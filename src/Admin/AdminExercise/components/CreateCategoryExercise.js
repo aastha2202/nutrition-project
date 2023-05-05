@@ -102,7 +102,7 @@ export default function CreateCategory() {
       >
         
 
-        <AppBar sx={{ position: 'relative' }}>
+        <AppBar sx={{ position: 'relative', backgroundColor:"purple"}}>
           <Toolbar>
           <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
               Rename

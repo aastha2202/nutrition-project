@@ -93,7 +93,7 @@ export default function CreateCategory() {
         onClose={handleClose}
        aria-describedby="alert-dialog-slide-description"
       >
-       <AppBar sx={{ position: 'relative' }}>
+       <AppBar sx={{ position: 'relative', backgroundColor:"purple" }}>
           <Toolbar>
           <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
               Rename

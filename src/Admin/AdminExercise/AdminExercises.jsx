@@ -162,7 +162,8 @@ export default function Exercise(){
     return (
 
         <div>
-        <Card className='dietplan-container'>
+        
+        
             <CardContent className='dietplan-companyname'>
                 <img src={Logo} alt="loading" className='dietplan-companyname-image'/>
                 
@@ -249,11 +250,11 @@ export default function Exercise(){
 
             <Card  style={{backgroundColor:"#F0E7F5", margin:"10px"}}>
             
-                <Grid container to="/dashboardadmin/adminaerobic" component={RouterLink} sx={{textDecoration:'none'}} justifyContent="space-between" alignItems="center" style={{padding:"30px"}}>
+                <Grid container to="/dashboardadmin/adminaerobic" component={RouterLink} sx={{textDecoration:'none'}} justifyContent="space-between" alignItems="center" style={{padding:"20px"}}>
                     <Grid item style={{padding:"5px"}}>
                         
                         <Typography variant="body1" component="span" style={maintitle}>
-                        Aerobic<br/>Activity
+                        Aerobic Activity
                         </Typography>
                     </Grid>
                     <Grid item>
@@ -267,11 +268,11 @@ export default function Exercise(){
 
             <Card  style={{backgroundColor:"#F0E7F5", margin:"10px"}}>
             
-                <Grid container to="/dashboardadmin/adminaerobic" component={RouterLink} sx={{textDecoration:'none'}} justifyContent="space-between" alignItems="center" style={{padding:"30px"}}>
+                <Grid container to="/dashboardadmin/adminaerobic" component={RouterLink} sx={{textDecoration:'none'}} justifyContent="space-between" flexDirection={"row"} alignItems="center" style={{padding:"20px"}}>
                     <Grid item style={{padding:"5px"}}>
                         
                         <Typography variant="body1" component="span" style={maintitle}>
-                        Strength<br/>Training
+                        Strength Training
                         </Typography>
                     </Grid>
                     <Grid item>
@@ -288,11 +289,11 @@ export default function Exercise(){
             
            
            
-         </Card>
+         
 
 
          <CreateCategoryExercise />
-  
+         
          </div>
     );
 }

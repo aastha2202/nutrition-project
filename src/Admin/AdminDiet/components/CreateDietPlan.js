@@ -156,7 +156,11 @@ export default function FullScreenDialog() {
           </Toolbar>
         </AppBar>
         {/* <Card style={{padding:"20px 5px", margin:"0px"}}><CardContent> */}
-        <Stack mb={3} mt={3} marginLeft={3}><Typography  style={{display: 'inline-block',marginRight:"10", fontFamily: 'Inter-SemiBold', lineHeight: "38px", marginLeft:'10px'}} variant='h5' gutterLeft >Select Interval </Typography></Stack>
+        <Stack mb={3} mt={3} marginLeft={3}>
+          <Typography  style={{display: 'inline-block',marginRight:"10", fontFamily: 'Inter-SemiBold', lineHeight: "38px", marginLeft:'10px'}} variant='h5' gutterLeft >Select Interval </Typography>
+          </Stack>
+
+
         <Stack marginLeft={3}> <TextField
           id="outlined-select-currency"
           select
@@ -171,23 +175,30 @@ export default function FullScreenDialog() {
 
           
 <Stack mt={2} marginLeft={3} id="date-picker-stack">
-<Grid mb={4}   Item>  <Grid container flexDirection="row"><Grid item >
-       
+<Grid mb={4}   Item>  
+   <Grid container flexDirection="row">
+      <Grid item >
+       <CardContent>
             
             <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DatePicker']} fullWidth>
         <DatePicker label="Start Date"  fullWidth/>
       </DemoContainer>
     </LocalizationProvider>
+    </CardContent>
        </Grid>
+
+
       <Grid item >
-    
+         <CardContent>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DatePicker']}>
         <DatePicker label="End Date"  fullWidth/>
       </DemoContainer>
     </LocalizationProvider>
-     </Grid></Grid> </Grid></Stack>
+    </CardContent>
+     </Grid></Grid> </Grid>
+     </Stack>
       {/* <Stack marginLeft={3} marginRight={3}>
       <Grid mb={2}   Item>
                                <Grid container flexDirection="row" justifyContent="space-between">
@@ -302,14 +313,15 @@ export default function FullScreenDialog() {
         </Select>
       </FormControl>
           </Grid>
-                                            <Grid xs={5}  md={5} lg={5} marginRight={1} item>
+                                          
+      <Grid xs={5}  md={5} lg={5} marginRight={1} item>
                                               
                                            
                                         <TextField label="Weight" variant='outlined'  fullWidth/>
                               
                                   </Grid>
 
-                                        <Grid xs={2} md={1} lg={1}  item>  <IconButton
+                <Grid xs={2} md={1} lg={1}  item>  <IconButton
             //   edge="start"
             //   style={{color:"white"}}
             //   onClick={handleClose}
@@ -318,9 +330,9 @@ export default function FullScreenDialog() {
               <DeleteIcon />
             </IconButton></Grid>
                               
-                                 </Grid></CardContent> </Card>   </Grid></Stack>
+                </Grid></CardContent> </Card>   </Grid></Stack>
 
-                                 <Button variant="contained" style={{
+      <Button variant="contained" style={{
         float: "right", marginLeft: "1rem", borderRadius: "50%", padding: "0.2rem", marginTop: "-0.5rem",
         position: 'fixed', zIndex: '1', bottom: 40, right: 40
       }}

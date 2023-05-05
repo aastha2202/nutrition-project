@@ -1,4 +1,4 @@
-import { CardContent, Grid, ButtonBase, Typography } from "@mui/material";
+import { CardContent, Grid, ButtonBase,  Typography } from "@mui/material";
 import Card from "@mui/material/Card";
 import  { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
@@ -16,6 +16,10 @@ import Logo from "../../assets/nova.svg";
 
 import Plusimage from "../../assets/Plusimage.svg";
 import CreateExercise from "./components/CreateExercise";
+
+
+import Iconify from 'src/components/iconify/Iconify';
+import { Link } from 'react-router-dom';
 
 
 
@@ -134,14 +138,37 @@ export default function Aerobic() {
         style={{ height: "auto", width: "250px", marginLeft: "30px" }}
       />
       
-        
-    <CardContent>
+      <Grid container flexDirection="row">
+                <Grid  textAlign={"center"} marginTop={0.5}  >
+                <Link to="/dashboardadmin/adminexercise">
+                 <IconButton>
+                 <Iconify icon="material-symbols:arrow-back-rounded" />
+                   </IconButton></Link>
+
+                </Grid>
+               
+                <Grid>
+                
+            <Typography x variant="h3" style={title}>
+              Aerobic Activity
+            </Typography>
+            
+     
+                </Grid>
+                
+            
+                    
+                        
+                        
+             
+             </Grid>   
+    {/* <CardContent>
             <Typography x variant="h3" style={title}>
               Aerobic Activity
             </Typography>
             
      </CardContent>
-       
+        */}
         
      
 

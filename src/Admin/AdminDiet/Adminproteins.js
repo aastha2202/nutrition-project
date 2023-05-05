@@ -20,7 +20,8 @@ import Logo from "../../assets/nova.svg";
 import Poultry from "../../assets/Poultry.svg";
 import Fish from "../../assets/Fish.svg";
 
-
+import Iconify from 'src/components/iconify/Iconify';
+import { Link } from 'react-router-dom';
 // import  "../styles.css";
 
 const pageheading={
@@ -153,13 +154,40 @@ export default function Protein() {
       style={{ height: "auto", width: "250px", marginLeft: "30px" }}
     />
   }
+  
+
+
   <Grid container spacing={2}>
     <Grid item xs={6}>
-      <CardContent>
-        <Typography variant="h3" style={pageheading} >Proteins </Typography>
-        <Typography style={calories}>45 Calories / Servings </Typography>
-        <Typography style={calories}>13 Servings / Day </Typography>
-      </CardContent>
+     
+      <Grid container  flexDirection="row">
+                <Grid item textAlign={"center"} marginTop={0.5}  >
+                <Link to="/dashboardadmin/adminitems">
+                 <IconButton>
+                 <Iconify icon="material-symbols:arrow-back-rounded" />
+                   </IconButton></Link>
+
+                </Grid>
+               
+                <Grid item>
+                
+            <Typography variant="h3" style={pageheading}  >
+            Proteins 
+            </Typography>
+            
+     
+                </Grid>
+                
+            
+                    
+                        
+                        
+             
+             </Grid>
+        {/* <Typography variant="h3" style={pageheading} >Proteins </Typography> */}
+        <Typography style={calories} sx={{marginLeft:4}}>45 Calories / Servings </Typography>
+        <Typography style={calories} sx={{marginLeft:4}}>13 Servings / Day </Typography>
+      
     </Grid>
     <Grid item xs={6}>
       <CardContent>
@@ -180,6 +208,10 @@ export default function Protein() {
       </CardContent>
     </Grid>
   </Grid>
+
+
+
+
   <CardContent>
     <Card>
       <Typography variant="body1" style={textparaStyle}>

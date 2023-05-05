@@ -11,8 +11,8 @@ import Userfiggirl from "../../assets/Userfiggirl.svg";
 import Userfig from "../../assets/Userfig.svg";
 import Iconify from 'src/components/iconify/Iconify';
 import { Link } from 'react-router-dom';
-import Searchbar from 'src/layouts/dashboard/Searchbar';
-
+//  import Searchbar from 'src/layouts/dashboard/Searchbar';
+ import Searchbar from 'src/layouts/dashboard/header/Searchbar';
 
 
 const pageheading={
@@ -26,17 +26,24 @@ export default function Adminuserlist() {
     return (
         
             <Page  title="Dashboard: Admin">
-
-            <Searchbar getSearch={(e) => searchFunction(e)} id="search-bar" sx={{height:"100px"}}/>
-
+            
+            {/* <Searchbar getSearch={(e) => searchFunction(e)} id="search-bar" sx={{height:"100px"}}/> */}
+            {/* <Searchbar />
+             <Box sx={{ flexGrow: 1, }} /> */}
+            {/* <CardContent>
+            <Searchbar />
+             <Box sx={{ flexGrow: 1, }} />
+            
+            </CardContent> */}
+            
             <Container>
              
              <Grid container flexDirection="row">
                 <Grid   >
                 <Link to="/dashboardadmin/adminuser">
-      <IconButton>
-        <Iconify icon="material-symbols:arrow-back-rounded" />
-      </IconButton></Link>
+                 <IconButton>
+                 <Iconify icon="material-symbols:arrow-back-rounded" />
+                   </IconButton></Link>
 
                 </Grid>
                

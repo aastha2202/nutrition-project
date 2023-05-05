@@ -37,10 +37,11 @@ export default function Userprofile(){
 
     return(
         <div> 
-       <Container>
+       
 
-            <Card>
-                <CardContent>
+            
+   
+         <CardContent>
                 <Grid container flexDirection="row">
 
 <Grid >
@@ -54,39 +55,55 @@ export default function Userprofile(){
     <Grid>
     <Typography style={pageheading}>Profile</Typography>
     </Grid>
- </Grid>
-            <Grid container spacing={3} style={{ display:'flex', justifyContent:'center' }}>
-        {/* {users.map((product) => ( */}
+                </Grid>
+           </CardContent>      
+
+
+
+           
+
         
-          <Grid item xs={4} sm={4} md={4}  >
-            {/* <Button> */}
+
+     
+      <Grid container spacing={3} style={{ display:'flex', justifyContent:'center',  }}>
+      
+        
+          
+           
 
             <Card >
               <CardContent>
-                {/* {console.log("profilesssss--->",itm.profile_pic,itm?.first_name)} */}
-                <Grid direction={'column'} spacing={8} height="200px" alignItems="center"
-  justify="center">
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                   
+                
+                <Grid direction={'column'}  spacing={8} height="200px" alignItems="center" justify="center">
+                  
+                   <Grid style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <img style={{ borderRadius: 50 ,height:50,width:50}} src={fish} />
-                  </div>
-                 
+                    </Grid>
+                  <Grid>
                   <Typography sx={{ fontSize: 30, fontWeight: 'bold',  fontFamily: 'Inter-SemiBold', lineHeight: "38px", marginLeft:"10px"  }} mt={3} textAlign={'center'} >
                    Sahib
                   </Typography>
-                  <div style={{ textAlign: "center", fontSize: 20,color:"black", fontWeight:'normal',  fontFamily: 'Inter-Regular', lineHeight: "50px", marginLeft:"10px" }}>
+                  </Grid>
+
+
+                  <Grid style={{ textAlign: "center", fontSize: 20,color:"black", fontWeight:'normal',  fontFamily: 'Inter-Regular', lineHeight: "50px", marginLeft:"10px" }}>
                    sahib@infobellit.com
-                  </div>
-                </Grid>
+                  </Grid>
+                  </Grid>
+               
               </CardContent>
             </Card>
-            {/* </Button> */}
-            {/* <ShopProductCard product={product} /> */}
-          </Grid>
+           
+          
       
 
       </Grid>
-      <Stack mt={4}>
+      
+
+     
+
+
+      <Stack mt={4} margin={2}>
     
       <Typography sx={{ fontSize: 20, fontWeight: 'bold',  fontFamily: 'Inter-SemiBold', lineHeight: "50px", marginLeft:"10px"  }} mt={3}  > 
                    Enter Member ID   <Switch
@@ -96,7 +113,7 @@ export default function Userprofile(){
     />
                   </Typography></Stack>
 
-                <Stack mt={2}>
+                <Stack mt={2} margin={2}>
                   <TextField id="outlined-basic" label="Outlined" variant="outlined" /> </Stack>
 
                 {/*  <Card style={{backgroundColor: "#F0E7F5"}}><CardContent><Stack><Typography sx={{ fontSize: 20, fontWeight: 'bold' }} mt={3}  >
@@ -135,12 +152,15 @@ export default function Userprofile(){
 
         <Stack mt={10}><Card style={{backgroundColor:"purple", margin:"10px", alignItems:"center"}}><Stack mb={2}> <Typography sx={{ fontSize: 20, fontWeight: 'bold', textAlign:'center', color:'white',  fontFamily: 'Inter-SemiBold', lineHeight: "38px", marginLeft:"10px" }} mt={3}  >
                    Delete Account
-                  </Typography></Stack></Card></Stack>
+                  </Typography></Stack>
+                  
+                  </Card>
+                  </Stack>
         
 
-      </CardContent>
-      </Card>
-      </Container>
+     
+      
+      
     </div>
     );
 }
