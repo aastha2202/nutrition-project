@@ -16,10 +16,27 @@ import Iconify from 'src/components/iconify/Iconify';
 import Slide from '@mui/material/Slide';
 import Page from 'src/components/Page';
 import CreateDietPlan from './components/CreateDietPlan';
+import EditCreateDietPlan from './components/EditCreateDietPlan';
+
 // import ScrollItems from './components/ScrollItems';
 import ScrollableTabsButtonPrevent from "./components/ScrollItems";
 
 
+const text ={
+  fontFamily: 'Inter-Regular',
+  color:"#112866",
+  
+};
+
+const edit={
+  fontFamily: 'Inter-Regular',
+  color:"yellow",
+  marginLeft:"50px", 
+  
+  right:30,
+  position:'absolute',
+
+}
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -32,13 +49,23 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     color: "#112866"
   };
 export default function ListAllDietPlan(){
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   
     
     return(
         <div> 
           <Page>
           
-           <CreateDietPlan />
+           < EditCreateDietPlan />
             <Grid container flexDirection="row">
 
         <Grid   >
@@ -59,14 +86,14 @@ export default function ListAllDietPlan(){
           <Grid container flexDirection={"column"} >
 
              <Grid container item flexDirection={"row"}>
-              <Typography>12/08/20234</Typography>
+              <Typography sx={text}> 12/08/20234</Typography>
               
-              <Typography   sx={{marginLeft:"50px", color:"yellow",right:30,position:'absolute', }} >Edit</Typography>
+              <Typography    style={edit}>Edit</Typography>
 
 
              </Grid>
              <Grid item>
-              <Typography>servings Recommended 30</Typography>
+              <Typography sx={text}>servings Recommended 30</Typography>
 
              </Grid>
 
@@ -82,13 +109,66 @@ export default function ListAllDietPlan(){
 
           </CardContent>
          </Card>
+
+
+         <Card  sx={{ margin: '10px', marginTop: '40px'}} >
+          <CardContent>
+          <Grid container flexDirection={"column"} >
+
+             <Grid container item flexDirection={"row"}>
+              <Typography sx={text}>12/98/20234</Typography>
+               <Grid>
+              <Button  style={edit}  >Edit</Button>
+              </Grid>
+
+             </Grid>
+             <Grid item>
+              <Typography sx={text}>servings Recommended 30</Typography>
+
+             </Grid>
+
+            
+             
+      
+
+
+    
+
+          </Grid>
+          <ScrollableTabsButtonPrevent/>
+
+          </CardContent>
+         </Card>
+
+
+         <Card  sx={{ margin: '10px', marginTop: '40px'}} >
+          <CardContent>
+          <Grid container flexDirection={"column"} >
+
+             <Grid container item flexDirection={"row"}>
+              <Typography sx={text}>02/08/2234</Typography>
+              
+              <Typography   style={edit} >Edit</Typography>
+
+
+             </Grid>
+             <Grid item>
+              <Typography sx={text}>servings Recommended 30</Typography>
+
+             </Grid>
+
+          </Grid>
+          <ScrollableTabsButtonPrevent/>
+
+          </CardContent>
+         </Card>
         
          
          <Stack mt={20}><Card style={{backgroundColor:"purple", fontFamily:'Inter-Regular', margin:"10px", alignItems:"center"}}><Stack mb={2}> <Typography sx={{ fontSize: 20, fontWeight: 'bold', textAlign:'center', color:'white', fontFamily: 'Inter-SemiBold', lineHeight: "38px", marginLeft:'10px'}} mt={3}  >
                    Save Confirm !!
                   </Typography></Stack></Card></Stack>
                   
-                  
+                      
               </Page>
                   </div>
     );

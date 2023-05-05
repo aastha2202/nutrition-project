@@ -3,7 +3,7 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import { Link as RouterLink } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
-
+import Chip from '@mui/material/Chip';
 import CardContent from '@mui/material/CardContent';
 import Backbutton from "../../assets/Backbutton.svg";
 import Page from 'src/components/Page';
@@ -22,7 +22,18 @@ const pageheading={
     lineHeight: "30px",
     color: "#112866"
   };
+
+
+  const chips={
+    fontFamily:"Inter-Regular",
+    fontWeight: "bold",
+  }
 export default function Adminuserlist() {
+
+    const handleClick = () => {
+        console.info('You clicked the Chip.');
+      };
+    
     return (
         
             <Page  title="Dashboard: Admin">
@@ -38,7 +49,7 @@ export default function Adminuserlist() {
             
             <Container>
              
-             <Grid container flexDirection="row">
+             <Grid container flexDirection="row"  marginLeft={"20px"}>
                 <Grid   >
                 <Link to="/dashboardadmin/adminuser">
                  <IconButton>
@@ -58,14 +69,19 @@ export default function Adminuserlist() {
              
              </Grid>
             
-             
+             <Stack direction="row" spacing={1}  marginLeft={"20px"} marginTop={"20px"}>
+                  <Chip label="Active " sx={chips}  onClick={handleClick} />
+                  <Chip label="Inactive" sx={chips} variant="outlined" onClick={handleClick} />
+             </Stack>
+
              
               
 
              <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
               
 
-             <Box sx={{ width: '100%' }}>  <Box sx={{ borderBottom: 1, borderColor: 'divider' }} >
+             <Box sx={{ width: '100%' }}>  
+             <Box sx={{ borderBottom: 1, borderColor: 'divider' }} >
          
        
 <Card sx={{ minWidth: 275 }} style={{margin:"20px"}}>

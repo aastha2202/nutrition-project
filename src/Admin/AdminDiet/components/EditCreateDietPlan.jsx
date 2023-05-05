@@ -109,7 +109,7 @@ const currencies = [
     },
   }
 
-export default function FullScreenDialog() {
+export default function EditFullScreenDialog() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -170,7 +170,7 @@ export default function FullScreenDialog() {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1, fontFamily: 'Inter-SemiBold', lineHeight: "38px", marginLeft:'10px' }} variant="h6" component="div">
-              Create Diet Plan
+              Create Diet Plan ::
             </Typography>
             <Button autoFocus color="inherit" onClick={handleClose}>
               save

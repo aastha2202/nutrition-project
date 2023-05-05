@@ -7,6 +7,19 @@ import CardContent from '@mui/material/CardContent';
  // import Typography from 'src/theme/overrides/Typography';
 
 import Typography  from '@mui/material/Typography';
+
+
+const cardstyle={
+  fontFamily: 'Inter-Regular',
+  color:"white",
+  fontSize:"12px",
+  textAlign:"center",
+ 
+  
+};
+
+
+
 export default function ScrollableTabsButtonPrevent() {
   const [value, setValue] = React.useState(0);
 
@@ -41,37 +54,37 @@ export default function ScrollableTabsButtonPrevent() {
 
       <Card sx={{ minWidth: 140,  minHeight:20,maxHeight:30, m: 1,  background:'purple' , color:"white"}}>
         
-          <Typography sx={{textAlign:"center"}}>Crabs:"208"</Typography>
+          <Typography style={cardstyle} mt={0.3} >Crabs:208</Typography>
         
       </Card>
       <Card sx={{ minWidth: 140, maxWidth: 200, minHeight:20,maxHeight:30, m: 1,  background:'purple' ,color:"white" }}>
         
-          <Typography sx={{textAlign:"center"}}>Crabs:"20"</Typography>
+          <Typography sx={cardstyle}  mt={0.3}>Crabs:"20"</Typography>
         
       </Card>
       <Card sx={{ minWidth: 140, maxWidth: 200, minHeight:20,maxHeight:30, m: 1,  background:'purple' ,color:"white" }}>
         
-          <Typography sx={{textAlign:"center"}}>Crabs:"20"</Typography>
+          <Typography style={cardstyle}  mt={0.3}>Crabs:"20"</Typography>
         
       </Card>
       <Card sx={{ minWidth: 140, maxWidth: 200, minHeight:20,maxHeight:30, m: 1,  background:'purple' , color:"white"}}>
         
-          <Typography sx={{textAlign:"center"}}>Crabs:"20"</Typography>
+          <Typography style={cardstyle}  mt={0.3}>Crabs:"20"</Typography>
         
       </Card>
       <Card sx={{ minWidth: 140, maxWidth: 200, minHeight:20,maxHeight:30, m: 1,  background:'purple' ,color:"white" }}>
         
-          <Typography sx={{textAlign:"center"}}>Crabs:"20"</Typography>
+          <Typography style={cardstyle}  mt={0.3}>Crabs:"20"</Typography>
         
       </Card>
       <Card sx={{ minWidth: 140, maxWidth: 200, minHeight:20,maxHeight:30, m: 1,  background:'purple' ,color:"white" }}>
         
-          <Typography sx={{textAlign:"center"}}>Crabs:"20"</Typography>
+          <Typography style={cardstyle}  mt={0.3}>Crabs:"20"</Typography>
         
       </Card>
       <Card sx={{ minWidth: 140, maxWidth: 200, minHeight:20,maxHeight:30, m: 1,  background:'purple' , color:"white"}}>
         
-          <Typography sx={{textAlign:"center"}}>Crabs:"20"</Typography>
+          <Typography style={cardstyle}  mt={0.3}>Crabs:"20"</Typography>
         
       </Card>
       
