@@ -151,7 +151,7 @@ export default function EditFullScreenDialog() {
       }} >
 
 
-        <span style={{ fontSize: "2rem" }}>+</span>
+        <span style={{ fontSize: "2rem" }}>Edit</span>
       </Button>
       <Dialog
         fullScreen

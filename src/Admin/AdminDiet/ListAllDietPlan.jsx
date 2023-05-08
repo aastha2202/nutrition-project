@@ -16,11 +16,11 @@ import Iconify from 'src/components/iconify/Iconify';
 import Slide from '@mui/material/Slide';
 import Page from 'src/components/Page';
 import CreateDietPlan from './components/CreateDietPlan';
-import EditCreateDietPlan from './components/EditCreateDietPlan';
+// import EditCreateDietPlan from './components/EditCreateDietPlan';
 
 // import ScrollItems from './components/ScrollItems';
 import ScrollableTabsButtonPrevent from "./components/ScrollItems";
-
+import BackDrop from './components/BackDrop';
 
 const text ={
   fontFamily: 'Inter-Regular',
@@ -65,7 +65,7 @@ export default function ListAllDietPlan(){
         <div> 
           <Page>
           
-           < EditCreateDietPlan />
+           <CreateDietPlan />
             <Grid container flexDirection="row">
 
         <Grid   >
@@ -119,6 +119,7 @@ export default function ListAllDietPlan(){
               <Typography sx={text}>12/98/20234</Typography>
                <Grid>
               <Button  style={edit}  >Edit</Button>
+              <BackDrop/>
               </Grid>
 
              </Grid>
