@@ -109,7 +109,7 @@ const currencies = [
     },
   }
 
-export default function FullScreenDialog() {
+export default function CreateDietPlan() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {

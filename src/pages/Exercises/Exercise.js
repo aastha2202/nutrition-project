@@ -1,25 +1,13 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
-
-
-
 import Box from '@mui/material/Box';
-
 import Card from '@mui/material/Card';
-
 import CardActions from '@mui/material/CardActions';
-
 import CardContent from '@mui/material/CardContent';
-
-
 import Grid from '@mui/material/Grid';
-
 import Button from '@mui/material/Button';
-
 import Typography from '@mui/material/Typography';
-
-
 // import { makeStyles } from '@material-ui/core/styles';
 
 // import CardMedia from '@material-ui/core/CardMedia';
@@ -33,8 +21,6 @@ import Typography from '@mui/material/Typography';
 // import ExerciseLogo from '../images/ExerciseLogo.png';
 import IconButton from '@mui/material/IconButton';
 import ArrowForward from '@mui/icons-material/ArrowForward';
-
-
 import Poultry from "../../assets/Poultry.svg";
 import Exerciselogo from "../../assets/Exerciselogo.svg";
 import Logo from "../../assets/nova.svg";
@@ -158,7 +144,7 @@ const year={
   
 export default function Exercise(){
 
-      
+    // const [data, setData] = useState({ date: "31  March \n 2023", servingsRecommended: 120, servingsLeft: 60, exercisesRecommended: 20, exercisesLeft: 10 })
      
     return (
         <Card className='dietplan-container'>
@@ -365,13 +351,7 @@ export default function Exercise(){
                     </Grid>
                 </Grid>
               
-            </Card>
-            
-
-            
-            
-           
-           
+            </Card>  
          </Card>
     );
 }

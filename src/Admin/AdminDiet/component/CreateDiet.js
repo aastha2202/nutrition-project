@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 // import MenuItem from '@mui/material/MenuItem';
 // import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-
+import {useState, useEffect,useRef,forwardRef,useImperativeHandle} from 'react';
 // import {   DialogContent, DialogContentText,  } from '@mui/material';
 import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
@@ -50,7 +50,7 @@ const Transition = React.forwardRef( (props, ref) => {
 });
 
 
-export default function FullScreenDialog() {
+const FullScreenDialog=forwardRef((props,ref)=>{
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -65,9 +65,9 @@ export default function FullScreenDialog() {
 
   const [age, setAge] = React.useState('');
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setAge(event.target.value);
+  // };
 
 
 
@@ -76,6 +76,37 @@ export default function FullScreenDialog() {
   const handleChanges = (event) => {
     setgrams(event.target.value);
   };
+
+  useImperativeHandle(ref,()=>({
+    handleClickOpen () {
+     console.log("handle click");
+     setOpen(true);
+   }
+ }))
+
+
+ const [createDiet,setCreateDiet]=useState(
+  {
+    "item_name": "",
+    "time_or_weight": "",
+    "units": "",
+    "calories":"",
+    "category_id": "",
+    "description": "",
+    "item_image": "",
+    "sets": "",
+    "counts": "",
+    "type": ""
+
+
+  }
+
+ )
+ const handleChange=(event=>{
+  console.log(event.target.name);
+  console.log(event.target.value);
+ })
+
 
   return (
     <div>
@@ -160,14 +191,14 @@ export default function FullScreenDialog() {
                     <Grid container flexDirection="column" spacing={1}>
                         <Grid xs={12}   mb={2}  style={{ borderRadius:"10px"}}
                         Item>
-                            <TextField label=" Item Name"  variant='outlined' fullWidth/>
+                            <TextField onChange={handleChange} label=" Item Name"  name="item_name" variant='outlined' fullWidth/>
                         </Grid>
 
                     
                     
                         <Grid xs={12}  mb={2}  
                          Item>
-                            <TextField label="Choose Diet Image" variant='outlined' fullWidth/>
+                            <TextField onChange={handleChange} name="item_image" label="Choose Diet Image" variant='outlined' fullWidth/>
                         </Grid>
                        
                             <Grid mb={2}    Item>
@@ -252,4 +283,6 @@ export default function FullScreenDialog() {
       </Dialog>
     </div>
   );
-}
+})
+
+export default   FullScreenDialog

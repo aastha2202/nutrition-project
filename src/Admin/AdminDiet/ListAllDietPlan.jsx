@@ -97,13 +97,7 @@ export default function ListAllDietPlan(){
 
              </Grid>
 
-            
-             
-      
-
-
-    
-
+          
           </Grid>
           <ScrollableTabsButtonPrevent/>
 
@@ -119,7 +113,7 @@ export default function ListAllDietPlan(){
               <Typography sx={text}>12/98/20234</Typography>
                <Grid>
               <Button  style={edit}  >Edit</Button>
-              <BackDrop/>
+              
               </Grid>
 
              </Grid>

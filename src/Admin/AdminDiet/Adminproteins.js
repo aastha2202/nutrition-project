@@ -10,9 +10,9 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 
 import ButtonBase from '@mui/material/ButtonBase'
-
-import { useState } from 'react';
-
+import axios from 'axios';
+// import { useState } from 'react';
+import { useState, useEffect,useRef } from 'react';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -23,21 +23,15 @@ import Fish from "../../assets/Fish.svg";
 import Iconify from 'src/components/iconify/Iconify';
 import { Link } from 'react-router-dom';
 // import  "../styles.css";
+import { useLocation } from 'react-router-dom';
+import useLongPress from './components/useLongPress';
 
 const pageheading={
     fontFamily:"Inter-Bold",
     color:"#112866",
 }
 
-const buttonStyle = {
 
-    position: 'absolute',
-    right:20,
-    borderRadius: "10px",
-    boxShadow: '#c4c4c4',
-    
-
-}
 
 const cardStyle = {
     backgroundColor: "#F0E7F5",
@@ -82,68 +76,95 @@ const calories ={
     fontFamily: 'Inter-Regular',
     color:"#112866",
 };
-const caloriesremained={
-    fontFamily: 'Inter-Regular',
-    color:"black",
-
-}
-
-
-
-
-export default function Protein() {
-
-
-    const [count1, setCount1] = useState(0);
-
-    const handleIncrement1 = () => {
-        setCount1(count1 + 1);
-    };
-
-    const handleDecrement1 = () => {
-        if (count1 > 0) {
-
-            setCount1(count1 - 1);
-        }
-
-    };
 
 
 
 
 
-    const [count2, setCount2] = useState(0);
 
-    const handleIncrement2 = () => {
-
-        setCount2(count2 + 1);
-    };
-
-    const handleDecrement2 = () => {
-        if (count2 > 0) {
-            setCount2(count2 - 1);
-        }
-
-    };
+export default function Protein(props) {
+  const childcomref = useRef()
 
 
+  const [longPressCount, setlongPressCount] = useState(0)
+  const [clickCount, setClickCount] = useState(0)
+
+  const onLongPress = () => {
+    console.log('longpress is triggered');
+    // functiona need
+    childcomref.current.handleClickOpen()
+    setlongPressCount(longPressCount + 1)
+  };
+  
+  const onClick = () => {
+    console.log('click is triggered')
+    setClickCount(clickCount + 1)
+  }
+
+  const defaultOptions = {
+    shouldPreventDefault: true,
+    delay: 500,
+  };
+  const longPressEvent = useLongPress(onLongPress, onClick, defaultOptions);
 
 
 
-    const [count3, setCount3] = useState(0);
 
-    const handleIncrement3 = () => {
-        setCount3(count3 + 1);
-    };
-
-    const handleDecrement3 = () => {
-        if (count3 > 0) {
-            setCount3(count3 - 1);
-        }
-
-    };
+    
 
 
+
+
+    // const [data, setData]=useState(
+    //   {
+    //     "name": "sure",
+    //     "job": "leader"
+    //   }
+
+    // )
+    useEffect(()=>{
+      dataHit();
+    },[])
+
+    const[dataFromAPi,setDataFromAPi]=useState([
+      
+
+    ])
+
+    const dataHit =async =>{
+      // let data = JSON.stringify({
+      //   "name": "data?.name",
+      //   "job": "leader"
+      // });
+      
+      let config = {
+        method: 'GET',
+        maxBodyLength: Infinity,
+        url: `https://aipse.in/api/getItemsOfCategory?category_id=${category_id}&type=food`,
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        // data : data
+      };
+      
+      axios(config)
+      .then((response) => {
+        setDataFromAPi(response?.data?.data)
+        console.log(dataFromAPi,"------------- proteins get data");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+
+
+    const location = useLocation();
+    const [data,setData] = useState(location.state?.data);
+    const[category_id,setCategory_id]=useState(data.category_id);
+    console.log(category_id,'----data-----');
+//     const [name, steName]=useState(props.data)
+ 
+// console.log(props.data,"name-----------");
     return ( 
         <div>
   
@@ -162,7 +183,7 @@ export default function Protein() {
      
       <Grid container  flexDirection="row">
                 <Grid item textAlign={"center"} marginTop={0.5}  >
-                <Link to="/dashboardadmin/adminitems">
+                <Link to="/dashboardadmin/AdminDietCategory">
                  <IconButton>
                  <Iconify icon="material-symbols:arrow-back-rounded" />
                    </IconButton></Link>
@@ -172,7 +193,7 @@ export default function Protein() {
                 <Grid item>
                 
             <Typography variant="h3" style={pageheading}  >
-            Proteins 
+            {data.category_name}
             </Typography>
             
      
@@ -185,28 +206,11 @@ export default function Protein() {
              
              </Grid>
         {/* <Typography variant="h3" style={pageheading} >Proteins </Typography> */}
-        <Typography style={calories} sx={{marginLeft:4}}>45 Calories / Servings </Typography>
+        {/* <Typography style={calories} sx={{marginLeft:4}}>45 Calories / Servings </Typography>
         <Typography style={calories} sx={{marginLeft:4}}>13 Servings / Day </Typography>
-      
+       */}
     </Grid>
-    <Grid item xs={6}>
-      <CardContent>
-        <Card
-          sx={{ Width: 200, height: 110 }}
-          style={{ backgroundColor: "#E1B725", textAlign:"center" }}
-        >
-          <Typography variant="h3"  style={caloriesremained}>
-            7
-          </Typography>
-          <Typography variant="h5" style={caloriesremained} >
-            serving
-          </Typography>
-          <Typography variant="h5" style={caloriesremained} >
-            remained
-          </Typography>
-        </Card>
-      </CardContent>
-    </Grid>
+   
   </Grid>
 
 
@@ -214,72 +218,30 @@ export default function Protein() {
 
   <CardContent>
     <Card>
+      <Grid container spacing={2} >
+      <Grid item xs={6}>
       <Typography variant="body1" style={textparaStyle}>
         Weigh AFTER cooked / 1 serving = 1 cooked oz
       </Typography>
+      </Grid>
+      <Grid item xs={6} container sx={{alignItems:"flex-end", alignSelf:"center",justifyContent:"end", alignContent:"end", }}>
+      <CardContent>
+      <Typography style={calories} sx={{marginLeft:4}}>45 Calories / Servings </Typography>
+        <Typography style={calories} sx={{marginLeft:4}}>13 Servings / Day </Typography>
+        </CardContent>
+      </Grid>
+      </Grid>
     </Card>
+    
   </CardContent>
-  <Card style={cardStyle}>
-    <CardContent>
-      <Grid container spacing={2} justifyContent="center" alignItems="center">
-        <Grid item xs={2} md={2}>
-          <ButtonBase>
-            <img src={Poultry} alt="nova logo" />
-          </ButtonBase>
-        </Grid>
-        <Grid item xs={10} spacing={2} md={10}>
-          <Grid item xs>
-            <div style={{ display: "flex" }}>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                style={maintitle}
-                className="maintitlecss"
-              >
-                Poultry 
-              </Typography>
-              
-            </div>
-            <Typography variant="body2" mt={1} gutterBottom style={maintext}>
-              white meat, skinless, chicken, turkey, hen, duck
-            </Typography>
-          </Grid>
-        </Grid>
-      </Grid>
-    </CardContent>
-  </Card>
-  <Card style={cardStyle}>
-    <CardContent>
-      <Grid container spacing={2} justifyContent="center" alignItems="center">
-        <Grid item xs={2} md={2}>
-          <ButtonBase>
-            <img src={Fish} alt="nova logo" />
-          </ButtonBase>
-        </Grid>
-        <Grid item xs={10} spacing={2} md={10}>
-          <Grid item xs>
-            <div style={{ display: "flex" }}>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                style={maintitle}
-              >
-                Poultry
-              </Typography>
-              
-            </div>
-            <Typography variant="body2" gutterBottom mt={1} style={maintext}>
-              fresh, canned or frozen, Cod, Flounder, Haddock, Halibut.
-            </Typography>
-          </Grid>
-        </Grid>
-      </Grid>
-    </CardContent>
-  </Card>
-  <Card style={cardStyle}>
-    <CardContent>
+ 
+
+  
+  
+{dataFromAPi?.length>1?(dataFromAPi.map(item=>{
+  return(
+    <Card style={cardStyle}>
+    <CardContent {...longPressEvent}>
       <Grid container spacing={2} justifyContent="center" alignItems="center">
         <Grid item xs={2} md={2}>
           <ButtonBase>
@@ -295,7 +257,7 @@ export default function Protein() {
                 component="div"
                  style = {maintitle }
               >
-                Fish
+                 {item.item_name}
               </Typography>
               
             </div>
@@ -308,8 +270,11 @@ export default function Protein() {
     </CardContent>
   </Card>
 
+  )
 
-  <CreateDiet />
+})):(<Typography   align="center"  style={calories}>No Data Found</Typography> )}
+
+  <CreateDiet  ref={childcomref}/>
 </div>
 
             );

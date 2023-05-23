@@ -13,7 +13,8 @@ import DashboardAppPage from './pages/Dashboard/DashboardAppPage';
 import Adminuser from './Admin/AdminDashboard/Adminuser';
 // 
 import Adminproteins from './Admin/AdminDiet/Adminproteins';
-import Adminitems from './Admin/AdminDiet/Adminitems';
+// import Adminitems from './Admin/AdminDiet/AdminDietCategory';
+ import AdminDietCategory from './Admin/AdminDiet/AdminDietCategory';
 // import CreateDietItems from './Admin/AdminDiet/component/CreateDietItems';
 
 import AdminExercises from './Admin/AdminExercise/AdminExercises';
@@ -28,7 +29,11 @@ import Userstats from './Admin/UserStats/Userstats';
 import Adminsearch from './Admin/AdminSearch/Adminsearch'
 import ListAllDietPlan from './Admin/AdminDiet/ListAllDietPlan';
 // ----------------------------------------------------------------------
-
+//  import Login from './user/Login/Login';
+// import Home from './user/Home/Home';
+// import Diet from './user/Diet/Diet';
+// import Exercise from './user/Exercise/Exercise';
+// import ItemsOfCategory from './user/Diet/ItemsOfCategory';
 
 
 
@@ -37,47 +42,43 @@ export default function Router() {
             path: '/dashboard',
             element: < DashboardLayout / > ,
             children: [
-                { element: < Navigate to = "/dashboard/app" / > , index: true },
-                { path: 'app', element: < DashboardAppPage / > },
-                { path: 'user', element: < UserPage / > },
-                { path: 'products', element: < ProductsPage / > },
+                { element: < Navigate to = "/dashboard/app" /> , index: true },
+                { path: 'app', element: < DashboardAppPage /> },
+                { path: 'user', element: < UserPage /> },
+                { path: 'products', element: < ProductsPage /> },
                 {
                     path: 'protein',
-                    element: < Protein / >
+                    element: < Protein />
                 },
 
 
                 {
                     path: 'login',
-                    element: < LoginPage / > ,
+                    element: < LoginPage /> ,
                 },
                 {
                     path: 'adminuser',
-                    element: < Adminuser / >
+                    element: < Adminuser />
                 },
 
-               
                 {
                     path: 'adminproteins',
                     element: < Adminproteins / >
                 },
-                {
-                    path: 'adminitems',
-                    element: < Adminitems / >
-                },
+                
                 {
                     path: 'createuser',
-                    element: < Createuser / >
+                    element: < Createuser />
                 },
                 {
                     path: 'dietplan',
-                    element: < DietPlan / > ,
+                    element: <DietPlan/> ,
                 },
                 {
                     path: 'exercise',
-                    element: < Exercise / > ,
+                    element: < Exercise /> ,
                 },
-                { path: 'aerobic', element: < Aerobic / > },
+                { path: 'aerobic', element: < Aerobic /> },
 
 
             ],
@@ -88,7 +89,7 @@ export default function Router() {
             children: [
                 { element: < Navigate to = "/dashboardadmin/app" / > , index: true },
                 { path: 'login', element: < LoginPage / > },
-                { path: 'adminitems', element: < Adminitems / > },
+                { path: 'AdminDietCategory', element: < AdminDietCategory / > },
                 { path: 'adminexercise', element: < AdminExercises / > },
                 {
                     path: 'adminaerobic',
@@ -118,7 +119,7 @@ export default function Router() {
 
                 {
                     path: 'alldietplan',
-                    element: < ListAllDietPlan / >
+                    element: < ListAllDietPlan/ >
                 },
 
                 {

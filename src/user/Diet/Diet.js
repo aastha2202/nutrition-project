@@ -2,7 +2,7 @@ import {React, useEffect, useState }from 'react';
 
 // import '../css/DietPlan.css';
 
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import {   Select, FormControl, InputLabel } from '@mui/material';
 import Card from '@mui/material/Card';
@@ -15,7 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Grid from '@mui/material/Grid';
 import { MarginOutlined } from '@mui/icons-material';
 import Button from '@mui/material/Button';
-import { useRef } from 'react';
+
 import Typography from '@mui/material/Typography';
  // import { makeStyles } from '@material-ui/core/styles';
 
@@ -35,7 +35,7 @@ import ProteinChicken from "../../assets/ProteinChicken.svg"
 
 // import dinning from '../images/dinningicon.png';
 
-import  "../styles.css";
+// import  "../styles.css";
 
 
 const title={
@@ -161,11 +161,25 @@ const caloriesremainedNo={
 
 export default function DietPlan(){
 
-  const servlingsLeft= useRef();
-  const location=useLocation(); 
- const [value,setValue]=useState(location.state?.item)
- console.log(value,"---------value state");
 
+
+    // const [count, setCount] = useState(0);
+
+    //     useEffect(() => {
+    //   getData()
+    // },[]);
+   
+
+    // const getData=()=>{
+    //     axios.get('')
+    //     .then(response => {
+    //     setCount(response.data)
+    //     //   console.log(response.data);
+    //     })
+    //     .catch(error => {
+    //       console.log(error);
+    //     });
+    // }
 
     const [data, setData] = useState([])
     const [exerciseData, setExerciseData] = useState([])
@@ -184,7 +198,7 @@ export default function DietPlan(){
     useEffect(() => {
       axios.get(`https://aipse.in/api/getAllDietPlan?userid=1&type=food&status=ongoing`)
         .then(function (response) {
-          console.log(response.data.data, "dieettttttttttt")
+          console.log(response.data.data,"dieettttttttttt")
           response.data.data.servingsLeft = parseInt
             (response?.data?.data.TotalServings - response?.data?.data.CosumedServings)
           setExerciseData(response?.data?.data)
@@ -199,7 +213,7 @@ export default function DietPlan(){
           for (let i = 0; i < response?.data?.data?.length; i++) {
             axios.get(`https://aipse.in/api/getOneDietPlan?userid=1&dietid=${exerciseData?.DietID}`)
               .then(function (response) {
-                // console.log(response?.data, "response..............responseeeeee")
+                 console.log(response?.data, "response..............responseeeeee")
               })
               .catch(function (error) {
                 console.log(error);
@@ -220,6 +234,8 @@ export default function DietPlan(){
                 <img src={Logo} alt="loading" className='dietplan-companyname-image'/>
                 
             </CardContent>
+            
+           
             <Grid container   style={{display:'flex',flexDirection:"row",position:'relative'}}>
                <Grid item xs={6}>
                <CardContent >
@@ -238,11 +254,12 @@ export default function DietPlan(){
                      <MenuItem value="Previous Week">Previous Week</MenuItem>
                      </Select>
                      </FormControl>
-                 <br/>  
+                 <br/>
+                
               </CardContent>
               </Grid>
-          </Grid>
-
+             </Grid>
+  
             <Grid>
                 <Card  style={{backgroundColor:"#D1A6E7",margin:"10px"}}>
                     <Grid container  item flexDirection={'row'} alignItems="center"  >
@@ -306,26 +323,25 @@ export default function DietPlan(){
                     
                 </Card>
             </Grid>  
-                    
+                   
             <Card  style={{backgroundColor:"#212121",margin:"10px"}} >
                     <Grid container    sx={{textDecoration:'none'}} alignItems="center" >
                     <Grid item xs={8} alignItems="flex-end"  >
                         <Grid item  container justifyContent="center" alignItems="center">
                         <CardContent sx={{alignItems:"center",alignSelf:'center',alignContent:"center"}}>
                                 <Typography variant="body1" component="span"   style={servingleft}>
-                                {value?.servingsLeft}  servings left 
-                                    
+                                    60 servings left
                                 </Typography>
                                  </CardContent>
                         </Grid>
                            
-                        </Grid>             
+                        </Grid>
 
                         <Grid item xs={4} alignItems="flex-end"  >
                         <Grid item  container justifyContent="center" alignItems="center">
                         <CardContent sx={{alignItems:"center",alignSelf:'center',alignContent:"center"}}>
                                  <img src={Diet} className='dinning-img' alt="dinning" style={{display: 'block', margin: 'auto'}}/>
-                                 </CardContent>
+                        </CardContent>
                         </Grid>
                            
                         </Grid>
@@ -335,11 +351,175 @@ export default function DietPlan(){
                     
    
                </Card> 
+            
+           
+            <Card style={maincardStyle} >
+                    
+                    <CardContent  >
+                     <Grid  container flexDirection={"column"} item  to="/dashboard/protein" component={RouterLink}  sx={{textDecoration:'none'}}>
+                    <Grid container item   spacing={1} justifyContent={"row"}>
+                     <Grid item xs={6}>
+                           
+                            <Typography variant="body1" component="span" style={proteinStyle}>
+                                Proteins
+                            </Typography>
+                            
+                        </Grid>
+                        <Grid item  container justifyContent="center" alignItems="center"  xs={3}>
+
+                        <img src={ProteinChicken}  alt="chicken" />
+
+                        </Grid>
+                        <Grid item xs={3} container justifyContent="center" alignItems="center">
+
+                        <img src={ProteinChicken}  alt="chicken" />
+
+                        </Grid>
+                     </Grid>
+
+                     <Grid container  justifyContent={"row"}  spacing={1}>
+                     <Grid container item xs={6} flex-direction={'row'}>
+                            <Grid item    >
+                            <Typography  variant="body1" sx={caloriesremainedNo}>
+                                {/* {count}    */} 7
+                            </Typography>
+                            </Grid>
+                            <Grid item mb={0.7}  flexDirection={"column"} alignSelf={"flex-end"}>
+                            <Typography style={caloriesremained} >
+                                calories remained 
+                            </Typography>
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={3} container justifyContent="center" alignItems="center"  >
+
+                        <Typography style={totalservingsStyle} > 
+                            10 Calories
+                        </Typography>
+
+                        </Grid>
+                        <Grid item xs={3} container justifyContent="center" alignItems="center" >
+                        <Typography style={totalservingsStyle}>
+                            8 Calories
+                        </Typography>
+
                       
+
+                        </Grid>
+                     </Grid>
+
+
+                     </Grid> 
+                       
+                        
+                        
+                       
+                     </CardContent>
+                        
+                    
+                    
+                    
+   
+               </Card> 
+           
+           
+
+            <Card style={maincardStyle}  >
+                    <CardContent to="/dashboard/protein" component={RouterLink} sx={{textDecoration:'none'}}>
+                    <Grid container  spacing={1} margin="10px" alignItems="center">
+                     <Grid item xs={6} >
+                     
+                     <Grid item  alignSelf={'center'}>
+                           
+                            <Typography variant="body1"  component="span" style={proteinStyle}>
+                                Carbohydrates vegetables
+                            </Typography> 
+                            
+                        </Grid>
+
+                        
+                       
+                        
+                       
+                        </Grid>    
+                        <Grid item xs={5} margin={1}    >
+                        
+                        <Grid item container container justifyContent="center" alignItems="center" >
+                            <Typography alignContent="center" variant="body1" component="span" style={totalservingsStyle}>
+                             45 Calories/Servings
+                            </Typography>
+                            
+                            
+                        </Grid>
+                        <Grid item   container justifyContent="center" alignItems="center"  >
+                             <Typography alignContent="center" variant="body1" component="span" style={totalservingsStyle} >
+                                 13/servings/Day
+                            </Typography>
+                        </Grid> 
+                        
+                          
+                           
+                        </Grid>
+                        
+                    </Grid>
+                    </CardContent>
+                    
+                    
+   
+               </Card> 
+
+               <Card style={maincardStyle}  >
+                    <CardContent to="/dashboard/protein" component={RouterLink} sx={{textDecoration:'none'}}>
+                    <Grid container  spacing={1} margin="10px" alignItems="center">
+                     <Grid item xs={6} >
+                     
+                     <Grid item  alignSelf={'center'}>
+                           
+                            <Typography variant="body1" Wrap component="span" style={proteinStyle}>
+                                Carbohydrates Fruits
+                            </Typography> 
+                            
+                        </Grid>
+
+                        
+                       
+                        
+                       
+                        </Grid>    
+                        <Grid item xs={5} margin={1}    >
+                        
+                        <Grid item container  justifyContent="center" alignItems="center" >
+                            <Typography alignContent="center" variant="body1" component="span" style={totalservingsStyle}>
+                             45 Calories/Servings
+                            </Typography>
+                            
+                            
+                        </Grid>
+                        <Grid item   container justifyContent="center" alignItems="center"  >
+                             <Typography alignContent="center" variant="body1" component="span" style={totalservingsStyle} >
+                                 13/servings/Day
+                            </Typography>
+                        </Grid> 
+                        
+                          
+                           
+                        </Grid>
+                        
+                    </Grid>
+                    </CardContent>
+                    
+                    
+   
+               </Card>    
+
+                
+
+                
+
+           
      {data?.map(item=>{
         return(
               <Card style={maincardStyle}  >
-                    <CardContent  state={{data:item , ano:{}}}  to="/dashboard/protein"  component={RouterLink} sx={{textDecoration:'none'}}>
+                    <CardContent to="/dashboard/protein" component={RouterLink} sx={{textDecoration:'none'}}>
                     <Grid container  spacing={1} margin="10px" alignItems="center">
                      <Grid item xs={6} >
                      
@@ -384,7 +564,10 @@ export default function DietPlan(){
         );
      })}
 
-   
+               
+            
+                 
+           
          </div>
 
          

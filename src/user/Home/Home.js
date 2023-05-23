@@ -12,10 +12,10 @@ import CardContent from '@mui/material/CardContent';
 import MenuItem from '@mui/material/MenuItem';
 // import DietPlan from '../Diet/DietPlan'; 
 
-import Logo from "../../assets/nova.svg";
-import Diet from "../../assets/Diet.svg";
-import Exerciselogo from "../../assets/Exerciselogo.svg";
-import  "../styles.css";
+// import Logo from "../../assets/nova.svg";
+// import Diet from "../../assets/Diet.svg";
+// import Exerciselogo from "../../assets/Exerciselogo.svg";
+// import  "../styles.css";
 
 // components
 
@@ -87,7 +87,6 @@ const handleExpandClick = () => {
   }
 
   const listDietPlan = () => {
-
     axios.get(`https://aipse.in/api/getlistsdietplans?userid=1`)
       .then(function (response) {
         // console.log(response?.data, "response in list diet plan")
@@ -246,8 +245,15 @@ const handleExpandClick = () => {
       
     </Card>
 
+    
+    
+    
+    
+   
+
+
     <Card   style={{backgroundColor:"#212121",margin:"10px"}}>
-                    <CardContent  state={{item:ongoingDietPlan}}  to="/dashboard/dietplan" component={RouterLink} sx={{textDecoration:'none'}}>
+                    <CardContent   to="/dashboard/dietplan" component={RouterLink} sx={{textDecoration:'none'}}>
                     <Grid container flexDirection="row" spacing="1" alignItems="center" justifyContent="center" >
                         <Grid item xs={4} alignItems="center" sx={{textAlign:'center'}} justifyContent="center">
                                

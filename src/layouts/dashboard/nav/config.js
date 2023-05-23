@@ -50,7 +50,7 @@ const navConfig = [{
     },
     {
         title: 'Diet',
-        path: '/dashboardadmin/Adminitems',
+        path: '/dashboardadmin/AdminDietCategory',
         icon: icon('ic_cart'),
         id: 0,
 
