@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-
+import { useEffect, useState }from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -8,6 +8,7 @@ import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import axios from 'axios';
 // import { makeStyles } from '@material-ui/core/styles';
 
 // import CardMedia from '@material-ui/core/CardMedia';
@@ -146,12 +147,67 @@ export default function Exercise(){
 
     // const [data, setData] = useState({ date: "31  March \n 2023", servingsRecommended: 120, servingsLeft: 60, exercisesRecommended: 20, exercisesLeft: 10 })
      
+    // api inetgration
+    const [data, setData] = useState([])
+    const [exerciseData, setExerciseData] = useState([])
+    
+
+    const getCurrentDate = () => {
+  
+      var date = new Date().getDate();
+      var month = new Date().getMonth() + 1;
+      var year = new Date().getFullYear();
+  
+      //Alert.alert(date + '-' + month + '-' + year);
+      // You can turn it in to your desired format
+      return date + '-' + month + '-' + year;//format: d-m-y;
+    }
+  
+  
+    useEffect(() => {
+        let userId = localStorage.getItem(['User ID']);
+        console.log(userId,"-----getting userid from localstoarge- ");
+      axios.get(`https://aipse.in/api/getAllDietPlan?userid=${userId}&type=exercise&status=ongoing`)
+        .then(function (response) {
+          console.log(response.data.data, "dieettttttttttt")
+          response.data.data.servingsLeft = parseInt
+            (response?.data?.data.TotalServings - response?.data?.data.CosumedServings)
+          setExerciseData(response?.data?.data)
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      axios.get(`https://aipse.in/api/getAllCategories?type=exercise`)
+        .then(function (response) {
+          setData(response?.data?.data)
+          console.log(response?.data?.data,"--------data -------")
+          for (let i = 0; i < response?.data?.data?.length; i++) {
+            axios.get(`https://aipse.in/api/getOneDietPlan?userid=1&dietid=${exerciseData?.DietID}`)
+              .then(function (response) {
+                // console.log(response?.data, "response..............responseeeeee")
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }, [])
+  
+     console.log(exerciseData,"exercise------");
+     console.log(data,"--------------data");
+
+
+
     return (
-        <Card className='dietplan-container'>
-            <CardContent className='dietplan-companyname'>
+        <>
+        
+            {/* <CardContent className='dietplan-companyname'>
                 <img src={Logo} alt="loading" className='dietplan-companyname-image'/>
                 
-            </CardContent>
+            </CardContent> */}
             <CardContent>
                 <Grid container justifyContent="space-between">
                         <Grid item className="my-grid-item" style={{marginleft:"30px"}}>
@@ -163,69 +219,7 @@ export default function Exercise(){
                 </Grid>
             </CardContent>
             
-           {/* <Grid>
-                <Card style={{backgroundColor:"#D1A6E7",margin:"10px"}}>
-                    <Grid container  item flexDirection={'row'} alignItems="center"  >
-                      <Grid item xs={6}> 
-                    <Card  style={{backgroundColor:"#8D25C1",margin:"10px"}}>
-                        <Grid container mt={1} justifyContent="center" spacing={1} alignItems="center" item flexDirection="row" >
-                        
-                           <Grid item alignSelf="center" >
-                            
-                           <Typography  variant="body1" mt="1" component="span" style={day} >
-                                            15
-                                    </Typography>
-                            </Grid> 
-                            <Grid item >
-                                <Grid  container flexDirection="column" mb="2" >
-                                    <Grid item>
-                                        <Typography variant="h5" component="span"  style={month}>
-                                                March
-                                        </Typography>
-                                    </Grid>
-                                
-                                    <Grid item mr="3">
-                                        <Typography  variant="h5" component="span" style={year}>
-                                                2023
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                           
-                            
-                        </Grid>
-                    </Card>
-                    </Grid> 
-
-                    <Grid item xs={6}>
-                    <Card  sx={{minHeight:65}} style={{backgroundColor:"#8D25C1",margin:"10px"}}>
-                    <Grid container  justifyContent="center" alignItems="center" flexDirection="column" j>
-                        
-                        <Grid item mt={1}>
-                        <Typography  style={todaysgoal}>Today's Goal</Typography>
-                        </Grid>
-                        <Grid item>
-
-                       
-                        <Grid ml={2} container flexDirection="row">
-                           <Grid item ><Typography style={excerciseNo}>20</Typography></Grid>
-                           <Grid item mt={2.5}><Typography ml={1}   style={exercise}>Exercise</Typography></Grid>
-                            </Grid>
-                        </Grid>
-                        
-                        
-                        
-                    </Grid>
-
-                    </Card>
-                    </Grid>
-
-
-                    </Grid>
-                    
-                    
-                </Card>
-    </Grid> */}
+          
 
             <Grid>
                 <Card style={{backgroundColor:"#D1A6E7",margin:"10px"}}>
@@ -290,7 +284,8 @@ export default function Exercise(){
                     
                 </Card>
             </Grid>
-        <Grid Item>
+        {/* <Grid Item>
+
              <Card  style={{backgroundColor:"#212121",margin:"10px"}}>
                     <CardContent>
                         <Grid container flexDirection="row" justifyContent="space-between">
@@ -314,9 +309,6 @@ export default function Exercise(){
             </Card>
         </Grid>
            
-
-           
-
             <Card  style={{backgroundColor:"#F0E7F5", margin:"10px"}}>
             
                 <Grid container to="/dashboard/aerobic" component={RouterLink} sx={{textDecoration:'none'}} justifyContent="space-between" alignItems="center" style={{padding:"30px"}}>
@@ -351,7 +343,34 @@ export default function Exercise(){
                     </Grid>
                 </Grid>
               
-            </Card>  
-         </Card>
+            </Card>   */}
+            {data?.map(item=>{
+         return(
+        <Card  style={{backgroundColor:"#F0E7F5", margin:"10px"}}>
+            
+        <Grid container state={{data:item }}  to="/dashboard/aerobic" component={RouterLink} sx={{textDecoration:'none'}} justifyContent="space-between" alignItems="center" style={{padding:"30px"}}>
+            <Grid item style={{padding:"5px"}}>
+                
+                <Typography variant="body1" component="span" style={maintitle}>
+                {item.category_name}
+                </Typography>
+            </Grid>
+            <Grid item>
+                <Typography variant="h5" component="span" style={plusStyle}>
+                <img src={Arrowforward} alt="Arrowforward logo" />
+                </Typography>
+            </Grid>
+        </Grid>
+      
+    </Card> 
+
+    );
+           })}
+
+        
+
+
+         </>
+
     );
 }

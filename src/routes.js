@@ -19,7 +19,7 @@ import Adminproteins from './Admin/AdminDiet/Adminproteins';
 
 import AdminExercises from './Admin/AdminExercise/AdminExercises';
 import AdminAerobic from './Admin/AdminExercise/AdminAerobic';
-import Createuser from './pages/Createuser';
+import RegisterUser from './pages/RegisterUser'
 import DietPlan from './pages/Diet/DietPlan';
 import Exercise from './pages/Exercises/Exercise';
 import Adminprofile from './Admin/AdminProfile/Adminprofile';
@@ -67,8 +67,8 @@ export default function Router() {
                 },
                 
                 {
-                    path: 'createuser',
-                    element: < Createuser />
+                    path: 'registeruser',
+                    element: < RegisterUser />
                 },
                 {
                     path: 'dietplan',

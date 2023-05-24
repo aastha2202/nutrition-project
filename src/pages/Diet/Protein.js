@@ -179,6 +179,8 @@ const dataHit =async =>{
 }
 
 
+
+
 //amreen api integration method
 
 // const [items, setItems] = useState([])
@@ -256,13 +258,13 @@ const dataHit =async =>{
     return ( 
         <div>
   
-  {
+  {/* {
     <img
       src={Logo}
       alt="nova logo"
       style={{ height: "auto", width: "250px", marginLeft: "30px" }}
     />
-  }
+  } */}
   <Grid container spacing={2}>
     <Grid item xs={6}>
       <CardContent>
@@ -308,7 +310,7 @@ const dataHit =async =>{
   
   {dataFromAPi?.length>1?(dataFromAPi.map(item=>{
   return(
-    <Card style={cardStyle}>
+    <Card  style={cardStyle}>
     <CardContent>
       <Grid container spacing={2} justifyContent="center" alignItems="center">
         <Grid item xs={2} md={2}>
@@ -349,6 +351,7 @@ const dataHit =async =>{
   )
 
 })):(<Typography   align="center"  style={calories}>No Data Found</Typography> )}
+
 </div>
 
             );

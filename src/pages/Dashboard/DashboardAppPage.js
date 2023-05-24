@@ -149,13 +149,14 @@ const handleExpandClick = () => {
 
   const getOneDiet = (item, index) => {
     console.log(item.status, "itemmmm statusss .....  ")
-    axios.get(`https://aipse.in/api/getAllDietPlan?userid=2&startdate=${item.startdate}&enddate=${item.enddate}&type=food&status=${item.status}`)
+    let userId = localStorage.getItem(['User ID']);
+    axios.get(`https://aipse.in/api/getAllDietPlan?userid=${userId}&startdate=${item.startdate}&enddate=${item.enddate}&type=food&status=${item.status}`)
       .then(function (response) {
         response.data.data.servingsLeft = parseInt
           (response?.data?.data.TotalServings - response?.data?.data.CosumedServings)
         setViewOneDietPlan({ ...viewOneDietPlan, previous: index })
         setoneDietplanData(response?.data?.data)
-        axios.get(`https://aipse.in/api/getAllDietPlan?userid=2&startdate=${item.startdate}&enddate=${item.enddate}&type=exercise&status=${item.status}`)
+        axios.get(`https://aipse.in/api/getAllDietPlan?userid=${userId}&startdate=${item.startdate}&enddate=${item.enddate}&type=exercise&status=${item.status}`)
           .then(function (response) {
             response.data.data.servingsLeft = parseInt
               (response?.data?.data.TotalServings - response?.data?.data.CosumedServings)
@@ -172,8 +173,8 @@ const handleExpandClick = () => {
 
 
   return (
-  <div >
-    <img src={Logo} alt="nova logo" style={{height: "auto", width: "250px", marginLeft: "30px"}}/>
+  < >
+    {/* <img src={Logo} alt="nova logo" style={{height: "auto", width: "250px", marginLeft: "30px"}}/> */}
     
         
     <Card style={{margin:"10px"}}>
@@ -201,10 +202,10 @@ const handleExpandClick = () => {
                      <Select  onChange={item => {
                 setValue(item.target.value);
                 onIntervalChange(item.target.value)
-                
+               
                 
             }} 
-            sx={{backgroundColor:"white"}} >
+            sx={{backgroundColor:"white"}}  defaultValue="0" >
                      <MenuItem value="-1" >Over All</MenuItem>
                      <MenuItem value="0">Today</MenuItem>
                      <MenuItem value="1">Week</MenuItem>
@@ -341,6 +342,6 @@ const handleExpandClick = () => {
          
     
     
-  </div>
+  </>
   );
 }

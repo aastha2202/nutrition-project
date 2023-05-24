@@ -1,7 +1,7 @@
 import { CardContent, Grid, ButtonBase, Typography } from "@mui/material";
 import Card from "@mui/material/Card";
-import  { useState } from 'react';
-
+import axios from 'axios';
+import { useEffect, useState }from 'react';
 // import WaterWalk from "./pictures/Waterwalk.svg"
 // import Lunge from "./pictures/Lunge.svg"
 // import Sidestep from "./pictures/Sidestep.svg"
@@ -13,8 +13,8 @@ import SideStepping from "../../assets/SideStepping.svg";
 import WaterWalking from "../../assets/WaterWalking.svg";
 import ForwardLunge from "../../assets/ForwardLunge.svg";
 import Logo from "../../assets/nova.svg";
-
-import  "../styles.css";
+import { useLocation  } from 'react-router-dom';
+// import  "../styles.css";
 
 
 
@@ -120,23 +120,61 @@ export default function Aerobic() {
         }
       
     };
+    // api integration
+    useEffect(()=>{
+      dataHit();
+    },[])
+    
+    const[dataFromAPi,setDataFromAPi]=useState([
+      
+    
+    ])
+    
+    const dataHit =async =>{
+      
+      
+      let config = {
+        method: 'GET',
+        maxBodyLength: Infinity,
+        url: `https://aipse.in/api/getItemsOfCategory?category_id=${value.category_id}&type=exercise`,
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        // data : data
+      };
+      
+      axios(config)
+      .then((response) => {
+        setDataFromAPi(response?.data?.data)
+        console.log(dataFromAPi,"------------- proteins get data");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+
+console.log(dataFromAPi,"---areobic page -----");
 
 
+const location=useLocation(); 
+  // const[category_id,setCategory_id]=useState(data.category_id);
+ const [value,setValue]=useState(location.state?.data)
+ console.log(value,"---------import data from exercise to areobic ");
 
 
 
   return (
-    <div>
-      <img
+    <>
+      {/* <img
         src={Logo}
         alt="nova logo"
         style={{ height: "auto", width: "250px", marginLeft: "30px" }}
-      />
+      /> */}
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <CardContent>
             <Typography x variant="h3" style={title}>
-              Aerobic Activity
+            {value.category_name}
             </Typography>
             
           </CardContent>
@@ -168,7 +206,7 @@ export default function Aerobic() {
       </Card>
 
       
-      <Card style={{backgroundColor: "#F0E7F5", margin: "1rem", boxShadow: "#c4c4c4", }}>
+      {/* <Card style={{backgroundColor: "#F0E7F5", margin: "1rem", boxShadow: "#c4c4c4", }}>
         <CardContent>
           <Grid container spacing={2} justifyContent="center" alignItems="center">
             <Grid item xs={2} md={2}>
@@ -318,13 +356,70 @@ export default function Aerobic() {
             </Grid>
           </Grid>
         </CardContent>
-      </Card>
+      </Card> */}
 
       
+      {dataFromAPi?.length>1?(dataFromAPi.map(item=>{
+  return(
+     
+    <Card style={{backgroundColor: "#F0E7F5", margin: "1rem", boxShadow: "#c4c4c4"}}>
+        <CardContent>
+          <Grid container spacing={2} justifyContent="center" alignItems="center" >
+            <Grid item xs={2} md={2}>
+              <ButtonBase sx={{ width: "auto", height: "auto" }}>
+                <img src={ForwardLunge} alt="nova logo" style={{ height: "100", width: "100px" }} />
+              </ButtonBase>
+            </Grid>
+            <Grid item xs={10} spacing={2} md={10}>
+              <Grid item >
+                  <Grid container  flexDirection={"row"}>
+                   <Grid item xs={8}>
+                  <Typography gutterBottom variant="h5" component="div" style={maintitle}>
+                    {item.item_name}
+                  </Typography>
+                  </Grid>
+                  <Grid item xs={4}  >
+                  <Card  sx={{position:'absolute', right:10,borderRadius:1,boxShadow: '#c4c4c4'}} >
+                                
+                            
+                                <IconButton onClick={handleDecrement3}>
+                                <RemoveIcon />
+                                 </IconButton>
+                                 {count3}
+                                 <IconButton onClick={handleIncrement3}>
+                                 <AddIcon />
+                                 </IconButton>
+                                
+  
+                            
+                            
 
+                          
+                         
+                      </Card>
+                      </Grid>  
 
+                  </Grid>     
+                
+                <Typography variant="body2" mt={1} gutterBottom style={maintext}>
+                  Stand in waist - or chest - high water, facing the pool
+                  wall.Take sideways steps with your body and toes facing the
+                  wall.Take 10 to 20 steps in one direction and then return
+                  .Repeat in the other direction.
+                </Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
+
+  )
+
+})):(<Typography   align="center"  >No Data Found</Typography> )}
+
+  
 
     
-    </div>
+    </>
   );
 }

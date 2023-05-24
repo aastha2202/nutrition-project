@@ -169,6 +169,8 @@ export default function DietPlan(){
 
     const [data, setData] = useState([])
     const [exerciseData, setExerciseData] = useState([])
+    
+
     const getCurrentDate = () => {
   
       var date = new Date().getDate();
@@ -182,7 +184,8 @@ export default function DietPlan(){
   
   
     useEffect(() => {
-      axios.get(`https://aipse.in/api/getAllDietPlan?userid=1&type=food&status=ongoing`)
+      let userId = localStorage.getItem(['User ID']);
+      axios.get(`https://aipse.in/api/getAllDietPlan?userid=${userId}&type=food&status=ongoing`)
         .then(function (response) {
           console.log(response.data.data, "dieettttttttttt")
           response.data.data.servingsLeft = parseInt
@@ -197,7 +200,7 @@ export default function DietPlan(){
           setData(response?.data?.data)
           console.log(response?.data?.data,"--------data -------")
           for (let i = 0; i < response?.data?.data?.length; i++) {
-            axios.get(`https://aipse.in/api/getOneDietPlan?userid=1&dietid=${exerciseData?.DietID}`)
+            axios.get(`https://aipse.in/api/getOneDietPlan?userid=${userId}&dietid=${exerciseData?.DietID}`)
               .then(function (response) {
                 // console.log(response?.data, "response..............responseeeeee")
               })
@@ -216,10 +219,10 @@ export default function DietPlan(){
     return (
         
         <div className='dietplan-container'>
-            <CardContent className='dietplan-companyname'>
+            {/* <CardContent className='dietplan-companyname'>
                 <img src={Logo} alt="loading" className='dietplan-companyname-image'/>
                 
-            </CardContent>
+            </CardContent> */}
             <Grid container   style={{display:'flex',flexDirection:"row",position:'relative'}}>
                <Grid item xs={6}>
                <CardContent >
@@ -335,13 +338,14 @@ export default function DietPlan(){
                     
    
                </Card> 
-                      
+                    
      {data?.map(item=>{
         return(
-              <Card style={maincardStyle}  >
-                    <CardContent  state={{data:item , ano:{}}}  to="/dashboard/protein"  component={RouterLink} sx={{textDecoration:'none'}}>
-                    <Grid container  spacing={1} margin="10px" alignItems="center">
-                     <Grid item xs={6} >
+          // <Grid container flex sx={12} lg={4}>
+            <Card  style={maincardStyle}  >
+                    <CardContent  state={{data:item }}  to="/dashboard/protein"  component={RouterLink} sx={{textDecoration:'none'}}>
+                    <Grid container spacing={1} margin="10px" alignItems="center">
+                     <Grid item xs={6}  >
                      
                      <Grid item  alignSelf={'center'}>
                            
@@ -349,11 +353,7 @@ export default function DietPlan(){
                                 {item.category_name}
                             </Typography> 
                             
-                        </Grid>
-
-                        
-                       
-                        
+                        </Grid> 
                        
                         </Grid>    
                         <Grid item xs={5} margin={1}    >
@@ -371,8 +371,6 @@ export default function DietPlan(){
                             </Typography>
                         </Grid> 
                         
-                          
-                           
                         </Grid>
                         
                     </Grid>
@@ -380,9 +378,11 @@ export default function DietPlan(){
                     
     
                </Card>
+              //  </Grid>  
 
         );
      })}
+    
 
    
          </div>
