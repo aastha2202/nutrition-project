@@ -2,7 +2,7 @@ import {React, useEffect, useState }from 'react';
 
 // import '../css/DietPlan.css';
 
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { Link as RouterLink, useLocation ,useNavigate} from 'react-router-dom';
 import Box from '@mui/material/Box';
 import {   Select, FormControl, InputLabel } from '@mui/material';
 import Card from '@mui/material/Card';
@@ -160,62 +160,221 @@ const caloriesremainedNo={
 
 
 export default function DietPlan(){
+  const location = useLocation();
+//   const [loading, setLoading] = useState(true)
+//   const [data, setData] = useState({})
+//   const [exerciseData, setExerciseData] = useState([])
+//   const [oneDietPlan, setOneDietPlan] = useState([])
+ 
+// console.log(data,"----data ---checking ")
+// console.log(exerciseData,"----exerciseData----checking")
+// console.log(oneDietPlan,"------oneDietPlan------")
 
-  const servlingsLeft= useRef();
-  const location=useLocation(); 
- const [value,setValue]=useState(location.state?.item)
- console.log(value,"---------value state");
+//   useEffect(() => {
+
+//     apiCall()
+  
+
+//   }, [])
 
 
-    const [data, setData] = useState([])
-    const [exerciseData, setExerciseData] = useState([])
+//   const apiCall = async () => {
+
+//     let userIdAsync = localStorage.getItem('userId')
+
+//     axios.get(`https://aipse.in/api/getAllDietPlan?userid=${userIdAsync}&type=food&status=ongoing`)
+//       .then(function (response) {
+//         console.log('getAll Diet Plan')
+//         // console.log(response.data.data, "dieettttttttttt")
+//         response.data.data.servingsLeft = parseInt
+//           (response?.data?.data.TotalServings - response?.data?.data.CosumedServings)
+//         setExerciseData(response?.data?.data)
+//         // console.log(data)
+//         axios.get(`https://aipse.in/api/getOneDietPlan?userid=${userIdAsync}`)
+//           .then(function (response) {
+//             console.log(response?.data?.data)
+//             let resDietPlan = response?.data?.data
+//             // setOneDietPlan(response?.data?.data)
+//             setLoading(false)
+//             axios.get(`https://aipse.in/api/getAllCategories?type=food`)
+//               .then(function (response) {
+//                 setData(response?.data?.data)
+//                 //  [{"category": "Pawan android", "diet_id": 709, "end_date": "08-23-2023", "interval": "2 month", "recommended_servings": 12, "servings_consumed": 0, "start_date": "05-25-2023", "total_servings": 1080, "type": "food", "user_id": 35}]} 
+
+//                 let dietPlan = [], dietCategories = []
+//                 for (let i = 0; i < resDietPlan.length; i++) {
+//                   let obj = resDietPlan[i]
+//                   if (dietCategories.includes(obj?.category)) {
+//                     let index = dietPlan.findIndex((x) => x.category === obj?.category)
+//                     dietPlan[index].servings_consumed = dietPlan[index].servings_consumed + obj?.servings_consumed
+//                   }
+//                   else {
+//                     dietCategories.push(obj?.category)
+//                     dietPlan.push(obj)
+//                   }
+//                   if (i == resDietPlan.length - 1) {
+//                     setOneDietPlan(dietPlan)
+//                   }
+//                 }
+
+//               })
+//               .catch(function (error) {
+//                 alert("something went wrong");
+//                 // console.log(error);
+//               });
+//             console.log(response?.data, "response..............responseeeeee in get one diet plannnnn")
+//           })
+//           .catch(function (error) {
+//             alert("something went wrong");
+//             // console.log(error);
+//           });
+
+
+//       })
+//       .catch(function (error) {
+//         alert("something went wrong");
+//         // console.log(error);
+//       });
+//   }
+
+
+
+//   const getCurrentDate = () => {
+
+//     var date = new Date().getDate();
+//     var month = new Date().getMonth() + 1;
+//     var year = new Date().getFullYear();
+//     return date + '-' + month + '-' + year;//format: d-m-y;
+//   }
+
+
+
+//   const setDietId = (item) => {
+//     let catid = data.filter(e => e.category_name == item.category)
+//     let id = null
+//     if (catid) { id = catid[0].category_id }
+//     navigation.navigate('ItemsOfCategory',
+//       { cat: id, diet_id: item, category: item.category, type: "food", servingsConsumed: item.servings_consumed, apiCall: apiCall }
+//     )
+
+
+//   }
+
+
+
+const [loading, setLoading] = useState(true)
+  const [data, setData] = useState({})
+  const [exerciseData, setExerciseData] = useState([])
+  const [oneDietPlan, setOneDietPlan] = useState([])
+  // const isFocused = useIsFocused();
+
+
+  useEffect(() => {
     
+      getValues()
+    
+  }, [])
 
-    const getCurrentDate = () => {
-  
-      var date = new Date().getDate();
-      var month = new Date().getMonth() + 1;
-      var year = new Date().getFullYear();
-  
-      //Alert.alert(date + '-' + month + '-' + year);
-      // You can turn it in to your desired format
-      return date + '-' + month + '-' + year;//format: d-m-y;
-    }
-  
-  
-    useEffect(() => {
-      let userId = localStorage.getItem(['User ID']);
-      axios.get(`https://aipse.in/api/getAllDietPlan?userid=${userId}&type=food&status=ongoing`)
+  const getValues = async () => {
+    // console.log("getValuess calledddd")
+    let start_date = await localStorage.getItem('dietstartDate')
+    let end_date = await localStorage.getItem('dietendDate')
+    await apiCall(start_date, end_date)
+  }
+
+
+  const apiCall = async (start_date, end_date) => {
+    setLoading(true)
+    let userIdAsync = localStorage.getItem('userId')
+    // console.log(start_date, end_date)
+    if (start_date) {
+      axios.get(`https://aipse.in/api/getAllDietPlan?userid=${userIdAsync}&startdate=${start_date}&enddate=${end_date}&type=food&status=today`)
         .then(function (response) {
-          console.log(response.data.data, "dieettttttttttt")
+
+          // console.log(response.data.data, "dieettttttttttt")
           response.data.data.servingsLeft = parseInt
-            (response?.data?.data.TotalServings - response?.data?.data.CosumedServings)
+            (response?.data?.data.RecommendedServings - response?.data?.data.CosumedServings)
           setExerciseData(response?.data?.data)
+          // console.log(data)
+          axios.get(`https://aipse.in/api/getOneDietPlan?userid=${userIdAsync}`)
+            .then(function (response) {
+
+              let resDietPlan = response?.data?.data
+              // console.log(response?.data?.data, "one diet plannnn")
+              // setOneDietPlan(response?.data?.data)
+              setLoading(false)
+              axios.get(`https://aipse.in/api/getAllCategories?type=food`)
+                .then(function (response) {
+                  setData(response?.data?.data)
+                  //  [{"category": "Pawan android", "diet_id": 709, "end_date": "08-23-2023", "interval": "2 month", "recommended_servings": 12, "servings_consumed": 0, "start_date": "05-25-2023", "total_servings": 1080, "type": "food", "user_id": 35}]} 
+                  // console.log(response?.data?.data)
+                  let dietPlan = [], dietCategories = []
+                  for (let i = 0; i < resDietPlan.length; i++) {
+                    let obj = resDietPlan[i]
+                    if (dietCategories.includes(obj?.category)) {
+                      let index = dietPlan.findIndex((x) => x.category === obj?.category)
+                      dietPlan[index].servings_consumed = dietPlan[index].servings_consumed + obj?.servings_consumed
+                    }
+                    else {
+                      dietCategories.push(obj?.category)
+                      dietPlan.push(obj)
+                    }
+                    if (i == resDietPlan.length - 1) {
+                      // console.log(dietPlan)
+                      setOneDietPlan(dietPlan)
+                    }
+                  }
+
+                })
+                .catch(function (error) {
+                  // Alert.alert("something went wrong");
+                  // console.log(error);
+                });
+              // console.log(response?.data, "response..............responseeeeee in get one diet plannnnn")
+            })
+            .catch(function (error) {
+              // Alert.alert("something went wrong");
+              // console.log(error);
+            });
+
+
         })
         .catch(function (error) {
-          console.log(error);
+          // Alert.alert("something went wrong");
+          // console.log(error);
         });
-      axios.get(`https://aipse.in/api/getAllCategories?type=food`)
-        .then(function (response) {
-          setData(response?.data?.data)
-          console.log(response?.data?.data,"--------data -------")
-          for (let i = 0; i < response?.data?.data?.length; i++) {
-            axios.get(`https://aipse.in/api/getOneDietPlan?userid=${userId}&dietid=${exerciseData?.DietID}`)
-              .then(function (response) {
-                // console.log(response?.data, "response..............responseeeeee")
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }, [])
-  
-     console.log(exerciseData,"exercise------");
-     console.log(data,"--------------data");
+    }
+    else {
+      setLoading(false)
+    }
+  }
+
+
+
+  const getCurrentDate = () => {
+
+    var date = new Date().getDate();
+    var month = new Date().getMonth() + 1;
+    var year = new Date().getFullYear();
+    if (date < 10) date = '0' + date;
+    if (month < 10) month = '0' + month;
+    return date + '-' + month + '-' + year;//format: d-m-y;
+  }
+
+
+  let navigate = useNavigate();
+ 
+  const setDietId = (item) => {
+    let catid = data.filter(e => e.category_name == item.category)
+    let id = null
+    if (catid) { id = catid[0].category_id }
+    localStorage.setItem('params',JSON.stringify({ cat: id, diet_id: item, category: item.category, type: "food", servingsConsumed: item.servings_consumed, apiCall: apiCall }))
+    navigate('/dashboard/itemsofdietplan')
+
+
+  }
+  // console.log(state,"-----state checking")
+
     return (
         
         <div className='dietplan-container'>
@@ -234,13 +393,13 @@ export default function DietPlan(){
                </Grid>
             <Grid  item xs={6} mt={1} >
               <CardContent  >
-                      <FormControl  sx={{ position:'absolute',right:6 }} size="small">
+                      {/* <FormControl  sx={{ position:'absolute',right:6 }} size="small">
                      <Select sx={{backgroundColor:"white"}} defaultValue="Today">
                      <MenuItem value="Today"  >Today</MenuItem>
                      <MenuItem value="Next Week">Next Week</MenuItem>
                      <MenuItem value="Previous Week">Previous Week</MenuItem>
                      </Select>
-                     </FormControl>
+                     </FormControl> */}
                  <br/>  
               </CardContent>
               </Grid>
@@ -253,13 +412,13 @@ export default function DietPlan(){
                     <Card  sx={{minHeight:80}} style={{backgroundColor:"#8D25C1",margin:"10px"}}>
                         <Grid container mt={1} justifyContent="center" alignItems="center" item flexDirection="row" >
                         
-                           <Grid item mt={1.5} >
+                           <Grid item mt={3} alignSelf={"center"} >
                             
                            <Typography variant="body1" component="span" style={day} >
-                                            15
+                                            {getCurrentDate()}
                                     </Typography>
                             </Grid> 
-                            <Grid item>
+                            {/* <Grid item>
                                 <Grid  container flexDirection="column"  style={{backgroundColor:"#8D25C1",margin:"10px"}} >
                                     <Grid item>
                                         <Typography variant="h5" component="span" style={month}>
@@ -274,7 +433,7 @@ export default function DietPlan(){
                                     </Grid>
                                 </Grid>
                             </Grid>
-                           
+                            */}
                             
                         </Grid>
                     </Card>
@@ -285,19 +444,19 @@ export default function DietPlan(){
                     <Grid container  justifyContent="center" alignItems="center" flexDirection="column" >
                         
                         <Grid item mt={1}>
-                        <Typography  style={todaysgoal}>Today's Goal</Typography>
+                        <Typography  style={todaysgoal}>Today's Intakes</Typography>
                         </Grid>
                         <Grid item>
 
                        
                         <Grid  container flexDirection="row">
-                           <Grid item ><Typography style={{ fontSize:"35px" ,color:"white",fontWeight:"40px"}}>20</Typography></Grid>
-                           <Grid item><Typography mt={3}  ml={0.5} style={exercise}>Exercise</Typography></Grid>
+                           <Grid item ><Typography style={{ fontSize:"35px" ,color:"white",fontWeight:"40px"}}> {exerciseData?.TotalServings} </Typography></Grid>
+                           <Grid item><Typography mt={3}  ml={0.5} style={exercise}>Servings</Typography></Grid>
                             </Grid>
                         </Grid>
                         
                         
-                        
+      
                     </Grid>
 
                     </Card>
@@ -310,13 +469,13 @@ export default function DietPlan(){
                 </Card>
             </Grid>  
                     
-            <Card  style={{backgroundColor:"#212121",margin:"10px"}} >
+            <Card  style={{backgroundColor:"#2c2b2b",margin:"10px"}} >
                     <Grid container    sx={{textDecoration:'none'}} alignItems="center" >
                     <Grid item xs={8} alignItems="flex-end"  >
                         <Grid item  container justifyContent="center" alignItems="center">
                         <CardContent sx={{alignItems:"center",alignSelf:'center',alignContent:"center"}}>
                                 <Typography variant="body1" component="span"   style={servingleft}>
-                                {value?.servingsLeft}  servings left 
+                                {exerciseData?.servingsLeft}  servings left 
                                     
                                 </Typography>
                                  </CardContent>
@@ -333,25 +492,32 @@ export default function DietPlan(){
                            
                         </Grid>
                         
-                    </Grid>
+                 </Grid>
                     
                     
    
                </Card> 
                     
-     {data?.map(item=>{
+     {oneDietPlan?.map(item=>{
         return(
           // <Grid container flex sx={12} lg={4}>
             <Card  style={maincardStyle}  >
-                    <CardContent  state={{data:item }}  to="/dashboard/protein"  component={RouterLink} sx={{textDecoration:'none'}}>
+                    <CardContent onClick={()=>{setDietId(item)}} sx={{textDecoration:'none'}}>
                     <Grid container spacing={1} margin="10px" alignItems="center">
                      <Grid item xs={6}  >
                      
                      <Grid item  alignSelf={'center'}>
-                           
+                            <Grid item container flexDirection={"column"}>
                             <Typography variant="body1" Wrap component="span" style={proteinStyle}>
-                                {item.category_name}
+                                {item.category}
                             </Typography> 
+                            </Grid>
+                            <Grid item>
+                            <Typography alignContent="center" variant="body1" component="span" style={totalservingsStyle}>
+                            {item.servings_consumed} servings consumed
+                            </Typography>
+                            </Grid>
+                           
                             
                         </Grid> 
                        

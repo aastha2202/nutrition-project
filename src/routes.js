@@ -4,12 +4,13 @@ import DashboardLayout from './layouts/dashboard/DashboardLayout';
 import DashboardAdmin from './layouts/dashboard/DashboardAdmin';
 import SimpleLayout from './layouts/simple';
 //
-import Protein from './pages/Diet/Protein';
+import ItemsOfDietPlan from './pages/Diet/ItemsOfDietPlan';
 import UserPage from './pages/UserPage';
 import LoginPage from './pages/LoginPage';
 import Page404 from './pages/Page404';
 import ProductsPage from './pages/ProductsPage';
-import DashboardAppPage from './pages/Dashboard/DashboardAppPage';
+//import DashboardAppPage from './pages/Dashboard/DashboardAppPage';
+import Home from "./pages/Home/Home";
 import Adminuser from './Admin/AdminDashboard/Adminuser';
 // 
 import Adminproteins from './Admin/AdminDiet/Adminproteins';
@@ -23,7 +24,7 @@ import RegisterUser from './pages/RegisterUser'
 import DietPlan from './pages/Diet/DietPlan';
 import Exercise from './pages/Exercises/Exercise';
 import Adminprofile from './Admin/AdminProfile/Adminprofile';
-import Aerobic from './pages/Exercises/Aerobic';
+import ItemOfExercise from './pages/Exercises/ItemOfExercise';
 import CreateExerciseItems from './Admin/AdminExercise/CreateExerciseItems';
 import Userstats from './Admin/UserStats/Userstats';
 import Adminsearch from './Admin/AdminSearch/Adminsearch'
@@ -43,12 +44,12 @@ export default function Router() {
             element: < DashboardLayout / > ,
             children: [
                 { element: < Navigate to = "/dashboard/app" /> , index: true },
-                { path: 'app', element: < DashboardAppPage /> },
+                { path: 'app', element: < Home /> },
                 { path: 'user', element: < UserPage /> },
                 { path: 'products', element: < ProductsPage /> },
                 {
-                    path: 'protein',
-                    element: < Protein />
+                    path: 'itemsofdietplan',
+                    element: < ItemsOfDietPlan />
                 },
 
 
@@ -78,7 +79,7 @@ export default function Router() {
                     path: 'exercise',
                     element: < Exercise /> ,
                 },
-                { path: 'aerobic', element: < Aerobic /> },
+                { path: 'itemofexercise', element: < ItemOfExercise /> },
 
 
             ],

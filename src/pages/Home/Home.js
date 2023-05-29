@@ -1,5 +1,4 @@
 // @mui
-// @mui
 import { Grid, Typography, Select, FormControl, InputLabel,Button,IconButton,Stack  } from '@mui/material';
 import{useState,useEffect} from 'react'
 import axios from 'axios';
@@ -37,7 +36,7 @@ const subtext={
 }
 
 
-export default function DashboardAppPage() {
+export default function Home() {
 
 
 
@@ -57,13 +56,87 @@ const handleExpandClick = () => {
     
     }));
 
-  var username = 'Seema'
+  // const [username,setusername]=useState('')
+  // const [userId,setuserId]=useState('')
+  // const [loading,setLoading]=useState(true)
+  // const [oneDietPlanData, setoneDietplanData] = useState([])
+  // const [oneExerciseData, setOneExerciseData] = useState([])
+  // const [data, setData] = useState({ date: "31  March \n 2023", servingsConsumed: 120, servingsLeft: 60, exercisesRecommended: 20, exercisesLeft: 10 })
+  // const [selected, setSelected] = useState({ label: "Today", value: "today" })
+  // const [viewOneDietPlan, setViewOneDietPlan] = useState({ ongoing: true, previous: -1 })
+  // const interval = { '0': 'today', '1': 'week', '2': 'month', '3': '3months' }
+  // const [ongoingDietPlan, setOngoingDietPlan] = useState({})
+  // const [ongoingExercisePlan, setOngoingExercisePlan] = useState({})
+  // const [prevDietPlan, setPrevDietPlan] = useState([])
+  // const [value, setValue] = useState('-1');
 
 
+  // useEffect(() => {
+  //   setValues()
+   
+  
+  // }, [])
+
+  // const setValues = async () => {
+  //   let uname =localStorage.getItem('Username')
+  //   let uid =localStorage.getItem('userId')
+  //   await setusername(uname)
+  //   await setuserId(uid)
+  //   await listDietPlan(uid);
+  // }
+
+  // const onIntervalChange = (value) => {
+  //   console.log(value)
+  //   if (value == '-1') {
+  //     getAllDietPlan(0, 0, 0, userId)
+  //   }
+  //   else {
+  //     getAllDietPlan(ongoingDietPlan, ongoingExercisePlan, value, userId)
+  //   }
+  // }
+
+  // const listDietPlan = async (uid) => {
+  //   setLoading(true)
+  //   console.log(`https://aipse.in/api/getlistsdietplans?userid=${uid}`)
+  //   await axios.get(`https://aipse.in/api/getlistsdietplans?userid=${uid}`)
+  //     .then(function (response) {
+  //       if (response?.data?.data == 'Data not found') {
+  //         setLoading(false)
+  //         localStorage.removeItem('exercisestartDate')
+  //         localStorage.removeItem('exerciseendDate')
+  //         localStorage.removeItem('dietstartDate')
+  //         localStorage.removeItem('dietendDate')
+  //       }
+  //       else {
+  //         let prev = response?.data?.data?.filter(e => e.status == 'previous')
+  //         let ongoing = response?.data?.data?.filter(e => e.status == 'ongoing')
+  //         setPrevDietPlan(prev ? prev : [])
+  //         if (ongoing?.length > 0) {
+  //           getAllDietPlan(0, 0, 0, uid)
+  //         }
+  //         else {
+  //           localStorage.removeItem('exercisestartDate')
+  //           localStorage.removeItem('exerciseendDate')
+  //           localStorage.removeItem('dietstartDate')
+  //           localStorage.removeItem('dietendDate')
+  //           setLoading(false)
+  //         }
+  //       }
+  //     })
+  //     .catch(function (error) {
+  //       setLoading(false)
+
+  //       // Alert.alert("something went wrong");
+  //       console.log(error, "listdietPlamn");
+  //     });
+  // }
+
+
+  const [loading, setLoading] = useState(true)
+  const [username, setusername] = useState('')
+  const [userId, setuserId] = useState('')
   const [oneDietPlanData, setoneDietplanData] = useState([])
   const [oneExerciseData, setOneExerciseData] = useState([])
-  const [data, setData] = useState({ date: "31  March \n 2023", servingsConsumed: 120, servingsLeft: 60, exercisesRecommended: 20, exercisesLeft: 10 })
-  const [selected, setSelected] = useState({ label: "Today", value: "today" })
   const [viewOneDietPlan, setViewOneDietPlan] = useState({ ongoing: true, previous: -1 })
   const interval = { '0': 'today', '1': 'week', '2': 'month', '3': '3months' }
   const [ongoingDietPlan, setOngoingDietPlan] = useState({})
@@ -73,83 +146,148 @@ const handleExpandClick = () => {
 
 
   useEffect(() => {
-    listDietPlan()
-  }, [])
+   
+      setValues()
+      
+  
 
+  }, [])
+  
+
+  const setValues = async () => {
+    let uname =  localStorage.getItem('Username')
+    let uid = localStorage.getItem('userId')
+    
+    await setusername(uname)
+    await setuserId(uid)
+    await listDietPlan(uid);
+  }
 
   const onIntervalChange = (value) => {
     if (value == '-1') {
-      getAllDietPlan()
+      getAllDietPlan(0, 0, 0, userId)
     }
     else {
-      getAllDietPlan(ongoingDietPlan, ongoingExercisePlan, value)
+      getAllDietPlan(ongoingDietPlan, ongoingExercisePlan, value, userId)
     }
   }
 
-  const listDietPlan = () => {
+  const listDietPlan = async (uid) => {
 
-    axios.get(`https://aipse.in/api/getlistsdietplans?userid=1`)
+    // console.log(`https://aipse.in/api/getlistsdietplans?userid=${uid}`)
+    await axios.get(`https://aipse.in/api/getlistsdietplans?userid=${uid}`)
       .then(function (response) {
-        // console.log(response?.data, "response in list diet plan")
-        let prev = response?.data?.data?.filter(e => e.status == 'previous')
-        let ongoing = response?.data?.data?.filter(e => e.status == 'ongoing')
-        setPrevDietPlan(prev ? prev : [])
-        console.log('prev and ongoing',prev,ongoing);
-        if (ongoing?.length > 0) {
-          getAllDietPlan()
+        if (response?.data?.data == 'Data not found') {
+          setLoading(false)
+          localStorage.removeItem('exercisestartDate')
+          localStorage.removeItem('exerciseendDate')
+          localStorage.removeItem('dietstartDate')
+          localStorage.removeItem('dietendDate')
+        }
+        else {
+          let prev = response?.data?.data?.filter(e => e.status == 'previous')
+          let ongoing = response?.data?.data?.filter(e => e.status == 'ongoing')
+          setPrevDietPlan(prev ? prev : [])
+          if (ongoing?.length > 0) {
+            getAllDietPlan(0, 0, 0, uid)
+          }
+          else {
+            localStorage.removeItem('exercisestartDate')
+            localStorage.removeItem('exerciseendDate')
+            localStorage.removeItem('dietstartDate')
+            localStorage.removeItem('dietendDate')
+            setLoading(false)
+          }
         }
       })
       .catch(function (error) {
-        console.log(error);
+        setLoading(false)
+
+        // Alert.alert("something went wrong");
+        console.log(error, "listdietPlamn");
       });
-      console.log(ongoingDietPlan,'----data coming')
   }
 
-  const getAllDietPlan = (diet, exercise, value) => {
-     console.log(diet,'diet', exercise,'exercise',value)
-    console.log('called');
-    let dieturl = `https://aipse.in/api/getAllDietPlan?userid=2&type=food&status=ongoing`,
-      exerciseurl = `https://aipse.in/api/getAllDietPlan?userid=2&type=exercise&status=ongoing`
+  const getAllDietPlan = (diet, exercise, value, uid) => {
+    // console.log("getAlldeiteplan")
+    let dieturl = `https://aipse.in/api/getAllDietPlan?userid=${uid}&type=food&status=ongoing`,
+      exerciseurl = `https://aipse.in/api/getAllDietPlan?userid=${uid}&type=exercise&status=ongoing`
     if (diet) {
-      dieturl = `https://aipse.in/api/getAllDietPlan?userid=2&startdate=${diet?.StartDate}&enddate=${diet?.EndDate}&type=food&status=${interval[value]}`
+      dieturl = `https://aipse.in/api/getAllDietPlan?userid=${uid}&startdate=${diet?.StartDate}&enddate=${diet?.EndDate}&type=food&status=${interval[value]}`
       if (exercise?.StartDate) {
-        exerciseurl = `https://aipse.in/api/getAllDietPlan?userid=2&startdate=${exercise?.StartDate}&enddate=${exercise?.EndDate}&type=exercise&status=${interval[value]}`
+        exerciseurl = `https://aipse.in/api/getAllDietPlan?userid=${uid}&startdate=${exercise?.StartDate}&enddate=${exercise?.EndDate}&type=exercise&status=${interval[value]}`
       }
     }
-    console.log('diet and exwrcise url',dieturl, exerciseurl)
+    // console.log(dieturl, exerciseurl)
+    let days;
+    value == '0' ? days = 1 : value == '1' ? days = 7 : value == '2' ? days = 30 : days = 90
+
     axios.get(dieturl)
       .then(function (response) {
         // 
-        console.log(response.data, "foodddd")
+        // console.log(response.data, "foodddd")
         // setOngoingDietPlan({ servingsLeft: 0, TotalServings: 0 })
         // setOngoingExercisePlan({ servingsLeft: 0, TotalServings: 0 })
+        if (diet) {
+
+
+          if (response?.data?.data?.RecommendedServings * days < response?.data?.data?.TotalServings) {
+            response.data.data.TotalServings = parseInt
+              (response?.data?.data?.RecommendedServings * days)
+          }
+
+
+
+        }
+
+
+        // console.log(response.data.data,"responseee")
+
         response.data.data.servingsLeft = parseInt
           (response?.data?.data.TotalServings - response?.data?.data.CosumedServings)
+
+        localStorage.setItem('dietstartDate', response?.data?.data?.StartDate)
+        localStorage.setItem('dietendDate', response?.data?.data?.EndDate)
         setOngoingDietPlan(response?.data?.data)
         axios.get(exerciseurl)
           .then(function (response) {
-            console.log(response.data, "exercise")
+
             if (response?.data?.data) {
+              if (diet) {
+                if (response?.data?.data?.RecommendedServings * days < response?.data?.data?.TotalServings) {
+                  response.data.data.TotalServings = parseInt
+                    (response?.data?.data?.RecommendedServings * days)
+                }
+
+              }
+
               response.data.data.servingsLeft = parseInt
                 (response?.data?.data.TotalServings - response?.data?.data.CosumedServings)
+              localStorage.setItem('exercisestartDate', response?.data?.data?.StartDate)
+              localStorage.setItem('exerciseendDate', response?.data?.data?.EndDate)
+
               setOngoingExercisePlan(response?.data?.data)
             }
             else {
               setOngoingExercisePlan({ servingsLeft: 0, TotalServings: 0 })
             }
+
+            setLoading(false)
           })
           .catch(function (error) {
+            // Alert.alert("something went wrong");
             console.log(error);
           });
       })
       .catch(function (error) {
+        // Alert.alert("something went wrong");
         console.log(error);
       });
   }
 
   const getOneDiet = (item, index) => {
+
     console.log(item.status, "itemmmm statusss .....  ")
-    let userId = localStorage.getItem(['User ID']);
     axios.get(`https://aipse.in/api/getAllDietPlan?userid=${userId}&startdate=${item.startdate}&enddate=${item.enddate}&type=food&status=${item.status}`)
       .then(function (response) {
         response.data.data.servingsLeft = parseInt
@@ -161,15 +299,25 @@ const handleExpandClick = () => {
             response.data.data.servingsLeft = parseInt
               (response?.data?.data.TotalServings - response?.data?.data.CosumedServings)
             setOneExerciseData(response?.data?.data)
+
           })
           .catch(function (error) {
+            // Alert.alert("something went wrong");
             console.log(error);
           });
       })
       .catch(function (error) {
+        // Alert.alert("something went wrong");
         console.log(error);
       });
   }
+  
+// console.log(uname,"username--checking---")  
+// console.log(uid,"id-------checking")
+console.log(ongoingDietPlan,"checking data ---ongoingDietPlan");
+console.log(ongoingExercisePlan,"checking data----ongoingExercisePlan");
+console.log(oneDietPlanData,"------oneDietPlanData  -----dataa");
+console.log(oneExerciseData,"-----oneExerciseData --dtaa checking");
 
 
   return (
@@ -202,16 +350,14 @@ const handleExpandClick = () => {
                      <Select  onChange={item => {
                 setValue(item.target.value);
                 onIntervalChange(item.target.value)
-               
-                
             }} 
-            sx={{backgroundColor:"white"}}  defaultValue="0" >
+            sx={{backgroundColor:"white"}}  defaultValue="-1" >
                      <MenuItem value="-1" >Over All</MenuItem>
                      <MenuItem value="0">Today</MenuItem>
                      <MenuItem value="1">Week</MenuItem>
                     
                      <MenuItem value="2">1 Month</MenuItem>
-                     <MenuItem value="3">3 Week</MenuItem>
+                     <MenuItem value="3">3 Months</MenuItem>
                      </Select>
                      </FormControl>
                  <br/>
@@ -247,7 +393,7 @@ const handleExpandClick = () => {
       
     </Card>
 
-    <Card   style={{backgroundColor:"#212121",margin:"10px"}}>
+    <Card   style={{backgroundColor:"#2c2b2b",margin:"10px"}}>
                     <CardContent  state={{item:ongoingDietPlan}}  to="/dashboard/dietplan" component={RouterLink} sx={{textDecoration:'none'}}>
                     <Grid container flexDirection="row" spacing="1" alignItems="center" justifyContent="center" >
                         <Grid item xs={4} alignItems="center" sx={{textAlign:'center'}} justifyContent="center">
@@ -279,16 +425,11 @@ const handleExpandClick = () => {
                         
                        
                         
-                       
-                        
-                        
-    
-                        
                         </Grid>
                     </CardContent>
             </Card>
     
-            <Card   style={{backgroundColor:"#212121",margin:"10px"}}>
+            <Card   style={{backgroundColor:"#2c2b2b",margin:"10px"}}>
                     <CardContent   to="/dashboard/Exercise" component={RouterLink} sx={{textDecoration:'none'}}>
                     <Grid container flexDirection="row" spacing="1" alignItems="center" justifyContent="center" >
                         
@@ -314,24 +455,14 @@ const handleExpandClick = () => {
                           
                           
                                 <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
-                                {ongoingExercisePlan.servingsLeft}
+                                {/* {ongoingExercisePlan.servingsLeft} */}
+                                {oneExerciseData.servingsLeft}
                                 </Typography>
                                 <Typography style={subtext}>exercise left</Typography>
-                                
-
-
-                          
+                                                    
                                
                         </Grid>
-                        
-                       
-                        
-                       
-                        
-                        
-                        
-                        
-                        
+                                       
                         </Grid>
                     </CardContent>
             </Card>

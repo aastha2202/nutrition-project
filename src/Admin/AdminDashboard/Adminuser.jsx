@@ -64,7 +64,7 @@ const dataHit =async => {
         return(
           <Card
         sx={{ minWidth: 275 }}
-        style={{ backgroundColor: "#212121", margin: "10px" }}
+        style={{ backgroundColor: "#2c2b2b", margin: "10px" }}
       >
         <CardContent>
           <Grid
@@ -103,7 +103,7 @@ const dataHit =async => {
       })} */}
       <Card
         sx={{ minWidth: 275 }}
-        style={{ backgroundColor: "#212121", margin: "10px" }}
+        style={{ backgroundColor: "#2c2b2b", margin: "10px" }}
       >
         <CardContent>
           <Grid
@@ -138,7 +138,7 @@ const dataHit =async => {
       </Card>
       <Card
         sx={{ minWidth: 275 }}
-        style={{ backgroundColor: "#212121", margin: "10px" }}
+        style={{ backgroundColor: "#2c2b2b", margin: "10px" }}
       >
         <CardContent>
           <Grid to="/dashboardadmin/adminsearch" component={RouterLink} sx={{textDecoration:'none'}} 
@@ -173,7 +173,7 @@ const dataHit =async => {
       </Card>
       <Card
         sx={{ minWidth: 275 }}
-        style={{ backgroundColor: "#212121", margin: "10px" }}
+        style={{ backgroundColor: "#2c2b2b", margin: "10px" }}
       >
         <CardContent>
           <Grid to="/dashboardadmin/adminsearch" component={RouterLink} sx={{textDecoration:'none'}} 

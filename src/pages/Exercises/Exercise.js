@@ -83,9 +83,6 @@ const year={
     
 }
 
-
-
-
   const maintitle={
     fontFamily: 'Inter-SemiBold',
     fontStyle: "normal",
@@ -163,9 +160,10 @@ export default function Exercise(){
       return date + '-' + month + '-' + year;//format: d-m-y;
     }
   
-  
+  console.log(getCurrentDate.date,"date and time checking");
     useEffect(() => {
-        let userId = localStorage.getItem(['User ID']);
+        // let userId = localStorage.getItem(['User ID']);
+        let userId = localStorage.getItem('userId')
         console.log(userId,"-----getting userid from localstoarge- ");
       axios.get(`https://aipse.in/api/getAllDietPlan?userid=${userId}&type=exercise&status=ongoing`)
         .then(function (response) {
@@ -182,7 +180,7 @@ export default function Exercise(){
           setData(response?.data?.data)
           console.log(response?.data?.data,"--------data -------")
           for (let i = 0; i < response?.data?.data?.length; i++) {
-            axios.get(`https://aipse.in/api/getOneDietPlan?userid=1&dietid=${exerciseData?.DietID}`)
+            axios.get(`https://aipse.in/api/getOneDietPlan?userid=${userId}&dietid=${exerciseData?.DietID}`)
               .then(function (response) {
                 // console.log(response?.data, "response..............responseeeeee")
               })
@@ -219,22 +217,20 @@ export default function Exercise(){
                 </Grid>
             </CardContent>
             
-          
-
             <Grid>
-                <Card style={{backgroundColor:"#D1A6E7",margin:"10px"}}>
+                <Card  style={{backgroundColor:"#D1A6E7",margin:"10px"}}>
                     <Grid container  item flexDirection={'row'} alignItems="center"  >
                       <Grid item xs={6}> 
-                    <Card  style={{backgroundColor:"#8D25C1",margin:"10px"}}>
+                    <Card  sx={{minHeight:80}} style={{backgroundColor:"#8D25C1",margin:"10px"}}>
                         <Grid container mt={1} justifyContent="center" alignItems="center" item flexDirection="row" >
                         
-                           <Grid item alignSelf={"center"} >
+                           <Grid item mt={3} alignSelf={"center"} >
                             
                            <Typography variant="body1" component="span" style={day} >
-                                            15
+                                            {getCurrentDate()}
                                     </Typography>
                             </Grid> 
-                            <Grid item>
+                            {/* <Grid item>
                                 <Grid  container flexDirection="column"  style={{backgroundColor:"#8D25C1",margin:"10px"}} >
                                     <Grid item>
                                         <Typography variant="h5" component="span" style={month}>
@@ -249,24 +245,22 @@ export default function Exercise(){
                                     </Grid>
                                 </Grid>
                             </Grid>
-                           
+                            */}
                             
                         </Grid>
                     </Card>
                     </Grid> 
 
                     <Grid item xs={6}>
-                    <Card  sx={{minHeight:65}} style={{backgroundColor:"#8D25C1",margin:"10px"}}>
-                    <Grid container  justifyContent="center" alignItems="center" flexDirection="column" j>
+                    <Card  sx={{minHeight:80}} style={{backgroundColor:"#8D25C1",margin:"10px"}}>
+                    <Grid container  justifyContent="center" alignItems="center" flexDirection="column" >
                         
                         <Grid item mt={1}>
                         <Typography  style={todaysgoal}>Today's Goal</Typography>
                         </Grid>
                         <Grid item>
-
-                       
-                        <Grid ml={2} container flexDirection="row">
-                           <Grid item ><Typography style={{ fontSize:"35px" ,color:"white",fontWeight:"40px"}}>20</Typography></Grid>
+                        <Grid  container flexDirection="row">
+                           <Grid item ><Typography style={{ fontSize:"35px" ,color:"white",fontWeight:"40px"}}> {exerciseData?.TotalServings} </Typography></Grid>
                            <Grid item><Typography mt={3}  ml={0.5} style={exercise}>Exercise</Typography></Grid>
                             </Grid>
                         </Grid>
@@ -283,7 +277,9 @@ export default function Exercise(){
                     
                     
                 </Card>
-            </Grid>
+            </Grid> 
+
+            
         {/* <Grid Item>
 
              <Card  style={{backgroundColor:"#212121",margin:"10px"}}>
@@ -309,23 +305,7 @@ export default function Exercise(){
             </Card>
         </Grid>
            
-            <Card  style={{backgroundColor:"#F0E7F5", margin:"10px"}}>
             
-                <Grid container to="/dashboard/aerobic" component={RouterLink} sx={{textDecoration:'none'}} justifyContent="space-between" alignItems="center" style={{padding:"30px"}}>
-                    <Grid item style={{padding:"5px"}}>
-                        
-                        <Typography variant="body1" component="span" style={maintitle}>
-                        Aerobic<br/>Activity
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography variant="h5" component="span" style={plusStyle}>
-                        <img src={Arrowforward} alt="Arrowforward logo" />
-                        </Typography>
-                    </Grid>
-                </Grid>
-              
-            </Card>
 
             <Card  style={{backgroundColor:"#F0E7F5", margin:"10px"}}>
             
@@ -348,7 +328,7 @@ export default function Exercise(){
          return(
         <Card  style={{backgroundColor:"#F0E7F5", margin:"10px"}}>
             
-        <Grid container state={{data:item }}  to="/dashboard/aerobic" component={RouterLink} sx={{textDecoration:'none'}} justifyContent="space-between" alignItems="center" style={{padding:"30px"}}>
+        <Grid container state={{data:item }}  to="/dashboard/itemofexercise" component={RouterLink} sx={{textDecoration:'none'}} justifyContent="space-between" alignItems="center" style={{padding:"30px"}}>
             <Grid item style={{padding:"5px"}}>
                 
                 <Typography variant="body1" component="span" style={maintitle}>

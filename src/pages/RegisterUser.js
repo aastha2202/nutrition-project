@@ -12,9 +12,10 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-
+import axios from 'axios';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function Copyright(props) {
@@ -54,6 +55,32 @@ export default function SignUp() {
     setGender(event.target.value);
   };
 
+
+  //API integration
+  const [response, setResponse] = useState()
+    const [formValue, setFormValue] = useState({
+        "user_name": "",
+        "password": "",
+        "role": "",
+        "gender": "male",
+        "mobile_number": "",
+        "email_id": "",
+        "address": "",
+        "profile_image": ""
+    })
+
+    const registerUser = () => {
+        axios.post(`https://aipse.in/api/registerUser`, formValue)
+            .then(function (response) {
+                console.log(response?.data, "responseeeeeee")
+                navigation.navigate('Login')
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -81,6 +108,19 @@ export default function SignUp() {
                   id="user_name"
                   label="User Name"
                   autoFocus
+                  onChangeText={(e) => { setFormValue({ ...formValue,  user_name: e.target.value }) }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  autoComplete="password"
+                  name="password"
+                  required
+                  fullWidth
+                  id="password"
+                  label="password"
+                  autoFocus
+                  onChangeText={(e) => { setFormValue({ ...formValue,  password: e.target.value }) }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -91,11 +131,24 @@ export default function SignUp() {
                   label="Email / Mobile No"
                   name="email_id"
                   autoComplete="email_id"
+                  onChangeText={(e) => { setFormValue({ ...formValue, email_id: e.target.value }) }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  autoComplete="role"
+                  name="role"
+                  required
+                  fullWidth
+                  id="role"
+                  label="role"
+                  autoFocus
+                  onChangeText={(e) => { setFormValue({ ...formValue,  role: e.target.value }) }}
                 />
               </Grid>
              
               <Grid item xs={12} container flexDirection={"row"} spacing={"4"}>
-              <Grid item xs={6}>
+              
                 <FormControl fullWidth>
                   <InputLabel required>Gender</InputLabel>
                   <Select
@@ -104,29 +157,15 @@ export default function SignUp() {
                   label="gender"
                   value={gender}
                   onChange={handleChange}
+
                   >
                     <MenuItem value="Male">Male</MenuItem>
                     <MenuItem value="Female">Female</MenuItem>
                     <MenuItem value="None">None</MenuItem>
                   </Select>
                 </FormControl>
-              </Grid>
-              <Grid item xs={6}>
-                <FormControl fullWidth>
-                  <InputLabel required>Age</InputLabel>
-                  <Select
-                  labelId="gender"
-                  id="gender"
-                  label="age"
-                  value={gender}
-                  onChange={handleChange}
-                  >
-                    <MenuItem value="Male">Male</MenuItem>
-                    <MenuItem value="Female">Female</MenuItem>
-                    <MenuItem value="None">None</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
+              
+              
               </Grid>
               
               <Grid item xs={12}>
@@ -137,17 +176,44 @@ export default function SignUp() {
                   label="Patient Id"
                   name="patient-id"
                   autoComplete="patient-id"
+                 
                 />
               </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  autoComplete="given-name"
+                  name="address"
+                  required
+                  fullWidth
+                  id="address"
+                  label="address"
+                  autoFocus
+                  
+                />
+              </Grid>
+              {/* <Grid item xs={12}>
+              <Button
+              variant="contained"
+              component="label">
+               Upload File
+            <input
+                 type="file"
+                hidden
+                        />
+               </Button>
+              </Grid> */}
               
               
               
             </Grid>
+            
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              // onPress={registerUser}
+
             >
               Submit
             </Button>
