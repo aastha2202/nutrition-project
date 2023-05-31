@@ -202,7 +202,9 @@ export default function Protein({ route, navigation,props }) {
     const [refreshing, setRefreshing] = useState(false)
     const [page, setPage] = useState(1)
     var [selectedData, setSelectedData] = useState(null)
-    const [categoryName, setCategoryName] = useState(null)
+    var [intakes,setIntakes]=useState(null)
+
+    const  [categoryName, setCategoryName] = useState(null)
     const snapPoints = ['39%'];
     var [params,setParams]=useState(null)
     const [viewModal,setViewModal]=useState(false)
@@ -217,6 +219,7 @@ export default function Protein({ route, navigation,props }) {
 
     useEffect(() => {
       let s= localStorage.getItem('params')
+    
       params=JSON.parse(s)
       setParams(params)
             apiCall()
@@ -263,15 +266,17 @@ export default function Protein({ route, navigation,props }) {
     
 
     const handleCard=(e)=>{
-      selectedData=e
+      let servings=getStatus(e.item_id)
+      selectedData={...e,servings_consumed:servings,diet_id:params.diet_id,category:params.category}
       setSelectedData(selectedData)
+     
       setViewModal(true)
       childComp.current.handleClickOpen()
     }
 
 
-    
-
+    // console.log(servings, "///////royre paramsss") 
+ console.log(itemIntakeStatus,"....//-------categoryName-----checkinh")
     // const state = useLocation();
     // const { cat, diet_id, category, type, servingsConsumed,  } = state;
     console.log(params,"-------params ------")
@@ -289,7 +294,7 @@ export default function Protein({ route, navigation,props }) {
     />
   } */}
 {
-  viewModal &&  < EditCalories state={selectedData}  state2={{dataa:items}} ref={childComp}/>
+  viewModal &&  < EditCalories state={selectedData} apiCall={apiCall}  ref={childComp}/>
 }
   <Grid container spacing={2}>
     <Grid  item xs={6}>
@@ -308,7 +313,7 @@ export default function Protein({ route, navigation,props }) {
                   {/* {value.category} */}
                   </Grid>
             </Grid>
-        {/* <Typography variant="h3" style={pageheading} >{value.category_name} </Typography> */}
+        {/* <Typography variant="h3" style={pageheading}> {value.category_name} </Typography> */}
         <Typography style={calories}>45 Calories / Servings </Typography>
         <Typography style={calories}>13 Servings / Day </Typography>
       </CardContent>
@@ -347,7 +352,7 @@ export default function Protein({ route, navigation,props }) {
       <Grid container spacing={2} justifyContent="center" alignItems="center">
         <Grid item xs={2} md={2}>
           <ButtonBase>
-            <img src={Fish} alt="nova logo" />
+            {/* <img src={Fish} alt="nova logo" /> */}
           </ButtonBase>
         </Grid>
         <Grid item xs={10} spacing={2} md={10}>
@@ -362,17 +367,14 @@ export default function Protein({ route, navigation,props }) {
                  {item.item_name}
                 
               </Typography>
-              <Card sx={{position:'absolute', right:10,borderRadius:1,boxShadow: '#c4c4c4'}}  >
+              <Card sx={{position:'absolute', minWidth:"30px" , alignContent:"center" , right:10,borderRadius:1,boxShadow: '#c4c4c4'}}  >
               {/* <EditCalories state={{data:itemIntakeStatus}} /> */}
-              <Typography >{getStatus(item.item_id)} </Typography>
-             
-              
-              
-                
+      
+                <Typography sx={{textAlign:"center",alignContent:"center"}}>{getStatus(item.item_id)}</Typography>
               </Card>
             </div>
             <Typography variant="body2" gutterBottom mt={0.6} style={maintext}>
-              fresh, canned or frozen, Cod, Flounder, Haddock, Halibut.
+              {item.description}
             </Typography>
           </Grid>
         </Grid>

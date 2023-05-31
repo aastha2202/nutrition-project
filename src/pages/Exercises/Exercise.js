@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink,useLocation ,useNavigate } from 'react-router-dom';
 import { useEffect, useState }from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -160,11 +160,11 @@ export default function Exercise(){
       return date + '-' + month + '-' + year;//format: d-m-y;
     }
   
-  console.log(getCurrentDate.date,"date and time checking");
+ 
     useEffect(() => {
         // let userId = localStorage.getItem(['User ID']);
         let userId = localStorage.getItem('userId')
-        console.log(userId,"-----getting userid from localstoarge- ");
+        // console.log(userId,"-----getting userid from localstoarge- ");
       axios.get(`https://aipse.in/api/getAllDietPlan?userid=${userId}&type=exercise&status=ongoing`)
         .then(function (response) {
           console.log(response.data.data, "dieettttttttttt")
@@ -198,6 +198,22 @@ export default function Exercise(){
      console.log(data,"--------------data");
 
 
+     let navigate = useNavigate();
+
+     const setDietId = (item) => {
+      let catid = data.filter(e => e.category_name == item.category)
+      let id = null
+      // if (catid) { id = catid[0].category_id }
+      
+      localStorage.setItem('param',JSON.stringify({ cat: id, diet_id: item, category: item.category, type: "food", servingsConsumed: item.servings_consumed, }))
+      navigate('/dashboard/itemofexercise')
+        
+      
+  
+  
+    }
+
+ 
 
     return (
         <>
@@ -266,7 +282,6 @@ export default function Exercise(){
                         </Grid>
                         
                         
-                        
                     </Grid>
 
                     </Card>
@@ -327,8 +342,9 @@ export default function Exercise(){
             {data?.map(item=>{
          return(
         <Card  style={{backgroundColor:"#F0E7F5", margin:"10px"}}>
+          {/* to="/dashboard/itemofexercise" component={RouterLink} */}
             
-        <Grid container state={{data:item }}  to="/dashboard/itemofexercise" component={RouterLink} sx={{textDecoration:'none'}} justifyContent="space-between" alignItems="center" style={{padding:"30px"}}>
+        <Grid container state={{data:item }}  onClick={()=>{setDietId(item)}}  sx={{textDecoration:'none'}} justifyContent="space-between" alignItems="center" style={{padding:"30px"}}>
             <Grid item style={{padding:"5px"}}>
                 
                 <Typography variant="body1" component="span" style={maintitle}>

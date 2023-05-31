@@ -456,7 +456,7 @@ console.log(oneExerciseData,"-----oneExerciseData --dtaa checking");
                           
                                 <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
                                 {/* {ongoingExercisePlan.servingsLeft} */}
-                                {oneExerciseData.servingsLeft}
+                                {ongoingExercisePlan.servingsLeft}
                                 </Typography>
                                 <Typography style={subtext}>exercise left</Typography>
                                                     

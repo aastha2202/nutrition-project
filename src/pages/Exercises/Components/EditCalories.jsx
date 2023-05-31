@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React ,{useState,useEffect} from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -13,13 +13,23 @@ import {useImperativeHandle,forwardRef} from 'react';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import axios from "axios"
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const EditCalories = forwardRef((props, ref) => {
- 
+  const [servings,setServings]=useState(1)
   const [open, setOpen] = React.useState(false);
-
+  const [postServings,setPostServings]=useState({
+    "user_id": "" ,
+    "date": "",
+    "diet_id":"",
+    "item_id": "",
+    "type": "food",
+    "category": "",
+    "servings_consumed": ""
+  })
+  console.log(props,"proppsssss")
   useImperativeHandle(ref, () => ({
      handleClickOpen () {
       setOpen(true);
@@ -31,15 +41,72 @@ const EditCalories = forwardRef((props, ref) => {
   };
 
   const handleClose = () => {
-    setOpen(false);
+    hitpostServings()
+  
   };
+
+
+  const [date, setDate] = useState(null)
+  // console.log(item)
+
+  useEffect(() => {
+  
+    setPostServings(props?.state)
+      getCurrentDate()
+  }, [])
+
+
+  const getCurrentDate = () => {
+      var date = new Date().getDate();
+      var month = new Date().getMonth() + 1;
+      var year = new Date().getFullYear();
+      if (date < 10) date = '0' + date;
+      if (month < 10) month = '0' + month;
+      setDate(date + '-' + month + '-' + year);//format: d-m-y;
+  }
+
+  const hitpostServings = async =>{
+    let userid=localStorage?.getItem('userId')
+    let data = JSON.stringify({
+      "user_id":parseInt(userid)  ,
+      "date": date,
+      "diet_id":  postServings?.diet_id,
+      "item_id":  postServings?.item_id,
+      "type": "food",
+      "category": postServings?.category,
+      "servings_consumed": postServings?.servings_consumed
+    });
+    
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://aipse.in/api/updateDailyIntake',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios.request(config)
+    .then((response) => {
+      props.apiCall()
+      setOpen(false);
+      // setPostServings(reponse?.data?.data)
+      console.log(response?.data?.data,"------post servings checking--");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    
+    
+  }
   // {calories,category_id,counts,description,item_id,item_image,item_name,sets,time_or_weight,type,units    }
-const items = props.state2;
-const itemIntakeStatus =props.state;
+// const servings = props.state2;
+const categoryName =props.state;
 
-
-  console.log(itemIntakeStatus,"-------editCalories------")
-   console.log(items,"-------state2222...------")
+  console.log(postServings,"-------setPostServings-------")
+  console.log(categoryName,"-------editCalories------")
+  //  console.log(servings,"-------state2222...------")
 
   return (
     <div>
@@ -48,8 +115,6 @@ const itemIntakeStatus =props.state;
       </Button> */}
 
        <Dialog 
-       
-        
         open={open}
         TransitionComponent={Transition}
         keepMounted
@@ -57,10 +122,10 @@ const itemIntakeStatus =props.state;
         aria-describedby="alert-dialog-slide-description"
       >
         <CardContent sx={{minWidth:"250px"}}>
-        <DialogTitle>loii</DialogTitle>
+        <DialogTitle>{categoryName.item_name}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-           ksksks
+           {categoryName.description}
           </DialogContentText>
         </DialogContent>
         </CardContent>
@@ -72,16 +137,15 @@ const itemIntakeStatus =props.state;
             <span >-</span>
             <Typography>0</Typography>
             <span>+</span>
-          
-
           </Grid> */}
           <Grid>
           <IconButton >
-                                <RemoveIcon />
+                               <span onClick={()=>{servings>1 && setServings(prev=>prev-1)}}> <RemoveIcon /></span>
                                  </IconButton>
-                                 0
+                                 {servings}
                                  <IconButton >
-                                 <AddIcon />
+                               <span onClick={()=>{setServings
+                              (prev=>prev+1)}}>  <AddIcon /></span>
                                  </IconButton> 
           </Grid>
           

@@ -124,9 +124,15 @@ export default function Aerobic() {
       
     };
     // api integration
-    useEffect(()=>{
-      dataHit();
-    },[])
+    var [param,setParams]=useState(null)
+    useEffect(() => {
+      let s= localStorage.getItem('param')
+    
+      param=JSON.parse(s)
+      setParams(param)
+      dataHit()
+        
+    }, [])
     
     const[dataFromAPi,setDataFromAPi]=useState([
       
@@ -135,11 +141,12 @@ export default function Aerobic() {
     
     const dataHit =async =>{
       
-      let userId = localStorage.getItem(['User ID']);
+      // let userId = localStorage.getItem(userId);
+      let userIdAsync =  localStorage.getItem('userId')
       let config = {
         method: 'GET',
         maxBodyLength: Infinity,
-        url: `https://aipse.in/api/getItemsOfCategory?category_id=${userId}&type=exercise`,
+        url: `https://aipse.in/api/getItemsOfCategory?category_id=${userIdAsync}&type=exercise`,
         headers: { 
           'Content-Type': 'application/json'
         },
@@ -149,7 +156,7 @@ export default function Aerobic() {
       axios(config)
       .then((response) => {
         setDataFromAPi(response?.data?.data)
-        console.log(dataFromAPi,"------------- proteins get data");
+        console.log(dataFromAPi,"------------- items get data");
       })
       .catch((error) => {
         console.log(error);
@@ -161,8 +168,8 @@ console.log(dataFromAPi,"---areobic page -----");
 
 const location=useLocation(); 
   // const[category_id,setCategory_id]=useState(data.category_id);
- const [value,setValue]=useState(location.state?.data)
- console.log(value,"---------import data from exercise to areobic ");
+//  const [value,setValue]=useState(location.state?.data)
+//  console.log(value,"---------import data from exercise to areobic ");
 
 
 
@@ -189,7 +196,7 @@ const location=useLocation();
                <Grid item>
           
             <Typography variant="h3" style={title}>
-            {value.category_name}
+            {/* {value.category_name} */} name 
             </Typography>
             
          

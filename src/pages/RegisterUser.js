@@ -17,6 +17,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Link as RouterLink, useNavigate} from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -62,7 +63,7 @@ export default function SignUp() {
         "user_name": "",
         "password": "",
         "role": "",
-        "gender": "male",
+        "gender": "",
         "mobile_number": "",
         "email_id": "",
         "address": "",
@@ -108,7 +109,7 @@ export default function SignUp() {
                   id="user_name"
                   label="User Name"
                   autoFocus
-                  onChangeText={(e) => { setFormValue({ ...formValue,  user_name: e.target.value }) }}
+                  onChange={(e) => { console.log( e.target.value), setFormValue({ ...formValue,  user_name: e.target.value }) }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -120,7 +121,7 @@ export default function SignUp() {
                   id="password"
                   label="password"
                   autoFocus
-                  onChangeText={(e) => { setFormValue({ ...formValue,  password: e.target.value }) }}
+                  onChange={(e) => { console.log( e.target.value),setFormValue({ ...formValue,  password: e.target.value }) }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -128,13 +129,13 @@ export default function SignUp() {
                   required
                   fullWidth
                   id="email_id"
-                  label="Email / Mobile No"
+                  label="Email"
                   name="email_id"
                   autoComplete="email_id"
-                  onChangeText={(e) => { setFormValue({ ...formValue, email_id: e.target.value }) }}
+                  onChange={(e) => { setFormValue({ ...formValue, email_id: e.target.value }) }}
                 />
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <TextField
                   autoComplete="role"
                   name="role"
@@ -145,7 +146,7 @@ export default function SignUp() {
                   autoFocus
                   onChangeText={(e) => { setFormValue({ ...formValue,  role: e.target.value }) }}
                 />
-              </Grid>
+              </Grid> */}
              
               <Grid item xs={12} container flexDirection={"row"} spacing={"4"}>
               
@@ -168,7 +169,7 @@ export default function SignUp() {
               
               </Grid>
               
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -177,6 +178,17 @@ export default function SignUp() {
                   name="patient-id"
                   autoComplete="patient-id"
                  
+                />
+              </Grid> */}
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="mobile_number"
+                  label="mobile_number"
+                  name="mobile_number"
+                  autoComplete="mobile_number"
+                  onChange={(e) =>  {console.log( e.target.value), setFormValue({ ...formValue, mobile_number: e.target.value }) }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -188,7 +200,7 @@ export default function SignUp() {
                   id="address"
                   label="address"
                   autoFocus
-                  
+                  onChange={(e) => { setFormValue({ ...formValue, address: e.target.value }) }}
                 />
               </Grid>
               {/* <Grid item xs={12}>
@@ -212,7 +224,7 @@ export default function SignUp() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              // onPress={registerUser}
+              // onClick={registerUser}
 
             >
               Submit
@@ -220,6 +232,7 @@ export default function SignUp() {
 
           </Box>
         </Box>
+        <Typography to="/dashboard/login"  component={RouterLink} sx={{textDecoration:'none'}} >already have an account click here</Typography>
         
       </Container>
     </ThemeProvider>

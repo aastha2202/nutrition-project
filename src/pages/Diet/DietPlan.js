@@ -161,106 +161,6 @@ const caloriesremainedNo={
 
 export default function DietPlan(){
   const location = useLocation();
-//   const [loading, setLoading] = useState(true)
-//   const [data, setData] = useState({})
-//   const [exerciseData, setExerciseData] = useState([])
-//   const [oneDietPlan, setOneDietPlan] = useState([])
- 
-// console.log(data,"----data ---checking ")
-// console.log(exerciseData,"----exerciseData----checking")
-// console.log(oneDietPlan,"------oneDietPlan------")
-
-//   useEffect(() => {
-
-//     apiCall()
-  
-
-//   }, [])
-
-
-//   const apiCall = async () => {
-
-//     let userIdAsync = localStorage.getItem('userId')
-
-//     axios.get(`https://aipse.in/api/getAllDietPlan?userid=${userIdAsync}&type=food&status=ongoing`)
-//       .then(function (response) {
-//         console.log('getAll Diet Plan')
-//         // console.log(response.data.data, "dieettttttttttt")
-//         response.data.data.servingsLeft = parseInt
-//           (response?.data?.data.TotalServings - response?.data?.data.CosumedServings)
-//         setExerciseData(response?.data?.data)
-//         // console.log(data)
-//         axios.get(`https://aipse.in/api/getOneDietPlan?userid=${userIdAsync}`)
-//           .then(function (response) {
-//             console.log(response?.data?.data)
-//             let resDietPlan = response?.data?.data
-//             // setOneDietPlan(response?.data?.data)
-//             setLoading(false)
-//             axios.get(`https://aipse.in/api/getAllCategories?type=food`)
-//               .then(function (response) {
-//                 setData(response?.data?.data)
-//                 //  [{"category": "Pawan android", "diet_id": 709, "end_date": "08-23-2023", "interval": "2 month", "recommended_servings": 12, "servings_consumed": 0, "start_date": "05-25-2023", "total_servings": 1080, "type": "food", "user_id": 35}]} 
-
-//                 let dietPlan = [], dietCategories = []
-//                 for (let i = 0; i < resDietPlan.length; i++) {
-//                   let obj = resDietPlan[i]
-//                   if (dietCategories.includes(obj?.category)) {
-//                     let index = dietPlan.findIndex((x) => x.category === obj?.category)
-//                     dietPlan[index].servings_consumed = dietPlan[index].servings_consumed + obj?.servings_consumed
-//                   }
-//                   else {
-//                     dietCategories.push(obj?.category)
-//                     dietPlan.push(obj)
-//                   }
-//                   if (i == resDietPlan.length - 1) {
-//                     setOneDietPlan(dietPlan)
-//                   }
-//                 }
-
-//               })
-//               .catch(function (error) {
-//                 alert("something went wrong");
-//                 // console.log(error);
-//               });
-//             console.log(response?.data, "response..............responseeeeee in get one diet plannnnn")
-//           })
-//           .catch(function (error) {
-//             alert("something went wrong");
-//             // console.log(error);
-//           });
-
-
-//       })
-//       .catch(function (error) {
-//         alert("something went wrong");
-//         // console.log(error);
-//       });
-//   }
-
-
-
-//   const getCurrentDate = () => {
-
-//     var date = new Date().getDate();
-//     var month = new Date().getMonth() + 1;
-//     var year = new Date().getFullYear();
-//     return date + '-' + month + '-' + year;//format: d-m-y;
-//   }
-
-
-
-//   const setDietId = (item) => {
-//     let catid = data.filter(e => e.category_name == item.category)
-//     let id = null
-//     if (catid) { id = catid[0].category_id }
-//     navigation.navigate('ItemsOfCategory',
-//       { cat: id, diet_id: item, category: item.category, type: "food", servingsConsumed: item.servings_consumed, apiCall: apiCall }
-//     )
-
-
-//   }
-
-
 
 const [loading, setLoading] = useState(true)
   const [data, setData] = useState({})
@@ -368,9 +268,9 @@ const [loading, setLoading] = useState(true)
     let catid = data.filter(e => e.category_name == item.category)
     let id = null
     if (catid) { id = catid[0].category_id }
-    localStorage.setItem('params',JSON.stringify({ cat: id, diet_id: item, category: item.category, type: "food", servingsConsumed: item.servings_consumed, apiCall: apiCall }))
+    localStorage.setItem('params',JSON.stringify({ cat: id, diet_id: item?.diet_id, category: item.category, type: "food", servingsConsumed: item.servings_consumed, apiCall: apiCall }))
     navigate('/dashboard/itemsofdietplan')
-
+    
 
   }
   // console.log(state,"-----state checking")
@@ -525,16 +425,16 @@ const [loading, setLoading] = useState(true)
                         <Grid item xs={5} margin={1}    >
                         
                         <Grid item container  justifyContent="center" alignItems="center" >
-                            <Typography alignContent="center" variant="body1" component="span" style={totalservingsStyle}>
+                            {/* <Typography alignContent="center" variant="body1" component="span" style={totalservingsStyle}>
                              45 Calories/Servings
-                            </Typography>
+                            </Typography> */}
                             
                             
                         </Grid>
                         <Grid item   container justifyContent="center" alignItems="center"  >
-                             <Typography alignContent="center" variant="body1" component="span" style={totalservingsStyle} >
+                             {/* <Typography alignContent="center" variant="body1" component="span" style={totalservingsStyle} >
                                  13/servings/Day
-                            </Typography>
+                            </Typography> */}
                         </Grid> 
                         
                         </Grid>

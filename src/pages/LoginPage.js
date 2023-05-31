@@ -68,7 +68,7 @@ export default function LoginPage() {
 
   // const [item,setItem]=useState()
   const [response, setResponse] = useState()
-  const [formValue, setFormValue] = useState({ email_id: "Diya@123", password: "123" })
+  const [formValue, setFormValue] = useState({ email_id: "", password: "" })
 
   // localStorage.setItem('Username', 'response?.data?.Username')
   const loginUser = () => {
