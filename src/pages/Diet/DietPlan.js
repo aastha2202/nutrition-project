@@ -205,12 +205,15 @@ const [loading, setLoading] = useState(true)
               setLoading(false)
               axios.get(`https://aipse.in/api/getAllCategories?type=food`)
                 .then(function (response) {
+
+                  let existingCategories = response?.data?.data.map(e => e.category_name)
                   setData(response?.data?.data)
                   //  [{"category": "Pawan android", "diet_id": 709, "end_date": "08-23-2023", "interval": "2 month", "recommended_servings": 12, "servings_consumed": 0, "start_date": "05-25-2023", "total_servings": 1080, "type": "food", "user_id": 35}]} 
                   // console.log(response?.data?.data)
                   let dietPlan = [], dietCategories = []
                   for (let i = 0; i < resDietPlan.length; i++) {
                     let obj = resDietPlan[i]
+                    if (existingCategories.includes(obj?.category)){
                     if (dietCategories.includes(obj?.category)) {
                       let index = dietPlan.findIndex((x) => x.category === obj?.category)
                       dietPlan[index].servings_consumed = dietPlan[index].servings_consumed + obj?.servings_consumed
@@ -219,6 +222,7 @@ const [loading, setLoading] = useState(true)
                       dietCategories.push(obj?.category)
                       dietPlan.push(obj)
                     }
+                  }
                     if (i == resDietPlan.length - 1) {
                       // console.log(dietPlan)
                       setOneDietPlan(dietPlan)

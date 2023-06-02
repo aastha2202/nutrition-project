@@ -12,7 +12,7 @@ import useResponsive from '../hooks/useResponsive';
 // components
 import Logo from '../components/logo';
 import Nova from "../assets/nova.svg";
-
+import Alert from '@mui/material/Alert';
 import Iconify from '../components/iconify';
 // sections
 import { LoginForm } from '../sections/auth/login';
@@ -58,39 +58,71 @@ export default function LoginPage() {
   //   })
   
   // }, [])
+// alert usage here
+  const [showAlert, setShowAlert] = useState(false);
+
+  const handleSuccess = () => {
+    setShowAlert(true);
+  };
+
+  const [errorAlert, setErrorAlert] = useState(false);
+
+  const handleError = () => {
+    setErrorAlert(true);
+  };
+
+
+
+  
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClick = () => {
-    navigate('/dashboard', { replace: true });
+    navigate('/dashboard/', { replace: true });
   };
 
   // const [item,setItem]=useState()
   const [response, setResponse] = useState()
   const [formValue, setFormValue] = useState({ email_id: "", password: "" })
-
+  // let navigate = useNavigate();
   // localStorage.setItem('Username', 'response?.data?.Username')
   const loginUser = () => {
     axios.post(`https://aipse.in/api/login`, formValue)
       .then(function (response) {
+
+        // if (response.code == "200") {
+        //   setFormValue({
+        //       "email_id": "", 
+        //     "password": ""
+        //   })}
         console.log(response?.data, "responseeeeeee------")
         console.log(formValue,"---form value checking--");
-        if (response?.data?.status) {  
+       
+        if (response?.data?.Status) {  
+          
           localStorage.setItem('Username', response?.data?.Username)
          localStorage.setItem('userId', response?.data?.['User ID'])
-         
+         handleSuccess()
           console.log('Username', response?.data)
-  
-          // navigation.navigate('HomeScreen')
-          navigate('/dashboard', { replace: true });
+          setTimeout(() => {
+            
+            navigate('/dashboard', { replace: true });
+          }, 2000);
+          
+          // navigate('/dashboard', { replace: true });
+          // <link to="/dashboard" component={RouterLink}></link>
+
         } 
         else {
           setResponse(response?.data?.Message)
+          handleError()
         }
       })
       .catch(function (error) {
+        handleError()
         console.log(error);
+        
       });
 
     }
@@ -102,13 +134,7 @@ export default function LoginPage() {
     <title> Login | NPWC </title>
   </Helmet>
   <StyledRoot>
-    <Logo
-      sx={{
-        position: "fixed",
-        top: { xs: 16, sm: 24, md: 40 },
-        left: { xs: 16, sm: 24, md: 40 },
-      }}
-    />
+    
     <Container maxWidth="sm">
       <StyledContent>
         <Grid
@@ -136,7 +162,7 @@ export default function LoginPage() {
 
         <Typography variant="body2" sx={{ mb: 5 }}>
           Don’ t have an account ? 
-          <Link variant="subtitle2"  to="/dashboard/registeruser"  component={RouterLink} sx={{textDecoration:'none'}} > Get started </Link>
+          <Link variant="subtitle2"  to="/registeruser"  component={RouterLink} sx={{textDecoration:'none'}} > Get started </Link>
         </Typography>
 
         <Stack spacing={3}>
@@ -171,6 +197,17 @@ export default function LoginPage() {
       <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={loginUser} > 
         Login
       </LoadingButton>
+      
+      {showAlert && (
+        <Alert severity="success" onClose={() => setShowAlert(false)}>
+          Login  Successful!
+        </Alert>
+      )}
+      {errorAlert && (
+        <Alert severity="success" onClose={() => setErrorAlert(false)}>
+          Login failed !
+        </Alert>
+      )}
       </Card>
 
        

@@ -29,6 +29,8 @@ import CreateExerciseItems from './Admin/AdminExercise/CreateExerciseItems';
 import Userstats from './Admin/UserStats/Userstats';
 import Adminsearch from './Admin/AdminSearch/Adminsearch'
 import ListAllDietPlan from './Admin/AdminDiet/ListAllDietPlan';
+
+import ResetPassword from "./pages/ResetPassword";
 // ----------------------------------------------------------------------
 //  import Login from './user/Login/Login';
 // import Home from './user/Home/Home';
@@ -39,9 +41,20 @@ import ListAllDietPlan from './Admin/AdminDiet/ListAllDietPlan';
 
 
 export default function Router() {
-    const routes = useRoutes([{
+    const routes = useRoutes([
+          
+        {
+            path: '/login',
+            element: < LoginPage /> ,
+        },  
+        {
+            path: '/registeruser',
+            element: < RegisterUser />
+        },
+        
+        {
             path: '/dashboard',
-            element: < DashboardLayout / > ,
+            element: < DashboardLayout /> ,
             children: [
                 { element: < Navigate to = "/dashboard/app" /> , index: true },
                 { path: 'app', element: < Home /> },
@@ -51,12 +64,13 @@ export default function Router() {
                     path: 'itemsofdietplan',
                     element: < ItemsOfDietPlan />
                 },
-
-
-                {
-                    path: 'login',
-                    element: < LoginPage /> ,
+                 {
+                    path: 'resetpassword',
+                    element: < ResetPassword /> ,
                 },
+
+
+               
                 {
                     path: 'adminuser',
                     element: < Adminuser />
@@ -64,13 +78,10 @@ export default function Router() {
 
                 {
                     path: 'adminproteins',
-                    element: < Adminproteins / >
+                    element: < Adminproteins />
                 },
                 
-                {
-                    path: 'registeruser',
-                    element: < RegisterUser />
-                },
+                
                 {
                     path: 'dietplan',
                     element: <DietPlan/> ,
@@ -83,39 +94,41 @@ export default function Router() {
 
 
             ],
+            
+
         },
         {
             path: '/dashboardadmin',
             element: < DashboardAdmin/> ,
             children: [
-                { element: < Navigate to = "/dashboardadmin/app" / > , index: true },
-                { path: 'login', element: < LoginPage / > },
-                { path: 'AdminDietCategory', element: < AdminDietCategory / > },
-                { path: 'adminexercise', element: < AdminExercises / > },
+                { element: < Navigate to = "/dashboardadmin/app" /> , index: true },
+                { path: 'login', element: < LoginPage /> },
+                { path: 'AdminDietCategory', element: < AdminDietCategory /> },
+                { path: 'adminexercise', element: < AdminExercises /> },
                 {
                     path: 'adminaerobic',
-                    element: <AdminAerobic  / >
+                    element: <AdminAerobic  />
                 },
                 {
                     path: 'adminuser',
-                    element: <Adminuser  / >
+                    element: <Adminuser  />
                 },
                 {
                     path: 'adminproteins',
-                    element: <Adminproteins  / >
+                    element: <Adminproteins  />
                 },
                 {
                     path: 'adminuser',
-                    element: < Adminuser / >
+                    element: < Adminuser />
                 },
                 {
                     path: 'adminprofile',
-                    element: < Adminprofile / >
+                    element: < Adminprofile />
                 },
 
                 {
                     path: 'userstats',
-                    element: < Userstats / >
+                    element: < Userstats />
                 },
 
                 {
@@ -125,30 +138,25 @@ export default function Router() {
 
                 {
                     path: 'adminsearch',
-                    element: < Adminsearch / >
+                    element: < Adminsearch />
                 },
                 
             ]
 
         },
 
-
-
-
-
-
         {
-            element: < SimpleLayout / > ,
+            element: < SimpleLayout /> ,
             children: [
-                { element: < Navigate to = "/dashboard/app" / > , index: true },
-                { path: '404', element: < Page404 / > },
-                { path: '*', element: < Navigate to = "/404" / > },
+                { element: < Navigate to = "/login" /> , index: true },
+                { path: '404', element: < Page404 /> },
+                { path: '*', element: < Navigate to = "/404" /> },
             ],
         },
         {
             path: '*',
             element: < Navigate to = "/404"
-            replace / > ,
+            replace /> ,
         },
     ]);
 

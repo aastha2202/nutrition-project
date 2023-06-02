@@ -2,6 +2,9 @@ import React ,{useState,useEffect} from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 // import {AppBar,ToolBar} from "@mui/material";
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
@@ -42,6 +45,7 @@ const EditCalories = forwardRef((props, ref) => {
 
   const handleClose = () => {
     hitpostServings()
+    handleAlert1Click()
   
   };
 
@@ -74,7 +78,7 @@ const EditCalories = forwardRef((props, ref) => {
       "item_id":  postServings?.item_id,
       "type": "food",
       "category": postServings?.category,
-      "servings_consumed": postServings?.servings_consumed
+      "servings_consumed": servings
     });
     
     let config = {
@@ -108,11 +112,36 @@ const categoryName =props.state;
   console.log(categoryName,"-------editCalories------")
   //  console.log(servings,"-------state2222...------")
 
+  //alert checking
+  // const [showAlert, setShowAlert] = useState(false);
+
+  // const handleSuccess = () => {
+  //   setShowAlert(true);
+  // };
+  const [alert1Open, setAlert1Open] = useState(false);
+  const handleAlert1Click = () => {
+    setAlert1Open(true);
+  };
+
+
+
   return (
     <div>
       {/* <Button variant="outlined" onClick={handleClickOpen}>
         alert dialog
       </Button> */}
+       <Snackbar
+        open={alert1Open}
+        onClose={() => handleAlertClose(1)}
+        // message="Over all plan is open"
+        autoHideDuration={1000}
+        // severity="success"
+        // sx={{background:"green"}}
+        >
+         <Alert severity="success">Servings Created successfully</Alert>
+        </Snackbar>
+
+
 
        <Dialog 
         open={open}
@@ -140,7 +169,7 @@ const categoryName =props.state;
           </Grid> */}
           <Grid>
           <IconButton >
-                               <span onClick={()=>{servings>1 && setServings(prev=>prev-1)}}> <RemoveIcon /></span>
+                      <span onClick={()=>{servings>1 && setServings(prev=>prev-1)}}> <RemoveIcon /></span>
                                  </IconButton>
                                  {servings}
                                  <IconButton >
@@ -152,6 +181,11 @@ const categoryName =props.state;
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Save</Button>
+          {/* {showAlert && (
+        <Alert severity="success" onClose={() => setShowAlert(false)}>
+          Created Servings Successful!
+        </Alert>
+      )} */}
         
         </DialogActions>
       </Dialog>

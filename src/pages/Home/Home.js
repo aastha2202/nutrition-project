@@ -1,4 +1,5 @@
 // @mui
+import React from "react"
 import { Grid, Typography, Select, FormControl, InputLabel,Button,IconButton,Stack  } from '@mui/material';
 import{useState,useEffect} from 'react'
 import axios from 'axios';
@@ -7,7 +8,7 @@ import { styled } from '@mui/material/styles';
 import { Link as RouterLink } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-
+import MuiAlert from '@mui/material/Alert';
 import MenuItem from '@mui/material/MenuItem';
 // import DietPlan from '../Diet/DietPlan'; 
 
@@ -15,7 +16,12 @@ import Logo from "../../assets/nova.svg";
 import Diet from "../../assets/Diet.svg";
 import Exerciselogo from "../../assets/Exerciselogo.svg";
 import  "../styles.css";
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
+// import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
+// import Stack from '@mui/material/Stack';
 // components
 
 // sections
@@ -55,7 +61,21 @@ const handleExpandClick = () => {
     })(({ theme, expand }) => ({
     
     }));
+// alert usage here
 
+    const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
   // const [username,setusername]=useState('')
   // const [userId,setuserId]=useState('')
   // const [loading,setLoading]=useState(true)
@@ -131,6 +151,55 @@ const handleExpandClick = () => {
   //     });
   // }
 
+  // alert messages
+  const [alert1Open, setAlert1Open] = useState(false);
+  const [alert2Open, setAlert2Open] = useState(false);
+  const [alert3Open, setAlert3Open] = useState(false);
+  const [alert4Open, setAlert4Open] = useState(false);
+  const [alert5Open, setAlert5Open] = useState(false);
+
+  const handleAlert1Click = () => {
+    setAlert1Open(true);
+  };
+
+  const handleAlert2Click = () => {
+    setAlert2Open(true);
+  };
+
+  const handleAlert3Click = () => {
+    setAlert3Open(true);
+  };
+
+  const handleAlert4Click = () => {
+    setAlert4Open(true);
+  };
+
+  const handleAlert5Click = () => {
+    setAlert5Open(true);
+  };
+
+  const handleAlertClose = (alertId) => {
+    switch (alertId) {
+      case 1:
+        setAlert1Open(false);
+        break;
+      case 2:
+        setAlert2Open(false);
+        break;
+      case 3:
+        setAlert3Open(false);
+        break;
+      case 4:
+        setAlert4Open(false);
+        break;
+      case 5:
+        setAlert5Open(false);
+        break;
+      default:
+        break;
+    }
+  };
+
 
   const [loading, setLoading] = useState(true)
   const [username, setusername] = useState('')
@@ -163,6 +232,18 @@ const handleExpandClick = () => {
     await listDietPlan(uid);
   }
 
+  // const formatDate = (date) => {
+  //   let splitDate = date.split("-")
+  //   return splitDate[1]+'-'+splitDate[0]+'-'+splitDate[2]
+  // }
+  const formatDate = (date) => {
+    if (date && typeof date === 'string') {
+      let splitDate = date.split("-");
+      return splitDate[1] + '-' + splitDate[0] + '-' + splitDate[2];
+    } else {
+      return ""; // Return an empty string or handle the case when date is undefined
+    }
+  };
   const onIntervalChange = (value) => {
     if (value == '-1') {
       getAllDietPlan(0, 0, 0, userId)
@@ -252,6 +333,8 @@ const handleExpandClick = () => {
         axios.get(exerciseurl)
           .then(function (response) {
 
+            console.log(response?.data,"checking----exercise ---------")
+
             if (response?.data?.data) {
               if (diet) {
                 if (response?.data?.data?.RecommendedServings * days < response?.data?.data?.TotalServings) {
@@ -320,11 +403,56 @@ console.log(oneDietPlanData,"------oneDietPlanData  -----dataa");
 console.log(oneExerciseData,"-----oneExerciseData --dtaa checking");
 
 
+
   return (
   < >
     {/* <img src={Logo} alt="nova logo" style={{height: "auto", width: "250px", marginLeft: "30px"}}/> */}
-    
-        
+      
+
+    <Snackbar
+        open={alert1Open}
+        onClose={() => handleAlertClose(1)}
+        // message="Over all plan is open"
+        autoHideDuration={1000}
+        // severity="success"
+        // sx={{background:"green"}}
+        >
+         <Alert severity="success">Over all plan is open!</Alert>
+        </Snackbar>
+      <Snackbar
+        open={alert2Open}
+        onClose={() => handleAlertClose(2)}
+        message="Today plan is open"
+        autoHideDuration={1000}
+        >
+       <Alert severity="success">Today plan is open!</Alert>  
+        </Snackbar>
+      <Snackbar
+        open={alert3Open}
+        onClose={() => handleAlertClose(3)}
+        message="Week plan is open"
+        autoHideDuration={1000}
+        >
+        <Alert severity="success">Week plan is open!</Alert>  
+         </Snackbar>
+      <Snackbar
+        open={alert4Open}
+        onClose={() => handleAlertClose(4)}
+        // message="1 Month plan is open"
+        autoHideDuration={1000}
+        >
+        <Alert severity="success"> 1 Month plan is open!</Alert>  
+         </Snackbar>
+      <Snackbar
+        open={alert5Open}
+        onClose={() => handleAlertClose(5)}
+        // message="3 Month plan is open"
+        autoHideDuration={1000}
+        // severity="success"
+        >
+        <Alert severity="success">3 Month plan is open!</Alert>  
+         </Snackbar>
+
     <Card style={{margin:"10px"}}>
     
       <Card  style={{ backgroundColor:"#D1A6E7"}}>
@@ -352,12 +480,15 @@ console.log(oneExerciseData,"-----oneExerciseData --dtaa checking");
                 onIntervalChange(item.target.value)
             }} 
             sx={{backgroundColor:"white"}}  defaultValue="-1" >
-                     <MenuItem value="-1" >Over All</MenuItem>
-                     <MenuItem value="0">Today</MenuItem>
-                     <MenuItem value="1">Week</MenuItem>
+                     <MenuItem value="-1"  onClick={handleAlert1Click}>Over All</MenuItem>
                     
-                     <MenuItem value="2">1 Month</MenuItem>
-                     <MenuItem value="3">3 Months</MenuItem>
+                    
+                     <MenuItem value="0"onClick={handleAlert2Click} >Today</MenuItem>
+                    
+                     <MenuItem value="1"onClick={handleAlert3Click}>Week</MenuItem>
+                    
+                     <MenuItem value="2" onClick={handleAlert4Click}>1 Month</MenuItem>
+                     <MenuItem value="3" onClick={handleAlert5Click}>3 Months</MenuItem>
                      </Select>
                      </FormControl>
                  <br/>
@@ -377,10 +508,13 @@ console.log(oneExerciseData,"-----oneExerciseData --dtaa checking");
             <Typography color="purple" variant='h4' >
               <div style={{display:'flex',alignContent:'center',justifyContent:'center',alignItems:"center",margin: "10px"}}>
                 <Typography variant='h4' style={{color:"black" ,margin: "5px" }}>
-                {ongoingDietPlan?.StartDate}
-                </Typography>
+                {/* {ongoingDietPlan?.StartDate} */}
+                {formatDate(ongoingDietPlan?.StartDate)}
+                </Typography > 
+                <Typography sx={{color:"white",fontFamily:"Inter-regular"}}>to</Typography>
                 <Typography variant='h4'  style={{color:"black" ,margin: "5px"}}>
-                {ongoingDietPlan?.EndDate}
+                {/* {ongoingDietPlan?.EndDate} */}
+                {formatDate(ongoingDietPlan?.EndDate)}
                 </Typography>
                 
               </div>

@@ -282,9 +282,21 @@ export default function Protein({ route, navigation,props }) {
     console.log(params,"-------params ------")
   console.log(items,"......---items--data...................")
   // console.log(itemIntakeStatus?.servings_consumed,"--itemIntakeStatus.servings_consumed---")
+  // alert usage here
+  const [showAlert, setShowAlert] = useState(false);
+
+  const handleSuccess = () => {
+    setShowAlert(true);
+  };
 
     return ( 
         <div>
+
+{showAlert && (
+        <Alert severity="success" onClose={() => setShowAlert(false)}>
+          created Successful!
+        </Alert>
+      )}
   
   {/* {
     <img
