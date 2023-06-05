@@ -38,6 +38,8 @@ import Poultry from "../../assets/Poultry.svg";
 import Exerciselogo from "../../assets/Exerciselogo.svg";
 import Logo from "../../assets/nova.svg";
 import Arrowforward from "../../assets/Arrowforward.svg";
+import axios from 'axios';
+import { useState,useEffect,useRef } from 'react';
 
 
 const pageheading={
@@ -156,14 +158,37 @@ const year={
   };
   
 export default function Exercise(){
+    const [dataFromApi,setDataFromApi]=useState([])
+    const childComponentRef = useRef(null);
 
-      
+
+      useEffect(()=>{
+        apiHit();
+      },[]);
+
+      const apiHit=aync=>{
+        let config = {
+            method: 'GET',
+            maxBodyLength: Infinity,
+            url: 'https://aipse.in/api/getAllCategories?type=exercise',
+            headers: { }
+          };
+          
+          axios.request(config)
+          .then((response) => {
+            console.log(JSON.stringify(response.data));
+            setDataFromApi(response?.data?.data);
+            console.log(response?.data?.data,'----response?.data')
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
      
     return (
 
         <div>
-        
-        
+        <Card className='dietplan-container'>
             <CardContent className='dietplan-companyname'>
                 <img src={Logo} alt="loading" className='dietplan-companyname-image'/>
                 
@@ -177,123 +202,53 @@ export default function Exercise(){
                 </Grid>
             </CardContent>
             
-           {/* <Grid>
-                <Card style={{backgroundColor:"#D1A6E7",margin:"10px"}}>
-                    <Grid container  item flexDirection={'row'} alignItems="center"  >
-                      <Grid item xs={6}> 
-                    <Card  style={{backgroundColor:"#8D25C1",margin:"10px"}}>
-                        <Grid container mt={1} justifyContent="center" spacing={1} alignItems="center" item flexDirection="row" >
-                        
-                           <Grid item alignSelf="center" >
-                            
-                           <Typography  variant="body1" mt="1" component="span" style={day} >
-                                            15
-                                    </Typography>
-                            </Grid> 
-                            <Grid item >
-                                <Grid  container flexDirection="column" mb="2" >
-                                    <Grid item>
-                                        <Typography variant="h5" component="span"  style={month}>
-                                                March
-                                        </Typography>
-                                    </Grid>
-                                
-                                    <Grid item mr="3">
-                                        <Typography  variant="h5" component="span" style={year}>
-                                                2023
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                           
-                            
-                        </Grid>
-                    </Card>
-                    </Grid> 
+         {
+            dataFromApi?.map(item=>{
+                return (
 
-                    <Grid item xs={6}>
-                    <Card  sx={{minHeight:65}} style={{backgroundColor:"#8D25C1",margin:"10px"}}>
-                    <Grid container  justifyContent="center" alignItems="center" flexDirection="column" j>
-                        
-                        <Grid item mt={1}>
-                        <Typography  style={todaysgoal}>Today's Goal</Typography>
+
+                    <Card key={item.category_id} style={{backgroundColor:"#F0E7F5", margin:"10px"}}>
+            
+                    <Grid container  sx={{textDecoration:'none'}} justifyContent="space-between" alignItems="center" style={{padding:"30px"}}>
+                        <Grid item style={{padding:"5px"}}>
+                            
+                            <Typography variant="body1" component="span" style={maintitle}>
+                            {item.category_name}
+                            </Typography>
                         </Grid>
                         <Grid item>
-
-                       
-                        <Grid ml={2} container flexDirection="row">
-                           <Grid item ><Typography style={excerciseNo}>20</Typography></Grid>
-                           <Grid item mt={2.5}><Typography ml={1}   style={exercise}>Exercise</Typography></Grid>
+                            <Grid display='flex' flex-direction='row'>
+                            <Grid item> <Button onClick={() => childComponentRef.current.handleClickOpenEdit(item.category_name,item.category_id)}>Edit</Button></Grid>
+                            <Grid state={{data:item}} to="/dashboardadmin/adminaerobic" component={RouterLink} item>
+                            <Typography variant="h5" component="span" style={plusStyle}>
+                            <img  src={Arrowforward} alt="Arrowforward logo" />
+                            </Typography>
                             </Grid>
+                            </Grid>
+                            
                         </Grid>
-                        
-                        
-                        
                     </Grid>
-
-                    </Card>
-                    </Grid>
-
-
-                    </Grid>
-                    
-                    
+                  
                 </Card>
-    </Grid> */}
 
-            
-        
-        
-           
+                )
+            })
+         }
 
            
 
-            <Card  style={{backgroundColor:"#F0E7F5", margin:"10px"}}>
-            
-                <Grid container to="/dashboardadmin/adminaerobic" component={RouterLink} sx={{textDecoration:'none'}} justifyContent="space-between" alignItems="center" style={{padding:"20px"}}>
-                    <Grid item style={{padding:"5px"}}>
-                        
-                        <Typography variant="body1" component="span" style={maintitle}>
-                        Aerobic Activity
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography variant="h5" component="span" style={plusStyle}>
-                        <img src={Arrowforward} alt="Arrowforward logo" />
-                        </Typography>
-                    </Grid>
-                </Grid>
-              
-            </Card>
-
-            <Card  style={{backgroundColor:"#F0E7F5", margin:"10px"}}>
-            
-                <Grid container to="/dashboardadmin/adminaerobic" component={RouterLink} sx={{textDecoration:'none'}} justifyContent="space-between" flexDirection={"row"} alignItems="center" style={{padding:"20px"}}>
-                    <Grid item style={{padding:"5px"}}>
-                        
-                        <Typography variant="body1" component="span" style={maintitle}>
-                        Strength Training
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography variant="h5" component="span" style={plusStyle}>
-                        <img src={Arrowforward} alt="Arrowforward logo" />
-                        </Typography>
-                    </Grid>
-                </Grid>
-              
-            </Card>
+           
             
 
             
             
            
            
-         
+         </Card>
 
 
-         <CreateCategoryExercise />
-         
+         <CreateCategoryExercise  ref={childComponentRef}/>
+  
          </div>
     );
 }

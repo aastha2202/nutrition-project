@@ -12,46 +12,73 @@ import Card from "@mui/material/Card";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import ThreeDRotation from "@mui/icons-material/ThreeDRotation";
 import { Link as RouterLink } from 'react-router-dom';
-
+import {useState,useEffect} from 'react';
 import CardContent from "@mui/material/CardContent";
-import { useState, useEffect } from 'react';
+import axios from 'axios';
 import Logo from "../../assets/nova.svg";
 import Diet from "../../assets/Diet.svg";
-import axios from 'axios';
-
+import CreateDietPlan from '../AdminDiet/components/CreateDietPlanNut'
+import BarGraph from "./BarGraph";
 export default function Adminuser() {
-const [disData, getData]=useState([]);
-
-useEffect(()=>{
-  dataHit();
-},[])
-const dataHit =async => {
-
-  let config = {
-    method: 'get',
-    maxBodyLength: Infinity,
-    url: 'https://aipse.in/api/searchUser?name=&page=1&count=10',
-    headers: { },
-    // data : data
-  };
-  
-  axios.request(config)
-  .then((response) => {
-    getData(response?.data?.data);
-    console.log((response?.data,"------active and inactive--"));
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+  const [totalCountOfUser,setTotalCountOfUser]=useState('');
+  const[totalCountOfInactiveUser,setTotalCountOfInactiveUser]=useState('')
+  const[totalCountOfActiveUser,setTotalCountOfActiveUser]=useState('')
+  useEffect(()=>{
+    apiHit()
+    count ();
+},[]);
+const [countData,setCountData] = useState("")
 
 
+const count = async => {
+    var config = {
+        method: 'Get',
+      maxBodyLength: Infinity,
+        url: 'https://aipse.in/api/count',
+        headers: { }
+      };
+      
+      axios(config)
+      .then(function (response) {
+        setCountData(response.data)
+        //setTotalCountOfUser(response.data.totalCountOfUser)
+        setTotalCountOfActiveUser(response.data.totalCountOfActiveUser)
+        setTotalCountOfInactiveUser(response.data.totalCountOfInactiveUser)
+        console.log(response.data.totalCountOfActiveUser,"<--------------setCountDatasetCountData-");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+}
+  const apiHit=async()=>{
+        
+    
+    let config = {
+        method: 'GET',
+        maxBodyLength: Infinity,
+        url:'https://aipse.in/api/searchUser?name=&page=1&count=100',
+        headers: {'Content-Type': 'application/json' }
+      };
+      
+      axios(config)
+      .then((response) => {
+       setTotalCountOfUser(response.data.totalCountOfUser)
+        // setUsersData([...usersData,response.data.data]);
+        //setTotalCountOfInactiveUser(response.data.totalCountOfInactiveUser)
+        //setTotalCountOfActiveUser(response.data.totalCountOfActiveUser)
+       
+        
+        console.log( response.data,'--------Admin Search direct respone from adminuser------');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 }
 
-{console.log(disData),'----api hit------'}
-
+// console.log(data,"--------sm checking for props----")
   return (
     <div>
-     
+    
       {
         <img
           src={Logo}
@@ -59,30 +86,28 @@ const dataHit =async => {
           style={{ height: "auto", width: "250px", marginLeft: "30px" }}
         />
       }
-
-      {/* {disData?.map(item =>{
-        return(
-          <Card
+      <CreateDietPlan/>
+      <Card
         sx={{ minWidth: 275 }}
-        style={{ backgroundColor: "#2c2b2b", margin: "10px" }}
+        style={{ backgroundColor: "#212121", margin: "10px" }}
       >
         <CardContent>
           <Grid
-            container to="/dashboardadmin/adminsearch" component={RouterLink} sx={{textDecoration:'none'}} 
+            container to="/dashboardadmin/adminsearch" component={RouterLink} state={{data:'all'}} sx={{textDecoration:'none'}} 
             flexDirection="row"
             spacing="1"
             alignItems="center"
             justifyContent="center"
           >
             <Grid item xs={4} alignItems="center" justifyContent="center">
-              <span style={{ fontSize: "25px", color: "#E1B725", fontFamily: 'Inter-SemiBold', lineHeight: "38px", marginLeft:'10px' }}> {disData.count} </span>
+              <span style={{ fontSize: "25px", color: "#E1B725", fontFamily: 'Inter-SemiBold', lineHeight: "38px", marginLeft:'10px' }}> {totalCountOfUser} </span>
             </Grid>
             <Grid item xs={4} alignItems="center" justifyContent="center">
               <span
                 style={{ fontSize: "25px", color: "white", fontWeight: "20px", fontFamily: 'Inter-SemiBold', lineHeight: "38px", marginLeft:'10px' }}
               >
                 
-                {disData.name}
+                Total Users
               </span>
             </Grid>
             <Grid
@@ -97,31 +122,27 @@ const dataHit =async => {
           </Grid>
         </CardContent>
       </Card>
-
-        )
-
-      })} */}
       <Card
         sx={{ minWidth: 275 }}
-        style={{ backgroundColor: "#2c2b2b", margin: "10px" }}
+        style={{ backgroundColor: "#212121", margin: "10px" }}
       >
         <CardContent>
-          <Grid
-            container to="/dashboardadmin/adminsearch" component={RouterLink} sx={{textDecoration:'none'}} 
+          <Grid to="/dashboardadmin/adminsearch" component={RouterLink} state={{data:'inactive'}} sx={{textDecoration:'none'}} 
+            container
             flexDirection="row"
             spacing="1"
             alignItems="center"
             justifyContent="center"
           >
             <Grid item xs={4} alignItems="center" justifyContent="center">
-              <span style={{ fontSize: "25px", color: "#E1B725", fontFamily: 'Inter-SemiBold', lineHeight: "38px", marginLeft:'10px' }}> 100 </span>
-            </Grid>{" "}
+              <span style={{ fontSize: "25px", color: "#E1B725", fontFamily: 'Inter-SemiBold', lineHeight: "38px", marginLeft:'10px' }}> {totalCountOfInactiveUser} </span>
+            </Grid>
             <Grid item xs={4} alignItems="center" justifyContent="center">
               <span
                 style={{ fontSize: "25px", color: "white", fontWeight: "20px", fontFamily: 'Inter-SemiBold', lineHeight: "38px", marginLeft:'10px' }}
               >
                 
-                {disData.user_name}
+                InActive Users
               </span>
             </Grid>
             <Grid
@@ -133,15 +154,15 @@ const dataHit =async => {
             >
               <img src={Diet} className="dinning-img" alt="dinning" />
             </Grid>
-          </Grid>{" "}
-        </CardContent>{" "}
+          </Grid>
+        </CardContent>
       </Card>
       <Card
         sx={{ minWidth: 275 }}
-        style={{ backgroundColor: "#2c2b2b", margin: "10px" }}
+        style={{ backgroundColor: "#212121", margin: "10px" }}
       >
         <CardContent>
-          <Grid to="/dashboardadmin/adminsearch" component={RouterLink} sx={{textDecoration:'none'}} 
+          <Grid to="/dashboardadmin/adminsearch" component={RouterLink} state={{data:'active'}} sx={{textDecoration:'none'}} 
             container
             flexDirection="row"
             spacing="1"
@@ -149,49 +170,14 @@ const dataHit =async => {
             justifyContent="center"
           >
             <Grid item xs={4} alignItems="center" justifyContent="center">
-              <span style={{ fontSize: "25px", color: "#E1B725", fontFamily: 'Inter-SemiBold', lineHeight: "38px", marginLeft:'10px' }}> 100 </span>{" "}
-            </Grid>{" "}
+              <span style={{ fontSize: "25px", color: "#E1B725", fontFamily: 'Inter-SemiBold', lineHeight: "38px", marginLeft:'10px' }}> {totalCountOfActiveUser} </span>
+            </Grid>
             <Grid item xs={4} alignItems="center" justifyContent="center">
               <span
                 style={{ fontSize: "25px", color: "white", fontWeight: "20px", fontFamily: 'Inter-SemiBold', lineHeight: "38px", marginLeft:'10px' }}
               >
                 
-                {disData.name}
-              </span>
-            </Grid>
-            <Grid
-              item
-              xs={4} container
-              // alignItems="center"
-              // justifyContent="center"
-              sx={{ justifyContent: "flex-end" }}
-            >
-              <img src={Diet} className="dinning-img" alt="dinning" />
-            </Grid>
-          </Grid>{" "}
-        </CardContent>{" "}
-      </Card>
-      <Card
-        sx={{ minWidth: 275 }}
-        style={{ backgroundColor: "#2c2b2b", margin: "10px" }}
-      >
-        <CardContent>
-          <Grid to="/dashboardadmin/adminsearch" component={RouterLink} sx={{textDecoration:'none'}} 
-            container
-            flexDirection="row"
-            spacing="1"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Grid item xs={4} alignItems="center" justifyContent="center">
-              <span style={{ fontSize: "25px", color: "#E1B725", fontFamily: 'Inter-SemiBold', lineHeight: "38px", marginLeft:'10px' }}> 160 </span>{" "}
-            </Grid>{" "}
-            <Grid item xs={4} alignItems="center" justifyContent="center">
-              <span
-                style={{ fontSize: "25px", color: "white", fontWeight: "20px", fontFamily: 'Inter-SemiBold', lineHeight: "38px", marginLeft:'10px' }}
-              >
-                
-                {disData.name}
+                Active Users
               </span>
             </Grid>
             <Grid
@@ -203,10 +189,27 @@ const dataHit =async => {
             >
               <img src={Diet} className="dinning-img" alt="dinning" />
             </Grid>
-          </Grid>{" "}
-        </CardContent>{" "}
+          </Grid>
+        </CardContent>
       </Card>
-      
+      <Card sx={{ minWidth: 275 }} style={{ margin: "20px" }} >
+        <CardContent>
+          <Grid container flexDirection="row" spacing="1">
+            <BarGraph/>
+          </Grid>
+          <Grid>
+            <Box
+              sx={{
+                "& > :not(style)": {
+                  m: 2,
+                },
+              }}
+            >
+              <Icon color="primary"> + </Icon>
+            </Box>
+          </Grid>
+        </CardContent>
+      </Card>
     </div>
   );
 }

@@ -41,13 +41,18 @@ const EditCalories = forwardRef((props, ref) => {
 
   const handleClickOpen = () => {
     setOpen(true);
+
+    
   };
 
-  const handleClose = () => {
+  const handle = () => {
     hitpostServings()
     handleAlert1Click()
   
   };
+const onClose=()=>{
+  setOpen(false);
+}
 
 
   const [date, setDate] = useState(null)
@@ -147,7 +152,7 @@ const categoryName =props.state;
         open={open}
         TransitionComponent={Transition}
         keepMounted
-        onClose={handleClose}
+        onClose={onClose}
         aria-describedby="alert-dialog-slide-description"
       >
         <CardContent sx={{minWidth:"250px"}}>
@@ -180,7 +185,7 @@ const categoryName =props.state;
           
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Save</Button>
+          <Button onClick={handle}>Save</Button>
           {/* {showAlert && (
         <Alert severity="success" onClose={() => setShowAlert(false)}>
           Created Servings Successful!

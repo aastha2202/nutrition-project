@@ -1,11 +1,21 @@
 
 import React from 'react';
+import { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 // import {Card, Typography }from '@mui/material';
 // import ArrowBackIosIcon from '@mui/material/ArrowBackIos';
 import {Button, CardContent, Card , Typography, Grid, TextField ,MenuItem,InputLabel,NativeSelect,FormControl} from '@mui/material';
 
 
-export default function CreateExerciseItems (){
+const CreateExerciseItems = forwardRef((props, ref) => {
+
+    
+    useImperativeHandle(ref, () => ({
+        handleClickEdit(data,action){
+          
+        }
+        
+    }))
+
     return (
         <>
            
@@ -35,7 +45,7 @@ export default function CreateExerciseItems (){
                                     <Grid md={5} lg={5} xs={5} style={{backgroundColor:"#F7EEFC"}}  item > 
                                     <FormControl variant="outlined" >
                                             <InputLabel variant="ourtlined" >
-                                                Sets
+                                                Sets12
                                             </InputLabel>
                                             <NativeSelect
                                              variant='outlined'
@@ -45,7 +55,7 @@ export default function CreateExerciseItems (){
                                                 id: 'uncontrolled-native',
                                                 }}
                                             >
-                                                <option value={10}>Ten</option>
+                                                <option value={10}>Ten111</option>
                                                 <option value={20}>Twenty</option>
                                                 <option value={30}>Thirty</option>
                                             </NativeSelect>
@@ -80,7 +90,7 @@ export default function CreateExerciseItems (){
                                                 id: 'uncontrolled-native',
                                                 }}
                                             >
-                                                <option value={10}>Ten</option>
+                                                <option value={10}>Ten123</option>
                                                 <option value={20}>Twenty</option>
                                                 <option value={30}>Thirty</option>
                                             </NativeSelect>
@@ -107,6 +117,7 @@ export default function CreateExerciseItems (){
            
         </>
     );
-}
+})
+export default  CreateExerciseItems;
 
 

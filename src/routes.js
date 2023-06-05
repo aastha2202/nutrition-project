@@ -15,7 +15,9 @@ import Adminuser from './Admin/AdminDashboard/Adminuser';
 // 
 import Adminproteins from './Admin/AdminDiet/Adminproteins';
 // import Adminitems from './Admin/AdminDiet/AdminDietCategory';
- import AdminDietCategory from './Admin/AdminDiet/AdminDietCategory';
+//  import AdminDietCategory from './Admin/AdminDiet/AdminDietCategory';
+ import Adminitems from './Admin/AdminDiet/Adminitems';
+
 // import CreateDietItems from './Admin/AdminDiet/component/CreateDietItems';
 
 import AdminExercises from './Admin/AdminExercise/AdminExercises';
@@ -29,7 +31,7 @@ import CreateExerciseItems from './Admin/AdminExercise/CreateExerciseItems';
 import Userstats from './Admin/UserStats/Userstats';
 import Adminsearch from './Admin/AdminSearch/Adminsearch'
 import ListAllDietPlan from './Admin/AdminDiet/ListAllDietPlan';
-
+ import DashboardAdminApp from "./Admin/AdminProfile/DashboardAdminApp";
 import ResetPassword from "./pages/ResetPassword";
 // ----------------------------------------------------------------------
 //  import Login from './user/Login/Login';
@@ -103,8 +105,12 @@ export default function Router() {
             children: [
                 { element: < Navigate to = "/dashboardadmin/app" /> , index: true },
                 { path: 'login', element: < LoginPage /> },
-                { path: 'AdminDietCategory', element: < AdminDietCategory /> },
+                { path: 'AdminDietCategory', element: < Adminitems /> },
                 { path: 'adminexercise', element: < AdminExercises /> },
+                {
+                    path: 'dashboardadminapp',
+                    element: < DashboardAdminApp />
+                },
                 {
                     path: 'adminaerobic',
                     element: <AdminAerobic  />
