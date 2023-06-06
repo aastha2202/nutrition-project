@@ -16,7 +16,7 @@ import Alert from '@mui/material/Alert';
 import Iconify from '../components/iconify';
 // sections
 import { LoginForm } from '../sections/auth/login';
-
+import Snackbar from '@mui/material/Snackbar';
 // ----------------------------------------------------------------------
 
 const StyledRoot = styled('div')(({ theme }) => ({
@@ -73,10 +73,10 @@ export default function LoginPage() {
 
 
 
-  
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const [showPassword, setShowPassword] = useState(false);
+ 
 
   const handleClick = () => {
     navigate('/dashboard/', { replace: true });
@@ -108,7 +108,7 @@ export default function LoginPage() {
           setTimeout(() => {
             
             navigate('/dashboard', { replace: true });
-          }, 2000);
+          }, 1000);
           
           // navigate('/dashboard', { replace: true });
           // <link to="/dashboard" component={RouterLink}></link>
@@ -198,7 +198,7 @@ export default function LoginPage() {
         Login
       </LoadingButton>
       
-      {showAlert && (
+      {/* {showAlert && (
         <Alert severity="success" onClose={() => setShowAlert(false)}>
           Login  Successful!
         </Alert>
@@ -207,7 +207,27 @@ export default function LoginPage() {
         <Alert severity="success" onClose={() => setErrorAlert(false)}>
           Login failed !
         </Alert>
-      )}
+      )} */}
+
+<Snackbar
+        open={showAlert}
+        onClose={() =>setShowAlert(false) }
+        // severity="success"
+       
+        autoHideDuration={1000}
+        >
+        <Alert severity="success"> Login successfull !</Alert>  
+         </Snackbar>
+      <Snackbar
+        open={errorAlert}
+        onClose={() => setErrorAlert(false)}
+       
+        autoHideDuration={1000}
+        >
+        <Alert  severity="error">Login Failed !</Alert>  
+         </Snackbar>
+
+
       </Card>
 
        

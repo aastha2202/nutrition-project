@@ -10,7 +10,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
-import { CardContent, Grid, Stack, TextField, Typography, AppBar,Toolbar, Card,} from '@mui/material';
+import { CardContent, Grid, Stack, TextField, Typography, AppBar,Toolbar, Card } from '@mui/material';
 import {useImperativeHandle,forwardRef} from 'react';
 // import { IconButton, RemoveIcon,AddIcon} from '@mui/material';
 import IconButton from '@mui/material/IconButton';
@@ -47,7 +47,8 @@ const EditCalories = forwardRef((props, ref) => {
 
   const handle = () => {
     hitpostServings()
-    handleAlert1Click()
+   
+   
   
   };
 const onClose=()=>{
@@ -99,6 +100,7 @@ const onClose=()=>{
     axios.request(config)
     .then((response) => {
       props.apiCall()
+      props.handleSuccess()
       setOpen(false);
       // setPostServings(reponse?.data?.data)
       console.log(response?.data?.data,"------post servings checking--");
@@ -123,10 +125,7 @@ const categoryName =props.state;
   // const handleSuccess = () => {
   //   setShowAlert(true);
   // };
-  const [alert1Open, setAlert1Open] = useState(false);
-  const handleAlert1Click = () => {
-    setAlert1Open(true);
-  };
+
 
 
 
@@ -135,16 +134,16 @@ const categoryName =props.state;
       {/* <Button variant="outlined" onClick={handleClickOpen}>
         alert dialog
       </Button> */}
-       <Snackbar
-        open={alert1Open}
-        onClose={() => handleAlertClose(1)}
+      {/* <Snackbar
+        open={alert1Open} 
+        // onClose={() => handleAlertClose(1)} 
         // message="Over all plan is open"
         autoHideDuration={1000}
         // severity="success"
         // sx={{background:"green"}}
         >
          <Alert severity="success">Servings Created successfully</Alert>
-        </Snackbar>
+        </Snackbar> */}
 
 
 

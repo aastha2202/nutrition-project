@@ -31,14 +31,7 @@ const navConfig = [{
 
     },
 
-    {
-        title: 'login',
-        path: '/dashboard/login',
-        icon: icon('ic_lock'),
-        id: 1,
-
-
-    },
+    
     {
         title: 'Dashboard',
         path: '/dashboardadmin/adminuser',

@@ -21,6 +21,8 @@ import { Link as RouterLink, useNavigate} from 'react-router-dom';
  import Iconify from 'src/components/iconify/Iconify';
  import { Icon, InlineIcon } from '@iconify/react';
 import plusIcon from '@iconify-icons/mdi/plus';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 function Copyright(props) {
   return (
@@ -36,6 +38,17 @@ function Copyright(props) {
 }
 
 const theme = createTheme();
+
+const createuser={
+  // color:"#112866",
+  fontFamily:"Inter-SemiBold",
+
+}
+const alreadyaccount={
+  // color:"#112866",
+  fontFamily:"Inter-SemiBold",
+
+}
 
 export default function SignUp() {
   const handleSubmit = (event) => {
@@ -71,6 +84,11 @@ export default function SignUp() {
     setErrorAlert(true);
   };
 
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/login', { replace: true });
+  };
 
   //API integration
   const [response, setResponse] = useState()
@@ -82,18 +100,37 @@ export default function SignUp() {
         "mobile_number": "",
         "email_id": "",
         "address": "",
-        "profile_image": ""
+        "profile_image": "",
+        "patientid":""
     })
 
     const registerUser = () => {
         axios.post(`https://aipse.in/api/registerUser`, formValue)
             .then(function (response) {
                 console.log(response?.data, "responseeeeeee")
-                handleSuccess()
-                setTimeout(() => {
+                // handleSuccess()
+                // setTimeout(() => {
             
-                  navigate('Login')
-                }, 2000);
+                //   navigate('Login')
+                // }, 2000);
+                if (response?.data?.Status) {  
+          
+                 
+                 handleSuccess()
+                  console.log('Username', response?.data)
+                  setTimeout(() => {
+                    
+                    navigate('/login', { replace: true });
+                  }, 1000);
+                  
+                  // navigate('/dashboard', { replace: true });
+                  // <link to="/dashboard" component={RouterLink}></link>
+        
+                } 
+                else {
+                  setResponse(response?.data?.Message)
+                  handleError()
+                }
                 
                
             })
@@ -245,8 +282,8 @@ const handleImageSelection = (event) => {
 
 
 
-          <Typography component="h1" variant="h5">
-            Create User
+          <Typography component="h1" style={createuser} variant="h5">
+            Register User
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -269,7 +306,7 @@ const handleImageSelection = (event) => {
                   required
                   fullWidth
                   id="password"
-                  label="password"
+                  label="Password"
                   autoFocus
                   onChange={(e) => { console.log( e.target.value),setFormValue({ ...formValue,  password: e.target.value }) }}
                 />
@@ -305,7 +342,7 @@ const handleImageSelection = (event) => {
                   <Select
                   labelId="gender"
                   id="gender"
-                  label="gender"
+                  label="Gender"
                   value={gender}
                   onChange={handleChange}
 
@@ -332,10 +369,10 @@ const handleImageSelection = (event) => {
               </Grid> */}
               <Grid item xs={12}>
                 <TextField
-                  required
+                  // required
                   fullWidth
                   id="mobile_number"
-                  label="mobile_number"
+                  label="Mobile number"
                   name="mobile_number"
                   autoComplete="mobile_number"
                   onChange={(e) =>  {console.log( e.target.value), setFormValue({ ...formValue, mobile_number: e.target.value }) }}
@@ -344,13 +381,14 @@ const handleImageSelection = (event) => {
               <Grid item xs={12}>
                 <TextField
                   autoComplete="given-name"
-                  name="address"
+                  name="patientid"
+
                   required
                   fullWidth
-                  id="address"
-                  label="address"
+                  id="patientid"
+                  label="Patientid"
                   autoFocus
-                  onChange={(e) => { setFormValue({ ...formValue, address: e.target.value }) }}
+                  onChange={(e) => { setFormValue({ ...formValue, patientid: e.target.value }) }}
                 />
               </Grid>
               {/* <Grid item xs={12}>
@@ -374,26 +412,33 @@ const handleImageSelection = (event) => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              // onClick={registerUser}
+              onClick={registerUser}
 
             >
               Submit
             </Button>
-            {showAlert && (
-        <Alert severity="success" onClose={() => setShowAlert(false)}>
-          Register  Successful!
-        </Alert>
-      )}
-      {errorAlert && (
-        <Alert severity="error" onClose={() => setErrorAlert(false)}>
-          register failed !
-        </Alert>
-      )}
 
+            <Typography variant="body2" sx={{ mb: 5 }}>
+            Already have an account
+          <Link variant="subtitle2"  to="/login"  component={RouterLink} sx={{textDecoration:'none'}} > Click Here </Link>
+        </Typography>
+           
+       <Snackbar
+        open={showAlert}
+        onClose={() =>  setShowAlert(false)}
+        autoHideDuration={1000} >
+         <Alert severity="success">register successfull!</Alert>
+        </Snackbar>
+        <Snackbar
+        open={errorAlert}
+        onClose={() =>  setErrorAlert(false)}        
+        autoHideDuration={1000}
+        >
+         <Alert severity="error">register failed!</Alert>
+        </Snackbar>
           </Box>
         </Box>
-        <Typography to="/login"  component={RouterLink} sx={{textDecoration:'none'}} >already have an account click here</Typography>
-        
+       
       </Container>
     </ThemeProvider>
   );

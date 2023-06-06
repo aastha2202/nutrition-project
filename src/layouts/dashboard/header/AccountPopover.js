@@ -4,14 +4,14 @@ import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton, Popover } from '@mui/material';
 // mocks_
 import account from '../../../_mock/account';
-
+import { Link as RouterLink, useNavigate} from 'react-router-dom';
 // ----------------------------------------------------------------------
 
 const MENU_OPTIONS = [
-  {
-    label: 'Home',
-    icon: 'eva:home-fill',
-  },
+  // {
+  //   label: 'Home',
+  //   icon: 'eva:home-fill',
+  // },
   {
     label: 'Profile',
     icon: 'eva:person-fill',
@@ -35,6 +35,16 @@ export default function AccountPopover() {
     setOpen(null);
   };
 
+  const navigate = useNavigate();
+
+ 
+
+  const handleClick = () => {
+    
+    navigate('/login', { replace: true });
+  };
+
+ 
   return (
     <div style={{float:"right", }}>
       <IconButton
@@ -98,7 +108,7 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem onClick={handleClose} sx={{ m: 1 }}>
+        <MenuItem onClick={handleClick} sx={{ m: 1 }}>
           Logout
         </MenuItem>
       </Popover>

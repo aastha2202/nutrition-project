@@ -90,24 +90,24 @@ const plusStyle = {
     color:"#112866",
     // color: "#000000"
   };
-  const day={
+  const currentdate={
     fontFamily: 'Inter-Regular',
     fontStyle: "normal",
     fontWeight: "600",
-    fontSize:"30px",
+    fontSize:"20px",
     lineHeight: "15px",
     color:"white",
     marginLeft:'1'
 
   };
 
-const month={
+const day={
     fontFamily: 'Inter-Regular',
-    fontSize:"15px" ,
+    fontSize:"20px" ,
     
     marginTop:"10px",
     alignSelf:"center",
-    color:"#112866",
+    // color:"#112866",
 }
 
 const year={
@@ -273,7 +273,7 @@ const [loading, setLoading] = useState(true)
     let id = null
     if (catid) { id = catid[0].category_id }
     localStorage.setItem('params',JSON.stringify({ cat: id, diet_id: item?.diet_id, category: item.category, type: "food", servingsConsumed: item.servings_consumed, apiCall: apiCall }))
-    navigate('/dashboard/itemsofexercise')
+    navigate('/dashboard/itemofexercise')
     
 
   }
@@ -287,26 +287,15 @@ const [loading, setLoading] = useState(true)
                 
             </CardContent> */}
             <Grid container   style={{display:'flex',flexDirection:"row",position:'relative'}}>
-               <Grid item xs={6}>
+               <Grid item xs={12}>
                <CardContent >
                          <Typography  variant='h5' style={title} >
-                              Exercise
+                              Exercise Plan
                           </Typography>    
 
                </CardContent>
                </Grid>
-            <Grid  item xs={6} mt={1} >
-              <CardContent  >
-                      {/* <FormControl  sx={{ position:'absolute',right:6 }} size="small">
-                     <Select sx={{backgroundColor:"white"}} defaultValue="Today">
-                     <MenuItem value="Today"  >Today</MenuItem>
-                     <MenuItem value="Next Week">Next Week</MenuItem>
-                     <MenuItem value="Previous Week">Previous Week</MenuItem>
-                     </Select>
-                     </FormControl> */}
-                 <br/>  
-              </CardContent>
-              </Grid>
+            
           </Grid>
 
             <Grid>
@@ -318,7 +307,7 @@ const [loading, setLoading] = useState(true)
                         
                            <Grid item mt={3} alignSelf={"center"} >
                             
-                           <Typography variant="body1" component="span" style={day} >
+                           <Typography variant="body1" component="span" style={currentdate} >
                                             {getCurrentDate()}
                                     </Typography>
                             </Grid> 
@@ -354,8 +343,8 @@ const [loading, setLoading] = useState(true)
 
                        
                         <Grid  container flexDirection="row">
-                           <Grid item ><Typography style={{ fontSize:"35px" ,color:"white",fontWeight:"40px"}}> {exerciseData?.TotalServings} </Typography></Grid>
-                           <Grid item><Typography mt={3}  ml={0.5} style={exercise}>Servings</Typography></Grid>
+                           <Grid item ><Typography style={{ fontSize:"35px" ,color:"white",fontWeight:"30px"}}> {exerciseData?.TotalServings} </Typography></Grid>
+                           <Grid item><Typography mt={3}  ml={0.5} style={exercise}>Sets</Typography></Grid>
                             </Grid>
                         </Grid>
                         
@@ -379,7 +368,7 @@ const [loading, setLoading] = useState(true)
                         <Grid item  container justifyContent="center" alignItems="center">
                         <CardContent sx={{alignItems:"center",alignSelf:'center',alignContent:"center"}}>
                                 <Typography variant="body1" component="span"   style={servingleft}>
-                                {exerciseData?.servingsLeft}  servings left 
+                                {exerciseData?.servingsLeft}  sets left 
                                     
                                 </Typography>
                                  </CardContent>
@@ -404,11 +393,12 @@ const [loading, setLoading] = useState(true)
                     
      {oneDietPlan?.map(item=>{
         return(
-          // <Grid container flex sx={12} lg={4}>
+          // <Grid container flexDirection={"row"} item  >
+          //   <Grid item sx={12} > 
             <Card  style={maincardStyle}  >
                     <CardContent onClick={()=>{setDietId(item)}} sx={{textDecoration:'none'}}>
                     <Grid container spacing={1} margin="10px" alignItems="center">
-                     <Grid item xs={6}  >
+                    
                      
                      <Grid item  alignSelf={'center'}>
                             <Grid item container flexDirection={"column"}>
@@ -418,37 +408,24 @@ const [loading, setLoading] = useState(true)
                             </Grid>
                             <Grid item>
                             <Typography alignContent="center" variant="body1" component="span" style={totalservingsStyle}>
-                            {item.servings_consumed} servings consumed
+                            {item.servings_consumed} sets done
                             </Typography>
                             </Grid>
                            
                             
                         </Grid> 
                        
-                        </Grid>    
-                        <Grid item xs={5} margin={1}    >
+                    
                         
-                        <Grid item container  justifyContent="center" alignItems="center" >
-                            {/* <Typography alignContent="center" variant="body1" component="span" style={totalservingsStyle}>
-                             45 Calories/Servings
-                            </Typography> */}
-                            
-                            
-                        </Grid>
-                        <Grid item   container justifyContent="center" alignItems="center"  >
-                             {/* <Typography alignContent="center" variant="body1" component="span" style={totalservingsStyle} >
-                                 13/servings/Day
-                            </Typography> */}
-                        </Grid> 
-                        
-                        </Grid>
                         
                     </Grid>
                     </CardContent>
                     
     
-               </Card>
-              //  </Grid>  
+               </Card>  
+
+                // {/* </Grid>  
+                // </Grid> */}
 
         );
      })}
