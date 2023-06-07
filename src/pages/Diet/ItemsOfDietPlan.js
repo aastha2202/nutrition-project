@@ -20,7 +20,9 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import Logo from "../../assets/nova.svg";
 import Poultry from "../../assets/Poultry.svg";
 import Fish from "../../assets/Fish.svg";
-import EditCalories from '../Exercises/Components/EditCalories';
+
+import EditCaloriesDiet from './Components/EditCaloriesDiet';
+// import EditCalories from '../Exercises/Components/EditCalories';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 // import  "../styles.css";
@@ -91,7 +93,7 @@ const caloriesremained={
 export default function Protein({ route, navigation,props }) {
   const servlingsLeft= useRef();
 
-
+ const imageurl= "https://aipse.in";
       const location = useLocation();
     //  console.log(location?.state?.data)
     // const [data,setData] = useState(location.state?.data);
@@ -257,7 +259,7 @@ export default function Protein({ route, navigation,props }) {
     />
   } */}
 {
-  viewModal &&  < EditCalories handleSuccess={handleSuccess} state={selectedData} apiCall={apiCall}  ref={childComp}/>
+  viewModal &&  < EditCaloriesDiet handleSuccess={handleSuccess} state={selectedData} apiCall={apiCall}  ref={childComp}/>
 }
   <Grid container spacing={2}>
     <Grid  item xs={6}>
@@ -314,9 +316,9 @@ export default function Protein({ route, navigation,props }) {
     <Card style={cardStyle}>
     <CardContent onClick={()=>{handleCard(item)}} >
       <Grid container spacing={2} justifyContent="center" alignItems="center">
-        <Grid item xs={2} md={2}>
-          <ButtonBase>
-            {/* <img src={Fish} alt="nova logo" /> */}
+        <Grid item xs={2} md={2} >
+          <ButtonBase >
+            <img  style={{borderRadius:100,maxHeight:"80px"}} src={imageurl+item.item_image}  alt="nova logo" />
           </ButtonBase>
         </Grid>
         <Grid item xs={10} spacing={2} md={10}>

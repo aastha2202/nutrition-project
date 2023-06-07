@@ -556,14 +556,14 @@ console.log(oneExerciseData,"-----oneExerciseData --dtaa checking");
       
     </Card>
 
-       <CardContent>
+       {/* <CardContent>
           <Typography sx={{fontSize:"20px"}}>Previous Diet Plans </Typography>
          
-          <Card   style={{display:'flex',alignContent:'center',justifyContent:'center',alignItems:"center",margin: "10px"}} >
+          <Card   style={{display:'flex',alignContent:'center',justifyContent:'center',alignItems:"center",}} >
           
             
               {/* <div style={{display:'flex',alignContent:'center',justifyContent:'center',alignItems:"center",margin: "10px"}}> */}
-                <Grid container item alignContent={"center"} >
+                <Grid container item alignContent={"center"} minHeight="80px" >
                 <Grid item xs={5} >
                 <Typography variant='h4' style={{color:"black" ,textAlign:"center" }}>
                 {/* {ongoingDietPlan?.StartDate} */}
@@ -670,7 +670,7 @@ console.log(oneExerciseData,"-----oneExerciseData --dtaa checking");
            
      
          
-          </CardContent>    
+          </CardContent>     */}
 
          
   

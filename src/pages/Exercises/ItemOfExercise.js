@@ -20,7 +20,8 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import Logo from "../../assets/nova.svg";
 import Poultry from "../../assets/Poultry.svg";
 import Fish from "../../assets/Fish.svg";
-import EditCalories from '../Exercises/Components/EditCalories';
+// import EditCalories from '../Exercises/Components/EditCalories';
+import  EditCalories from "./Components/EditCalories"
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 // import  "../styles.css";
@@ -91,7 +92,7 @@ const caloriesremained={
 export default function Aerobic({ route, navigation,props }) {
   const servlingsLeft= useRef();
 
-
+      const imageurl="https://aipse.in";
       const location = useLocation();
     //  console.log(location?.state?.data)
     // const [data,setData] = useState(location.state?.data);
@@ -257,7 +258,7 @@ export default function Aerobic({ route, navigation,props }) {
     />
   } */}
 {
-  viewModal &&  < EditCalories handleSuccess={handleSuccess} state={selectedData} apiCall={apiCall}  ref={childComp}/>
+  viewModal && < EditCalories handleSuccess={handleSuccess} state={selectedData} apiCall={apiCall}  ref={childComp}/>
 }
   <Grid container spacing={2}>
     <Grid  item xs={6}>
@@ -316,7 +317,8 @@ export default function Aerobic({ route, navigation,props }) {
       <Grid container spacing={2} justifyContent="center" alignItems="center">
         <Grid item xs={2} md={2}>
           <ButtonBase>
-            {/* <img src={Fish} alt="nova logo" /> */}
+            <img src={imageurl+item.item_image} alt="nova logo" />
+
           </ButtonBase>
         </Grid>
         <Grid item xs={10} spacing={2} md={10}>
@@ -333,7 +335,7 @@ export default function Aerobic({ route, navigation,props }) {
               </Typography>
               <Card sx={{position:'absolute', minWidth:"30px" , alignContent:"center" , right:10,borderRadius:1,boxShadow: '#c4c4c4'}}  >
               {/* <EditCalories state={{data:itemIntakeStatus}} /> */}
-      
+                
                 <Typography sx={{textAlign:"center",alignContent:"center"}}>{getStatus(item.item_id)}</Typography>
               </Card>
             </div>

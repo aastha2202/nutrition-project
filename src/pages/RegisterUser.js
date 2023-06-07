@@ -15,7 +15,7 @@ import Select from '@mui/material/Select';
 import axios from 'axios';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link as RouterLink, useNavigate} from 'react-router-dom';
  import Iconify from 'src/components/iconify/Iconify';
@@ -65,9 +65,14 @@ export default function SignUp() {
     console.log(gender); 
   };
 
+// validation 
+
+
+
+
 // To update the state of gender
   const [gender, setGender] = React.useState('');
-
+  const [images,setImages]=useState("");
   const handleChange = (event) => {
     setGender(event.target.value);
   };
@@ -82,6 +87,17 @@ export default function SignUp() {
 
   const handleError = () => {
     setErrorAlert(true);
+  };
+
+  const [enterFields, setEnterFields] = useState(false);
+  useEffect (()=>{
+    if(images){
+      console.log()
+    setFormValue({ ...formValue,  profile_image: images?.toString().slice(images.toString()[22]===','?23:22,) }) 
+    }
+  },[images])
+  const handleEmpty = () => {
+    setEnterFields(true);
   };
 
   const navigate = useNavigate();
@@ -105,17 +121,19 @@ export default function SignUp() {
     })
 
     const registerUser = () => {
-        axios.post(`https://aipse.in/api/registerUser`, formValue)
-            .then(function (response) {
+        
+
+          // if(Object.values(formValue).includes("")){
+          //         // alert("Enter valid data")
+          //         handleEmpty()
+          //     }
+        
+
+                axios.post(`https://aipse.in/api/registerUser`, formValue)
+                .then(function (response) {
                 console.log(response?.data, "responseeeeeee")
-                // handleSuccess()
-                // setTimeout(() => {
-            
-                //   navigate('Login')
-                // }, 2000);
                 if (response?.data?.Status) {  
           
-                 
                  handleSuccess()
                   console.log('Username', response?.data)
                   setTimeout(() => {
@@ -131,21 +149,44 @@ export default function SignUp() {
                   setResponse(response?.data?.Message)
                   handleError()
                 }
+              })
+              .catch(function (error) {
+                 handleError()
+                  console.log(error);
+                 
+              });
+                
+ 
+
+              
+                
+                // if (response?.data?.Status) {  
+          
+                //  handleSuccess()
+                //   console.log('Username', response?.data)
+                //   setTimeout(() => {
+                    
+                //     navigate('/login', { replace: true });
+                //   }, 1000);
+                  
+                //   // navigate('/dashboard', { replace: true });
+                //   // <link to="/dashboard" component={RouterLink}></link>
+        
+                // } 
+                // else {
+                //   setResponse(response?.data?.Message)
+                //   handleError()
+                // }
                 
                
-            })
-            .catch(function (error) {
-               handleError()
-                console.log(error);
-               
-            });
+            
     }
 
 
     // photo inetgration
     // const [images , setImages]=useState()
     // const [base64Data, setBase64Data]=useState()
-    const [images,setImages]=useState([]);
+    
     const [viewImage,setViewImage]=React.useState(false);
     function getBase64(file, callback) {
     
@@ -176,7 +217,7 @@ export default function SignUp() {
      
     console.log("upload method is calling ",images[0]?.toString().slice(22,))
   //console.log(images[0],'slicing-----',images[0].toString().slice(22,),'----image to upload----');
-  diet.item_image=images[0]?.toString().slice(22,);
+  // diet.item_image=images[0]?.toString().slice(22,);
   
   // setFormData(formData=>({
   //   ...formData,
@@ -187,7 +228,7 @@ export default function SignUp() {
   
   //alert("Photo Uploaded Successfully..") 
 }
-
+ console.log(images,'----images----');
 const deleteImage = (index) => {
   images.splice(index, 1);
   setImages([...images]);
@@ -244,40 +285,7 @@ const handleImageSelection = (event) => {
                 
                   <br />
                 
-         {/* <div>
-           <Button
-           id="upload-btn"
-           onClick={()=>UploadImages(1)}
-           
-           sx={{
-             '&:hover': {
-               backgroundColor: '#ffd796',
-             },
-             color: '#ff7424',
-             backgroundColor: '#ffd796',
-             marginLeft: '10px',
-           }}
-         >
-           Upload   
-         </Button></div> */}
-
-         {/* {images?.map((itm,index) => {
-                   
-                   return <div style={{ display: 'flex', margin: '1rem' }}>
-                      <Avatar alt="Remy Sharp"
-                       src="/broken-image.jpg">
-                     <img src={itm} style={{ height: '50px',  borderRadius:"50px", width: '70px',marginTop:20 }} />
-                     </Avatar>
-                     <Iconify
-                             onClick={() => {
-                               deleteImage(index);
-                             }}
-                             icon={'typcn:delete'}
-                             sx={{ width: 16, height: 16, ml: 1, color: 'red' }}
-                           />
-                     </div>
-                   
-         })} */}
+        
         </div>
 
 
@@ -296,7 +304,7 @@ const handleImageSelection = (event) => {
                   id="user_name"
                   label="User Name"
                   autoFocus
-                  onChange={(e) => { console.log( e.target.value), setFormValue({ ...formValue,  user_name: e.target.value }) }}
+                  onChange={(e) => { setFormValue({ ...formValue,  user_name: e.target.value }) }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -308,7 +316,7 @@ const handleImageSelection = (event) => {
                   id="password"
                   label="Password"
                   autoFocus
-                  onChange={(e) => { console.log( e.target.value),setFormValue({ ...formValue,  password: e.target.value }) }}
+                  onChange={(e) => { setFormValue({ ...formValue,  password: e.target.value }) }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -356,41 +364,20 @@ const handleImageSelection = (event) => {
               
               </Grid>
               
-              {/* <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="patient-id"
-                  label="Patient Id"
-                  name="patient-id"
-                  autoComplete="patient-id"
-                 
-                />
-              </Grid> */}
+            
               <Grid item xs={12}>
                 <TextField
                   // required
                   fullWidth
                   id="mobile_number"
+                  required
                   label="Mobile number"
                   name="mobile_number"
                   autoComplete="mobile_number"
-                  onChange={(e) =>  {console.log( e.target.value), setFormValue({ ...formValue, mobile_number: e.target.value }) }}
+                  onChange={(e) =>  {setFormValue({ ...formValue, mobile_number: e.target.value }) }}
                 />
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  autoComplete="given-name"
-                  name="patientid"
-
-                  required
-                  fullWidth
-                  id="patientid"
-                  label="Patientid"
-                  autoFocus
-                  onChange={(e) => { setFormValue({ ...formValue, patientid: e.target.value }) }}
-                />
-              </Grid>
+              
               {/* <Grid item xs={12}>
               <Button
               variant="contained"
@@ -415,11 +402,11 @@ const handleImageSelection = (event) => {
               onClick={registerUser}
 
             >
-              Submit
+              Create Account
             </Button>
 
             <Typography variant="body2" sx={{ mb: 5 }}>
-            Already have an account
+            Already have an account ?
           <Link variant="subtitle2"  to="/login"  component={RouterLink} sx={{textDecoration:'none'}} > Click Here </Link>
         </Typography>
            
@@ -436,6 +423,14 @@ const handleImageSelection = (event) => {
         >
          <Alert severity="error">register failed!</Alert>
         </Snackbar>
+
+        <Snackbar
+        open={enterFields}
+        onClose={() =>setEnterFields(false) }
+        autoHideDuration={1000}
+        >
+        <Alert severity="warning"> Some Required Fields are missing </Alert>  
+         </Snackbar>
           </Box>
         </Box>
        

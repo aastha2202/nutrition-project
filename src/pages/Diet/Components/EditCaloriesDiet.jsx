@@ -20,7 +20,7 @@ import axios from "axios"
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-const EditCalories = forwardRef((props, ref) => {
+const EditCaloriesDiet = forwardRef((props, ref) => {
   const [servings,setServings]=useState(1)
   const [open, setOpen] = React.useState(false);
   const [postServings,setPostServings]=useState({
@@ -82,7 +82,7 @@ const onClose=()=>{
       "date": date,
       "diet_id":  postServings?.diet_id,
       "item_id":  postServings?.item_id,
-      "type": "exercise",
+      "type": "food",
       "category": postServings?.category,
       "servings_consumed": servings
     });
@@ -131,7 +131,21 @@ const categoryName =props.state;
 
   return (
     <div>
-    
+      {/* <Button variant="outlined" onClick={handleClickOpen}>
+        alert dialog
+      </Button> */}
+      {/* <Snackbar
+        open={alert1Open} 
+        // onClose={() => handleAlertClose(1)} 
+        // message="Over all plan is open"
+        autoHideDuration={1000}
+        // severity="success"
+        // sx={{background:"green"}}
+        >
+         <Alert severity="success">Servings Created successfully</Alert>
+        </Snackbar> */}
+
+
 
        <Dialog 
         open={open}
@@ -152,7 +166,11 @@ const categoryName =props.state;
           
            select servings
          
-          
+          {/* <Grid container item flexDirection={"row"}>
+            <span >-</span>
+            <Typography>0</Typography>
+            <span>+</span>
+          </Grid> */}
           <Grid>
           <IconButton >
                       <span onClick={()=>{servings>1 && setServings(prev=>prev-1)}}> <RemoveIcon /></span>
@@ -167,7 +185,12 @@ const categoryName =props.state;
         </DialogContent>
         <DialogActions>
           <Button onClick={handle}>Save</Button>
-          
+          {/* {showAlert && (
+        <Alert severity="success" onClose={() => setShowAlert(false)}>
+          Created Servings Successful!
+        </Alert>
+      )} */}
+        
         </DialogActions>
       </Dialog>
     
@@ -177,4 +200,4 @@ const categoryName =props.state;
   );
 });
 
-export default EditCalories;
+export default EditCaloriesDiet;
