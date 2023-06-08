@@ -226,7 +226,7 @@ export default function LoginPage() {
        
         autoHideDuration={1000}
         >
-        <Alert  severity="error">Password doesn`t match with email !</Alert>  
+        <Alert  severity="error">Password and email doesn`t match  </Alert>  
          </Snackbar>
 
 

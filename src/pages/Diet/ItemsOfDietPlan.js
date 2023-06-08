@@ -221,7 +221,16 @@ export default function Protein({ route, navigation,props }) {
      
       setViewModal(true)
       childComp.current.handleClickOpen()
+      
     }
+
+// console.log(servings);
+    const close = (servings, item) => {
+      // Alert.alert(`You have consumed ${servings} servings of ${item.item_name
+      setAddServings(servings)
+      apiCall()
+      // bottomSheetModalRef.current?.close();
+  }
 
 
     // console.log(servings, "///////royre paramsss") 
@@ -234,8 +243,9 @@ export default function Protein({ route, navigation,props }) {
   // alert usage here
   const [showAlert, setShowAlert] = useState(false);
 
-  const handleSuccess = () => {
+  const handleSuccess = (servings) => {
     setShowAlert(true);
+    close(servings)
   };
 
     return ( 
@@ -290,7 +300,7 @@ export default function Protein({ route, navigation,props }) {
           sx={{ Width: 200, height: 110 }}
           style={{ backgroundColor: "#E1B725", textAlign:"center" }}
         >
-          <Typography variant="h3"  style={caloriesremained}> {params?.servingsConsumed}  
+          <Typography variant="h3"  style={caloriesremained}> {params?.servingsConsumed + addServings}  
            
           </Typography>
           <Typography variant="h5" style={caloriesremained} >
@@ -318,7 +328,7 @@ export default function Protein({ route, navigation,props }) {
       <Grid container spacing={2} justifyContent="center" alignItems="center">
         <Grid item xs={2} md={2} >
           <ButtonBase >
-            <img  style={{borderRadius:100,maxHeight:"80px"}} src={imageurl+item.item_image}  alt="nova logo" />
+            <img  style={{borderRadius:100,maxHeight:"80px"}} src={imageurl+item.item_image}  alt="image" />
           </ButtonBase>
         </Grid>
         <Grid item xs={10} spacing={2} md={10}>

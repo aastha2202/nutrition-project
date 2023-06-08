@@ -13,7 +13,7 @@ sx = {
 />;
 
 const navConfig = [{
-        title: 'dashboard',
+        title: 'Home',
         path: '/dashboard/app',
         icon: <HomeIcon/>,
         id: 1,

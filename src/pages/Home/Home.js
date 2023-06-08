@@ -512,6 +512,49 @@ console.log(oneExerciseData,"-----oneExerciseData --dtaa checking");
                         </Grid>
                     </CardContent>
             </Card>
+
+            <Grid sx={12} margin={"10px"}>
+              <Typography style={hello}>Exercise</Typography>
+            </Grid>
+
+            <Card  style={{backgroundColor:"#8D25C1",marginTop:"10px" }}>
+          
+            
+              {/* <Grid style={{display:'flex',alignContent:'center',justifyContent:'center',alignItems:"center",margin: "10px"}}>
+                <Typography variant='h4' style={{color:"black" , textAlign:"center" }}>
+                
+                {formatDate(ongoingDietPlan?.StartDate)}
+                </Typography > 
+                <Typography sx={{color:"white",fontFamily:"Inter-regular",textAlign:"center",marginLeft:"1px",marginRight:"1px"}}>to</Typography>
+                <Typography variant='h4'  style={{color:"black" ,textAlign:"center"}}>
+             
+                {formatDate(ongoingDietPlan?.EndDate)}
+                </Typography>
+                
+              </Grid> */}
+               <Grid container item alignContent={"center"} minHeight="80px" >
+            <Grid item xs={5.5} >
+            <Typography variant='h4' style={{color:"black" ,textAlign:"center" }}>
+            {/* {ongoingDietPlan?.StartDate} */}
+            {formatDate(ongoingExercisePlan?.StartDate)}
+            </Typography > 
+            </Grid>
+            <Grid item xs={1}>
+            <Typography variant='h4' sx={{color:"black",fontFamily:"Inter-regular",textAlign:"center"}}>to</Typography>
+           
+            </Grid>
+            <Grid item  xs={5.5} justify="center" >
+            <Typography variant='h4'  style={{color:"black", textAlign:"center"}}>
+            {/* {ongoingDietPlan?.EndDate} */}
+            {formatDate(ongoingExercisePlan?.EndDate)}
+            </Typography>
+            </Grid>
+            
+            
+            </Grid>
+           
+            
+          </Card>
             <Card   style={{backgroundColor:"#2c2b2b",marginTop:"10px"}}>
                     <CardContent   to="/dashboard/Exercise" component={RouterLink} sx={{textDecoration:'none'}}>
                     <Grid container flexDirection="row" spacing="1" alignItems="center" justifyContent="center" >
@@ -556,124 +599,10 @@ console.log(oneExerciseData,"-----oneExerciseData --dtaa checking");
       
     </Card>
 
-       {/* <CardContent>
-          <Typography sx={{fontSize:"20px"}}>Previous Diet Plans </Typography>
-         
-          <Card   style={{display:'flex',alignContent:'center',justifyContent:'center',alignItems:"center",}} >
-          
-            
-              {/* <div style={{display:'flex',alignContent:'center',justifyContent:'center',alignItems:"center",margin: "10px"}}> */}
-                <Grid container item alignContent={"center"} minHeight="80px" >
-                <Grid item xs={5} >
-                <Typography variant='h4' style={{color:"black" ,textAlign:"center" }}>
-                {/* {ongoingDietPlan?.StartDate} */}
-                {formatDate(ongoingDietPlan?.StartDate)}
-                </Typography > 
-                </Grid>
-                <Grid item xs={1}>
-                <Typography variant='h4' sx={{color:"black",fontFamily:"Inter-regular",textAlign:"center"}}>to</Typography>
-               
-                </Grid>
-                <Grid item  xs={5} justify="center" >
-                <Typography variant='h4'  style={{color:"black", textAlign:"center"}}>
-                {/* {ongoingDietPlan?.EndDate} */}
-                {formatDate(ongoingDietPlan?.EndDate)}
-                </Typography>
-                </Grid>
-                
-                
-                </Grid>
-                
-              {/* </div> */}
-           
-            
-          </Card>
-
-          
-
-          
-             <Card   style={{backgroundColor:"#2c2b2b",marginTop:"10px"}}>
-                    <CardContent   >
-                    <Grid container flexDirection="row" spacing="1" alignItems="center" justifyContent="center" >
-                        <Grid item xs={4} alignItems="center" sx={{textAlign:'center'}} justifyContent="center">
-                               
-                                <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
-                        
-                                {oneDietPlanData.TotalServings}
-                                </Typography>
-                                <Typography style={subtext}>Servings recommended</Typography>
-                                
-                        </Grid>
-                        <Grid item xs={4}  sx={{justifyContent:'center',textAlign: 'center',alignItems:"center",alignSelf:'center',alignContent:'center',}}>
-                       
-                          <Typography >
-                          <img src={Diet}  alt="dinning" style={{display: 'block', margin: 'auto'}}/>
-                          </Typography>
-                       
-
-                       
-                       
-                        </Grid>
-                        <Grid item xs={4} sx={{textAlign:'center'}} alignItems="center" justifyContent="center">
-                               
-                                <Typography style={{ fontSize:"25px" ,color:"#E1B725"}}>
-                                {oneDietPlanData.servingsLeft}
-                                </Typography>
-                                <Typography style={subtext}>Servings left</Typography>
-                              
-                        </Grid>
-                        
-                       
-                        
-                        </Grid>
-                    </CardContent>
-            </Card>
-            <Card   style={{backgroundColor:"#2c2b2b",marginTop:"10px"}}>
-                    <CardContent >
-                    <Grid container flexDirection="row" spacing="1" alignItems="center" justifyContent="center" >
-                        
-                        <Grid item xs={4} alignItems="center"  sx={{textAlign:'center'}} alignSelf={"center"} justifyContent="center">
-                              
-                                
-                                <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
-                                {/* {ongoingExercisePlan.TotalServings} */}
-                                {oneExerciseData.TotalServings}
-                                </Typography>
-                                <Typography style={subtext}>exercise recommended</Typography>
-                               
-
-                              
-                               
-                        </Grid>
-                        <Grid item xs={4}  sx={{justifyContent:'center',alignItems:"center",textAlign:'center',alignSelf:'center',alignContent:'center'}}>
-                        
-                        <img src={Exerciselogo}  alt="dinning" style={{display: 'block', margin: 'auto'}}/>
-                        
-                       
-                        </Grid>
-                        <Grid item xs={4} sx={{textAlign:'center'}}  >
-                          
-                          
-                                <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
-                                {/* {ongoingExercisePlan.servingsLeft} */}
-                                {/* {ongoingExercisePlan.servingsLeft} */}
-                                {oneExerciseData.servingsLeft}
-                                </Typography>
-                                <Typography style={subtext}>exercise left</Typography>
-                                                    
-                               
-                        </Grid>
-                                       
-                        </Grid>
-                    </CardContent>
-            </Card>
-           
-     
-         
-          </CardContent>     */}
+       
 
          
-  
+   
     
   </>
   );
