@@ -222,6 +222,14 @@ export default function Aerobic({ route, navigation,props }) {
       childComp.current.handleClickOpen()
     }
 
+    const close = (servings, item) => {
+      // Alert.alert(`You have consumed ${servings} servings of ${item.item_name
+      setAddServings(servings)
+      apiCall()
+      // bottomSheetModalRef.current?.close();
+  }
+  
+
 
     // console.log(servings, "///////royre paramsss") 
  console.log(itemIntakeStatus,"....//-------categoryName-----checkinh")
@@ -233,10 +241,16 @@ export default function Aerobic({ route, navigation,props }) {
   // alert usage here
   const [showAlert, setShowAlert] = useState(false);
 
-  const handleSuccess = () => {
+  const handleSuccess = (servings) => {
+    close(servings)
     setShowAlert(true);
+    
   };
 
+  // const handleSuccess = () => {
+  //   setShowAlert(true);
+  // }
+    
     return ( 
         <div>
 
@@ -289,11 +303,11 @@ export default function Aerobic({ route, navigation,props }) {
           sx={{ Width: 200, height: 110 }}
           style={{ backgroundColor: "#E1B725", textAlign:"center" }}
         >
-          <Typography variant="h3"  style={caloriesremained}> {params?.servingsConsumed}  
+          <Typography variant="h3"  style={caloriesremained}> {params?.servingsConsumed + addServings}  
        
           </Typography>
           <Typography variant="h5" style={caloriesremained} >
-            serving
+            sets
           </Typography>
           <Typography variant="h5" style={caloriesremained} >
             Consumed
@@ -317,7 +331,7 @@ export default function Aerobic({ route, navigation,props }) {
       <Grid container spacing={2} justifyContent="center" alignItems="center">
         <Grid item xs={2} md={2}>
           <ButtonBase>
-            <img src={imageurl+item.item_image} alt="nova logo" />
+            <img   style={{borderRadius:100,maxHeight:"80px", objectFit: 'cover',}} src={imageurl+item.item_image} alt="image" />
 
           </ButtonBase>
         </Grid>
@@ -355,4 +369,4 @@ export default function Aerobic({ route, navigation,props }) {
 </div>
 
             );
-    }
+   }

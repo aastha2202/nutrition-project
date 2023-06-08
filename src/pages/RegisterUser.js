@@ -15,7 +15,7 @@ import Select from '@mui/material/Select';
 import axios from 'axios';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { useState,useEffect } from 'react';
+import { useState,useEffect,useRef } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link as RouterLink, useNavigate} from 'react-router-dom';
  import Iconify from 'src/components/iconify/Iconify';
@@ -51,6 +51,16 @@ const alreadyaccount={
 }
 
 export default function SignUp() {
+
+  const [formValid, setFormValid] = useState(true);
+
+  const userNameRef = useRef(null);
+  const passwordRef = useRef(null);
+  const emailRef = useRef(null);
+  const genderRef = useRef(null);
+  const mobileNumberRef = useRef(null);
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -61,8 +71,49 @@ export default function SignUp() {
       patientid: data.get('patient-id')
       
     });
+    //////
+     // Perform validation
+     let isValid = true;
 
-    console.log(gender); 
+     if (data.get('user_name') === '') {
+       userNameRef.current.focus();
+       isValid = false;
+     }
+ 
+     if (data.get('password') === '') {
+       passwordRef.current.focus();
+       isValid = false;
+     }
+ 
+     if (data.get('email_id') === '') {
+       emailRef.current.focus();
+       isValid = false;
+     }
+ 
+     if (data.get('gender') === '') {
+       genderRef.current.focus();
+       isValid = false;
+     }
+ 
+     if (data.get('mobile_number') === '') {
+       mobileNumberRef.current.focus();
+       isValid = false;
+     }
+ 
+     if (!isValid) {
+       setFormValid(false);
+       return;
+     }
+ 
+     console.log({
+       email: data.get('email_id'),
+       password: data.get('password'),
+       patientid: data.get('patient-id')
+     });
+ 
+     console.log(formValue.gender);
+
+    
   };
 
 // validation 
@@ -75,6 +126,7 @@ export default function SignUp() {
   const [images,setImages]=useState("");
   const handleChange = (event) => {
     setGender(event.target.value);
+    setFormValid(true);
   };
   // alerts
   const [showAlert, setShowAlert] = useState(false);
@@ -141,8 +193,7 @@ export default function SignUp() {
                     navigate('/login', { replace: true });
                   }, 1000);
                   
-                  // navigate('/dashboard', { replace: true });
-                  // <link to="/dashboard" component={RouterLink}></link>
+                  
         
                 } 
                 else {
@@ -157,26 +208,6 @@ export default function SignUp() {
               });
                 
  
-
-              
-                
-                // if (response?.data?.Status) {  
-          
-                //  handleSuccess()
-                //   console.log('Username', response?.data)
-                //   setTimeout(() => {
-                    
-                //     navigate('/login', { replace: true });
-                //   }, 1000);
-                  
-                //   // navigate('/dashboard', { replace: true });
-                //   // <link to="/dashboard" component={RouterLink}></link>
-        
-                // } 
-                // else {
-                //   setResponse(response?.data?.Message)
-                //   handleError()
-                // }
                 
                
             
@@ -226,7 +257,7 @@ export default function SignUp() {
    setImages([])
   setReload(!reload);
   
-  //alert("Photo Uploaded Successfully..") 
+  //alert("Photo Uploaded Successfully..") 
 }
  console.log(images,'----images----');
 const deleteImage = (index) => {
@@ -304,7 +335,10 @@ const handleImageSelection = (event) => {
                   id="user_name"
                   label="User Name"
                   autoFocus
-                  onChange={(e) => { setFormValue({ ...formValue,  user_name: e.target.value }) }}
+                  onChange={(e) => { setFormValue({ ...formValue,  user_name: e.target.value }); setFormValid(true); }}
+                  inputRef={userNameRef}
+                  error={!formValid && formValue.user_name === ''}
+                  helperText={!formValid && formValue.user_name === '' && 'User Name is required'}
                 />
               </Grid>
               <Grid item xs={12}>

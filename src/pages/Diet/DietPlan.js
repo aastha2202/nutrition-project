@@ -41,7 +41,7 @@ import  "../styles.css";
 const title={
     
     fontFamily:"Inter-Bold",
-    fontSize:"30px" ,
+    fontSize:"20px" ,
     color:"#112866",
 };
  const caloriesremained={
@@ -164,7 +164,7 @@ export default function DietPlan(){
 
 const [loading, setLoading] = useState(true)
   const [data, setData] = useState({})
-  const [exerciseData, setExerciseData] = useState([])
+  const [DietData, setDietData] = useState([])
   const [oneDietPlan, setOneDietPlan] = useState([])
   // const isFocused = useIsFocused();
 
@@ -194,7 +194,7 @@ const [loading, setLoading] = useState(true)
           // console.log(response.data.data, "dieettttttttttt")
           response.data.data.servingsLeft = parseInt
             (response?.data?.data.RecommendedServings - response?.data?.data.CosumedServings)
-          setExerciseData(response?.data?.data)
+          setDietData(response?.data?.data)
           // console.log(data)
           axios.get(`https://aipse.in/api/getOneDietPlan?userid=${userIdAsync}`)
             .then(function (response) {
@@ -354,7 +354,7 @@ const [loading, setLoading] = useState(true)
 
                        
                         <Grid  container flexDirection="row">
-                           <Grid item ><Typography style={{ fontSize:"30px" ,color:"white",fontWeight:"40px"}}> {exerciseData?.TotalServings} </Typography></Grid>
+                           <Grid item ><Typography style={{ fontSize:"30px" ,color:"white",fontWeight:"40px"}}> {DietData?.RecommendedServings} </Typography></Grid>
                            <Grid item><Typography mt={2}  ml={0.5} style={exercise}>Servings</Typography></Grid>
                             </Grid>
                         </Grid>
@@ -379,7 +379,7 @@ const [loading, setLoading] = useState(true)
                         <Grid item  container justifyContent="center" alignItems="center">
                         <CardContent sx={{alignItems:"center",alignSelf:'center',alignContent:"center"}}>
                                 <Typography variant="body1" component="span"   style={servingleft}>
-                                {exerciseData?.servingsLeft}  servings left 
+                                {DietData?.servingsLeft}  servings left 
                                     
                                 </Typography>
                                  </CardContent>

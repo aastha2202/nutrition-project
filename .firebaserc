@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "npwc-user"
-  }
+    "default": "npwc-user",
+    "staging": "npwc-user"
+  },
+  "targets": {},
+  "etags": {}
 }

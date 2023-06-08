@@ -164,7 +164,7 @@ export default function Exercise(){
 
 const [loading, setLoading] = useState(true)
   const [data, setData] = useState({})
-  const [exerciseData, setExerciseData] = useState([])
+  const [dietData, setdietData] = useState([])
   const [oneDietPlan, setOneDietPlan] = useState([])
   // const isFocused = useIsFocused();
 
@@ -194,7 +194,7 @@ const [loading, setLoading] = useState(true)
           // console.log(response.data.data, "dieettttttttttt")
           response.data.data.servingsLeft = parseInt
             (response?.data?.data.RecommendedServings - response?.data?.data.CosumedServings)
-          setExerciseData(response?.data?.data)
+          setdietData(response?.data?.data)
           // console.log(data)
           axios.get(`https://aipse.in/api/getOneDietPlan?userid=${userIdAsync}`)
             .then(function (response) {
@@ -343,7 +343,7 @@ const [loading, setLoading] = useState(true)
 
                        
                         <Grid  container flexDirection="row">
-                           <Grid item ><Typography style={{ fontSize:"35px" ,color:"white",fontWeight:"30px"}}> {exerciseData?.TotalServings} </Typography></Grid>
+                           <Grid item ><Typography style={{ fontSize:"35px" ,color:"white",fontWeight:"30px"}}> {dietData?.RecommendedServings} </Typography></Grid>
                            <Grid item><Typography mt={3}  ml={0.5} style={exercise}>Sets</Typography></Grid>
                             </Grid>
                         </Grid>
@@ -368,7 +368,7 @@ const [loading, setLoading] = useState(true)
                         <Grid item  container justifyContent="center" alignItems="center">
                         <CardContent sx={{alignItems:"center",alignSelf:'center',alignContent:"center"}}>
                                 <Typography variant="body1" component="span"   style={servingleft}>
-                                {exerciseData?.servingsLeft}  sets left 
+                                {dietData?.servingsLeft}  sets left 
                                     
                                 </Typography>
                                  </CardContent>
