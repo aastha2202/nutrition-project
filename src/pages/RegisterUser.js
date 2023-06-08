@@ -20,7 +20,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link as RouterLink, useNavigate} from 'react-router-dom';
  import Iconify from 'src/components/iconify/Iconify';
  import { Icon, InlineIcon } from '@iconify/react';
-import plusIcon from '@iconify-icons/mdi/plus';
+// import plusIcon from '@iconify-icons/mdi/plus';
 
 function Copyright(props) {
   return (
