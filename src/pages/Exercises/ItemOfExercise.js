@@ -1,455 +1,358 @@
-import { CardContent, Grid, ButtonBase, Typography } from "@mui/material";
-import Card from "@mui/material/Card";
+import { Grid, Typography, Select, FormControl, InputLabel,Button } from '@mui/material';
+import * as React from 'react';
+
+// import '../../fonts/Poppins-BoldItalic.ttf'
+
+// import '../../fonts/Poppins-ExtraBold.ttf';
+
 import axios from 'axios';
-import { useEffect, useState }from 'react';
-// import WaterWalk from "./pictures/Waterwalk.svg"
-// import Lunge from "./pictures/Lunge.svg"
-// import Sidestep from "./pictures/Sidestep.svg"
+import Card from '@mui/material/Card';
+import Iconify from 'src/components/iconify/Iconify';
+import CardContent from '@mui/material/CardContent';
+import { Link } from 'react-router-dom';
+import ButtonBase from '@mui/material/ButtonBase'
+import { useLocation  } from 'react-router-dom';
+import { useState,useEffect } from 'react';
+import { useRef } from 'react';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import Poultry from "../../assets/Poultry.svg";
-import SideStepping from "../../assets/SideStepping.svg";
-import WaterWalking from "../../assets/WaterWalking.svg";
-import ForwardLunge from "../../assets/ForwardLunge.svg";
 import Logo from "../../assets/nova.svg";
-import { useLocation  } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import Iconify from 'src/components/iconify/Iconify';
-import EditCalories from '../Exercises/Components/EditCalories';
+import Poultry from "../../assets/Poultry.svg";
+import Fish from "../../assets/Fish.svg";
+// import EditCalories from '../Exercises/Components/EditCalories';
+import  EditCalories from "./Components/EditCalories"
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 // import  "../styles.css";
 
+const pageheading={
+    fontFamily:"Inter-Bold",
+    color:"#112866",
+}
 
+const buttonStyle = {
 
+    position: 'absolute',
+    right:20,
+    borderRadius: "10px",
+    boxShadow: '#c4c4c4',
+    
 
+}
 
+const cardStyle = {
+    backgroundColor: "#F0E7F5",
+    margin: '1rem',
+    boxShadow: '#c4c4c4'
 
-const title={
-  fontFamily:"Inter-Bold",
-  fontSize:"30px",
-  color:"#112886" 
-};
-
-
-const maintext = {
-  fontFamily: 'Inter-Regular',
-  fontStyle: "normal",
-  fontWeight: "500",
-  fontSize: "14px",
-  lineHeight: "21px",
-  color:"#112866",
-  
-
-
-};
+}
 
 const textparaStyle = {
-  fontFamily: 'Inter-Regular',
-  padding: "30px",
-  color: "#9B54BF"
- 
-};
+    fontFamily: 'Inter-Regular',
+    padding: "30px",
+    color: "#9B54BF"
+}
 
 const maintitle = {
-  fontFamily: 'Inter-Bold',
-
-   // fontFamily: 'poppinsItalic',
-  //  src: url('./fonts/Roboto-Regular.ttf') format('truetype'),
-   fontStyle: "normal",
-   fontWeight: "600",
-   fontSize: "20px",
-   color:"#112866"
- // fontFamily: "'Poppins', sans-serif",
-  // src: `url(${poppinsItalic}) format('truetype')`,
-  // lineHeight: "38px", 
+    fontFamily: 'Inter-Bold',
+  
+     // fontFamily: 'poppinsItalic',
+    // // src: url('./fonts/Roboto-Regular.ttf') format('truetype'),
+     fontStyle: "normal",
+     fontWeight: "600",
+     fontSize: "20px",
+     color:"#112866",
+   // fontFamily: "'Poppins', sans-serif",
+    // src: `url(${poppinsItalic}) format('truetype')`,
+    // lineHeight: "38px", 
 };
 
-const regular={
-  fontFamily:'Inter-Regular',
-  textAlign:"center",
-  color:"black"
+const maintext = {
+    fontFamily: 'Inter-Regular',
+    fontStyle: "normal",
+    fontWeight: "500",
+    fontSize: "14px",
+    lineHeight: "21px",
+    color:"#112866",
+
+};
+
+const calories ={
+    fontFamily: 'Inter-Regular',
+    color:"#112866",
+};
+const caloriesremained={
+    fontFamily: 'Inter-Regular',
+    color:"black",
 
 }
 
 
+export default function Aerobic({ route, navigation,props }) {
+  const servlingsLeft= useRef();
 
-export default function Aerobic() {
+      const imageurl="https://aipse.in";
+      const location = useLocation();
+    //  console.log(location?.state?.data)
+    // const [data,setData] = useState(location.state?.data);
+    // const[category_id,setCategory_id]=useState(location.state?.data);
+    // console.log(category_id,'----data-----');
 
+    // const [value,setValue]=useState(location.state?.data)
+    //  console.log(value,"---------import api data ");
     const [count1, setCount1] = useState(0);
 
     const handleIncrement1 = () => {
-      setCount1(count1 + 1);
+        setCount1(count1 + 1);
     };
-  
+
     const handleDecrement1 = () => {
-        if (count1 > 0){
+        if (count1 > 0) {
 
             setCount1(count1 - 1);
         }
-      
+
     };
-
-
-
 
 
     const [count2, setCount2] = useState(0);
 
     const handleIncrement2 = () => {
-        
-      setCount2(count2 + 1);
+
+        setCount2(count2 + 1);
     };
-  
+
     const handleDecrement2 = () => {
-        if (count2 > 0){
+        if (count2 > 0) {
             setCount2(count2 - 1);
         }
-      
+
     };
-
-    
-
-
 
     const [count3, setCount3] = useState(0);
-
     const handleIncrement3 = () => {
-      setCount3(count3 + 1);
+        setCount3(count3 + 1);
     };
-  
+
     const handleDecrement3 = () => {
-        if (count3 > 0){
+        if (count3 > 0) {
             setCount3(count3 - 1);
         }
-      
+
     };
-    // api integration
-    var [param,setParams]=useState(null)
+
+
+    const [items, setItems] = useState([])
+    const [itemIntakeStatus, setItemIntakeStatus] = useState([])
+    const [refreshing, setRefreshing] = useState(false)
+    const [page, setPage] = useState(1)
+    var [selectedData, setSelectedData] = useState(null)
+    var [intakes,setIntakes]=useState(null)
+
+    const  [categoryName, setCategoryName] = useState(null)
+    const snapPoints = ['39%'];
+    var [params,setParams]=useState(null)
+    const [viewModal,setViewModal]=useState(false)
+    const bottomSheetModalRef = useRef(null);
+    // const windowHeight = Dimensions.get('window').height;
+    const [loading, setLoading] = useState(true)
+    const [addServings, setAddServings] = useState(0)
+
+    const childComp=useRef();
+    // const isFocused = useIsFocused();
+
+    // console.log(params, "royre paramsss")
+
     useEffect(() => {
-      let s= localStorage.getItem('param')
+      let s= localStorage.getItem('params')
     
-      param=JSON.parse(s)
-      setParams(param)
-      dataHit()
+      params=JSON.parse(s)
+      setParams(params)
+            apiCall()
         
     }, [])
-    
-    const[dataFromAPi,setDataFromAPi]=useState([
-      
-    
-    ])
-    
-    const dataHit =async =>{
-      
-      // let userId = localStorage.getItem(userId);
-      let userIdAsync =  localStorage.getItem('userId')
-      let config = {
-        method: 'GET',
-        maxBodyLength: Infinity,
-        url: `https://aipse.in/api/getItemsOfCategory?category_id=${userIdAsync}&type=exercise`,
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        // data : data
-      };
-      
-      axios(config)
-      .then((response) => {
-        setDataFromAPi(response?.data?.data)
-        console.log(dataFromAPi,"------------- items get data");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+
+    const apiCall = async () => {
+      setViewModal(false)
+        let userIdAsync = await localStorage.getItem('userId')
+
+        setCategoryName(params.category)
+       
+
+        axios.get(`https://aipse.in/api/getItemsOfCategory?category_id=${params.cat}&type=exercise`)
+            .then(function (response) {
+
+                setItems(response?.data?.data)
+                axios.get(`https://aipse.in/api/itemIntakeStatus?userid=${userIdAsync}&type=exercise&category=${params.category}`)
+                    .then(function (response) {
+
+                        setItemIntakeStatus(response?.data?.data)
+                        // handleSuccess()
+                        setLoading(false)
+                    })
+                    .catch(function (error) {
+                        // Alert.alert("something went wrong");
+                        // console.log(error);
+                    });
+            })
+            .catch(function (error) {
+                // Alert.alert("something went wrong");
+                // console.log(error);
+            });
     }
 
-console.log(dataFromAPi,"---areobic page -----");
-
-
-const location=useLocation(); 
-  // const[category_id,setCategory_id]=useState(data.category_id);
-//  const [value,setValue]=useState(location.state?.data)
-//  console.log(value,"---------import data from exercise to areobic ");
+   
 
 
 
-  return (
-    <>
-      {/* <img
-        src={Logo}
-        alt="nova logo"
-        style={{ height: "auto", width: "250px", marginLeft: "30px" }}
-      /> */}
+    const getStatus = (id) => {
+        // console.log(itemIntakeStatus, id)
+        let servings = itemIntakeStatus?.filter(i => i?.item_id == id)
+        return servings?.length > 0 ? servings[0].servings_consumed : 0
+    }
+    
+
+    const handleCard=(e)=>{
+      let servings=getStatus(e.item_id)
+      selectedData={...e,servings_consumed:servings,diet_id:params.diet_id,category:params.category}
+      setSelectedData(selectedData)
      
-      <Grid container  spacing={2}>
-        
-          <Grid item xs={6}  alignSelf={"center"}>
-     
-     <Grid container  flexDirection="row" margin="5px" >
-               <Grid item textAlign={"center"} alignSelf={"center"} marginTop={0.5}  >
-               <Link to="/dashboard/exercise">
-                <IconButton>
-                <Iconify icon="material-symbols:arrow-back-rounded" />
-                  </IconButton></Link>
+      setViewModal(true)
+      childComp.current.handleClickOpen()
+    }
 
-               </Grid>
-               <Grid item>
-          
-            <Typography variant="h3" style={title}>
-            {/* {value.category_name} */} name 
-            </Typography>
-            
-         
-          </Grid>
-              
-              
-               
-           
-                   
-                       
-                       
-            
-            </Grid>
+
+    // console.log(servings, "///////royre paramsss") 
+ console.log(itemIntakeStatus,"....//-------categoryName-----checkinh")
+    // const state = useLocation();
+    // const { cat, diet_id, category, type, servingsConsumed,  } = state;
+    console.log(params,"-------params ------")
+  console.log(items,"......---items--data...................")
+  // console.log(itemIntakeStatus?.servings_consumed,"--itemIntakeStatus.servings_consumed---")
+  // alert usage here
+  const [showAlert, setShowAlert] = useState(false);
+
+  const handleSuccess = () => {
+    setShowAlert(true);
+  };
+
+    return ( 
+        <div>
+
+
+      <Snackbar
+        open={showAlert}
+        onClose={() =>  setShowAlert(false)}
+        autoHideDuration={1000}
+    
+        >
+         <Alert severity="success"> servings created Successful!</Alert>
+        </Snackbar>
+  
+  {/* {
+    <img
+      src={Logo}
+      alt="nova logo"
+      style={{ height: "auto", width: "250px", marginLeft: "30px" }}
+    />
+  } */}
+{
+  viewModal && < EditCalories handleSuccess={handleSuccess} state={selectedData} apiCall={apiCall}  ref={childComp}/>
+}
+  <Grid container spacing={2}>
+    <Grid  item xs={6}>
+      <CardContent >
        
-   </Grid>
-        <Grid item xs={6}>
-          <CardContent>
-            <Card sx={{ Width: 200, height: "auto" }} style={{ backgroundColor: "#E1B725" }}>
-              <Typography variant="h3" style={regular}>
-                7
+      <Grid  container flexDirection={"row"} >
+          {/* <img src={Backbutton} className='dinning-img' alt="dinning" /> */}
+          <Grid item>
+            <Link to="/dashboard/exercise" >
+              
+                  <IconButton>
+                    <Iconify icon="material-symbols:arrow-back-rounded" />
+                  </IconButton></Link>
+                  </Grid>
+                  <Grid item>
+                  <Typography variant="h3" style={pageheading} >{params?.category}  </Typography>
+                  {/* {value.category} */}
+                  </Grid>
+            </Grid>
+        {/* <Typography variant="h3" style={pageheading}> {value.category_name} </Typography> */}
+        <Typography style={calories}>45 Calories / Servings </Typography>
+        <Typography style={calories}>13 Servings / Day </Typography>
+      </CardContent>
+    </Grid>
+    <Grid item xs={6}>
+      <CardContent>
+        <Card
+          sx={{ Width: 200, height: 110 }}
+          style={{ backgroundColor: "#E1B725", textAlign:"center" }}
+        >
+          <Typography variant="h3"  style={caloriesremained}> {params?.servingsConsumed}  
+       
+          </Typography>
+          <Typography variant="h5" style={caloriesremained} >
+            serving
+          </Typography>
+          <Typography variant="h5" style={caloriesremained} >
+            Consumed
+          </Typography>
+        </Card>
+      </CardContent>
+    </Grid>
+  </Grid>
+  <CardContent>
+    <Card>
+      <Typography variant="body1" style={textparaStyle}>
+        Weigh AFTER cooked / 1 serving = 1 cooked oz 
+      </Typography>
+    </Card>
+  </CardContent>
+  
+  {items?.length>0?(items.map(item=>{
+  return(
+    <Card style={cardStyle}>
+    <CardContent onClick={()=>{handleCard(item)}} >
+      <Grid container spacing={2} justifyContent="center" alignItems="center">
+        <Grid item xs={2} md={2}>
+          <ButtonBase>
+            <img src={imageurl+item.item_image} alt="nova logo" />
+
+          </ButtonBase>
+        </Grid>
+        <Grid item xs={10} spacing={2} md={10}>
+          <Grid item xs>
+            <div style={{ display: "flex" }}>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                 style = {maintitle }
+              >
+                 {item.item_name}
+                
               </Typography>
-              <Typography variant="h5" style={regular}>
-                activities
-              </Typography>
-              <Typography variant="h5" style={regular}>
-                remained
-              </Typography>
-            </Card>
-          </CardContent>
+              <Card sx={{position:'absolute', minWidth:"30px" , alignContent:"center" , right:10,borderRadius:1,boxShadow: '#c4c4c4'}}  >
+              {/* <EditCalories state={{data:itemIntakeStatus}} /> */}
+                
+                <Typography sx={{textAlign:"center",alignContent:"center"}}>{getStatus(item.item_id)}</Typography>
+              </Card>
+            </div>
+            <Typography variant="body2" gutterBottom mt={0.6} style={maintext}>
+              {item.description}
+            </Typography>
+          </Grid>
         </Grid>
       </Grid>
-
-      <Card style={{ margin: "1rem"}}>
-        <Typography  style={textparaStyle}>
-          Engaging in Water Aerobics is a great way to stay active while
-          limiting pain associated with arthritis.The water is a great place to
-          get moving while adding resistance and without putting too much
-          pressure on your joints.
-        </Typography>
-      </Card>
-
-      
-      {/* <Card style={{backgroundColor: "#F0E7F5", margin: "1rem", boxShadow: "#c4c4c4", }}>
-        <CardContent>
-          <Grid container spacing={2} justifyContent="center" alignItems="center">
-            <Grid item xs={2} md={2}>
-              <ButtonBase sx={{ width: "auto", height: "auto" }}>
-                <img src={SideStepping} alt="nova logo" style={{ height: "100", width: "100px" }} />
-              </ButtonBase>
-            </Grid>
-            <Grid item xs={10} spacing={2} md={10}>
-            <Grid item >
-                  <Grid container flexDirection={"row"}>
-                   <Grid item xs={8}>
-                  <Typography gutterBottom variant="h5" component="div" style={maintitle}>
-                    Forward Lunge
-                  </Typography>
-                  </Grid>
-                  <Grid item xs={4} >
-                  <Card  sx={{position:'absolute', right:10,borderRadius:1,boxShadow: '#c4c4c4'}} >
-                                
-                            
-                                <IconButton onClick={handleDecrement1}>
-                                <RemoveIcon />
-                                 </IconButton>
-                                 {count1}
-                                 <IconButton onClick={handleIncrement1}>
-                                 <AddIcon />
-                                 </IconButton>
-                                
-  
-                            
-                            
-
-                          
-                         
-                      </Card>
-                      </Grid>  
-
-                  </Grid>     
-                
-                <Typography variant="body2" mt={1} gutterBottom style={maintext}>
-                  Stand in waist - or chest - high water, facing the pool
-                  wall.Take sideways steps with your body and toes facing the
-                  wall.Take 10 to 20 steps in one direction and then return
-                  .Repeat in the other direction.
-                </Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </Card>
-      <Card style={{ backgroundColor: "#F0E7F5", margin: "1rem", boxShadow: "#c4c4c4", }}>
-        <CardContent>
-          <Grid container  spacing={2}  justifyContent="center" alignItems="center" >
-            <Grid item xs={2} md={2}>
-              <ButtonBase sx={{ width: "auto", height: "auto" }}>
-                <img src={WaterWalking} alt="nova logo" style={{ height: "100", width: "100px" }}/>
-              </ButtonBase>
-            </Grid>
-            <Grid item xs={10} spacing={2} md={10}>
-               <Grid item >
-                
-                  <Grid container spacing={1} flexDirection={"row"}>
-                   <Grid item   xs={8}>
-                  <Typography gutterBottom variant="h5"    style={maintitle}>
-                    Forward Lunge
-                  </Typography>
-                  </Grid>
-                  <Grid item xs={4}  >
-                  <Card   sx={{position:'absolute', right:10,  borderRadius:1,boxShadow: '#c4c4c4'}} >
-                                
-                              
-                                <IconButton onClick={handleDecrement2}>
-                                <RemoveIcon />
-                                 </IconButton>
-                                 {count2}
-                                 <IconButton onClick={handleIncrement2}>
-                                 <AddIcon />
-                                 </IconButton>
-                            
-                          
-                         
-                      </Card>
-                      </Grid>  
-
-                  </Grid>     
-                
-                <Typography variant="body2" mt={1} gutterBottom style={maintext}>
-                  Stand in waist - or chest - high water, facing the pool
-                  wall.Take sideways steps with your body and toes facing the
-                  wall.Take 10 to 20 steps in one direction and then return
-                  .Repeat in the other direction.
-                </Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </Card>
-
-
-
-
-      <Card style={{backgroundColor: "#F0E7F5", margin: "1rem", boxShadow: "#c4c4c4"}}>
-        <CardContent>
-          <Grid container spacing={2} justifyContent="center" alignItems="center" >
-            <Grid item xs={2} md={2}>
-              <ButtonBase sx={{ width: "auto", height: "auto" }}>
-                <img src={ForwardLunge} alt="nova logo" style={{ height: "100", width: "100px" }} />
-              </ButtonBase>
-            </Grid>
-            <Grid item xs={10} spacing={2} md={10}>
-              <Grid item >
-                  <Grid container  flexDirection={"row"}>
-                   <Grid item xs={8}>
-                  <Typography gutterBottom variant="h5" component="div" style={maintitle}>
-                    Step Walking
-                  </Typography>
-                  </Grid>
-                  <Grid item xs={4}  >
-                  <Card  sx={{position:'absolute', right:10,borderRadius:1,boxShadow: '#c4c4c4'}} >
-                                
-                            
-                                <IconButton onClick={handleDecrement3}>
-                                <RemoveIcon />
-                                 </IconButton>
-                                 {count3}
-                                 <IconButton onClick={handleIncrement3}>
-                                 <AddIcon />
-                                 </IconButton>
-                                
-  
-                            
-                            
-
-                          
-                         
-                      </Card>
-                      </Grid>  
-
-                  </Grid>     
-                
-                <Typography variant="body2" mt={1} gutterBottom style={maintext}>
-                  Stand in waist - or chest - high water, facing the pool
-                  wall.Take sideways steps with your body and toes facing the
-                  wall.Take 10 to 20 steps in one direction and then return
-                  .Repeat in the other direction.
-                </Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </Card> */}
-{/* <EditCalories/> */}
-      
-      {dataFromAPi?.length>0?(dataFromAPi.map(item=>{
-  return(
-     
-    <Card  key={item.category_id} style={{backgroundColor: "#F0E7F5", margin: "1rem", boxShadow: "#c4c4c4"}}>
-        <CardContent >
-          <Grid container spacing={2} justifyContent="center" alignItems="center" >
-            <Grid item xs={2} md={2}>
-              <ButtonBase sx={{ width: "auto", height: "auto" }}>
-              {/* {item.item_image} */}
-                <img src={ForwardLunge} alt="nova logo" style={{ height: "100", width: "100px" }} />
-              </ButtonBase>
-            </Grid>
-            <Grid item xs={10} spacing={2} md={10}>
-              <Grid item >
-                  <Grid container  flexDirection={"row"}>
-                   <Grid item xs={8}>
-                  <Typography gutterBottom variant="h5" component="div" style={maintitle}>
-                    {item.item_name}
-                  </Typography>
-                  </Grid>
-                  <Grid item xs={4}  >
-                    
-                  <Card   sx={{position:'absolute',  right:10,borderRadius:1,boxShadow: '#c4c4c4'}} >
-                                
-                  <EditCalories/>
-                                {/* <IconButton onClick={handleDecrement3}>
-                                <RemoveIcon />
-                                 </IconButton>
-                                 {count3}
-                                 <IconButton onClick={handleIncrement3}>
-                                 <AddIcon />
-                                 </IconButton>    */}
-                         
-                      </Card>
-                      </Grid>  
-
-                  </Grid>     
-                
-                <Typography variant="body2" mt={0.5} gutterBottom style={maintext}>
-                  Stand in waist - or chest - high water, facing the pool
-                  wall.Take sideways steps with your body and toes facing the
-                  wall.Take 10 to 20 steps in one direction and then return
-                  .Repeat in the other direction.
-                </Typography>
-                
-              </Grid>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </Card>
+    </CardContent>
+  </Card>
 
   )
 
-})):(<Typography   align="center"  >No Data Found</Typography> )}
+})):(<Typography   align="center"  style={calories}>No Data Found</Typography> )}
 
-  
+</div>
 
-    
-    </>
-  );
-}
+            );
+    }

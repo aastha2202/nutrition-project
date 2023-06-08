@@ -20,8 +20,11 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import Logo from "../../assets/nova.svg";
 import Poultry from "../../assets/Poultry.svg";
 import Fish from "../../assets/Fish.svg";
-import EditCalories from '../Exercises/Components/EditCalories';
 
+import EditCaloriesDiet from './Components/EditCaloriesDiet';
+// import EditCalories from '../Exercises/Components/EditCalories';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 // import  "../styles.css";
 
 const pageheading={
@@ -90,7 +93,7 @@ const caloriesremained={
 export default function Protein({ route, navigation,props }) {
   const servlingsLeft= useRef();
 
-
+ const imageurl= "https://aipse.in";
       const location = useLocation();
     //  console.log(location?.state?.data)
     // const [data,setData] = useState(location.state?.data);
@@ -141,62 +144,6 @@ export default function Protein({ route, navigation,props }) {
     };
 
 
-
-// new integration 
-  //  const [items, setItems] = useState([])
-  //   const [itemIntakeStatus, setItemIntakeStatus] = useState([])
-  //   const [refreshing, setRefreshing] = useState(false)
-  //   const [page, setPage] = useState(1)
-  //   const [selectedData, setSelectedData] = useState(null)
-  //   const [categoryName, setCategoryName] = useState(null)
-  //   const snapPoints = ['39%'];
-  //   const bottomSheetModalRef = useRef(null);
-    // const windowHeight = Dimensions.get('window').height;
-    // const [loading, setLoading] = useState(true)
-
-    // console.log(params, "royre paramsss")
-
-    // useEffect(() => {
-
-    //     apiCall()
-    // }, [])
-
-    // const apiCall = async () => {
-    //     let userIdAsync = localStorage.getItem('userId')
-
-    //     // setCategoryName(params.category)
-
-    //     axios.get(`https://aipse.in/api/getItemsOfCategory?category_id=${category_id}&type=food`)
-    //         .then(function (response) {
-    //             console.log(response?.data?.data)
-    //             setItems(response?.data?.data)
-    //             axios.get(`https://aipse.in/api/itemIntakeStatus?userid=${userIdAsync}&type=food&category=${value.category}`)
-    //                 .then(function (response) {
-    //                     console.log(response?.data?.data, "item inrtake statsu")
-    //                     setItemIntakeStatus(response?.data?.data)
-    //                     setLoading(false)
-    //                 })
-    //                 .catch(function (error) {
-    //                    alert("something went wrong");
-    //                     // console.log(error);
-    //                 });
-    //         })
-    //         .catch(function (error) {
-    //             alert("something went wrong");
-    //             // console.log(error);
-    //         });
-    // }
-
-
-
-
-
-    // const getStatus = (id) => {
-    //     console.log(itemIntakeStatus, id)
-    //     let servings = itemIntakeStatus?.filter(i => i?.item_id == id)
-    //     return servings?.length > 0 ? servings[0].servings_consumed : 0
-    // }
-
     const [items, setItems] = useState([])
     const [itemIntakeStatus, setItemIntakeStatus] = useState([])
     const [refreshing, setRefreshing] = useState(false)
@@ -212,6 +159,7 @@ export default function Protein({ route, navigation,props }) {
     // const windowHeight = Dimensions.get('window').height;
     const [loading, setLoading] = useState(true)
     const [addServings, setAddServings] = useState(0)
+
     const childComp=useRef();
     // const isFocused = useIsFocused();
 
@@ -241,6 +189,7 @@ export default function Protein({ route, navigation,props }) {
                     .then(function (response) {
 
                         setItemIntakeStatus(response?.data?.data)
+                        // handleSuccess()
                         setLoading(false)
                     })
                     .catch(function (error) {
@@ -292,11 +241,15 @@ export default function Protein({ route, navigation,props }) {
     return ( 
         <div>
 
-{showAlert && (
-        <Alert severity="success" onClose={() => setShowAlert(false)}>
-          created Successful!
-        </Alert>
-      )}
+
+      <Snackbar
+        open={showAlert}
+        onClose={() =>  setShowAlert(false)}
+        autoHideDuration={1000}
+    
+        >
+         <Alert severity="success"> servings created Successful!</Alert>
+        </Snackbar>
   
   {/* {
     <img
@@ -306,7 +259,7 @@ export default function Protein({ route, navigation,props }) {
     />
   } */}
 {
-  viewModal &&  < EditCalories state={selectedData} apiCall={apiCall}  ref={childComp}/>
+  viewModal &&  < EditCaloriesDiet handleSuccess={handleSuccess} state={selectedData} apiCall={apiCall}  ref={childComp}/>
 }
   <Grid container spacing={2}>
     <Grid  item xs={6}>
@@ -319,7 +272,8 @@ export default function Protein({ route, navigation,props }) {
               
                   <IconButton>
                     <Iconify icon="material-symbols:arrow-back-rounded" />
-                  </IconButton></Link></Grid>
+                  </IconButton></Link>
+                  </Grid>
                   <Grid item>
                   <Typography variant="h3" style={pageheading} >{params?.category}  </Typography>
                   {/* {value.category} */}
@@ -337,13 +291,13 @@ export default function Protein({ route, navigation,props }) {
           style={{ backgroundColor: "#E1B725", textAlign:"center" }}
         >
           <Typography variant="h3"  style={caloriesremained}> {params?.servingsConsumed}  
-            {/* {{item?.recommended_servings}} */}
+           
           </Typography>
           <Typography variant="h5" style={caloriesremained} >
-            serving
+            Serving
           </Typography>
           <Typography variant="h5" style={caloriesremained} >
-            remained
+            Consumed
           </Typography>
         </Card>
       </CardContent>
@@ -362,9 +316,9 @@ export default function Protein({ route, navigation,props }) {
     <Card style={cardStyle}>
     <CardContent onClick={()=>{handleCard(item)}} >
       <Grid container spacing={2} justifyContent="center" alignItems="center">
-        <Grid item xs={2} md={2}>
-          <ButtonBase>
-            {/* <img src={Fish} alt="nova logo" /> */}
+        <Grid item xs={2} md={2} >
+          <ButtonBase >
+            <img  style={{borderRadius:100,maxHeight:"80px"}} src={imageurl+item.item_image}  alt="nova logo" />
           </ButtonBase>
         </Grid>
         <Grid item xs={10} spacing={2} md={10}>

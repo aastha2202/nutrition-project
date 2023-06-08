@@ -1,6 +1,6 @@
 // @mui
 import React from "react"
-import { Grid, Typography, Select, FormControl, InputLabel,Button,IconButton,Stack  } from '@mui/material';
+import { Grid, Typography, Select, FormControl, InputLabel,Button,IconButton,Stack,  } from '@mui/material';
 import{useState,useEffect} from 'react'
 import axios from 'axios';
 import { styled } from '@mui/material/styles';
@@ -11,7 +11,7 @@ import CardContent from '@mui/material/CardContent';
 import MuiAlert from '@mui/material/Alert';
 import MenuItem from '@mui/material/MenuItem';
 // import DietPlan from '../Diet/DietPlan'; 
-
+import Iconify from 'src/components/iconify/Iconify';
 import Logo from "../../assets/nova.svg";
 import Diet from "../../assets/Diet.svg";
 import Exerciselogo from "../../assets/Exerciselogo.svg";
@@ -20,7 +20,8 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 // import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ChevronDownIcon from '@material-ui/icons/ExpandMore';
 // import Stack from '@mui/material/Stack';
 // components
 
@@ -76,80 +77,8 @@ const handleExpandClick = () => {
 
     setOpen(false);
   };
-  // const [username,setusername]=useState('')
-  // const [userId,setuserId]=useState('')
-  // const [loading,setLoading]=useState(true)
-  // const [oneDietPlanData, setoneDietplanData] = useState([])
-  // const [oneExerciseData, setOneExerciseData] = useState([])
-  // const [data, setData] = useState({ date: "31  March \n 2023", servingsConsumed: 120, servingsLeft: 60, exercisesRecommended: 20, exercisesLeft: 10 })
-  // const [selected, setSelected] = useState({ label: "Today", value: "today" })
-  // const [viewOneDietPlan, setViewOneDietPlan] = useState({ ongoing: true, previous: -1 })
-  // const interval = { '0': 'today', '1': 'week', '2': 'month', '3': '3months' }
-  // const [ongoingDietPlan, setOngoingDietPlan] = useState({})
-  // const [ongoingExercisePlan, setOngoingExercisePlan] = useState({})
-  // const [prevDietPlan, setPrevDietPlan] = useState([])
-  // const [value, setValue] = useState('-1');
-
-
-  // useEffect(() => {
-  //   setValues()
-   
   
-  // }, [])
-
-  // const setValues = async () => {
-  //   let uname =localStorage.getItem('Username')
-  //   let uid =localStorage.getItem('userId')
-  //   await setusername(uname)
-  //   await setuserId(uid)
-  //   await listDietPlan(uid);
-  // }
-
-  // const onIntervalChange = (value) => {
-  //   console.log(value)
-  //   if (value == '-1') {
-  //     getAllDietPlan(0, 0, 0, userId)
-  //   }
-  //   else {
-  //     getAllDietPlan(ongoingDietPlan, ongoingExercisePlan, value, userId)
-  //   }
-  // }
-
-  // const listDietPlan = async (uid) => {
-  //   setLoading(true)
-  //   console.log(`https://aipse.in/api/getlistsdietplans?userid=${uid}`)
-  //   await axios.get(`https://aipse.in/api/getlistsdietplans?userid=${uid}`)
-  //     .then(function (response) {
-  //       if (response?.data?.data == 'Data not found') {
-  //         setLoading(false)
-  //         localStorage.removeItem('exercisestartDate')
-  //         localStorage.removeItem('exerciseendDate')
-  //         localStorage.removeItem('dietstartDate')
-  //         localStorage.removeItem('dietendDate')
-  //       }
-  //       else {
-  //         let prev = response?.data?.data?.filter(e => e.status == 'previous')
-  //         let ongoing = response?.data?.data?.filter(e => e.status == 'ongoing')
-  //         setPrevDietPlan(prev ? prev : [])
-  //         if (ongoing?.length > 0) {
-  //           getAllDietPlan(0, 0, 0, uid)
-  //         }
-  //         else {
-  //           localStorage.removeItem('exercisestartDate')
-  //           localStorage.removeItem('exerciseendDate')
-  //           localStorage.removeItem('dietstartDate')
-  //           localStorage.removeItem('dietendDate')
-  //           setLoading(false)
-  //         }
-  //       }
-  //     })
-  //     .catch(function (error) {
-  //       setLoading(false)
-
-  //       // Alert.alert("something went wrong");
-  //       console.log(error, "listdietPlamn");
-  //     });
-  // }
+  
 
   // alert messages
   const [alert1Open, setAlert1Open] = useState(false);
@@ -412,10 +341,7 @@ console.log(oneExerciseData,"-----oneExerciseData --dtaa checking");
     <Snackbar
         open={alert1Open}
         onClose={() => handleAlertClose(1)}
-        // message="Over all plan is open"
         autoHideDuration={1000}
-        // severity="success"
-        // sx={{background:"green"}}
         >
          <Alert severity="success">Over all plan is open!</Alert>
         </Snackbar>
@@ -452,29 +378,33 @@ console.log(oneExerciseData,"-----oneExerciseData --dtaa checking");
         >
         <Alert severity="success">3 Month plan is open!</Alert>  
          </Snackbar>
-
+   <Stack margin="10px">
+    <Typography variant='h5' style={hello}>  Hello, {username} </Typography>     
+    </Stack>
     <Card style={{margin:"10px"}}>
     
       <Card  style={{ backgroundColor:"#D1A6E7"}}>
         <CardContent >
           <Card style={{backgroundColor:"#D1A6E7"}}>
             <Grid container   style={{display:'flex',flexDirection:"row",position:'relative',marginBottom:'1rem'}}>
-               <Grid item xs={6}>
-               <CardContent >
+               <Grid item xs={8}>
+               {/* <CardContent > */}
                          <Typography  variant='h5' style={hello} >
-                              Hello, {username}
+                         Ongoing Diet Plan  
+                      
+
                           </Typography>    
 
-               </CardContent>
+               {/* </CardContent> */}
                </Grid>
                
 
 
           {(ongoingDietPlan?.Type || ongoingExercisePlan?.Type) &&
         
-             (<Grid  item xs={6} >
-              <CardContent >
-                      <FormControl  sx={{ position:'absolute',right:0 }} size="small">
+             (<Grid  item xs={4} >
+              {/* <CardContent > */}
+                      <FormControl  sx={{ position:'absolute',right:5 }} size="small">
                      <Select  onChange={item => {
                 setValue(item.target.value);
                 onIntervalChange(item.target.value)
@@ -493,7 +423,7 @@ console.log(oneExerciseData,"-----oneExerciseData --dtaa checking");
                      </FormControl>
                  <br/>
                 
-              </CardContent>
+              {/* </CardContent> */}
               </Grid>)}
  
         
@@ -502,32 +432,52 @@ console.log(oneExerciseData,"-----oneExerciseData --dtaa checking");
 
           </Card>
           
-
-
-          <Card  style={{backgroundColor:"#8D25C1"}}>
-            <Typography color="purple" variant='h4' >
-              <div style={{display:'flex',alignContent:'center',justifyContent:'center',alignItems:"center",margin: "10px"}}>
-                <Typography variant='h4' style={{color:"black" ,margin: "5px" }}>
-                {/* {ongoingDietPlan?.StartDate} */}
+        
+        
+          <Card  style={{backgroundColor:"#8D25C1",marginTop:"10px" }}>
+          
+            
+              {/* <Grid style={{display:'flex',alignContent:'center',justifyContent:'center',alignItems:"center",margin: "10px"}}>
+                <Typography variant='h4' style={{color:"black" , textAlign:"center" }}>
+                
                 {formatDate(ongoingDietPlan?.StartDate)}
                 </Typography > 
-                <Typography sx={{color:"white",fontFamily:"Inter-regular"}}>to</Typography>
-                <Typography variant='h4'  style={{color:"black" ,margin: "5px"}}>
-                {/* {ongoingDietPlan?.EndDate} */}
+                <Typography sx={{color:"white",fontFamily:"Inter-regular",textAlign:"center",marginLeft:"1px",marginRight:"1px"}}>to</Typography>
+                <Typography variant='h4'  style={{color:"black" ,textAlign:"center"}}>
+             
                 {formatDate(ongoingDietPlan?.EndDate)}
                 </Typography>
                 
-              </div>
+              </Grid> */}
+               <Grid container item alignContent={"center"} minHeight="80px" >
+            <Grid item xs={5.5} >
+            <Typography variant='h4' style={{color:"black" ,textAlign:"center" }}>
+            {/* {ongoingDietPlan?.StartDate} */}
+            {formatDate(ongoingDietPlan?.StartDate)}
+            </Typography > 
+            </Grid>
+            <Grid item xs={1}>
+            <Typography variant='h4' sx={{color:"black",fontFamily:"Inter-regular",textAlign:"center"}}>to</Typography>
+           
+            </Grid>
+            <Grid item  xs={5.5} justify="center" >
+            <Typography variant='h4'  style={{color:"black", textAlign:"center"}}>
+            {/* {ongoingDietPlan?.EndDate} */}
+            {formatDate(ongoingDietPlan?.EndDate)}
             </Typography>
-
+            </Grid>
+            
+            
+            </Grid>
+           
+            
           </Card>
           
-        </CardContent>
-      </Card>
-      
-    </Card>
+           
+         
 
-    <Card   style={{backgroundColor:"#2c2b2b",margin:"10px"}}>
+
+          <Card   style={{backgroundColor:"#2c2b2b",marginTop:"10px"}}  >
                     <CardContent  state={{item:ongoingDietPlan}}  to="/dashboard/dietplan" component={RouterLink} sx={{textDecoration:'none'}}>
                     <Grid container flexDirection="row" spacing="1" alignItems="center" justifyContent="center" >
                         <Grid item xs={4} alignItems="center" sx={{textAlign:'center'}} justifyContent="center">
@@ -562,8 +512,7 @@ console.log(oneExerciseData,"-----oneExerciseData --dtaa checking");
                         </Grid>
                     </CardContent>
             </Card>
-    
-            <Card   style={{backgroundColor:"#2c2b2b",margin:"10px"}}>
+            <Card   style={{backgroundColor:"#2c2b2b",marginTop:"10px"}}>
                     <CardContent   to="/dashboard/Exercise" component={RouterLink} sx={{textDecoration:'none'}}>
                     <Grid container flexDirection="row" spacing="1" alignItems="center" justifyContent="center" >
                         
@@ -573,7 +522,7 @@ console.log(oneExerciseData,"-----oneExerciseData --dtaa checking");
                                 <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
                                 {ongoingExercisePlan.TotalServings}
                                 </Typography>
-                                <Typography style={subtext}>exercise recommended</Typography>
+                                <Typography style={subtext} textAlign={"center"}>exercise recommended</Typography>
                                
 
                               
@@ -600,12 +549,131 @@ console.log(oneExerciseData,"-----oneExerciseData --dtaa checking");
                         </Grid>
                     </CardContent>
             </Card>
+         
+          
+        </CardContent>
+      </Card>
+      
+    </Card>
 
+       {/* <CardContent>
+          <Typography sx={{fontSize:"20px"}}>Previous Diet Plans </Typography>
+         
+          <Card   style={{display:'flex',alignContent:'center',justifyContent:'center',alignItems:"center",}} >
+          
             
+              {/* <div style={{display:'flex',alignContent:'center',justifyContent:'center',alignItems:"center",margin: "10px"}}> */}
+                <Grid container item alignContent={"center"} minHeight="80px" >
+                <Grid item xs={5} >
+                <Typography variant='h4' style={{color:"black" ,textAlign:"center" }}>
+                {/* {ongoingDietPlan?.StartDate} */}
+                {formatDate(ongoingDietPlan?.StartDate)}
+                </Typography > 
+                </Grid>
+                <Grid item xs={1}>
+                <Typography variant='h4' sx={{color:"black",fontFamily:"Inter-regular",textAlign:"center"}}>to</Typography>
+               
+                </Grid>
+                <Grid item  xs={5} justify="center" >
+                <Typography variant='h4'  style={{color:"black", textAlign:"center"}}>
+                {/* {ongoingDietPlan?.EndDate} */}
+                {formatDate(ongoingDietPlan?.EndDate)}
+                </Typography>
+                </Grid>
+                
+                
+                </Grid>
+                
+              {/* </div> */}
+           
             
+          </Card>
+
+          
+
+          
+             <Card   style={{backgroundColor:"#2c2b2b",marginTop:"10px"}}>
+                    <CardContent   >
+                    <Grid container flexDirection="row" spacing="1" alignItems="center" justifyContent="center" >
+                        <Grid item xs={4} alignItems="center" sx={{textAlign:'center'}} justifyContent="center">
+                               
+                                <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
+                        
+                                {oneDietPlanData.TotalServings}
+                                </Typography>
+                                <Typography style={subtext}>Servings recommended</Typography>
+                                
+                        </Grid>
+                        <Grid item xs={4}  sx={{justifyContent:'center',textAlign: 'center',alignItems:"center",alignSelf:'center',alignContent:'center',}}>
+                       
+                          <Typography >
+                          <img src={Diet}  alt="dinning" style={{display: 'block', margin: 'auto'}}/>
+                          </Typography>
+                       
+
+                       
+                       
+                        </Grid>
+                        <Grid item xs={4} sx={{textAlign:'center'}} alignItems="center" justifyContent="center">
+                               
+                                <Typography style={{ fontSize:"25px" ,color:"#E1B725"}}>
+                                {oneDietPlanData.servingsLeft}
+                                </Typography>
+                                <Typography style={subtext}>Servings left</Typography>
+                              
+                        </Grid>
+                        
+                       
+                        
+                        </Grid>
+                    </CardContent>
+            </Card>
+            <Card   style={{backgroundColor:"#2c2b2b",marginTop:"10px"}}>
+                    <CardContent >
+                    <Grid container flexDirection="row" spacing="1" alignItems="center" justifyContent="center" >
+                        
+                        <Grid item xs={4} alignItems="center"  sx={{textAlign:'center'}} alignSelf={"center"} justifyContent="center">
+                              
+                                
+                                <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
+                                {/* {ongoingExercisePlan.TotalServings} */}
+                                {oneExerciseData.TotalServings}
+                                </Typography>
+                                <Typography style={subtext}>exercise recommended</Typography>
+                               
+
+                              
+                               
+                        </Grid>
+                        <Grid item xs={4}  sx={{justifyContent:'center',alignItems:"center",textAlign:'center',alignSelf:'center',alignContent:'center'}}>
+                        
+                        <img src={Exerciselogo}  alt="dinning" style={{display: 'block', margin: 'auto'}}/>
+                        
+                       
+                        </Grid>
+                        <Grid item xs={4} sx={{textAlign:'center'}}  >
+                          
+                          
+                                <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
+                                {/* {ongoingExercisePlan.servingsLeft} */}
+                                {/* {ongoingExercisePlan.servingsLeft} */}
+                                {oneExerciseData.servingsLeft}
+                                </Typography>
+                                <Typography style={subtext}>exercise left</Typography>
+                                                    
+                               
+                        </Grid>
+                                       
+                        </Grid>
+                    </CardContent>
+            </Card>
+           
+     
+         
+          </CardContent>     */}
 
          
-    
+  
     
   </>
   );

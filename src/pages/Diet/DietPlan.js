@@ -94,7 +94,7 @@ const plusStyle = {
     fontFamily: 'Inter-Regular',
     fontStyle: "normal",
     fontWeight: "600",
-    fontSize:"30px",
+    fontSize:"20px",
     lineHeight: "15px",
     color:"white",
     marginLeft:'1'
@@ -354,8 +354,8 @@ const [loading, setLoading] = useState(true)
 
                        
                         <Grid  container flexDirection="row">
-                           <Grid item ><Typography style={{ fontSize:"35px" ,color:"white",fontWeight:"40px"}}> {exerciseData?.TotalServings} </Typography></Grid>
-                           <Grid item><Typography mt={3}  ml={0.5} style={exercise}>Servings</Typography></Grid>
+                           <Grid item ><Typography style={{ fontSize:"30px" ,color:"white",fontWeight:"40px"}}> {exerciseData?.TotalServings} </Typography></Grid>
+                           <Grid item><Typography mt={2}  ml={0.5} style={exercise}>Servings</Typography></Grid>
                             </Grid>
                         </Grid>
                         
@@ -402,7 +402,7 @@ const [loading, setLoading] = useState(true)
    
                </Card> 
                     
-     {oneDietPlan?.map(item=>{
+     {oneDietPlan?.length>0?(oneDietPlan.map(item=>{
         return(
           // <Grid container flex sx={12} lg={4}>
             <Card  style={maincardStyle}  >
@@ -451,7 +451,7 @@ const [loading, setLoading] = useState(true)
               //  </Grid>  
 
         );
-     })}
+     })):(<Typography   align="center"  style={title} >No Categories assigned</Typography> )}
     
 
    
