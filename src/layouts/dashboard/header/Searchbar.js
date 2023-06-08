@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 // @mui
 import { styled } from '@mui/material/styles';
@@ -11,7 +10,7 @@ import Iconify from '../../../components/iconify';
 // ----------------------------------------------------------------------
 
 const HEADER_MOBILE = 64;
-const HEADER_DESKTOP = 10;
+const HEADER_DESKTOP = 92;
 
 const StyledSearchbar = styled('div')(({ theme }) => ({
   ...bgBlur({ color: theme.palette.background.default }),
@@ -67,7 +66,7 @@ export default function Searchbar() {
               }
               sx={{ mr: 1, fontWeight: 'fontWeightBold' }}
             />
-            <Button variant="contained" onClick={handleClose}>
+            <Button variant="contained" sx={{backgroundColor:"purple"}} onClick={handleClose}>
               Search
             </Button>
           </StyledSearchbar>

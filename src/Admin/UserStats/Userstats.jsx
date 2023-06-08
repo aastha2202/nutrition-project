@@ -31,11 +31,14 @@ export default function Userstats(){
                 <Typography style={pageheading}>User Stats</Typography>
                 </Grid>
              </Grid>
-             <Stack mt={20}><Card to="/dashboardadmin/alldietplan" component={RouterLink} sx={{textDecoration:'none'}} style={{backgroundColor:"purple", margin:"10px", alignItems:"center"}}><Stack mb={2}> <Typography sx={{ fontSize: 20, fontWeight: 'bold', textAlign:'left', color:'white', fontFamily: 'Inter-SemiBold', lineHeight: "38px", marginLeft:'10px'}} gutterBottom variant="h5" component="div" mt={3}  >
+             <Stack mt={20}><Card to="/dashboardadmin/alldietplan" component={RouterLink} sx={{textDecoration:'none'}} style={{backgroundColor:"purple", margin:"10px", alignItems:"center"}}><Stack mb={2}> 
+             <Typography sx={{ fontSize: 20, fontWeight: 'bold', textAlign:'left', color:'white', fontFamily: 'Inter-SemiBold', lineHeight: "38px", marginLeft:'10px'}} gutterBottom variant="h5" component="div" mt={3}  >
                    Create Diet Plan
                   </Typography></Stack></Card></Stack>
 
-                  <Stack mt={4}><Card style={{backgroundColor:"purple", margin:"10px", alignItems:"center"}}><Stack mb={2}> <Typography sx={{ fontSize: 20, fontWeight: 'bold', color:'white', fontFamily:'Inter-semiBold', lineHeight:'38px', marginLeft:'10px'}} mt={3}  >
+                  <Stack mt={4}><Card style={{backgroundColor:"purple", margin:"10px", alignItems:"center"}}>
+                    <Stack mb={2}>
+                       <Typography sx={{ fontSize: 20, fontWeight: 'bold', color:'white', fontFamily:'Inter-semiBold', lineHeight:'38px', marginLeft:'10px'}} mt={3}  >
                    Create Exercise Plan
                   </Typography></Stack></Card></Stack>
             

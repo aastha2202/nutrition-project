@@ -1,28 +1,31 @@
-import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import {React, useEffect, useState }from 'react';
 
+// import '../css/DietPlan.css';
 
-
-
+import { Link as RouterLink, useLocation ,useNavigate} from 'react-router-dom';
 import Box from '@mui/material/Box';
-
+import {   Select, FormControl, InputLabel } from '@mui/material';
 import Card from '@mui/material/Card';
-
+import axios from 'axios';
 import CardActions from '@mui/material/CardActions';
 
 import CardContent from '@mui/material/CardContent';
 
-
+import MenuItem from '@mui/material/MenuItem';
 import Grid from '@mui/material/Grid';
-
+import { MarginOutlined } from '@mui/icons-material';
 import Button from '@mui/material/Button';
-
+import { useRef } from 'react';
 import Typography from '@mui/material/Typography';
-
-
-// import { makeStyles } from '@material-ui/core/styles';
+ // import { makeStyles } from '@material-ui/core/styles';
 
 // import CardMedia from '@material-ui/core/CardMedia';
+// import Poultry from "../pictures/Poultry.svg";
+import Logo from "../../assets/nova.svg";
+import Diet from "../../assets/Diet.svg";
+import Peas from "../../assets/Peas.svg";
+import Arrowforward from "../../assets/Arrowforward.svg";
+import ProteinChicken from "../../assets/ProteinChicken.svg"
 
 // import companyimage from '../images/CompanyName.png';
 
@@ -30,24 +33,35 @@ import Typography from '@mui/material/Typography';
 
 // import peas from '../images/peas.png'
 
-// import ExerciseLogo from '../images/ExerciseLogo.png';
-import IconButton from '@mui/material/IconButton';
-import ArrowForward from '@mui/icons-material/ArrowForward';
+// import dinning from '../images/dinningicon.png';
+
+import  "../styles.css";
 
 
-import Poultry from "../../assets/Poultry.svg";
-import Exerciselogo from "../../assets/Exerciselogo.svg";
-import Logo from "../../assets/nova.svg";
-import Arrowforward from "../../assets/Arrowforward.svg";
-
-
-const pageheading={
+const title={
+    
     fontFamily:"Inter-Bold",
-    fontWeight: "bold",
-    fontSize: "30px",
-    lineHeight: "38px",
-    color: "#112866"
+    fontSize:"30px" ,
+    color:"#112866",
 };
+ const caloriesremained={
+    fontFamily:"Inter-Regular",
+    fontStyle: "normal",
+    fontWeight: "600",
+    fontSize: "12px",
+    lineHeight: "15px",
+    color:"#112866",
+ };
+
+ const exercise={
+    fontFamily:"Inter-Regular",
+    fontSize:"12px" ,
+    color:"white",
+    fontWeight:"20px",
+
+ }
+ 
+
 const plusStyle = {
     width: "34px",
     height: "26px",
@@ -56,205 +70,248 @@ const plusStyle = {
     borderRadius: "7px"
    
   };
-  const textparaStyle = {
-    fontFamily: 'Inter-Regular',
-    // padding: "30px",
-    
-    fontSize:"20px" ,
-    color:"#E1B725"
+  const proteinStyle={
+    fontFamily: 'Inter-SemiBold',
+    fontStyle: "normal",
+    fontWeight: "400",
+    fontSize: "18px",
+    // lineHeight: "38px",
+
+    color: "#112886",
+
    
   };
-
-  const day={
+  const totalservingsStyle={
     fontFamily: 'Inter-Regular',
     fontStyle: "normal",
     fontWeight: "600",
-    fontSize:"30px",
+    fontSize: "12px",
+    // lineHeight: "15px",
+    color:"#112866",
+    // color: "#000000"
+  };
+  const currentdate={
+    fontFamily: 'Inter-Regular',
+    fontStyle: "normal",
+    fontWeight: "600",
+    fontSize:"20px",
     lineHeight: "15px",
     color:"white",
-    
-    marginLeft:"3px"
-    
+    marginLeft:'1'
 
   };
 
-const month={
+const day={
     fontFamily: 'Inter-Regular',
-    fontSize:"15px" ,
-    color:"black",
+    fontSize:"20px" ,
+    
     marginTop:"10px",
     alignSelf:"center",
-    // color: "#112866"
+    // color:"#112866",
 }
 
 const year={
     fontFamily: 'Inter-Regular',
     fontSize:"15px" ,
-    // color:"#112866",
-    color:"black",
-    marginBottom:"10px",
     
+    marginBottom:"10px",
+    color:"#112866",
+};
+
+const caloriesremainedNo={
+    color:"#112866",
+    fontSize:"30px"
 }
 
-
-
-
-  const maintitle={
-    fontFamily: 'Inter-SemiBold',
+  const dayservingsStyle={
+    fontFamily: 'Inter-Regular',
     fontStyle: "normal",
-    fontWeight: "300",
-    fontSize: "30px",
-    lineHeight: "38px",
-
-    color: "#112866"
+    fontWeight: "600",
+    fontSize: "12px",
+    lineHeight: "15px",
+    color:"#112866",
+       
   };
 
+  const maincardStyle={
+    backgroundColor:"#F0E7F5",
+    margin:"10px"
+
+  };
   const todaysgoal={
     fontFamily:'Inter-Regular',
-    fontSize:"13px" ,
-    color:"black",
-    marginLeft:"10px",
-    // color:"#112866"
-  };
-  const exercise={
-    fontFamily:"Inter-Regular",
-    fontSize:"12px" ,
-    color:"white",
-    fontWeight:"20px",
+    fontSize:"15px" ,
     
- };
-  const excerciseNo={
-    fontFamily:"Inter-Regular",
-    fontSize:"30px" ,
-    color:"white",
-    fontWeight:"40px",
-    
+   // marginLeft:"0px",
+    color:"#112866",
   };
 
-  const today={
-    fontFamily:"Inter-Regular",
-    color:"#112866",
+  const servingleft={
+    fontFamily:'Inter-Regular',
+
+    fontSize:"20px" ,
+    color:"#E1B725"
+  };
+  const regular={
+    fontFamily:'Inter-Regular',
+    color:"#112866"
   }
 
 
-  const totalservingsStyle={
-    fontFamily: 'Poppins',
-    fontStyle: "normal",
-    fontWeight: "600",
-    fontSize: "12px",
-    lineHeight: "15px",
-    
-    color: "#000000"
-  };
-  const dayservingsStyle={
-    fontFamily: 'Poppins',
-    fontStyle: "normal",
-    fontWeight: "600",
-    fontSize: "12px",
-    lineHeight: "15px",
-    
-    color: "#000000"
-  };
-  
-export default function Exercise(){
 
-      
-     
+export default function Exercise(){
+  const location = useLocation();
+
+const [loading, setLoading] = useState(true)
+  const [data, setData] = useState({})
+  const [exerciseData, setExerciseData] = useState([])
+  const [oneDietPlan, setOneDietPlan] = useState([])
+  // const isFocused = useIsFocused();
+
+
+  useEffect(() => {
+    
+      getValues()
+    
+  }, [])
+
+  const getValues = async () => {
+    // console.log("getValuess calledddd")
+    let start_date = await localStorage.getItem('exercisestartDate')
+    let end_date = await localStorage.getItem('exerciseendDate')
+    await apiCall(start_date, end_date)
+  }
+
+
+  const apiCall = async (start_date, end_date) => {
+    setLoading(true)
+    let userIdAsync = localStorage.getItem('userId')
+    // console.log(start_date, end_date)
+    if (start_date) {
+      axios.get(`https://aipse.in/api/getAllDietPlan?userid=${userIdAsync}&startdate=${start_date}&enddate=${end_date}&type=exercise&status=today`)
+        .then(function (response) {
+
+          // console.log(response.data.data, "dieettttttttttt")
+          response.data.data.servingsLeft = parseInt
+            (response?.data?.data.RecommendedServings - response?.data?.data.CosumedServings)
+          setExerciseData(response?.data?.data)
+          // console.log(data)
+          axios.get(`https://aipse.in/api/getOneDietPlan?userid=${userIdAsync}`)
+            .then(function (response) {
+
+              let resDietPlan = response?.data?.data
+              // console.log(response?.data?.data, "one diet plannnn")
+              // setOneDietPlan(response?.data?.data)
+              setLoading(false)
+              axios.get(`https://aipse.in/api/getAllCategories?type=exercise`)
+                .then(function (response) {
+
+                  let existingCategories = response?.data?.data.map(e => e.category_name)
+                  setData(response?.data?.data)
+                  //  [{"category": "Pawan android", "diet_id": 709, "end_date": "08-23-2023", "interval": "2 month", "recommended_servings": 12, "servings_consumed": 0, "start_date": "05-25-2023", "total_servings": 1080, "type": "food", "user_id": 35}]} 
+                  // console.log(response?.data?.data)
+                  let dietPlan = [], dietCategories = []
+                  for (let i = 0; i < resDietPlan.length; i++) {
+                    let obj = resDietPlan[i]
+                    if (existingCategories.includes(obj?.category)){
+                    if (dietCategories.includes(obj?.category)) {
+                      let index = dietPlan.findIndex((x) => x.category === obj?.category)
+                      dietPlan[index].servings_consumed = dietPlan[index].servings_consumed + obj?.servings_consumed
+                    }
+                    else {
+                      dietCategories.push(obj?.category)
+                      dietPlan.push(obj)
+                    }
+                  }
+                    if (i == resDietPlan.length - 1) {
+                      // console.log(dietPlan)
+                      setOneDietPlan(dietPlan)
+                    }
+                  }
+
+                })
+                .catch(function (error) {
+                  // Alert.alert("something went wrong");
+                  // console.log(error);
+                });
+              // console.log(response?.data, "response..............responseeeeee in get one diet plannnnn")
+            })
+            .catch(function (error) {
+              // Alert.alert("something went wrong");
+              // console.log(error);
+            });
+
+
+        })
+        .catch(function (error) {
+          // Alert.alert("something went wrong");
+          // console.log(error);
+        });
+    }
+    else {
+      setLoading(false)
+    }
+  }
+
+
+
+  const getCurrentDate = () => {
+
+    var date = new Date().getDate();
+    var month = new Date().getMonth() + 1;
+    var year = new Date().getFullYear();
+    if (date < 10) date = '0' + date;
+    if (month < 10) month = '0' + month;
+    return date + '-' + month + '-' + year;//format: d-m-y;
+  }
+
+
+  let navigate = useNavigate();
+ 
+  const setDietId = (item) => {
+    let catid = data.filter(e => e.category_name == item.category)
+    let id = null
+    if (catid) { id = catid[0].category_id }
+    localStorage.setItem('params',JSON.stringify({ cat: id, diet_id: item?.diet_id, category: item.category, type: "food", servingsConsumed: item.servings_consumed, apiCall: apiCall }))
+    navigate('/dashboard/itemofexercise')
+    
+
+  }
+  // console.log(state,"-----state checking")
+
     return (
-        <Card className='dietplan-container'>
-            <CardContent className='dietplan-companyname'>
+        
+        <div className='dietplan-container'>
+            {/* <CardContent className='dietplan-companyname'>
                 <img src={Logo} alt="loading" className='dietplan-companyname-image'/>
                 
-            </CardContent>
-            <CardContent>
-                <Grid container justifyContent="space-between">
-                        <Grid item className="my-grid-item" style={{marginleft:"30px"}}>
-                            <span style={pageheading}>Exercise</span>
-                        </Grid>
-                        <Grid item className="my-grid-item" mt={1} style={{marginRight:"30px"}}>
-                            <span style={today}>Today</span>
-                        </Grid>
-                </Grid>
-            </CardContent>
+            </CardContent> */}
+            <Grid container   style={{display:'flex',flexDirection:"row",position:'relative'}}>
+               <Grid item xs={12}>
+               <CardContent >
+                         <Typography  variant='h5' style={title} >
+                              Exercise Plan
+                          </Typography>    
+
+               </CardContent>
+               </Grid>
             
-           {/* <Grid>
-                <Card style={{backgroundColor:"#D1A6E7",margin:"10px"}}>
-                    <Grid container  item flexDirection={'row'} alignItems="center"  >
-                      <Grid item xs={6}> 
-                    <Card  style={{backgroundColor:"#8D25C1",margin:"10px"}}>
-                        <Grid container mt={1} justifyContent="center" spacing={1} alignItems="center" item flexDirection="row" >
-                        
-                           <Grid item alignSelf="center" >
-                            
-                           <Typography  variant="body1" mt="1" component="span" style={day} >
-                                            15
-                                    </Typography>
-                            </Grid> 
-                            <Grid item >
-                                <Grid  container flexDirection="column" mb="2" >
-                                    <Grid item>
-                                        <Typography variant="h5" component="span"  style={month}>
-                                                March
-                                        </Typography>
-                                    </Grid>
-                                
-                                    <Grid item mr="3">
-                                        <Typography  variant="h5" component="span" style={year}>
-                                                2023
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                           
-                            
-                        </Grid>
-                    </Card>
-                    </Grid> 
-
-                    <Grid item xs={6}>
-                    <Card  sx={{minHeight:65}} style={{backgroundColor:"#8D25C1",margin:"10px"}}>
-                    <Grid container  justifyContent="center" alignItems="center" flexDirection="column" j>
-                        
-                        <Grid item mt={1}>
-                        <Typography  style={todaysgoal}>Today's Goal</Typography>
-                        </Grid>
-                        <Grid item>
-
-                       
-                        <Grid ml={2} container flexDirection="row">
-                           <Grid item ><Typography style={excerciseNo}>20</Typography></Grid>
-                           <Grid item mt={2.5}><Typography ml={1}   style={exercise}>Exercise</Typography></Grid>
-                            </Grid>
-                        </Grid>
-                        
-                        
-                        
-                    </Grid>
-
-                    </Card>
-                    </Grid>
-
-
-                    </Grid>
-                    
-                    
-                </Card>
-    </Grid> */}
+          </Grid>
 
             <Grid>
-                <Card style={{backgroundColor:"#D1A6E7",margin:"10px"}}>
+                <Card  style={{backgroundColor:"#D1A6E7",margin:"10px"}}>
                     <Grid container  item flexDirection={'row'} alignItems="center"  >
                       <Grid item xs={6}> 
-                    <Card  style={{backgroundColor:"#8D25C1",margin:"10px"}}>
+                    <Card  sx={{minHeight:80}} style={{backgroundColor:"#8D25C1",margin:"10px"}}>
                         <Grid container mt={1} justifyContent="center" alignItems="center" item flexDirection="row" >
                         
-                           <Grid item alignSelf={"center"} >
+                           <Grid item mt={3} alignSelf={"center"} >
                             
-                           <Typography variant="body1" component="span" style={day} >
-                                            15
+                           <Typography variant="body1" component="span" style={currentdate} >
+                                            {getCurrentDate()}
                                     </Typography>
                             </Grid> 
-                            <Grid item>
+                            {/* <Grid item>
                                 <Grid  container flexDirection="column"  style={{backgroundColor:"#8D25C1",margin:"10px"}} >
                                     <Grid item>
                                         <Typography variant="h5" component="span" style={month}>
@@ -269,30 +326,30 @@ export default function Exercise(){
                                     </Grid>
                                 </Grid>
                             </Grid>
-                           
+                            */}
                             
                         </Grid>
                     </Card>
                     </Grid> 
 
                     <Grid item xs={6}>
-                    <Card  sx={{minHeight:65}} style={{backgroundColor:"#8D25C1",margin:"10px"}}>
-                    <Grid container  justifyContent="center" alignItems="center" flexDirection="column" j>
+                    <Card  sx={{minHeight:80}} style={{backgroundColor:"#8D25C1",margin:"10px"}}>
+                    <Grid container  justifyContent="center" alignItems="center" flexDirection="column" >
                         
                         <Grid item mt={1}>
-                        <Typography  style={todaysgoal}>Today's Goal</Typography>
+                        <Typography  style={todaysgoal}>Today's Intakes</Typography>
                         </Grid>
                         <Grid item>
 
                        
-                        <Grid ml={2} container flexDirection="row">
-                           <Grid item ><Typography style={{ fontSize:"35px" ,color:"white",fontWeight:"40px"}}>20</Typography></Grid>
-                           <Grid item><Typography mt={3}  ml={0.5} style={exercise}>Exercise</Typography></Grid>
+                        <Grid  container flexDirection="row">
+                           <Grid item ><Typography style={{ fontSize:"35px" ,color:"white",fontWeight:"30px"}}> {exerciseData?.TotalServings} </Typography></Grid>
+                           <Grid item><Typography mt={3}  ml={0.5} style={exercise}>Sets</Typography></Grid>
                             </Grid>
                         </Grid>
                         
                         
-                        
+      
                     </Grid>
 
                     </Card>
@@ -303,75 +360,80 @@ export default function Exercise(){
                     
                     
                 </Card>
-            </Grid>
-        <Grid Item>
-             <Card  style={{backgroundColor:"#212121",margin:"10px"}}>
-                    <CardContent>
-                        <Grid container flexDirection="row" justifyContent="space-between">
-                            
-                            <Grid mt={2} xs={6} Item>
-                                <CardContent alignSelf={"center"} alignItems={"center"}  alignContent={"center"}>
-                                <Typography style={textparaStyle}>10 Exercise Left</Typography>
-                                </CardContent>
-                            </Grid>
-                        
-                            <Grid item xs={6} alignSelf={"center"} alignItems={"flex-end"}  alignContent={"flex-end"}> 
-                            <CardContent  sx={{textAlign:'flex-end'}}  >
-                                <Typography  sx={{textAlign:'flex-end'}}>
-                                 <img src={Exerciselogo}  alt="dinning" style={{display: 'block', margin: 'auto' ,float:"right"}}/>
-                                 </Typography>
+            </Grid>  
+                    
+            <Card  style={{backgroundColor:"#2c2b2b",margin:"10px"}} >
+                    <Grid container    sx={{textDecoration:'none'}} alignItems="center" >
+                    <Grid item xs={8} alignItems="flex-end"  >
+                        <Grid item  container justifyContent="center" alignItems="center">
+                        <CardContent sx={{alignItems:"center",alignSelf:'center',alignContent:"center"}}>
+                                <Typography variant="body1" component="span"   style={servingleft}>
+                                {exerciseData?.servingsLeft}  sets left 
+                                    
+                                </Typography>
                                  </CardContent>
-                            </Grid>
-                            
                         </Grid>
+                           
+                        </Grid>             
+
+                        <Grid item xs={4} alignItems="flex-end"  >
+                        <Grid item  container justifyContent="center" alignItems="center">
+                        <CardContent sx={{alignItems:"center",alignSelf:'center',alignContent:"center"}}>
+                                 <img src={Diet} className='dinning-img' alt="dinning" style={{display: 'block', margin: 'auto'}}/>
+                                 </CardContent>
+                        </Grid>
+                           
+                        </Grid>
+                        
+                 </Grid>
+                    
+                    
+   
+               </Card> 
+                    
+     {oneDietPlan?.map(item=>{
+        return(
+          // <Grid container flexDirection={"row"} item  >
+          //   <Grid item sx={12} > 
+            <Card  style={maincardStyle}  >
+                    <CardContent onClick={()=>{setDietId(item)}} sx={{textDecoration:'none'}}>
+                    <Grid container spacing={1} margin="10px" alignItems="center">
+                    
+                     
+                     <Grid item  alignSelf={'center'}>
+                            <Grid item container flexDirection={"column"}>
+                            <Typography variant="body1" Wrap component="span" style={proteinStyle}>
+                                {item.category}
+                            </Typography> 
+                            </Grid>
+                            <Grid item>
+                            <Typography alignContent="center" variant="body1" component="span" style={totalservingsStyle}>
+                            {item.servings_consumed} sets done
+                            </Typography>
+                            </Grid>
+                           
+                            
+                        </Grid> 
+                       
+                    
+                        
+                        
+                    </Grid>
                     </CardContent>
-            </Card>
-        </Grid>
-           
+                    
+    
+               </Card>  
 
-           
+                // {/* </Grid>  
+                // </Grid> */}
 
-            <Card  style={{backgroundColor:"#F0E7F5", margin:"10px"}}>
-            
-                <Grid container to="/dashboard/aerobic" component={RouterLink} sx={{textDecoration:'none'}} justifyContent="space-between" alignItems="center" style={{padding:"30px"}}>
-                    <Grid item style={{padding:"5px"}}>
-                        
-                        <Typography variant="body1" component="span" style={maintitle}>
-                        Aerobic<br/>Activity
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography variant="h5" component="span" style={plusStyle}>
-                        <img src={Arrowforward} alt="Arrowforward logo" />
-                        </Typography>
-                    </Grid>
-                </Grid>
-              
-            </Card>
+        );
+     })}
+    
 
-            <Card  style={{backgroundColor:"#F0E7F5", margin:"10px"}}>
-            
-                <Grid container to="/dashboard/aerobic" component={RouterLink} sx={{textDecoration:'none'}} justifyContent="space-between" alignItems="center" style={{padding:"30px"}}>
-                    <Grid item style={{padding:"5px"}}>
-                        
-                        <Typography variant="body1" component="span" style={maintitle}>
-                        Strength<br/>Training
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography variant="h5" component="span" style={plusStyle}>
-                        <img src={Arrowforward} alt="Arrowforward logo" />
-                        </Typography>
-                    </Grid>
-                </Grid>
-              
-            </Card>
-            
+   
+         </div>
 
-            
-            
-           
-           
-         </Card>
+         
     );
 }
