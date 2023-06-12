@@ -73,45 +73,45 @@ export default function SignUp() {
     });
     //////
      // Perform validation
-     let isValid = true;
+    //  let isValid = true;
 
-     if (data.get('user_name') === '') {
-       userNameRef.current.focus();
-       isValid = false;
-     }
+    //  if (data.get('user_name') === '') {
+    //    userNameRef.current.focus();
+    //    isValid = false;
+    //  }
  
-     if (data.get('password') === '') {
-       passwordRef.current.focus();
-       isValid = false;
-     }
+    //  if (data.get('password') === '') {
+    //    passwordRef.current.focus();
+    //    isValid = false;
+    //  }
  
-     if (data.get('email_id') === '') {
-       emailRef.current.focus();
-       isValid = false;
-     }
+    //  if (data.get('email_id') === '') {
+    //    emailRef.current.focus();
+    //    isValid = false;
+    //  }
  
-     if (data.get('gender') === '') {
-       genderRef.current.focus();
-       isValid = false;
-     }
+    //  if (data.get('gender') === '') {
+    //    genderRef.current.focus();
+    //    isValid = false;
+    //  }
  
-     if (data.get('mobile_number') === '') {
-       mobileNumberRef.current.focus();
-       isValid = false;
-     }
+    //  if (data.get('mobile_number') === '') {
+    //    mobileNumberRef.current.focus();
+    //    isValid = false;
+    //  }
  
-     if (!isValid) {
-       setFormValid(false);
-       return;
-     }
+    //  if (!isValid) {
+    //    setFormValid(false);
+    //    return;
+    //  }
  
-     console.log({
-       email: data.get('email_id'),
-       password: data.get('password'),
-       patientid: data.get('patient-id')
-     });
+  //    console.log({
+  //      email: data.get('email_id'),
+  //      password: data.get('password'),
+  //      patientid: data.get('patient-id')
+  //    }); 
  
-     console.log(formValue.gender);
+  //    console.log(formValue.gender);
 
     
   };
@@ -168,8 +168,7 @@ export default function SignUp() {
         "mobile_number": "",
         "email_id": "",
         "address": "",
-        "profile_image": "",
-        "patientid":""
+        "profile_image": ""
     })
 
     const registerUser = () => {
@@ -296,7 +295,7 @@ const handleImageSelection = (event) => {
                        sx={{ size:"200px" }}
                        alt="Remy Sharp"
                        src="/broken-image.jpg">
-                       <Iconify id="camera-icon" icon={'mdi:camera'} onChange={handleImageSelection} sx={{ width: 650, height: 650, ml: 2,  color: '#ff7424' }} />
+                       <Iconify id="camera-icon" icon={'mdi:camera'} onChange={handleImageSelection} sx={{ width: 650, height: 650, ml: 1,  color: '#ff7424' }} />
                       
                        {images && <img src={images} alt="Uploaded Image" />}
 
@@ -432,9 +431,10 @@ const handleImageSelection = (event) => {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, }}
+              // backgroundColor:"#F0E7F5", color:"black", fontFamily:"Inter-SemiBold"
               onClick={registerUser}
-
+               
             >
               Create Account
             </Button>

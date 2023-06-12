@@ -17,6 +17,8 @@ import Iconify from '../components/iconify';
 // sections
 import { LoginForm } from '../sections/auth/login';
 import Snackbar from '@mui/material/Snackbar';
+import { CircularProgress } from '@mui/material';
+
 // ----------------------------------------------------------------------
 
 const StyledRoot = styled('div')(({ theme }) => ({
@@ -59,6 +61,7 @@ export default function LoginPage() {
   
   // }, [])
 // alert usage here
+const [isLoading,setIsLoading]=useState(false)
   const [showAlert, setShowAlert] = useState(false);
 
   const handleSuccess = () => {
@@ -113,6 +116,7 @@ export default function LoginPage() {
        localStorage.setItem('userId', response?.data?.['User ID'])
        handleSuccess()
         console.log('Username', response?.data)
+        setIsLoading(true);
         setTimeout(() => {
           
           navigate('/dashboard', { replace: true });
@@ -151,9 +155,9 @@ export default function LoginPage() {
           justifyContent="center"
           spacing={2}
         >
-          <Grid item variant="h2">
+          {/* <Grid item variant="h2">
             Hi, Welcome Back
-          </Grid>
+          </Grid> */}
           <Grid item>
             <img
               src={Nova}
@@ -199,11 +203,26 @@ export default function LoginPage() {
           Forgot password?
         </Link>
       </Stack>
-      <Card >
-      {/* to="/dashboard" component={RouterLink} sx={{textDecoration:'none'}}  ^ onPress={loginUser} */}
+      {/* <Card >
+      
       <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={loginUser} > 
         Login
       </LoadingButton>
+      
+
+      </Card> */}
+
+<Card >
+      {isLoading ? (
+        <CircularProgress  sx={{display:'flex',alignItems:'center',justifyContent:'center', alignContent:'center'}}  style={{marginLeft:'50%'}}  />
+      ) :(
+      <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={loginUser} > 
+        Login
+      </LoadingButton>
+      )
+}
+      
+      </Card>
       
       <Snackbar
         open={enterFields}
@@ -229,8 +248,6 @@ export default function LoginPage() {
         <Alert  severity="error">Password and email doesn`t match  </Alert>  
          </Snackbar>
 
-
-      </Card>
 
        
       </StyledContent>

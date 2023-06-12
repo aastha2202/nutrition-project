@@ -156,6 +156,10 @@ const caloriesremainedNo={
     fontFamily:'Inter-Regular',
     color:"#112866"
   }
+  const calories ={
+    fontFamily: 'Inter-Regular',
+    color:"#112866",
+};
 
 
 
@@ -295,6 +299,9 @@ const [loading, setLoading] = useState(true)
 
                </CardContent>
                </Grid>
+
+               {/* {DietData?.RecommendedServings >0 ?(0):(0)} */}
+               
             <Grid  item xs={6} mt={1} >
               <CardContent  >
                       {/* <FormControl  sx={{ position:'absolute',right:6 }} size="small">
@@ -309,6 +316,7 @@ const [loading, setLoading] = useState(true)
               </Grid>
           </Grid>
 
+          {DietData?.RecommendedServings >0 ?(<Card>
             <Grid>
                 <Card  style={{backgroundColor:"#D1A6E7",margin:"10px"}}>
                     <Grid container  item flexDirection={'row'} alignItems="center"  >
@@ -348,7 +356,7 @@ const [loading, setLoading] = useState(true)
                     <Grid container  justifyContent="center" alignItems="center" flexDirection="column" >
                         
                         <Grid item mt={1}>
-                        <Typography  style={todaysgoal}>Today's Intakes</Typography>
+                        <Typography style={exercise}>Today's Intakes</Typography>
                         </Grid>
                         <Grid item>
 
@@ -451,9 +459,19 @@ const [loading, setLoading] = useState(true)
               //  </Grid>  
 
         );
-     })):(<Typography   align="center"  style={title} >No Categories assigned</Typography> )}
+     })):(<Card sx={{ margin:"10px" ,maxHeight:"800px"}}>
+     <CardContent>
+     <Typography   align="center"  style={title} >No categories assigned</Typography>
+     
+     </CardContent>
+     </Card> )}
     
-
+    </Card>):(<Card sx={{backgroundColor:"#8D25C1", margin:"10px" ,maxHeight:"800px"}}>
+              <CardContent>
+              <Typography  align="center"   style={calories}> You don`t have any ongoing diet  plans. Please consult Dietician.</Typography>
+              </CardContent>
+              </Card>)}
+  
    
          </div>
 

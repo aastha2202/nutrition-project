@@ -142,7 +142,39 @@ export default function Protein({ route, navigation,props }) {
         }
 
     };
+    
 
+    const [extraData, setExtraData] = useState(new Date())
+    const [date, setDate] = useState(null)
+
+    const getCurrentDate = () => {
+      var date = new Date().getDate();
+      var month = new Date().getMonth() + 1;
+      var year = new Date().getFullYear();
+      if (date < 10) date = '0' + date;
+      if (month < 10) month = '0' + month;
+      setDate(date + '-' + month + '-' + year);//format: d-m-y;
+  }
+
+    const increaseCount = (item, index) => {
+      console.log('increasingg',item)
+      setAddServings(addServings => parseInt(addServings) + 1)
+      item.servings_consumed = parseInt(item.servings_consumed) + 1 
+      items[index] = item
+      setItems(items)
+      setExtraData(new Date())
+      saveDailyIntake(item)
+  }
+
+  const decreaseCount = (item, index) => {
+
+      setAddServings(addServings => parseInt(addServings) - 1)
+      item.servings_consumed = parseInt(item.servings_consumed) - 1 
+      items[index] =item
+      setItems(items)
+      setExtraData(new Date())
+      saveDailyIntake(item)
+  }
 
     const [items, setItems] = useState([])
     const [itemIntakeStatus, setItemIntakeStatus] = useState([])
@@ -171,37 +203,118 @@ export default function Protein({ route, navigation,props }) {
       params=JSON.parse(s)
       setParams(params)
             apiCall()
+            getCurrentDate()
         
     }, [])
 
-    const apiCall = async () => {
-      setViewModal(false)
-        let userIdAsync = await localStorage.getItem('userId')
 
-        setCategoryName(params.category)
+    const saveDailyIntake = async (item) => {
+      let userIdAsync = await localStorage.getItem('userId')
+
+
+      let data = {
+          "user_id": parseInt(userIdAsync),
+          "date": date,
+          "diet_id": params.diet_id,
+          "item_id": item.item_id,
+          "type": item.type,
+          "category": params?.category,
+          "servings_consumed": item?.servings_consumed
+      }
+
+      console.log(data, "posr requestrrrrtt")
+      axios.post(`https://aipse.in/api/updateDailyIntake`, data)
+          .then(function (response) {
+
+              console.log(response?.data, "response from apiii")
+              // closeBackdrop(servings, item)
+          })
+          .catch(function (error) {
+              // Alert.alert("something went wrong");
+              // console.log(error);
+          });
+
+
+
+  }
+
+    // const apiCall = async () => {
+    //   setViewModal(false)
+    //     let userIdAsync = await localStorage.getItem('userId')
+
+    //     setCategoryName(params.category)
        
 
-        axios.get(`https://aipse.in/api/getItemsOfCategory?category_id=${params.cat}&type=food`)
-            .then(function (response) {
+    //     axios.get(`https://aipse.in/api/getItemsOfCategory?category_id=${params.cat}&type=food`)
+    //         .then(function (response) {
 
-                setItems(response?.data?.data)
-                axios.get(`https://aipse.in/api/itemIntakeStatus?userid=${userIdAsync}&type=food&category=${params.category}`)
-                    .then(function (response) {
+    //             setItems(response?.data?.data)
+    //             axios.get(`https://aipse.in/api/itemIntakeStatus?userid=${userIdAsync}&type=food&category=${params.category}`)
+    //                 .then(function (response) {
 
-                        setItemIntakeStatus(response?.data?.data)
-                        // handleSuccess()
-                        setLoading(false)
-                    })
-                    .catch(function (error) {
-                        // Alert.alert("something went wrong");
-                        // console.log(error);
-                    });
-            })
-            .catch(function (error) {
-                // Alert.alert("something went wrong");
-                // console.log(error);
-            });
-    }
+    //                     setItemIntakeStatus(response?.data?.data)
+    //                     // handleSuccess()
+    //                     setLoading(false)
+    //                 })
+    //                 .catch(function (error) {
+    //                     // Alert.alert("something went wrong");
+    //                     // console.log(error);
+    //                 });
+    //         })
+    //         .catch(function (error) {
+    //             // Alert.alert("something went wrong");
+    //             // console.log(error);
+    //         });
+    // }
+    const apiCall = async () => {
+      let userIdAsync = await localStorage.getItem('userId')
+
+      setCategoryName(params.category)
+
+      axios.get(`https://aipse.in/api/getItemsOfCategory?category_id=${params.cat}&type=food`)
+          .then(function (response) {
+              console.log(response?.data?.data,"checkingggggggggggggggggggg")
+              if (response?.data?.data) {
+                 let  items = response?.data?.data
+                  setItems(items)
+                  axios.get(`https://aipse.in/api/itemIntakeStatus?userid=${userIdAsync}&type=food&category=${params.category}`)
+                      .then(function (response) {
+                          console.log(response?.data)
+                          let itemServings = response?.data?.data ? response?.data?.data :[]
+                         
+                          for (let i = 0; i < items.length; i++) {
+                              let servings = itemServings?.filter(oneitem => oneitem?.item_id == items[i].item_id)
+                              console.log(servings,"servings")
+                              if (servings.length > 0) {
+                                  items[i] = { ...items[i], ...servings[0] }
+                                  setAddServings(addServings => parseInt(addServings) + parseInt(servings[0].servings_consumed))
+                              }
+                              else {
+                                  items[i] = { ...items[i], servings_consumed: 0 }
+                              }
+
+                              if (i == items.length - 1) {
+                                  setItems(items)
+                                  setLoading(false)
+                              }
+                          }
+                          setItemIntakeStatus(response?.data?.data)
+
+                      })
+                      .catch(function (error) {
+                          // Alert.alert("something went wrong");
+                          // console.log(error);
+                      });
+              }
+              else {
+                  setLoading(false)
+              }
+          })
+          .catch(function (error) {
+              // Alert.alert("something went wrong");
+              // console.log(error);
+          });
+  }
 
    
 
@@ -300,7 +413,7 @@ export default function Protein({ route, navigation,props }) {
           sx={{ Width: 200, height: 110 }}
           style={{ backgroundColor: "#E1B725", textAlign:"center" }}
         >
-          <Typography variant="h3"  style={caloriesremained}> {params?.servingsConsumed + addServings}  
+          <Typography variant="h3"  style={caloriesremained}> { addServings}  
            
           </Typography>
           <Typography variant="h5" style={caloriesremained} >
@@ -321,14 +434,14 @@ export default function Protein({ route, navigation,props }) {
     </Card>
   </CardContent>
   
-  {items?.length>0?(items.map(item=>{
+  {items?.length>0?(items.map((item,index)=>{
   return(
     <Card style={cardStyle}>
-    <CardContent onClick={()=>{handleCard(item)}} >
+    <CardContent >
       <Grid container spacing={2} justifyContent="center" alignItems="center">
         <Grid item xs={2} md={2} >
           <ButtonBase >
-            <img  style={{borderRadius:100,maxHeight:"80px"}} src={imageurl+item.item_image}  alt="image" />
+            <img  style={{borderRadius:100,maxHeight:"80px", minWidth:"80px",objectFit: 'cover',}} src={imageurl+item.item_image}  alt="image" />
           </ButtonBase>
         </Grid>
         <Grid item xs={10} spacing={2} md={10}>
@@ -345,8 +458,19 @@ export default function Protein({ route, navigation,props }) {
               </Typography>
               <Card sx={{position:'absolute', minWidth:"30px" , alignContent:"center" , right:10,borderRadius:1,boxShadow: '#c4c4c4'}}  >
               {/* <EditCalories state={{data:itemIntakeStatus}} /> */}
+
+              <IconButton onClick={() => { item.servings_consumed >= 1 && decreaseCount(item, index) }} >
+                                <RemoveIcon  />
+                                 </IconButton>
+                              
+                                
+                                 {item.servings_consumed}
+                                { console.log(item?.servings_consumed,"in code --")}
+                                 <IconButton  onClick={() => { increaseCount(item, index) }}>
+                                 <AddIcon />
+                                 </IconButton>
       
-                <Typography sx={{textAlign:"center",alignContent:"center"}}>{getStatus(item.item_id)}</Typography>
+                {/* <Typography sx={{textAlign:"center",alignContent:"center"}}>{getStatus(item.item_id)}</Typography> */}
               </Card>
             </div>
             <Typography variant="body2" gutterBottom mt={0.6} style={maintext}>
@@ -360,7 +484,7 @@ export default function Protein({ route, navigation,props }) {
 
   )
 
-})):(<Typography   align="center"  style={calories}>No Data Found</Typography> )}
+})):(<Typography   align="center"  style={calories}>No Items Found</Typography> )}
 
 </div>
 
