@@ -1,7 +1,10 @@
 import {React, useEffect, useState }from 'react';
 
 // import '../css/DietPlan.css';
-
+import {  ButtonBase, } from "@mui/material";
+import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import { Link as RouterLink, useLocation ,useNavigate} from 'react-router-dom';
 import Box from '@mui/material/Box';
 import {   Select, FormControl, InputLabel } from '@mui/material';
@@ -13,7 +16,7 @@ import CardContent from '@mui/material/CardContent';
 
 import MenuItem from '@mui/material/MenuItem';
 import Grid from '@mui/material/Grid';
-import { MarginOutlined } from '@mui/icons-material';
+// import { MarginO } from '@mui/icons-material';
 import Button from '@mui/material/Button';
 import { useRef } from 'react';
 import Typography from '@mui/material/Typography';
@@ -26,7 +29,7 @@ import Diet from "../../assets/Diet.svg";
 import Peas from "../../assets/Peas.svg";
 import Arrowforward from "../../assets/Arrowforward.svg";
 import ProteinChicken from "../../assets/ProteinChicken.svg"
-
+import Exerciselogo from "../../assets/Exerciselogo.svg";
 // import companyimage from '../images/CompanyName.png';
 
 // import chicken from '../images/chicken.png';
@@ -34,14 +37,14 @@ import ProteinChicken from "../../assets/ProteinChicken.svg"
 // import peas from '../images/peas.png'
 
 // import dinning from '../images/dinningicon.png';
-
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import  "../styles.css";
 
 
 const title={
     
     fontFamily:"Inter-Bold",
-    fontSize:"30px" ,
+    fontSize:"20px" ,
     color:"#112866",
 };
  const caloriesremained={
@@ -122,6 +125,18 @@ const caloriesremainedNo={
     color:"#112866",
     fontSize:"30px"
 }
+const maintext = {
+  fontFamily: 'Inter-Regular',
+  fontStyle: "normal",
+  fontWeight: "500",
+  fontSize: "14px",
+  lineHeight: "21px",
+  color:"#112866",
+  
+
+
+};
+
 
   const dayservingsStyle={
     fontFamily: 'Inter-Regular',
@@ -156,7 +171,10 @@ const caloriesremainedNo={
     fontFamily:'Inter-Regular',
     color:"#112866"
   }
-
+  const calories ={
+    fontFamily: 'Inter-Regular',
+    color:"#112866",
+};
 
 
 export default function Exercise(){
@@ -164,7 +182,7 @@ export default function Exercise(){
 
 const [loading, setLoading] = useState(true)
   const [data, setData] = useState({})
-  const [exerciseData, setExerciseData] = useState([])
+  const [dietData, setdietData] = useState([])
   const [oneDietPlan, setOneDietPlan] = useState([])
   // const isFocused = useIsFocused();
 
@@ -194,7 +212,7 @@ const [loading, setLoading] = useState(true)
           // console.log(response.data.data, "dieettttttttttt")
           response.data.data.servingsLeft = parseInt
             (response?.data?.data.RecommendedServings - response?.data?.data.CosumedServings)
-          setExerciseData(response?.data?.data)
+          setdietData(response?.data?.data)
           // console.log(data)
           axios.get(`https://aipse.in/api/getOneDietPlan?userid=${userIdAsync}`)
             .then(function (response) {
@@ -272,17 +290,29 @@ const [loading, setLoading] = useState(true)
     let catid = data.filter(e => e.category_name == item.category)
     let id = null
     if (catid) { id = catid[0].category_id }
-    localStorage.setItem('params',JSON.stringify({ cat: id, diet_id: item?.diet_id, category: item.category, type: "food", servingsConsumed: item.servings_consumed, apiCall: apiCall }))
+    localStorage.setItem('params',JSON.stringify({ cat: id, diet_id: item?.diet_id, category: item.category, type: "exercise", servingsConsumed: item.servings_consumed, apiCall: apiCall }))
     navigate('/dashboard/itemofexercise')
     
 
   }
   // console.log(state,"-----state checking")
+  const [count3, setCount3] = useState(0);
+
+    const handleIncrement3 = () => {
+      setCount3(count3 + 1);
+    };
+  
+    const handleDecrement3 = () => {
+        if (count3 > 0){
+            setCount3(count3 - 1);
+        }
+      
+    };
 
     return (
         
-        <div className='dietplan-container'>
-            {/* <CardContent className='dietplan-companyname'>
+        <>
+          {/* <CardContent className='dietplan-companyname'>
                 <img src={Logo} alt="loading" className='dietplan-companyname-image'/>
                 
             </CardContent> */}
@@ -297,7 +327,8 @@ const [loading, setLoading] = useState(true)
                </Grid>
             
           </Grid>
-
+         
+          {(dietData?.RecommendedServings > 0)?(  <Grid>
             <Grid>
                 <Card  style={{backgroundColor:"#D1A6E7",margin:"10px"}}>
                     <Grid container  item flexDirection={'row'} alignItems="center"  >
@@ -337,13 +368,15 @@ const [loading, setLoading] = useState(true)
                     <Grid container  justifyContent="center" alignItems="center" flexDirection="column" >
                         
                         <Grid item mt={1}>
-                        <Typography  style={todaysgoal}>Today's Intakes</Typography>
+                        <Typography style={exercise}>Today's Intakes</Typography>
+                        {/* style={todaysgoal} */}
                         </Grid>
-                        <Grid item>
+                        <Grid item >
 
                        
                         <Grid  container flexDirection="row">
-                           <Grid item ><Typography style={{ fontSize:"35px" ,color:"white",fontWeight:"30px"}}> {exerciseData?.TotalServings} </Typography></Grid>
+                           <Grid item ><Typography style={{ fontSize:"35px" ,color:"white",fontWeight:"30px"}}> {dietData?.RecommendedServings}  
+                           </Typography></Grid>
                            <Grid item><Typography mt={3}  ml={0.5} style={exercise}>Sets</Typography></Grid>
                             </Grid>
                         </Grid>
@@ -368,7 +401,7 @@ const [loading, setLoading] = useState(true)
                         <Grid item  container justifyContent="center" alignItems="center">
                         <CardContent sx={{alignItems:"center",alignSelf:'center',alignContent:"center"}}>
                                 <Typography variant="body1" component="span"   style={servingleft}>
-                                {exerciseData?.servingsLeft}  sets left 
+                                {dietData?.servingsLeft}  sets left 
                                     
                                 </Typography>
                                  </CardContent>
@@ -379,7 +412,8 @@ const [loading, setLoading] = useState(true)
                         <Grid item xs={4} alignItems="flex-end"  >
                         <Grid item  container justifyContent="center" alignItems="center">
                         <CardContent sx={{alignItems:"center",alignSelf:'center',alignContent:"center"}}>
-                                 <img src={Diet} className='dinning-img' alt="dinning" style={{display: 'block', margin: 'auto'}}/>
+                                 {/* <img src={Diet} className='dinning-img' alt="dinning" style={{display: 'block', margin: 'auto'}}/> */}
+                                 <img src={Exerciselogo}  alt="dinning" style={{display: 'block', margin: 'auto'}}/>
                                  </CardContent>
                         </Grid>
                            
@@ -390,26 +424,29 @@ const [loading, setLoading] = useState(true)
                     
    
                </Card> 
-                    
-     {oneDietPlan?.map(item=>{
+               {/* oneDietPlan?.length>0         */}
+     {(oneDietPlan.length>0)?(oneDietPlan?.map(item=>{
         return(
           // <Grid container flexDirection={"row"} item  >
           //   <Grid item sx={12} > 
             <Card  style={maincardStyle}  >
                     <CardContent onClick={()=>{setDietId(item)}} sx={{textDecoration:'none'}}>
-                    <Grid container spacing={1} margin="10px" alignItems="center">
-                    
-                     
-                     <Grid item  alignSelf={'center'}>
+                    <Grid container  flex flexDirection={"row"} spacing={1} margin="10px" alignItems="center">
+                      
+                     <Grid item container  xs={11} alignSelf={'center'}>
                             <Grid item container flexDirection={"column"}>
                             <Typography variant="body1" Wrap component="span" style={proteinStyle}>
                                 {item.category}
                             </Typography> 
                             </Grid>
-                            <Grid item>
+                            <Grid item  position={"end"}>
                             <Typography alignContent="center" variant="body1" component="span" style={totalservingsStyle}>
-                            {item.servings_consumed} sets done
+                            {item.servings_consumed} sets done 
                             </Typography>
+                            </Grid>
+
+                            <Grid item container xs={1} sx={{ position:'absolute',right:0 }}>
+                              <ArrowForwardIcon/>
                             </Grid>
                            
                             
@@ -428,11 +465,29 @@ const [loading, setLoading] = useState(true)
                 // </Grid> */}
 
         );
-     })}
-    
+     })):(
+     <Card sx={{ margin:"10px" ,maxHeight:"800px"}}>
+              <CardContent>
+              <Typography   align="center"  style={title} >No exercise assigned</Typography>
+              
+              </CardContent>
+              </Card> )
+     }
+
+     
+    </Grid>
+
+            
+         ):(<Card sx={{backgroundColor:"#8D25C1", margin:"10px" ,maxHeight:"800px"}}>
+              <CardContent>
+              <Typography  align="center"   style={calories}> You don`t have any ongoing  exercise plans. Please consult Dietician.</Typography>
+              </CardContent>
+              </Card>)}
+
+
 
    
-         </div>
+         </>
 
          
     );

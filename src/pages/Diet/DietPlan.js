@@ -41,7 +41,7 @@ import  "../styles.css";
 const title={
     
     fontFamily:"Inter-Bold",
-    fontSize:"30px" ,
+    fontSize:"20px" ,
     color:"#112866",
 };
  const caloriesremained={
@@ -156,6 +156,10 @@ const caloriesremainedNo={
     fontFamily:'Inter-Regular',
     color:"#112866"
   }
+  const calories ={
+    fontFamily: 'Inter-Regular',
+    color:"#112866",
+};
 
 
 
@@ -164,7 +168,7 @@ export default function DietPlan(){
 
 const [loading, setLoading] = useState(true)
   const [data, setData] = useState({})
-  const [exerciseData, setExerciseData] = useState([])
+  const [DietData, setDietData] = useState([])
   const [oneDietPlan, setOneDietPlan] = useState([])
   // const isFocused = useIsFocused();
 
@@ -194,7 +198,7 @@ const [loading, setLoading] = useState(true)
           // console.log(response.data.data, "dieettttttttttt")
           response.data.data.servingsLeft = parseInt
             (response?.data?.data.RecommendedServings - response?.data?.data.CosumedServings)
-          setExerciseData(response?.data?.data)
+          setDietData(response?.data?.data)
           // console.log(data)
           axios.get(`https://aipse.in/api/getOneDietPlan?userid=${userIdAsync}`)
             .then(function (response) {
@@ -281,7 +285,7 @@ const [loading, setLoading] = useState(true)
 
     return (
         
-        <div className='dietplan-container'>
+        < >
             {/* <CardContent className='dietplan-companyname'>
                 <img src={Logo} alt="loading" className='dietplan-companyname-image'/>
                 
@@ -295,6 +299,9 @@ const [loading, setLoading] = useState(true)
 
                </CardContent>
                </Grid>
+
+               {/* {DietData?.RecommendedServings >0 ?(0):(0)} */}
+               
             <Grid  item xs={6} mt={1} >
               <CardContent  >
                       {/* <FormControl  sx={{ position:'absolute',right:6 }} size="small">
@@ -309,6 +316,7 @@ const [loading, setLoading] = useState(true)
               </Grid>
           </Grid>
 
+          {DietData?.RecommendedServings >0 ?(<Grid>
             <Grid>
                 <Card  style={{backgroundColor:"#D1A6E7",margin:"10px"}}>
                     <Grid container  item flexDirection={'row'} alignItems="center"  >
@@ -348,13 +356,13 @@ const [loading, setLoading] = useState(true)
                     <Grid container  justifyContent="center" alignItems="center" flexDirection="column" >
                         
                         <Grid item mt={1}>
-                        <Typography  style={todaysgoal}>Today's Intakes</Typography>
+                        <Typography style={exercise}>Today's Intakes</Typography>
                         </Grid>
                         <Grid item>
 
                        
                         <Grid  container flexDirection="row">
-                           <Grid item ><Typography style={{ fontSize:"30px" ,color:"white",fontWeight:"40px"}}> {exerciseData?.TotalServings} </Typography></Grid>
+                           <Grid item ><Typography style={{ fontSize:"30px" ,color:"white",fontWeight:"40px"}}> {DietData?.RecommendedServings} </Typography></Grid>
                            <Grid item><Typography mt={2}  ml={0.5} style={exercise}>Servings</Typography></Grid>
                             </Grid>
                         </Grid>
@@ -379,7 +387,7 @@ const [loading, setLoading] = useState(true)
                         <Grid item  container justifyContent="center" alignItems="center">
                         <CardContent sx={{alignItems:"center",alignSelf:'center',alignContent:"center"}}>
                                 <Typography variant="body1" component="span"   style={servingleft}>
-                                {exerciseData?.servingsLeft}  servings left 
+                                {DietData?.servingsLeft}  servings left 
                                     
                                 </Typography>
                                  </CardContent>
@@ -451,11 +459,21 @@ const [loading, setLoading] = useState(true)
               //  </Grid>  
 
         );
-     })):(<Typography   align="center"  style={title} >No Categories assigned</Typography> )}
+     })):(<Card sx={{ margin:"10px" ,maxHeight:"800px"}}>
+     <CardContent>
+     <Typography   align="center"  style={title} >No categories assigned</Typography>
+     
+     </CardContent>
+     </Card> )}
     
-
+    </Grid>):(<Card sx={{backgroundColor:"#8D25C1", margin:"10px" ,maxHeight:"800px"}}>
+              <CardContent>
+              <Typography  align="center"   style={calories}> You don`t have any ongoing diet  plans. Please consult Dietician.</Typography>
+              </CardContent>
+              </Card>)}
+  
    
-         </div>
+         </>
 
          
     );

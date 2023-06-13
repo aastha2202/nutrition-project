@@ -100,7 +100,7 @@ const onClose=()=>{
     axios.request(config)
     .then((response) => {
       props.apiCall()
-      props.handleSuccess()
+      props.handleSuccess(servings)
       setOpen(false);
       // setPostServings(reponse?.data?.data)
       console.log(response?.data?.data,"------post servings checking--");

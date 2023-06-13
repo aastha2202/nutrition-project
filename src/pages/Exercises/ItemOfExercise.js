@@ -101,35 +101,13 @@ export default function Aerobic({ route, navigation,props }) {
 
     // const [value,setValue]=useState(location.state?.data)
     //  console.log(value,"---------import api data ");
-    const [count1, setCount1] = useState(0);
-
-    const handleIncrement1 = () => {
-        setCount1(count1 + 1);
-    };
-
-    const handleDecrement1 = () => {
-        if (count1 > 0) {
-
-            setCount1(count1 - 1);
-        }
-
-    };
+   
+   
 
 
-    const [count2, setCount2] = useState(0);
+   
 
-    const handleIncrement2 = () => {
-
-        setCount2(count2 + 1);
-    };
-
-    const handleDecrement2 = () => {
-        if (count2 > 0) {
-            setCount2(count2 - 1);
-        }
-
-    };
-
+    
     const [count3, setCount3] = useState(0);
     const handleIncrement3 = () => {
         setCount3(count3 + 1);
@@ -142,6 +120,37 @@ export default function Aerobic({ route, navigation,props }) {
 
     };
 
+    const [extraData, setExtraData] = useState(new Date())
+    const [date, setDate] = useState(null)
+
+    const getCurrentDate = () => {
+      var date = new Date().getDate();
+      var month = new Date().getMonth() + 1;
+      var year = new Date().getFullYear();
+      if (date < 10) date = '0' + date;
+      if (month < 10) month = '0' + month;
+      setDate(date + '-' + month + '-' + year);//format: d-m-y;
+  }
+
+    const increaseCount = (item, index) => {
+      console.log('increasingg',item)
+      setAddServings(addServings => parseInt(addServings) + 1)
+      item.servings_consumed = parseInt(item.servings_consumed) + 1 
+      items[index] = item
+      setItems(items)
+      setExtraData(new Date())
+      saveDailyIntake(item)
+  }
+
+  const decreaseCount = (item, index) => {
+
+      setAddServings(addServings => parseInt(addServings) - 1)
+      item.servings_consumed = parseInt(item.servings_consumed) - 1 
+      items[index] =item
+      setItems(items)
+      setExtraData(new Date())
+      saveDailyIntake(item)
+  }
 
     const [items, setItems] = useState([])
     const [itemIntakeStatus, setItemIntakeStatus] = useState([])
@@ -158,7 +167,7 @@ export default function Aerobic({ route, navigation,props }) {
     // const windowHeight = Dimensions.get('window').height;
     const [loading, setLoading] = useState(true)
     const [addServings, setAddServings] = useState(0)
-
+   
     const childComp=useRef();
     // const isFocused = useIsFocused();
 
@@ -170,37 +179,122 @@ export default function Aerobic({ route, navigation,props }) {
       params=JSON.parse(s)
       setParams(params)
             apiCall()
+            getCurrentDate()
+
         
     }, [])
 
-    const apiCall = async () => {
-      setViewModal(false)
-        let userIdAsync = await localStorage.getItem('userId')
+    const saveDailyIntake = async (item) => {
+      let userIdAsync = await localStorage.getItem('userId')
 
-        setCategoryName(params.category)
+
+      let data = {
+          "user_id": parseInt(userIdAsync),
+          "date": date,
+          "diet_id": params.diet_id,
+          "item_id": item.item_id,
+          "type": item.type,
+          "category": params?.category,
+          "servings_consumed": item?.servings_consumed
+      }
+
+      console.log(data, "posr requestrrrrtt")
+      axios.post(`https://aipse.in/api/updateDailyIntake`, data)
+          .then(function (response) {
+
+              console.log(response?.data, "response from apiii")
+              // closeBackdrop(servings, item)
+          })
+          .catch(function (error) {
+              // Alert.alert("something went wrong");
+              // console.log(error);
+          });
+
+
+
+  }
+
+    // const apiCall = async () => {
+    //   setViewModal(false)
+    //     let userIdAsync = await localStorage.getItem('userId')
+
+    //     setCategoryName(params.category)
        
 
-        axios.get(`https://aipse.in/api/getItemsOfCategory?category_id=${params.cat}&type=exercise`)
-            .then(function (response) {
+    //     axios.get(`https://aipse.in/api/getItemsOfCategory?category_id=${params.cat}&type=exercise`)
+    //         .then(function (response) {
 
-                setItems(response?.data?.data)
-                axios.get(`https://aipse.in/api/itemIntakeStatus?userid=${userIdAsync}&type=exercise&category=${params.category}`)
-                    .then(function (response) {
+    //             setItems(response?.data?.data)
+    //             axios.get(`https://aipse.in/api/itemIntakeStatus?userid=${userIdAsync}&type=exercise&category=${params.category}`)
+    //                 .then(function (response) {
 
-                        setItemIntakeStatus(response?.data?.data)
-                        // handleSuccess()
-                        setLoading(false)
-                    })
-                    .catch(function (error) {
-                        // Alert.alert("something went wrong");
-                        // console.log(error);
-                    });
-            })
-            .catch(function (error) {
-                // Alert.alert("something went wrong");
-                // console.log(error);
-            });
-    }
+    //                     setItemIntakeStatus(response?.data?.data)
+    //                     // handleSuccess()
+    //                     setLoading(false)
+    //                 })
+    //                 .catch(function (error) {
+    //                     // Alert.alert("something went wrong");
+    //                     // console.log(error);
+    //                 });
+    //         })
+    //         .catch(function (error) {
+    //             // Alert.alert("something went wrong");
+    //             // console.log(error);
+    //         });
+    // }
+
+
+
+    const apiCall = async () => {
+      let userIdAsync = await localStorage.getItem('userId')
+
+      setCategoryName(params.category)
+
+      axios.get(`https://aipse.in/api/getItemsOfCategory?category_id=${params.cat}&type=exercise`)
+          .then(function (response) {
+              console.log(response?.data?.data,"checkingggggggggggggggggggg")
+              if (response?.data?.data) {
+                 let  items = response?.data?.data
+                  setItems(items)
+                  axios.get(`https://aipse.in/api/itemIntakeStatus?userid=${userIdAsync}&type=exercise&category=${params.category}`)
+                      .then(function (response) {
+                          console.log(response?.data)
+                          let itemServings = response?.data?.data ? response?.data?.data :[]
+                         
+                          for (let i = 0; i < items.length; i++) {
+                              let servings = itemServings?.filter(oneitem => oneitem?.item_id == items[i].item_id)
+                              console.log(servings,"servings")
+                              if (servings.length > 0) {
+                                  items[i] = { ...items[i], ...servings[0] }
+                                  setAddServings(addServings => parseInt(addServings) + parseInt(servings[0].servings_consumed))
+                              }
+                              else {
+                                  items[i] = { ...items[i], servings_consumed: 0 }
+                              }
+
+                              if (i == items.length - 1) {
+                                  setItems(items)
+                                  setLoading(false)
+                              }
+                          }
+                          setItemIntakeStatus(response?.data?.data)
+
+                      })
+                      .catch(function (error) {
+                          // Alert.alert("something went wrong");
+                          // console.log(error);
+                      });
+              }
+              else {
+                  setLoading(false)
+              }
+          })
+          .catch(function (error) {
+              // Alert.alert("something went wrong");
+              // console.log(error);
+          });
+  }
+
 
    
 
@@ -222,6 +316,14 @@ export default function Aerobic({ route, navigation,props }) {
       childComp.current.handleClickOpen()
     }
 
+    const close = (servings, item) => {
+      // Alert.alert(`You have consumed ${servings} servings of ${item.item_name
+      setAddServings(servings)
+      apiCall()
+      // bottomSheetModalRef.current?.close();
+  }
+  
+
 
     // console.log(servings, "///////royre paramsss") 
  console.log(itemIntakeStatus,"....//-------categoryName-----checkinh")
@@ -233,10 +335,17 @@ export default function Aerobic({ route, navigation,props }) {
   // alert usage here
   const [showAlert, setShowAlert] = useState(false);
 
-  const handleSuccess = () => {
+  const handleSuccess = (servings) => {
+    close(servings)
     setShowAlert(true);
+    
   };
 
+  // const handleSuccess = () => {
+  //   setShowAlert(true);
+  // }
+  
+    console.log(items,"--------------")
     return ( 
         <div>
 
@@ -279,8 +388,8 @@ export default function Aerobic({ route, navigation,props }) {
                   </Grid>
             </Grid>
         {/* <Typography variant="h3" style={pageheading}> {value.category_name} </Typography> */}
-        <Typography style={calories}>45 Calories / Servings </Typography>
-        <Typography style={calories}>13 Servings / Day </Typography>
+        <Typography style={calories}>45 Calories / Sets </Typography>
+        <Typography style={calories}>13 Sets / Day </Typography>
       </CardContent>
     </Grid>
     <Grid item xs={6}>
@@ -289,14 +398,15 @@ export default function Aerobic({ route, navigation,props }) {
           sx={{ Width: 200, height: 110 }}
           style={{ backgroundColor: "#E1B725", textAlign:"center" }}
         >
-          <Typography variant="h3"  style={caloriesremained}> {params?.servingsConsumed}  
+          <Typography variant="h3"  style={caloriesremained}> {addServings}
+          {/* {params?.servingsConsumed + addServings}   */}
        
           </Typography>
           <Typography variant="h5" style={caloriesremained} >
-            serving
+            sets
           </Typography>
           <Typography variant="h5" style={caloriesremained} >
-            Consumed
+            done
           </Typography>
         </Card>
       </CardContent>
@@ -310,18 +420,20 @@ export default function Aerobic({ route, navigation,props }) {
     </Card>
   </CardContent>
   
-  {items?.length>0?(items.map(item=>{
+  {items?.length>0?
+  (items.map((item,index)=>{
   return(
     <Card style={cardStyle}>
-    <CardContent onClick={()=>{handleCard(item)}} >
+    <CardContent >
+    {/* onClick={()=>{handleCard(item)}} */}
       <Grid container spacing={2} justifyContent="center" alignItems="center">
-        <Grid item xs={2} md={2}>
+        <Grid item xs={3} md={3}>
           <ButtonBase>
-            <img src={imageurl+item.item_image} alt="nova logo" />
+            <img   style={{borderRadius:100,maxHeight:"80px",  objectFit: 'cover',}} src={imageurl+item.item_image} alt="image" />
 
           </ButtonBase>
-        </Grid>
-        <Grid item xs={10} spacing={2} md={10}>
+        </Grid> 
+        <Grid item xs={9} spacing={2} md={9}>
           <Grid item xs>
             <div style={{ display: "flex" }}>
               <Typography
@@ -330,13 +442,24 @@ export default function Aerobic({ route, navigation,props }) {
                 component="div"
                  style = {maintitle }
               >
-                 {item.item_name}
+                 {item.item_name}  
                 
               </Typography>
               <Card sx={{position:'absolute', minWidth:"30px" , alignContent:"center" , right:10,borderRadius:1,boxShadow: '#c4c4c4'}}  >
               {/* <EditCalories state={{data:itemIntakeStatus}} /> */}
+              <IconButton onClick={() => { item.servings_consumed >= 1 && decreaseCount(item, index) }} >
+                                <RemoveIcon  />
+                                 </IconButton>
+                              
+                                
+                                 {item.servings_consumed}
+                                { console.log(item?.servings_consumed,"in code --")}
+                                 <IconButton  onClick={() => { increaseCount(item, index) }}>
+                                 <AddIcon />
+                                 </IconButton>
+                                
                 
-                <Typography sx={{textAlign:"center",alignContent:"center"}}>{getStatus(item.item_id)}</Typography>
+                {/* <Typography sx={{textAlign:"center",alignContent:"center"}}>{getStatus(item.item_id)}</Typography> */}
               </Card>
             </div>
             <Typography variant="body2" gutterBottom mt={0.6} style={maintext}>
@@ -350,9 +473,11 @@ export default function Aerobic({ route, navigation,props }) {
 
   )
 
-})):(<Typography   align="center"  style={calories}>No Data Found</Typography> )}
+})):(<Typography   align="center"  style={calories}>No Exercise Found</Typography> )}
+
+
 
 </div>
 
             );
-    }
+   }
