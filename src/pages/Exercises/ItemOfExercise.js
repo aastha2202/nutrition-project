@@ -427,13 +427,13 @@ export default function Aerobic({ route, navigation,props }) {
     <CardContent >
     {/* onClick={()=>{handleCard(item)}} */}
       <Grid container spacing={2} justifyContent="center" alignItems="center">
-        <Grid item xs={2} md={2}>
+        <Grid item xs={3} md={3}>
           <ButtonBase>
-            <img   style={{borderRadius:100,maxHeight:"80px", minWidth:"80px", objectFit: 'cover',}} src={imageurl+item.item_image} alt="image" />
+            <img   style={{borderRadius:100,maxHeight:"80px",  objectFit: 'cover',}} src={imageurl+item.item_image} alt="image" />
 
           </ButtonBase>
         </Grid> 
-        <Grid item xs={10} spacing={2} md={10}>
+        <Grid item xs={9} spacing={2} md={9}>
           <Grid item xs>
             <div style={{ display: "flex" }}>
               <Typography

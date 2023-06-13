@@ -464,7 +464,7 @@ console.log(upcoming,"----upcoming----")
              <Grid container item alignContent={"center"} minHeight="80px" >
           <Grid item xs={5.5} >
           <Typography variant='h4' style={{color:"black" ,textAlign:"center" }}>
-          {/* {ongoingDietPlan?.StartDate} */}
+      
           {formatDate(ongoingDietPlan?.StartDate)}
           </Typography > 
           </Grid>
@@ -474,7 +474,7 @@ console.log(upcoming,"----upcoming----")
           </Grid>
           <Grid item  xs={5.5} justify="center" >
           <Typography variant='h4'  style={{color:"black", textAlign:"center"}}>
-          {/* {ongoingDietPlan?.EndDate} */}
+      
           {formatDate(ongoingDietPlan?.EndDate)}
           </Typography>
           </Grid>
@@ -542,7 +542,7 @@ console.log(upcoming,"----upcoming----")
 <Grid container item alignContent={"center"} minHeight="80px" >
 <Grid item xs={5.5} >
 <Typography variant='h4' style={{color:"black" ,textAlign:"center" }}>
-{/* {ongoingDietPlan?.StartDate} */}
+
 {formatDate(ongoingExercisePlan?.StartDate)}
 </Typography > 
 </Grid>
@@ -552,7 +552,7 @@ console.log(upcoming,"----upcoming----")
 </Grid>
 <Grid item  xs={5.5} justify="center" >
 <Typography variant='h4'  style={{color:"black", textAlign:"center"}}>
-{/* {ongoingDietPlan?.EndDate} */}
+
 {formatDate(ongoingExercisePlan?.EndDate)}
 </Typography>
 </Grid>
@@ -588,7 +588,7 @@ console.log(upcoming,"----upcoming----")
               
               
                     <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
-                    {/* {ongoingExercisePlan.servingsLeft} */}
+                   
                     {ongoingExercisePlan.servingsLeft}
                     </Typography>
                     <Typography style={subtext}>exercise left</Typography>
@@ -619,7 +619,7 @@ console.log(upcoming,"----upcoming----")
 
          
       {prevDietPlan.length > 0 && (
-        <Card sx={{margin:"10px"}} style={{backgroundColor:"#D1A6E7"}}>
+        <Card sx={{margin:"10px"}} style={{backgroundColor:"white"}}>
           <Grid  sx={12} marginLeft={"30px"}  marginTop={"10px"}>
           <Typography variant='h5' style={hello} >Previous Plans</Typography>
     
@@ -633,8 +633,7 @@ console.log(upcoming,"----upcoming----")
 <Grid container item alignContent={"center"} minHeight="80px" >
 <Grid item xs={5.5} >
 <Typography variant='h4' style={{color:"black" ,textAlign:"center" }}>
-{/* {ongoingDietPlan?.StartDate} */}
-{/* {formatDate(ongoingExercisePlan?.StartDate)} */}
+
 {formatDate(item.startdate)}
 </Typography > 
 </Grid>
@@ -644,8 +643,7 @@ console.log(upcoming,"----upcoming----")
 </Grid>
 <Grid item  xs={5.5} justify="center" >
 <Typography variant='h4'  style={{color:"black", textAlign:"center"}}>
-{/* {ongoingDietPlan?.EndDate} */}
-{/* {formatDate(ongoingExercisePlan?.EndDate)} */}
+
 {formatDate(item.enddate)}
 </Typography>
 </Grid>
@@ -678,11 +676,9 @@ console.log(upcoming,"----upcoming----")
                                         {oneDietPlanData.TotalServings}
                                         {/* {oneExerciseData.TotalServings} */}
                                         </Typography>
-                                        <Typography style={subtext}>diet recommended</Typography>
+                                        <Typography style={subtext}>servings recommended</Typography>
                                        
-        
-                                      
-                                       
+                
                                 </Grid>
                                 <Grid item xs={4}  sx={{justifyContent:'center',alignItems:"center",textAlign:'center',alignSelf:'center',alignContent:'center'}}>
                                 
@@ -698,7 +694,7 @@ console.log(upcoming,"----upcoming----")
                                        
                                         {/* {oneExerciseData.servingsLeft} */}
                                         </Typography>
-                                        <Typography style={subtext}>diet left</Typography>
+                                        <Typography style={subtext}>servings left</Typography>
                                                             
                                        
                                 </Grid>

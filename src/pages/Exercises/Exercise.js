@@ -311,8 +311,8 @@ const [loading, setLoading] = useState(true)
 
     return (
         
-        <div className='dietplan-container'>
-            {/* <CardContent className='dietplan-companyname'>
+        <>
+          {/* <CardContent className='dietplan-companyname'>
                 <img src={Logo} alt="loading" className='dietplan-companyname-image'/>
                 
             </CardContent> */}
@@ -327,8 +327,8 @@ const [loading, setLoading] = useState(true)
                </Grid>
             
           </Grid>
-          {/* dietData?.RecommendedServings > 0 */}
-          {(dietData?.RecommendedServings > 0)?(  <Card>
+         
+          {(dietData?.RecommendedServings > 0)?(  <Grid>
             <Grid>
                 <Card  style={{backgroundColor:"#D1A6E7",margin:"10px"}}>
                     <Grid container  item flexDirection={'row'} alignItems="center"  >
@@ -475,7 +475,7 @@ const [loading, setLoading] = useState(true)
      }
 
      
-    </Card>
+    </Grid>
 
             
          ):(<Card sx={{backgroundColor:"#8D25C1", margin:"10px" ,maxHeight:"800px"}}>
@@ -487,7 +487,7 @@ const [loading, setLoading] = useState(true)
 
 
    
-         </div>
+         </>
 
          
     );

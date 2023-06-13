@@ -285,7 +285,7 @@ const [loading, setLoading] = useState(true)
 
     return (
         
-        <div className='dietplan-container'>
+        < >
             {/* <CardContent className='dietplan-companyname'>
                 <img src={Logo} alt="loading" className='dietplan-companyname-image'/>
                 
@@ -316,7 +316,7 @@ const [loading, setLoading] = useState(true)
               </Grid>
           </Grid>
 
-          {DietData?.RecommendedServings >0 ?(<Card>
+          {DietData?.RecommendedServings >0 ?(<Grid>
             <Grid>
                 <Card  style={{backgroundColor:"#D1A6E7",margin:"10px"}}>
                     <Grid container  item flexDirection={'row'} alignItems="center"  >
@@ -466,14 +466,14 @@ const [loading, setLoading] = useState(true)
      </CardContent>
      </Card> )}
     
-    </Card>):(<Card sx={{backgroundColor:"#8D25C1", margin:"10px" ,maxHeight:"800px"}}>
+    </Grid>):(<Card sx={{backgroundColor:"#8D25C1", margin:"10px" ,maxHeight:"800px"}}>
               <CardContent>
               <Typography  align="center"   style={calories}> You don`t have any ongoing diet  plans. Please consult Dietician.</Typography>
               </CardContent>
               </Card>)}
   
    
-         </div>
+         </>
 
          
     );
