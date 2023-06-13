@@ -330,7 +330,9 @@ const [loading, setLoading] = useState(true)
          
           {(dietData?.RecommendedServings > 0)?(  <Grid>
             <Grid>
-                <Card  style={{backgroundColor:"#D1A6E7",margin:"10px"}}>
+                <Card  style={{backgroundColor:"#D1A6E7",margin:"10px"}}> 
+                {/* background: #8D25C157; */}
+
                     <Grid container  item flexDirection={'row'} alignItems="center"  >
                       <Grid item xs={6}> 
                     <Card  sx={{minHeight:80}} style={{backgroundColor:"#8D25C1",margin:"10px"}}>
