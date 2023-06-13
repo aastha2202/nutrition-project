@@ -628,7 +628,7 @@ console.log(upcoming,"----upcoming----")
                 <CardContent key={index} > 
         
                 
-                    <Card  onClick={() => { index == viewOneDietPlan.previous ? setViewOneDietPlan(-1) : getOneDiet(item, index) }} style={{backgroundColor:"#8D25C1", }} >
+                    <Card  onClick={() => { index == viewOneDietPlan.previous ? setViewOneDietPlan(-1) : getOneDiet(item, index) }} style={{backgroundColor:"white", boxShadow:10, borderRadius: 10 }} >
 
 <Grid container item alignContent={"center"} minHeight="80px" >
 <Grid item xs={5.5} >
@@ -650,20 +650,16 @@ console.log(upcoming,"----upcoming----")
 
 
 </Grid>
-
-
-                </Card>
-
-                  {viewOneDietPlan.previous === index && (
-                    <Card sx={{marginTop:"10px"}}>
+{viewOneDietPlan.previous === index && (
+                    <Grid sx={{marginTop:"10px"}}>
                       {item?.type === 'food' ? (
-                        <Card >
+                        <Grid >
                           {oneDietPlanData === 'empty' ? (
                             <CardContent style={{ alignItems: "center", flexDirection: "row", justifyContent: 'space-between' }}>
                               <Typography style={{ color: "white" }}> No data found in diet plan</Typography>
                             </CardContent>
                           ) : (
-                            <Card  style={{backgroundColor:"#2c2b2b",}} >
+                            <Card  style={{backgroundColor:"#2c2b2b", margin:"10px"}}  >
                             
                          
                                 <CardContent >
@@ -704,16 +700,16 @@ console.log(upcoming,"----upcoming----")
                             
                     </Card>
                           )}
-                        </Card>
+                        </Grid>
                       ) : item?.type === 'exercise' ? (
-                        <Card >
+                        <Grid  >
                           {oneDietPlanData === 'empty' ? (
                             <CardContent style={{ justifyContent: "center", alignItems: "center" }}>
                               <Typography style={{ color: "white" }}> No data found in exercise plan</Typography>
                             </CardContent>
                           ) : (
-                            <Card   style={{backgroundColor:"#2c2b2b",}}>
-                            <CardContent >
+                            <Card   style={{backgroundColor:"#2c2b2b",margin:"10px"}}>
+                            <CardContent  >
                             <Grid container flexDirection="row" spacing="1" alignItems="center" justifyContent="center" >
                                 
                                 <Grid item xs={4} alignItems="center"  sx={{textAlign:'center'}} alignSelf={"center"} justifyContent="center">
@@ -752,14 +748,18 @@ console.log(upcoming,"----upcoming----")
                             </CardContent>
                              </Card>
                           )}
-                        </Card>
+                        </Grid>
                       ) : (
                         <CardContent style={ { justifyContent: "center", alignItems: "center" }}>
                           <Typography>No activity</Typography>
                         </CardContent>
                       )}
-                    </Card>
+                    </Grid>
                   )}
+
+                </Card>
+
+                 
                 </CardContent>
               ))}
             
@@ -767,149 +767,6 @@ console.log(upcoming,"----upcoming----")
         </Card>
       )}
 
-
-      
-    
- 
-      {upcoming.length > 0 && (
-        <Card sx={{margin:"10px"}} style={{backgroundColor:"#D1A6E7"}} >
-          {/* <Typography variant='h5' style={hello}  >Upcoming Plans</Typography> */}
-          <Grid  sx={12} marginLeft={"30px"}  marginTop={"10px"}>
-          <Typography variant='h5' style={hello} >Upcoming Plans</Typography>
-    
-           </Grid>
-          
-           
-              {upcoming.map((item, index) => (
-                <Card key={index} sx={{margin:"20px",backgroundColor:"#D1A6E7"}} >
-                  
-                    
-                      {item?.type === 'food' ? (
-                        <Card  style={{backgroundColor:"#2c2b2b",}} >
-                            
-                         
-                        <CardContent >
-                    <Grid container flexDirection="row" spacing="1" alignItems="center" justifyContent="center" >
-                        
-                        <Grid item xs={4} alignItems="center"  sx={{textAlign:'center'}} alignSelf={"center"} justifyContent="center">
-                              
-                                
-                                <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
-                                {/* {upcoming.TotalServings} */}
-                                {/* {oneExerciseData.TotalServings} */}
-                                </Typography>
-                                {/* <Typography style={subtext}>servings recommended</Typography> */}
-                               
-
-                              
-                               
-                        </Grid>
-                        <Grid item xs={4}  sx={{justifyContent:'center',alignItems:"center",textAlign:'center',alignSelf:'center',alignContent:'center'}}>
-                        
-                        <img src={Diet}  alt="dinning" style={{display: 'block', margin: 'auto'}}/>
-                        
-                       
-                        </Grid>
-                        <Grid item xs={4} sx={{textAlign:'center'}}  >
-                          
-                          
-                                <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
-                                {/* {upcoming.servingsLeft} */}
-                               
-                                {/* {oneExerciseData.servingsLeft} */}
-                                </Typography>
-                                {/* <Typography style={subtext}>servings left</Typography> */}
-                                                    
-                               
-                        </Grid>
-                                       
-                        </Grid>
-                    </CardContent>
-                    
-            </Card>
-                       
-                        // <img src={Diet}  alt="Diet image" style={{display: 'block', margin: 'auto'}}/>
-                      ) : (
-
-                        <Card   style={{backgroundColor:"#2c2b2b",}}>
-                        <CardContent >
-                        <Grid container flexDirection="row" spacing="1" alignItems="center" justifyContent="center" >
-                            
-                            <Grid item xs={4} alignItems="center"  sx={{textAlign:'center'}} alignSelf={"center"} justifyContent="center">
-                                  
-                                    
-                                    <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
-    
-                                    {/* {upcoming.TotalServings} */}
-                                    </Typography>
-                                    {/* <Typography style={subtext}>exercise recommended</Typography> */}
-                                   
-    
-                                  
-                                   
-                            </Grid>
-                            <Grid item xs={4}  sx={{justifyContent:'center',alignItems:"center",textAlign:'center',alignSelf:'center',alignContent:'center'}}>
-                            
-                            <img src={Exerciselogo}  alt="dinning" style={{display: 'block', margin: 'auto'}}/>
-                            
-                           
-                            </Grid>
-                            <Grid item xs={4} sx={{textAlign:'center'}}  >
-                              
-                              
-                                    <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
-                                   
-                                   
-                                    {/* {upcoming.servingsLeft} */}
-                                    </Typography>
-                                    {/* <Typography style={subtext}>exercise left</Typography> */}
-                                                       
-                                   
-                            </Grid>
-                                           
-                            </Grid>
-                        </CardContent>
-                         </Card>
-                        // <img src={Exerciselogo}  alt="exercise logo" style={{display: 'block', margin: 'auto'}}/>
-                        
-                      )}
-                      <Card sx={{marginTop:"5px"}}>
-                     < Grid container item alignContent={"center"} minHeight="80px" sx={{backgroundColor:"#8D25C1", }} >
-            <Grid item xs={5}  >
-            <Typography variant='h4' style={{color:"black" ,textAlign:"center", }}>
-            {formatDate(item.startdate)}
-           
-            </Typography > 
-            </Grid>
-            <Grid item xs={2}>
-            <Typography variant='h4' sx={{color:"black",fontFamily:"Inter-regular",textAlign:"center"}}>to</Typography>
-           
-            </Grid>
-            <Grid item  xs={5} justify="center" >
-            <Typography variant='h4'  style={{color:"black", textAlign:"center"}}>
-           
-            {formatDate(item.enddate)}
-            </Typography>
-            </Grid>
-            
-            
-                     </Grid>
-                     
-                   </Card>
-                 
-                </Card>
-              ))}
-            
-          
-        </Card>
-      )}
-    
-      
-
-      
-
-         
-   
     
   </>
   );
