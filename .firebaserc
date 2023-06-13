@@ -1,7 +1,7 @@
 {
   "projects": {
-    "default": "npwc-user",
-    "staging": "npwc-user"
+    "default": "nutritionapp-user",
+    "staging": "nutritionapp-user"
   },
   "targets": {},
   "etags": {}
