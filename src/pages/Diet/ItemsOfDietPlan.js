@@ -439,9 +439,9 @@ export default function Protein({ route, navigation,props }) {
     <Card style={cardStyle}>
     <CardContent >
       <Grid container spacing={2} justifyContent="center" alignItems="center">
-        <Grid item xs={3} md={3} >
+        <Grid item xs={3} md={3} sx={{textAlign:"center"}} >
           <ButtonBase >
-            <img  style={{borderRadius:100,maxHeight:"80px",objectFit: 'cover',}} src={imageurl+item.item_image}  alt="image" />
+            <img  style={{borderRadius:100,maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={imageurl+item.item_image}  alt="image" />
           </ButtonBase>
         </Grid>
         <Grid item xs={9} spacing={2} md={9}>

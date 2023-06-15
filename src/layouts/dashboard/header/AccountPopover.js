@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 // @mui
 import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton, Popover } from '@mui/material';
 // mocks_
 import account from '../../../_mock/account';
 import { Link as RouterLink, useNavigate} from 'react-router-dom';
+import axios from 'axios';
 // ----------------------------------------------------------------------
 
 const MENU_OPTIONS = [
@@ -16,18 +17,52 @@ const MENU_OPTIONS = [
     label: 'Profile',
     icon: 'eva:person-fill',
   },
-  {
-    label: 'Settings',
-    icon: 'eva:settings-2-fill',
-  },
+  // {
+  //   label: 'Settings',
+  //   icon: 'eva:settings-2-fill',
+  // },
 ];
 
 // ----------------------------------------------------------------------
 
-export default function AccountPopover() {
+export default function AccountPopover(props) {
   const [open, setOpen] = useState(null);
 
-  const handleOpen = (event) => {
+  // const userinfo = props.data;
+  // console.log(userinfo);
+
+  const [userData,setUserData]= useState([]);
+  useEffect(() => {
+    
+    apiCall()
+  
+}, [])
+  
+   const apiCall = async()=>{
+    let uid = localStorage.getItem('userId')
+    console.log(uid,"---popover in profile page---")
+    let config = {
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: `https://aipse.in/api/userDetails?user_id=${uid}`,
+        headers: { }
+      };
+      
+     axios.request(config)
+      .then((response) => {
+        setUserData(response.data.data)
+        console.log(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+   }
+
+console.log(userData,"=====popover page user details==")
+ 
+
+
+const handleOpen = (event) => {
     setOpen(event.currentTarget);
   };
 
@@ -40,8 +75,15 @@ export default function AccountPopover() {
  
 
   const handleClick = () => {
+     localStorage.removeItem('Username')
+     localStorage.removeItem('userId')
     
     navigate('/login', { replace: true });
+  };
+
+  const handleRegister = () => {
+    
+    navigate('/dashboard/profile', { replace: true });
   };
 
  
@@ -87,20 +129,35 @@ export default function AccountPopover() {
           },
         }}
       >
-        <Box sx={{ my: 1.5, px: 2.5 }}>
+        {userData?.map(item=>{
+          return(
+          <Box sx={{ my: 1.5, px: 2.5 }}>
+          <Typography variant="subtitle2" noWrap>
+            {/* {account.displayName} */}
+            {item.user_name}
+          </Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
+            {/* {account.email} */}
+            {item.email_id}
+          </Typography>
+        </Box>
+        
+          )
+        })}
+        {/* <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
             {account.displayName}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
             {account.email}
           </Typography>
-        </Box>
+        </Box> */}
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
         <Stack sx={{ p: 1 }}>
           {MENU_OPTIONS.map((option) => (
-            <MenuItem key={option.label} onClick={handleClose}>
+            <MenuItem key={option.label} onClick={handleRegister}>
               {option.label}
             </MenuItem>
           ))}

@@ -11,6 +11,8 @@ import Page404 from './pages/Page404';
 import ProductsPage from './pages/ProductsPage';
 //import DashboardAppPage from './pages/Dashboard/DashboardAppPage';
 import Home from "./pages/Home/Home";
+import Profile from "./pages/Profile";
+
 import Adminuser from './Admin/AdminDashboard/Adminuser';
 // 
 import Adminproteins from './Admin/AdminDiet/Adminproteins';
@@ -53,6 +55,10 @@ export default function Router() {
             path: '/registeruser',
             element: < RegisterUser />
         },
+        {
+            path: 'resetpassword',
+            element: < ResetPassword /> ,
+        },
         
         {
             path: '/dashboard',
@@ -66,11 +72,11 @@ export default function Router() {
                     path: 'itemsofdietplan',
                     element: < ItemsOfDietPlan />
                 },
-                 {
-                    path: 'resetpassword',
-                    element: < ResetPassword /> ,
+                 
+                {
+                    path: 'profile',
+                    element: <Profile  /> ,
                 },
-
 
                
                 {

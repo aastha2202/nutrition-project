@@ -138,11 +138,15 @@ const [isLoading,setIsLoading]=useState(false)
 
     }
 
+    const forgetpassword=()=>{
+      navigate('/resetpassword', { replace: true });
+    }
+
   
     return ( 
       <>
   <Helmet>
-    <title> Login | NPWC </title>
+    <title>  NPWC </title>
   </Helmet>
   <StyledRoot>
     
@@ -199,7 +203,7 @@ const [isLoading,setIsLoading]=useState(false)
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
         
         
-        <Link variant="subtitle2" underline="hover">
+        <Link variant="subtitle2"  to="/resetpassword"  component={RouterLink} sx={{textDecoration:'none'}}>
           Forgot password?
         </Link>
       </Stack>

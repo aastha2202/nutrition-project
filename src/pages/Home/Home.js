@@ -4,7 +4,7 @@ import { Grid, Typography, Select, FormControl, InputLabel,Button,IconButton,Sta
 import{useState,useEffect} from 'react'
 import axios from 'axios';
 import { styled } from '@mui/material/styles';
-
+import BarGraph1 from './components/BarGraph1'
 import { Link as RouterLink } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -24,6 +24,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ChevronDownIcon from '@material-ui/icons/ExpandMore';
 // import Stack from '@mui/material/Stack';
 // components
+import AccountPopover from "../../layouts/dashboard/header/AccountPopover";
 
 // sections
 
@@ -152,8 +153,7 @@ const handleExpandClick = () => {
   useEffect(() => {
    
       setValues()
-      
-  
+    
 
   }, [])
   
@@ -331,6 +331,36 @@ const handleExpandClick = () => {
         console.log(error);
       });
   }
+
+  //user data hitting
+//   const [userData,setUserData]= useState([]);
+//   useEffect(() => {
+    
+//     apiCall()
+  
+// }, [])
+  
+//    const apiCall = async()=>{
+//     let uid = localStorage.getItem('userId')
+//     console.log(uid,"---userid in profile page---")
+//     let config = {
+//         method: 'get',
+//         maxBodyLength: Infinity,
+//         url: `https://aipse.in/api/userDetails?user_id=${uid}`,
+//         headers: { }
+//       };
+      
+//      axios.request(config)
+//       .then((response) => {
+//         setUserData(response.data.data)
+//         console.log(response.data.data);
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+//    }
+
+
   
 // console.log(uname,"username--checking---")  
 // console.log(uid,"id-------checking")
@@ -340,12 +370,12 @@ console.log(oneDietPlanData,"------oneDietPlanData  -----dataa");
 console.log(oneExerciseData,"-----oneExerciseData --dtaa checking");
 console.log(upcoming,"----upcoming----")
 
-
+// console.log(userData,"----user details---")  
   return (
   < >
     {/* <img src={Logo} alt="nova logo" style={{height: "auto", width: "250px", marginLeft: "30px"}}/> */}
       
-
+{/* <AccountPopover state={{data:userData}}/> */}
     <Snackbar
         open={alert1Open}
         onClose={() => handleAlertClose(1)}
@@ -767,7 +797,7 @@ console.log(upcoming,"----upcoming----")
         </Card>
       )}
 
-    
+    <BarGraph1/>
   </>
   );
 }

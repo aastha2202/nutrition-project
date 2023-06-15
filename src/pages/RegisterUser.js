@@ -16,9 +16,10 @@ import axios from 'axios';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useState,useEffect,useRef } from 'react';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider, } from '@mui/material/styles';
 import { Link as RouterLink, useNavigate} from 'react-router-dom';
  import Iconify from 'src/components/iconify/Iconify';
+ import {   IconButton, InputAdornment, } from '@mui/material';
  import { Icon, InlineIcon } from '@iconify/react';
 // import plusIcon from '@iconify-icons/mdi/plus';
 import Snackbar from '@mui/material/Snackbar';
@@ -54,16 +55,43 @@ export default function SignUp() {
 
   const [formValid, setFormValid] = useState(true);
 
-  const userNameRef = useRef(null);
-  const passwordRef = useRef(null);
-  const emailRef = useRef(null);
-  const genderRef = useRef(null);
-  const mobileNumberRef = useRef(null);
-
+  
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+
+
+    // const validationErrors = {};
+    // let hasErrors = false;
+
+    // if (formValue.user_name.trim() === '') {
+    //   validationErrors.user_name = true;
+    //   hasErrors = true;
+    // }
+
+    // if (formValue.password.trim() === '') {
+    //   validationErrors.password = true;
+    //   hasErrors = true;
+    // }
+
+    // if (formValue.email.trim() === '') {
+    //   validationErrors.email_id = true;
+    //   hasErrors = true;
+    // }
+
+    // if (!/^\d{10}$/.test(formValue.mobile-number)) {
+    //   validationErrors.mobile_number = true;
+    //   hasErrors = true;
+    // }
+
+    // setErrors(validationErrors);
+
+    // if (!hasErrors) {
+    //   // Perform form submission
+    //   // ...
+    // }
+    
     console.log({
       email: data.get('email_id'),
       password: data.get('password'),
@@ -71,56 +99,25 @@ export default function SignUp() {
       patientid: data.get('patient-id')
       
     });
-    //////
-     // Perform validation
-    //  let isValid = true;
-
-    //  if (data.get('user_name') === '') {
-    //    userNameRef.current.focus();
-    //    isValid = false;
-    //  }
- 
-    //  if (data.get('password') === '') {
-    //    passwordRef.current.focus();
-    //    isValid = false;
-    //  }
- 
-    //  if (data.get('email_id') === '') {
-    //    emailRef.current.focus();
-    //    isValid = false;
-    //  }
- 
-    //  if (data.get('gender') === '') {
-    //    genderRef.current.focus();
-    //    isValid = false;
-    //  }
- 
-    //  if (data.get('mobile_number') === '') {
-    //    mobileNumberRef.current.focus();
-    //    isValid = false;
-    //  }
- 
-    //  if (!isValid) {
-    //    setFormValid(false);
-    //    return;
-    //  }
- 
-  //    console.log({
-  //      email: data.get('email_id'),
-  //      password: data.get('password'),
-  //      patientid: data.get('patient-id')
-  //    }); 
- 
-  //    console.log(formValue.gender);
-
     
   };
+
+  // const handleChanges = (event) => {
+  //   const { name, value } = event.target;
+  //   setFormValue((prevValues) => ({
+  //     ...prevValues,
+  //     [name]: value,
+  //   }));
+  // };
 
 // validation 
 
 
 
 
+
+const [error, setError] = useState(false);
+const [errorPassword, setErrorPassword] = useState(false);
 // To update the state of gender
   const [gender, setGender] = React.useState('');
   const [images,setImages]=useState("");
@@ -139,6 +136,12 @@ export default function SignUp() {
 
   const handleError = () => {
     setErrorAlert(true);
+  };
+
+  const [errorMobile, setErrorMobile] = useState(false);
+
+  const Errornumber = () => {
+    setErrorMobile(true);
   };
 
   const [enterFields, setEnterFields] = useState(false);
@@ -160,6 +163,7 @@ export default function SignUp() {
 
   //API integration
   const [response, setResponse] = useState()
+  // const [email,setEmail]=useState({})
     const [formValue, setFormValue] = useState({
         "user_name": "",
         "password": "",
@@ -170,6 +174,14 @@ export default function SignUp() {
         "address": "",
         "profile_image": ""
     })
+
+
+  //   const [errors, setErrors] = useState({
+  //     user_name: false,
+  //     password: false,
+  //     email_id: false,
+  //     mobile_number: false,
+  //   });
 
     const registerUser = () => {
         
@@ -292,10 +304,10 @@ const handleImageSelection = (event) => {
           <div id="project-input-tag-div" style={{ display: 'flex' ,marginTop:"10px" , marginBottom:"10px"}}>
                   <label id="input-tag-project-multi-drawer" for="inputTag" style={{ cursor: 'pointer', display: 'flex' }}>
                   <Avatar
-                       sx={{ size:"200px" }}
+                       sx={{ size:"200px" ,width:"100px",height:"100px"}}
                        alt="Remy Sharp"
                        src="/broken-image.jpg">
-                       <Iconify id="camera-icon" icon={'mdi:camera'} onChange={handleImageSelection} sx={{ width: 650, height: 650, ml: 1,  color: '#ff7424' }} />
+                       <Iconify id="camera-icon" icon={'mdi:camera'} onChange={handleImageSelection} sx={{ width: 50, height: 150, ml: 1,  color: '#ff7424' }} />
                       
                        {images && <img src={images} alt="Uploaded Image" />}
 
@@ -335,46 +347,89 @@ const handleImageSelection = (event) => {
                   label="User Name"
                   autoFocus
                   onChange={(e) => { setFormValue({ ...formValue,  user_name: e.target.value }); setFormValid(true); }}
-                  inputRef={userNameRef}
-                  error={!formValid && formValue.user_name === ''}
-                  helperText={!formValid && formValue.user_name === '' && 'User Name is required'}
+                //   onChange={handleChanges}
+                //   error={errors.userName}
+                //   value={formValue.userName}
+                //  helperText={errors.userName && 'User Name is required'}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   autoComplete="password"
                   name="password"
+                  type="password"
                   required
                   fullWidth
                   id="password"
                   label="Password"
                   autoFocus
-                  onChange={(e) => { setFormValue({ ...formValue,  password: e.target.value }) }}
+                  value={formValue?.password}
+                  type={showPassword ? 'text' : 'password'}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
+                          <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                  error={errorPassword}
+                  helperText={
+                    errorPassword &&
+                    'Password should contain at least one special character, number, uppercase letter, and lowercase letter.'
+                  }
+
+                  onChange={(e) => {
+
+                    const specialCharRegex = /[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/;
+                    const numberRegex = /[0-9]/;
+                    const uppercaseRegex = /[A-Z]/;
+                    const lowercaseRegex = /[a-z]/;
+
+                   // Validate the password
+                  const isPasswordValid =
+                  specialCharRegex.test(formValue?.password) &&
+                  numberRegex.test(formValue?.password) &&
+                  uppercaseRegex.test(formValue?.password) &&
+                  lowercaseRegex.test(formValue?.password);
+
+                     // Set error state based on validation result
+                     setErrorPassword(!isPasswordValid);
+                     setFormValue({ ...formValue,  password: e.target.value }) }}
+                  // onChange={handleChanges}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
+                  type="email"
                   id="email_id"
                   label="Email"
                   name="email_id"
                   autoComplete="email_id"
-                  onChange={(e) => { setFormValue({ ...formValue, email_id: e.target.value }) }}
+                  value={formValue?.email_id}
+
+                  
+                  error={error}
+                  helperText={error && 'Please enter a valid email address.'}
+                  onChange={(e) => {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                    // Validating the email
+                    const isEmailValid = emailRegex.test(formValue?.email_id);
+                
+                    // Set error state based on validation result
+                   
+                    setError(!isEmailValid);
+                    setFormValue({ ...formValue, email_id: e.target.value }) 
+                  
+                  }}
+                   
                 />
               </Grid>
-              {/* <Grid item xs={12}>
-                <TextField
-                  autoComplete="role"
-                  name="role"
-                  required
-                  fullWidth
-                  id="role"
-                  label="role"
-                  autoFocus
-                  onChangeText={(e) => { setFormValue({ ...formValue,  role: e.target.value }) }}
-                />
-              </Grid> */}
+              
              
               <Grid item xs={12} container flexDirection={"row"} spacing={"4"}>
               
@@ -405,9 +460,26 @@ const handleImageSelection = (event) => {
                   id="mobile_number"
                   required
                   label="Mobile number"
+                  type="number"
                   name="mobile_number"
                   autoComplete="mobile_number"
-                  onChange={(e) =>  {setFormValue({ ...formValue, mobile_number: e.target.value }) }}
+                  value={formValue?.mobile_number}
+                  
+                  onChange={(e) =>  { 
+                    const sanitizedValue = e.target.value.replace(/\D/g, '');
+                  // Limit input to 10 numbers
+                  const truncatedValue = sanitizedValue.slice(0, 10);
+
+                    
+                    
+                    //Errornumber()
+                    setFormValue({ ...formValue, mobile_number:truncatedValue  });
+
+                
+                
+               }}
+                  // onChange={handleChanges}
+                    // onChange={handleMobileNumberChange} 
                 />
               </Grid>
               
@@ -464,6 +536,15 @@ const handleImageSelection = (event) => {
         autoHideDuration={1000}
         >
         <Alert severity="warning"> Some Required Fields are missing </Alert>  
+         </Snackbar>
+
+
+         <Snackbar
+        open={errorMobile}
+        onClose={() =>setErrorMobile(false) }
+        autoHideDuration={1000}
+        >
+        <Alert severity="warning"> mobile number must be 10 </Alert>  
          </Snackbar>
           </Box>
         </Box>

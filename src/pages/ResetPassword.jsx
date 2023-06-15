@@ -78,13 +78,13 @@ export default function ResetPassword() {
     <title> Reset Password | NPWC </title>
   </Helmet>
   <StyledRoot>
-    <Logo
+    {/* <Logo
       sx={{
         position: "fixed",
         top: { xs: 16, sm: 24, md: 40 },
         left: { xs: 16, sm: 24, md: 40 },
       }}
-    />
+    /> */}
     <Container maxWidth="sm">
       <StyledContent>
         <Grid
@@ -94,9 +94,9 @@ export default function ResetPassword() {
           justifyContent="center"
           spacing={2}
         >
-          <Grid item variant="h2">
+          {/* <Grid item variant="h2">
             Hi, Welcome Back
-          </Grid>
+          </Grid> */}
           <Grid item>
             <img
               src={Nova}
@@ -114,7 +114,7 @@ export default function ResetPassword() {
         </Typography>
 
         <Stack spacing={3}>
-        <TextField name="user name" label="user name"   required/>
+        <TextField name="email" label="email"   required/>
 
         <TextField
          

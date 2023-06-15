@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------------
 import React from "react";
-// import { useState,useEffect } from "react";
+import { useState,useEffect } from "react";
 // const [username, setusername] = useState('')
 // useEffect(() => {
    
@@ -12,16 +12,16 @@ import React from "react";
 
 
 // const setValues = async () => {
-// let uname =  localStorage.getItem('Username')
-// await setusername(uname)
+// let username =  localStorage.getItem('Username')
+// await setusername(username)
 // }
 
 
-let uname =  localStorage.getItem('Username')
-console.log(uname)
+let username =  localStorage.getItem('Username')
+console.log(username)
 const account = {
-  displayName: uname,
-  email: 'demo@minimals.cc',
+  displayName: username,
+  email: 'demo@gmail.com',
   photoURL: '/assets/images/avatars/avatar_default.jpg',
 };
 
