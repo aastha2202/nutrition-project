@@ -1,12 +1,12 @@
 import {React, useEffect, useState }from 'react';
-
+import axios from 'axios';
 // import '../css/DietPlan.css';
 
 import { Link as RouterLink, useLocation ,useNavigate} from 'react-router-dom';
 import Box from '@mui/material/Box';
 import {   Select, FormControl, InputLabel } from '@mui/material';
 import Card from '@mui/material/Card';
-import axios from 'axios';
+// import axios from 'axios';
 import CardActions from '@mui/material/CardActions';
 
 import CardContent from '@mui/material/CardContent';
@@ -35,8 +35,8 @@ import ProteinChicken from "../../assets/ProteinChicken.svg"
 
 // import dinning from '../images/dinningicon.png';
 
-import  "../styles.css";
-
+// import  "../styles.css";
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const title={
     
@@ -416,7 +416,7 @@ const [loading, setLoading] = useState(true)
             <Card  style={maincardStyle}  >
                     <CardContent onClick={()=>{setDietId(item)}} sx={{textDecoration:'none'}}>
                     <Grid container spacing={1} margin="10px" alignItems="center">
-                     <Grid item xs={6}  >
+                     <Grid item xs={11}  >
                      
                      <Grid item  alignSelf={'center'}>
                             <Grid item container flexDirection={"column"}>
@@ -434,22 +434,11 @@ const [loading, setLoading] = useState(true)
                         </Grid> 
                        
                         </Grid>    
-                        <Grid item xs={5} margin={1}    >
-                        
-                        <Grid item container  justifyContent="center" alignItems="center" >
-                            {/* <Typography alignContent="center" variant="body1" component="span" style={totalservingsStyle}>
-                             45 Calories/Servings
-                            </Typography> */}
-                            
-                            
-                        </Grid>
-                        <Grid item   container justifyContent="center" alignItems="center"  >
-                             {/* <Typography alignContent="center" variant="body1" component="span" style={totalservingsStyle} >
-                                 13/servings/Day
-                            </Typography> */}
-                        </Grid> 
-                        
-                        </Grid>
+                       
+                        <Grid item container xs={1} sx={{ position:'absolute',right:2 }}>
+                              <ArrowForwardIcon/>
+                            </Grid>
+
                         
                     </Grid>
                     </CardContent>

@@ -412,13 +412,13 @@ export default function Aerobic({ route, navigation,props }) {
       </CardContent>
     </Grid>
   </Grid>
-  <CardContent>
+  {/* <CardContent>
     <Card>
       <Typography variant="body1" style={textparaStyle}>
         Weigh AFTER cooked / 1 serving = 1 cooked oz 
       </Typography>
     </Card>
-  </CardContent>
+  </CardContent> */}
   
   {items?.length>0?
   (items.map((item,index)=>{
@@ -427,9 +427,9 @@ export default function Aerobic({ route, navigation,props }) {
     <CardContent >
     {/* onClick={()=>{handleCard(item)}} */}
       <Grid container spacing={2} justifyContent="center" alignItems="center">
-        <Grid item xs={3} md={3}>
+        <Grid item xs={3} md={3} sx={{textAlign:"center"}}>
           <ButtonBase>
-            <img   style={{borderRadius:100,maxHeight:"80px",  objectFit: 'cover',}} src={imageurl+item.item_image} alt="image" />
+            <img   style={{borderRadius:100, maxHeight:"70px",minWidth:"70px",objectFit: 'cover'}} src={imageurl+item.item_image} alt="image" />
 
           </ButtonBase>
         </Grid> 
