@@ -117,7 +117,7 @@ export default function SignUp() {
 
 
 const [error, setError] = useState(false);
-// const [errorPassword, setErrorPass] = useState(false);
+const [errorPassword, setErrorPassword] = useState(false);
 // To update the state of gender
   const [gender, setGender] = React.useState('');
   const [images,setImages]=useState("");
@@ -374,9 +374,9 @@ const handleImageSelection = (event) => {
                       </InputAdornment>
                     ),
                   }}
-                  error={error}
+                  error={errorPassword}
                   helperText={
-                    error &&
+                    errorPassword &&
                     'Password should contain at least one special character, number, uppercase letter, and lowercase letter.'
                   }
 
@@ -395,7 +395,7 @@ const handleImageSelection = (event) => {
                   lowercaseRegex.test(formValue?.password);
 
                      // Set error state based on validation result
-                    setError(!isPasswordValid);
+                     setErrorPassword(!isPasswordValid);
                      setFormValue({ ...formValue,  password: e.target.value }) }}
                   // onChange={handleChanges}
                 />
