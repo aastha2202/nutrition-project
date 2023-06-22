@@ -17,7 +17,7 @@ import { useRef } from 'react';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import Logo from "../../assets/nova.svg";
+import TitleLogo from "../../assets/TitleLogo.svg";
 import Poultry from "../../assets/Poultry.svg";
 import Fish from "../../assets/Fish.svg";
 
@@ -62,7 +62,7 @@ const maintitle = {
     // // src: url('./fonts/Roboto-Regular.ttf') format('truetype'),
      fontStyle: "normal",
      fontWeight: "600",
-     fontSize: "20px",
+     fontSize: "18px",
      color:"#112866",
    // fontFamily: "'Poppins', sans-serif",
     // src: `url(${poppinsItalic}) format('truetype')`,
@@ -361,8 +361,26 @@ export default function Protein({ route, navigation,props }) {
     close(servings)
   };
 
-    return ( 
-        <div>
+
+  const [ spinner, setSpinner ] = useState(true);
+
+  // It will be executed before rendering
+
+  useEffect(() => {
+    console.log("loader is onnnnnnn");
+
+
+    setTimeout(() =>{ 
+      // <img src={Logo} alt="loader image" width="100" height="100"/>
+     
+      
+      // <HashLoader color="#36d7b7" />
+      setSpinner(false)
+    }, 1000)
+  }, []);
+    return (  
+
+      <>
 
 
       <Snackbar
@@ -417,7 +435,7 @@ export default function Protein({ route, navigation,props }) {
            
           </Typography>
           <Typography variant="h5" style={caloriesremained} >
-            Serving
+            Servings
           </Typography>
           <Typography variant="h5" style={caloriesremained} >
             Consumed
@@ -439,24 +457,29 @@ export default function Protein({ route, navigation,props }) {
     <Card style={cardStyle}>
     <CardContent >
       <Grid container spacing={2} justifyContent="center" alignItems="center">
-        <Grid item xs={3} md={3} sx={{textAlign:"center"}} >
+        <Grid item xs={3}  sx={{textAlign:"center"}} >
           <ButtonBase >
             <img  style={{borderRadius:100,maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={imageurl+item.item_image}  alt="image" />
           </ButtonBase>
         </Grid>
-        <Grid item xs={9} spacing={2} md={9}>
-          <Grid item xs>
-            <div style={{ display: "flex" }}>
+        <Grid container item xs={9} spacing={1} >
+          {/* <Grid item xs> */}
+            {/* <div style={{ display: "flex" }}> */}
+            <Grid item xs={8} marginTop="9px">
               <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
+                // gutterBottom
+                // variant="h5"
+                // component="div"
                  style = {maintitle }
+                 sx={{alignSelf:"center",   display:"flex", flexDirection:"column" ,justifyContent: "center",}}
               >
                  {item.item_name}
                 
               </Typography>
-              <Card sx={{position:'absolute', minWidth:"30px" , alignContent:"center" , right:10,borderRadius:1,boxShadow: '#c4c4c4'}}  >
+              </Grid>
+              <Grid item xs={4} >
+    
+              <Card sx={{position:'absolute', minWidth:"30px"  , right:5,borderRadius:1,boxShadow: '#c4c4c4'}}  >
               {/* <EditCalories state={{data:itemIntakeStatus}} /> */}
 
               <IconButton onClick={() => { item.servings_consumed >= 1 && decreaseCount(item, index) }} >
@@ -472,13 +495,19 @@ export default function Protein({ route, navigation,props }) {
       
                 {/* <Typography sx={{textAlign:"center",alignContent:"center"}}>{getStatus(item.item_id)}</Typography> */}
               </Card>
-            </div>
+              </Grid>
+            {/* </div> */}
+
+           <Grid item xs={12}>
             <Typography variant="body2" gutterBottom mt={0.6} style={maintext}>
-              {item.description}
+              {item.description ,"oiuyghfgh hghj hj nmbn mnbm  nb jk sfwefkjhgfg nghj ghnfg" }
             </Typography>
+            </Grid>
+
+
           </Grid>
         </Grid>
-      </Grid>
+      {/* </Grid> */}
     </CardContent>
   </Card>
 
@@ -486,7 +515,7 @@ export default function Protein({ route, navigation,props }) {
 
 })):(<Typography   align="center"  style={calories}>No Items Found</Typography> )}
 
-</div>
-
+</>
+       
             );
     }

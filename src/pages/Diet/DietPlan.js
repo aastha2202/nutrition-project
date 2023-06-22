@@ -1,5 +1,7 @@
 import {React, useEffect, useState }from 'react';
 import axios from 'axios';
+// import Joyride from 'react-joyride';
+import Joyride, { STATUS } from "react-joyride";
 // import '../css/DietPlan.css';
 
 import { Link as RouterLink, useLocation ,useNavigate} from 'react-router-dom';
@@ -21,7 +23,7 @@ import Typography from '@mui/material/Typography';
 
 // import CardMedia from '@material-ui/core/CardMedia';
 // import Poultry from "../pictures/Poultry.svg";
-import Logo from "../../assets/nova.svg";
+import TitleLogo from "../../assets/TitleLogo.svg";
 import Diet from "../../assets/Diet.svg";
 import Peas from "../../assets/Peas.svg";
 import Arrowforward from "../../assets/Arrowforward.svg";
@@ -37,7 +39,7 @@ import ProteinChicken from "../../assets/ProteinChicken.svg"
 
 // import  "../styles.css";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-
+import { step3ClassName, step4ClassName } from '../Home/Home';
 const title={
     
     fontFamily:"Inter-Bold",
@@ -283,186 +285,347 @@ const [loading, setLoading] = useState(true)
   }
   // console.log(state,"-----state checking")
 
-    return (
-        
-        < >
-            {/* <CardContent className='dietplan-companyname'>
-                <img src={Logo} alt="loading" className='dietplan-companyname-image'/>
-                
-            </CardContent> */}
-            <Grid container   style={{display:'flex',flexDirection:"row",position:'relative'}}>
-               <Grid item xs={6}>
-               <CardContent >
-                         <Typography  variant='h5' style={title} >
-                              Diet plan
-                          </Typography>    
+  const [ spinner, setSpinner ] = useState(true);
 
-               </CardContent>
-               </Grid>
+  // It will be executed before rendering
 
-               {/* {DietData?.RecommendedServings >0 ?(0):(0)} */}
-               
-            <Grid  item xs={6} mt={1} >
-              <CardContent  >
-                      {/* <FormControl  sx={{ position:'absolute',right:6 }} size="small">
-                     <Select sx={{backgroundColor:"white"}} defaultValue="Today">
-                     <MenuItem value="Today"  >Today</MenuItem>
-                     <MenuItem value="Next Week">Next Week</MenuItem>
-                     <MenuItem value="Previous Week">Previous Week</MenuItem>
-                     </Select>
-                     </FormControl> */}
-                 <br/>  
-              </CardContent>
-              </Grid>
+  useEffect(() => {
+    console.log("loader is onnnnnnn");
+
+    // <img src={Diet} alt="loader image" width="100" height="100"/>
+    setTimeout(() =>{ 
+
+      setSpinner(false)
+    }, 1000)
+  }, []);
+
+
+  // tour working from here
+  const tourSteps = [
+    {
+      target: '.tour-element-1',
+      content: 'Step 1: Welcome to the tour!',
+      placement: 'bottom',
+    },
+    {
+      target: '.tour-element-2',
+      content: 'Step 2: Here is another element to showcase.',
+      placement: 'top',
+    },
+  ];
+  const [isTourOpen, setIsTourOpen] = useState(false);
+
+  const handleTourOpen = () => {
+    setIsTourOpen(true);
+  };
+
+  const handleTourClose = () => {
+    setIsTourOpen(false);
+  };
+
+  // 2nd try
+  const [{ run, steps }, setState] = useState({
+    run: true,
+    steps: [
+      {
+        content: <h2>Let's begin our journey!</h2>,
+        locale: { skip: <strong>SKIP</strong> },
+        placement: "center",
+        target: "body"
+
+
+      },
+      {
+        content: <h2>Here is first step!</h2>,
+        placement: "bottom",
+        target: "#step-1",
+        title: "First step"
+      },
+      {
+        content: <h2>Here is second step!</h2>,
+        placement: "bottom",
+        target: "#step-2",
+        title: "Second step",
+
+        // <Link to={user.id}>{user.name}</Link>
+      },
+      {
+        content: <h2>Here is third step!</h2>,
+        placement: "bottom",
+        target: "#step-3",
+        title: "Third step"
+      },
+      {
+        content: <h2>Here is fourth step!</h2>,
+        placement: "bottom",
+        target: "#step-4",
+        title: "Fourth step"
+      },
+      {
+        content: <h2>Here is fifth step!</h2>,
+        placement: "bottom",
+        target: "#step-5",
+        title: "Fifth step"
+      },
+      {
+        content: <h2>Here is six step!</h2>,
+        placement: "bottom",
+        target: "#step-6",
+        title: "Six step"
+      }, 
+    ]
+  });
+  
+// const [close,setClose]=useState(true);
+//   const handleJoyrideCallback = (data) => {
+//     const { status } = data;
+
+//     if (status === 'finished') {
+//       setState((prevState) => ({
+//         ...prevState,
+//         run: false,
+//       }));
+//     }
+//   };
+// const [loading, setLoading] = useState(true)
+
+    return ( 
+      
+      < >
+
+      {/* <div>
+      {close &&(<div style={{
+      background: "#797979",
+      height: "100vh",
+      display: "flex",
+      gap: "8px",
+      padding: 10,
+      color: "white",
+      justifyContent: "center",
+      alignItems: "center"
+      }}>
+      <Joyride
+      continuous
+      // callback={handleJoyrideCallback}
+      callback={() => {}}
+      run={run}
+      steps={steps}
+      hideCloseButton
+      scrollToFirstStep
+      showSkipButton
+      showProgress
+      />
+      {
+      [1, 2, 3, 4, 5, 6].map((item) => {
+      return (
+        <div
+          key={item}
+          id={`step-${item}`}
+          style={{
+            border: "1px solid white",
+            width: "100px",
+            height: "100px",
+            background: "#0c1d2b",
+            borderRadius: "8px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {item}
+        </div>
+      )
+      })
+      }
+      
+      </div>) }
+      
+      
+      
+      </div> */}
+        {/* <CardContent className='dietplan-companyname'>
+            <img src={Logo} alt="loading" className='dietplan-companyname-image'/>
+            
+        </CardContent> */}
+        <Grid container   style={{display:'flex',flexDirection:"row",position:'relative'}}>
+           <Grid item xs={6} className="step-4"  >
+           <CardContent  >
+           
+                     <Typography  variant='h5' style={title} >
+                          Diet plan
+                      </Typography>    
+      
+           </CardContent>
+           </Grid>
+      
+           {/* {DietData?.RecommendedServings >0 ?(0):(0)} */}
+           
+        <Grid  item xs={6} mt={1} >
+       
+          <CardContent  >
+                  {/* <FormControl  sx={{ position:'absolute',right:6 }} size="small">
+                 <Select sx={{backgroundColor:"white"}} defaultValue="Today">
+                 <MenuItem value="Today"  >Today</MenuItem>
+                 <MenuItem value="Next Week">Next Week</MenuItem>
+                 <MenuItem value="Previous Week">Previous Week</MenuItem>
+                 </Select>
+                 </FormControl> */}
+             <br/>  
+          </CardContent>
           </Grid>
-
-          {DietData?.RecommendedServings >0 ?(<Grid>
-            <Grid>
-                <Card  style={{backgroundColor:"#D1A6E7",margin:"10px"}}>
-                    <Grid container  item flexDirection={'row'} alignItems="center"  >
-                      <Grid item xs={6}> 
-                    <Card  sx={{minHeight:80}} style={{backgroundColor:"#8D25C1",margin:"10px"}}>
-                        <Grid container mt={1} justifyContent="center" alignItems="center" item flexDirection="row" >
+      </Grid>
+      
+      {DietData?.RecommendedServings >0 ?(<Grid>
+        <Grid>
+            <Card  style={{backgroundColor:"#D1A6E7",margin:"10px"}}>
+                <Grid container  item flexDirection={'row'} alignItems="center"  >
+                  <Grid item xs={6}> 
+                <Card  sx={{minHeight:80}} style={{backgroundColor:"#8D25C1",margin:"10px"}}>
+                    <Grid container mt={1} justifyContent="center" alignItems="center" item flexDirection="row" >
+                    
+                       <Grid item mt={3} alignSelf={"center"} >
                         
-                           <Grid item mt={3} alignSelf={"center"} >
-                            
-                           <Typography variant="body1" component="span" style={day} >
-                                            {getCurrentDate()}
+                       <Typography variant="body1" component="span" style={day} >
+                                        {getCurrentDate()}
+                                </Typography>
+                        </Grid> 
+                        {/* <Grid item>
+                            <Grid  container flexDirection="column"  style={{backgroundColor:"#8D25C1",margin:"10px"}} >
+                                <Grid item>
+                                    <Typography variant="h5" component="span" style={month}>
+                                            March
                                     </Typography>
-                            </Grid> 
-                            {/* <Grid item>
-                                <Grid  container flexDirection="column"  style={{backgroundColor:"#8D25C1",margin:"10px"}} >
-                                    <Grid item>
-                                        <Typography variant="h5" component="span" style={month}>
-                                                March
-                                        </Typography>
-                                    </Grid>
-                                
-                                    <Grid item>
-                                        <Typography  variant="h5" component="span" style={year}>
-                                                2023
-                                        </Typography>
-                                    </Grid>
+                                </Grid>
+                            
+                                <Grid item>
+                                    <Typography  variant="h5" component="span" style={year}>
+                                            2023
+                                    </Typography>
                                 </Grid>
                             </Grid>
-                            */}
-                            
                         </Grid>
-                    </Card>
-                    </Grid> 
-
-                    <Grid item xs={6}>
-                    <Card  sx={{minHeight:80}} style={{backgroundColor:"#8D25C1",margin:"10px"}}>
-                    <Grid container  justifyContent="center" alignItems="center" flexDirection="column" >
+                        */}
                         
-                        <Grid item mt={1}>
-                        <Typography style={exercise}>Today's Intakes</Typography>
+                    </Grid>
+                </Card>
+                </Grid> 
+      
+                <Grid item xs={6}>
+                <Card  sx={{minHeight:80}} style={{backgroundColor:"#8D25C1",margin:"10px"}}>
+                <Grid container  justifyContent="center" alignItems="center" flexDirection="column" >
+                    
+                    <Grid item mt={1} className={step4ClassName} >
+                    <Typography style={exercise}>Today's Intakes</Typography>
+                    </Grid>
+                    <Grid item>
+      
+                   
+                    <Grid  container flexDirection="row">
+                       <Grid item ><Typography style={{ fontSize:"30px" ,color:"white",fontWeight:"40px"}}> {DietData?.RecommendedServings} </Typography></Grid>
+                       <Grid item><Typography mt={2}  ml={0.5} style={exercise}>Servings</Typography></Grid>
+                        </Grid>
+                    </Grid>
+                    
+                    
+      
+                </Grid>
+      
+                </Card>
+                </Grid>
+      
+      
+                </Grid>
+                
+                
+            </Card>
+        </Grid>  
+                
+        <Card  style={{backgroundColor:"#2c2b2b",margin:"10px"}} >
+                <Grid container    sx={{textDecoration:'none'}} alignItems="center" >
+                <Grid item xs={8} alignItems="flex-end"  >
+                    <Grid item  container justifyContent="center" alignItems="center">
+                    <CardContent sx={{alignItems:"center",alignSelf:'center',alignContent:"center"}}>
+                            <Typography variant="body1" component="span"   style={servingleft}>
+                            {DietData?.servingsLeft}  servings left 
+                                
+                            </Typography>
+                             </CardContent>
+                    </Grid>
+                       
+                    </Grid>             
+      
+                    <Grid item xs={4} alignItems="flex-end"  >
+                    <Grid item  container justifyContent="center" alignItems="center">
+                    <CardContent sx={{alignItems:"center",alignSelf:'center',alignContent:"center"}}>
+                             <img src={Diet} className='dinning-img' alt="dinning" style={{display: 'block', margin: 'auto'}}/>
+                             </CardContent>
+                    </Grid>
+                       
+                    </Grid>
+                    
+             </Grid>
+                
+                
+      
+           </Card> 
+                
+      {oneDietPlan?.length>0?(oneDietPlan.map(item=>{
+      return(
+      // <Grid container flex sx={12} lg={4}>
+        <Card  style={maincardStyle}  >
+                <CardContent onClick={()=>{setDietId(item)}} sx={{textDecoration:'none', cursor:"pointer"}}>
+                <Grid container spacing={1} margin="10px" alignItems="center">
+                 <Grid item xs={11}  >
+                 
+                 <Grid item  alignSelf={'center'}>
+                        <Grid item container flexDirection={"column"}>
+                        <Typography variant="body1" Wrap component="span" style={proteinStyle}>
+                            {item.category}
+                        </Typography> 
                         </Grid>
                         <Grid item>
-
-                       
-                        <Grid  container flexDirection="row">
-                           <Grid item ><Typography style={{ fontSize:"30px" ,color:"white",fontWeight:"40px"}}> {DietData?.RecommendedServings} </Typography></Grid>
-                           <Grid item><Typography mt={2}  ml={0.5} style={exercise}>Servings</Typography></Grid>
-                            </Grid>
-                        </Grid>
-                        
-                        
-      
-                    </Grid>
-
-                    </Card>
-                    </Grid>
-
-
-                    </Grid>
-                    
-                    
-                </Card>
-            </Grid>  
-                    
-            <Card  style={{backgroundColor:"#2c2b2b",margin:"10px"}} >
-                    <Grid container    sx={{textDecoration:'none'}} alignItems="center" >
-                    <Grid item xs={8} alignItems="flex-end"  >
-                        <Grid item  container justifyContent="center" alignItems="center">
-                        <CardContent sx={{alignItems:"center",alignSelf:'center',alignContent:"center"}}>
-                                <Typography variant="body1" component="span"   style={servingleft}>
-                                {DietData?.servingsLeft}  servings left 
-                                    
-                                </Typography>
-                                 </CardContent>
-                        </Grid>
-                           
-                        </Grid>             
-
-                        <Grid item xs={4} alignItems="flex-end"  >
-                        <Grid item  container justifyContent="center" alignItems="center">
-                        <CardContent sx={{alignItems:"center",alignSelf:'center',alignContent:"center"}}>
-                                 <img src={Diet} className='dinning-img' alt="dinning" style={{display: 'block', margin: 'auto'}}/>
-                                 </CardContent>
-                        </Grid>
-                           
-                        </Grid>
-                        
-                 </Grid>
-                    
-                    
-   
-               </Card> 
-                    
-     {oneDietPlan?.length>0?(oneDietPlan.map(item=>{
-        return(
-          // <Grid container flex sx={12} lg={4}>
-            <Card  style={maincardStyle}  >
-                    <CardContent onClick={()=>{setDietId(item)}} sx={{textDecoration:'none'}}>
-                    <Grid container spacing={1} margin="10px" alignItems="center">
-                     <Grid item xs={11}  >
-                     
-                     <Grid item  alignSelf={'center'}>
-                            <Grid item container flexDirection={"column"}>
-                            <Typography variant="body1" Wrap component="span" style={proteinStyle}>
-                                {item.category}
-                            </Typography> 
-                            </Grid>
-                            <Grid item>
-                            <Typography alignContent="center" variant="body1" component="span" style={totalservingsStyle}>
-                            {item.servings_consumed} servings consumed
-                            </Typography>
-                            </Grid>
-                           
-                            
-                        </Grid> 
-                       
+                        <Typography alignContent="center" variant="body1" component="span" style={totalservingsStyle}>
+                        {item.servings_consumed} servings consumed
+                        </Typography>
                         </Grid>    
-                       
-                        <Grid item container xs={1} sx={{ position:'absolute',right:2 }}>
-                              <ArrowForwardIcon/>
-                            </Grid>
-
-                        
-                    </Grid>
-                    </CardContent>
+                    </Grid> 
+                   
+                    </Grid>    
+                   
+                    <Grid item container xs={1} sx={{ position:'absolute',right:2 }}>
+                          <ArrowForwardIcon/>
+                        </Grid>
+      
                     
-    
-               </Card>
-              //  </Grid>  
+                </Grid>
+                </CardContent>
+                
+      
+           </Card>
+          //  </Grid>  
+      
+      );
+      })):(<Card sx={{ margin:"10px" ,maxHeight:"800px"}}>
+      <CardContent>
+      <Typography   align="center"  style={title} >No categories assigned</Typography>
+      
+      </CardContent>
+      </Card> )}
+      
+      </Grid>):(<Card sx={{backgroundColor:"#8D25C1", margin:"10px" ,maxHeight:"800px"}}>
+          <CardContent>
+          <Typography  align="center"   style={calories}> You don`t have any ongoing diet  plans. Please consult Dietician.</Typography>
+          </CardContent>
+          </Card>)}
+      
+      
+      </>
+          
+          
 
-        );
-     })):(<Card sx={{ margin:"10px" ,maxHeight:"800px"}}>
-     <CardContent>
-     <Typography   align="center"  style={title} >No categories assigned</Typography>
-     
-     </CardContent>
-     </Card> )}
-    
-    </Grid>):(<Card sx={{backgroundColor:"#8D25C1", margin:"10px" ,maxHeight:"800px"}}>
-              <CardContent>
-              <Typography  align="center"   style={calories}> You don`t have any ongoing diet  plans. Please consult Dietician.</Typography>
-              </CardContent>
-              </Card>)}
-  
-   
-         </>
+         
+        
+      
 
          
     );

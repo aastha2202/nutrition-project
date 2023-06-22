@@ -94,7 +94,7 @@ const [isLoading,setIsLoading]=useState(false)
 
   // const [item,setItem]=useState()
   const [response, setResponse] = useState()
-  const [formValue, setFormValue] = useState({ email_id: " ", password: " " })
+  const [formValue, setFormValue] = useState({ email_id: " ", password: " " ,fcm_token:" "})
   // let navigate = useNavigate();
   // localStorage.setItem('Username', 'response?.data?.Username')
   const loginUser = () => {
@@ -111,7 +111,7 @@ const [isLoading,setIsLoading]=useState(false)
       console.log(formValue,"---form value checking--");
      
       if (response?.data?.Status) {  
-        
+        localStorage.setItem('tour', true )
         localStorage.setItem('Username', response?.data?.Username)
        localStorage.setItem('userId', response?.data?.['User ID'])
        handleSuccess()

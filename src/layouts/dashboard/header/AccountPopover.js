@@ -1,11 +1,14 @@
 import { useState,useEffect } from 'react';
+import axios from 'axios';
 // @mui
 import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton, Popover } from '@mui/material';
 // mocks_
 import account from '../../../_mock/account';
 import { Link as RouterLink, useNavigate} from 'react-router-dom';
-import axios from 'axios';
+// import index from "../nav/index";
+// import Nav from "../nav/index";
+
 // ----------------------------------------------------------------------
 
 const MENU_OPTIONS = [
@@ -79,16 +82,22 @@ const handleOpen = (event) => {
      localStorage.removeItem('userId')
     
     navigate('/login', { replace: true });
+    handleClose()
   };
 
   const handleRegister = () => {
     
     navigate('/dashboard/profile', { replace: true });
+    handleClose()
   };
+  
 
- 
+  const imageurl= "https://aipse.in";
+  console.log(userData?.profile_image,"---anil---")
   return (
+    
     <div style={{float:"right", }}>
+    
       <IconButton
         onClick={handleOpen}
         sx={{
@@ -107,7 +116,8 @@ const handleOpen = (event) => {
           }),
         }}
       >
-        <Avatar src={account.photoURL} alt="photoURL" />
+        {/* <Avatar src={account.photoURL} alt="photoURL" /> */}
+        <Avatar src={imageurl+userData[0]?.profile_image} alt="photoURL" />
       </IconButton>
 
       <Popover
@@ -169,6 +179,8 @@ const handleOpen = (event) => {
           Logout
         </MenuItem>
       </Popover>
+
+      
     </div>
   );
 }

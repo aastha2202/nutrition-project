@@ -59,6 +59,10 @@ export default function Router() {
             path: 'resetpassword',
             element: < ResetPassword /> ,
         },
+        {
+            path: 'exercise',
+            element: < Exercise /> ,
+        },
         
         {
             path: '/dashboard',

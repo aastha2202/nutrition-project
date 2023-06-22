@@ -172,6 +172,7 @@ const [errorPassword, setErrorPassword] = useState(false);
         "mobile_number": "",
         "email_id": "",
         "address": "",
+        "fcm_token":" ",
         "profile_image": ""
     })
 
