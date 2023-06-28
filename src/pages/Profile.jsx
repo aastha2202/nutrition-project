@@ -1,13 +1,15 @@
 import * as React from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
-import {useEffect,useState} from 'react'
+import {useEffect,useState} from 'react';
+// import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles'
 import { red } from '@mui/material/colors';
 import { Card, CardContent, Grid, Typography, Avatar, Badge, Button, Stack, Container } from '@mui/material';
 import TextField from '@mui/material/TextField';
-// import fish from "../../assets/Fish.svg";
+import fish from "../assets/Fish.svg";
 import DeleteIcon from '@mui/icons-material/Delete';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 // import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Switch from '@mui/material/Switch';
 // import { useState } from 'react';
@@ -48,7 +50,7 @@ export default function Userprofile({props}){
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: `https://aipse.in/api/userDetails?user_id=${uid}`,
+        url: `https://novapwc.com/api/userDetails?user_id=${uid}`,
         headers: { }
       };
       
@@ -61,9 +63,9 @@ export default function Userprofile({props}){
         console.log(error);
       });
    }
+   const imageurl= "https://novapwc.com/";
 
-
- console.log(data,"-----------user details checking")
+ console.log(data,"-----------user details checking,profile page")
      
     return(
         <> 
@@ -73,11 +75,13 @@ export default function Userprofile({props}){
                 <CardContent>
    <Grid container flexDirection="row">
 
-<Grid  item>
+<Grid  item alignSelf={"center"}>
 <Link  to="/dashboard">
-      <IconButton>
+      {/* <IconButton>
         <Iconify icon="material-symbols:arrow-back-rounded" />
-      </IconButton></Link>
+      </IconButton> */}
+      <ArrowBackIcon style={{ color: 'black' }} />
+      </Link>
 
     </Grid>
    
@@ -93,13 +97,13 @@ export default function Userprofile({props}){
           <Grid item   >
             {/* <Button> */}
 
-            <Card >
+            {/* <Card > */}
               <CardContent>
                 {/* {console.log("profilesssss--->",itm.profile_pic,itm?.first_name)} */}
                 <Grid container display="flex" flexDirection="column" alignItems="center" justifyContent="center">
                   <Grid style={{ display: "flex", alignItems: "center", justifyContent: "center" }} item>
-                   
-                    {/* <img style={{ borderRadius: 50 ,height:50,width:50}} src={fish} /> */}
+                  <Avatar src={(imageurl+item?.profile_image)} alt="photo" style={{ borderRadius: 50 ,height:100,width:100,}} />
+                    {/* <img style={{ borderRadius: 50 ,height:100,width:100}} src={fish} /> */}
                   </Grid>
                  <Grid item>
                   <Typography sx={{ fontSize: 30, fontWeight: 'bold',  fontFamily: 'Inter-SemiBold', lineHeight: "38px", marginLeft:"10px"  }} mt={3} textAlign={'center'} >
@@ -110,9 +114,15 @@ export default function Userprofile({props}){
                   <Grid style={{ textAlign: "center", fontSize: 20,color:"black", fontWeight:'normal',  fontFamily: 'Inter-Regular', lineHeight: "50px", marginLeft:"10px" }} item>
                   {item?.email_id} 
                   </Grid>
+                  <Grid style={{ textAlign: "center", fontSize: 20,color:"black", fontWeight:'normal',  fontFamily: 'Inter-Regular', lineHeight: "50px", marginLeft:"10px" }} item>
+                      status: {item?.status} 
+                  </Grid>
+                  {/* <Grid style={{ textAlign: "center", fontSize: 20,color:"black", fontWeight:'normal',  fontFamily: 'Inter-Regular', lineHeight: "50px", marginLeft:"10px" }} item>
+                      logout 
+                  </Grid> */}
                 </Grid>
               </CardContent>
-            </Card>
+            {/* </Card> */}
             {/* </Button> */}
             {/* <ShopProductCard product={product} /> */}
           </Grid>

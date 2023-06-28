@@ -187,7 +187,7 @@
 //       method: 'POST',
 //       maxBodyLength: Infinity,
 //     //  url: baseUrl + '/assignDietPlanForPatient',
-//      url: `https://aipse.in/api/assignDietPlanForPatient`,
+//      url: `http://44.212.136.151:8081/api/assignDietPlanForPatient`,
 
 //       headers: {
 //         'Content-Type': 'application/json',
@@ -902,7 +902,7 @@
 //       let config = {
 //         method: 'POST',
 //         maxBodyLength: Infinity,
-//         url: 'https://aipse.in/api/assignDietPlanForPatient',
+//         url: 'http://44.212.136.151:8081/api/assignDietPlanForPatient',
 //         headers: { 
 //           'Content-Type': 'application/json'
 //         },
@@ -924,7 +924,7 @@
 //       let config = {
 //           method: 'GET',
 //           maxBodyLength: Infinity,
-//           url: 'https://aipse.in/api/getAllCategories?type=food',
+//           url: 'http://44.212.136.151:8081/api/getAllCategories?type=food',
 //           headers: { 'Content-Type': 'application/json' },
 //       };
 //       axios(config)
@@ -974,7 +974,7 @@
 //     let config = {
 //       method: 'PUT',
 //       maxBodyLength: Infinity,
-//       url: 'https://aipse.in/api/editDietPlanAssigned',
+//       url: 'http://44.212.136.151:8081/api/editDietPlanAssigned',
 //       headers: { 
 //         'Content-Type': 'application/json'
 //       },

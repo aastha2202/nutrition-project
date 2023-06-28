@@ -10,7 +10,7 @@ const count = async => {
     var config = {
         method: 'GET',
         maxBodyLength: Infinity,
-        url: 'https://aipse.in/api/count',
+        url: 'http://44.212.136.151:8081/api/count',
         headers: { } 
       };
       

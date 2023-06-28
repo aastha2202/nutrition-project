@@ -1,1 +1,1 @@
-export const baseUrl = "https://aipse.in/api/";
+export const baseUrl = "http://44.212.136.151:8081/api/";

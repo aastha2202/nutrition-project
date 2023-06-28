@@ -31,7 +31,7 @@ import axios from 'axios';
 //     let config = {
 //         method: 'get',
 //         maxBodyLength: Infinity,
-//         url: `https://aipse.in/api/userDetails?user_id=${uid}`,
+//         url: `https://novapwc.com/api/userDetails?user_id=${uid}`,
 //         headers: { }
 //       };
       
@@ -60,7 +60,7 @@ import axios from 'axios';
 //     let config = {
 //         method: 'get',
 //         maxBodyLength: Infinity,
-//         url: `https://aipse.in/api/userDetails?user_id=${uid}`,
+//         url: `https://novapwc.com/api/userDetails?user_id=${uid}`,
 //         headers: { }
 //       };
       
@@ -110,7 +110,7 @@ const account = {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: `https://aipse.in/api/userDetails?user_id=${uid}`,
+        url: `https://novapwc.com/api/userDetails?user_id=${uid}`,
         headers: { }
       };
       

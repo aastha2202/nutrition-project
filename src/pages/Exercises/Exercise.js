@@ -22,7 +22,8 @@ import Button from '@mui/material/Button';
 import { useRef } from 'react';
 import Typography from '@mui/material/Typography';
  // import { makeStyles } from '@material-ui/core/styles';
-
+ import { ClipLoader,RotatingLines } from 'react-spinners';
+import { SyncLoader } from 'react-spinners';
 // import CardMedia from '@material-ui/core/CardMedia';
 // import Poultry from "../pictures/Poultry.svg";
 import Logo from "../../assets/nova.svg";
@@ -36,7 +37,7 @@ import Exerciselogo from "../../assets/Exerciselogo.svg";
 // import chicken from '../images/chicken.png';
 
 // import peas from '../images/peas.png'
-
+import CircularProgress from '@mui/material/CircularProgress';
 // import dinning from '../images/dinningicon.png';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import  "../styles.css";
@@ -180,7 +181,7 @@ const maintext = {
 
 export default function Exercise(){
   const location = useLocation();
-  const [loading, setLoading] = useState(true )
+  const [loading, setLoading] = useState(true)
 
   const [data, setData] = useState({})
   const [dietData, setdietData] = useState([])
@@ -196,8 +197,10 @@ export default function Exercise(){
 
   const getValues = async () => {
     // console.log("getValuess calledddd")
+   
     let start_date = await localStorage.getItem('exercisestartDate')
     let end_date = await localStorage.getItem('exerciseendDate')
+    // localStorage.removeItem(exercisestartDate);
     await apiCall(start_date, end_date)
   }
 
@@ -205,26 +208,32 @@ export default function Exercise(){
   const apiCall = async (start_date, end_date) => {
     setLoading(true)
     let userIdAsync = localStorage.getItem('userId')
-    // console.log(start_date, end_date)
-    if (start_date) {
-      axios.get(`https://aipse.in/api/getAllDietPlan?userid=${userIdAsync}&startdate=${start_date}&enddate=${end_date}&type=exercise&status=today`)
-        .then(function (response) {
+    console.log(start_date, end_date);
 
-          // console.log(response.data.data, "dieettttttttttt")
+    if (start_date) {
+      axios.get(`https://novapwc.com/api/getAllDietPlan?userid=${userIdAsync}&startdate=${start_date}&enddate=${end_date}&type=exercise&status=today`)
+        .then(function (response) {
+        if (response?.data?.Status=== "No content"){
+          setLoading(false)
+          console.log(response?.data?.Status ,"======ressssssss")
+        }
+          
+          // console.log(response?.data?.data, "dieettttttttttt")
           response.data.data.servingsLeft = parseInt
             (response?.data?.data.RecommendedServings - response?.data?.data.CosumedServings)
           setdietData(response?.data?.data)
           // console.log(data)
-          axios.get(`https://aipse.in/api/getOneDietPlan?userid=${userIdAsync}`)
+          axios.get(`https://novapwc.com/api/getOneDietPlan?userid=${userIdAsync}`)
             .then(function (response) {
 
               let resDietPlan = response?.data?.data
-              // console.log(response?.data?.data, "one diet plannnn")
+              // console.log(response?.data?.data, "one diet plannnn rrrrrrrrrr")
               // setOneDietPlan(response?.data?.data)
               setLoading(false)
-              axios.get(`https://aipse.in/api/getAllCategories?type=exercise`)
+              axios.get(`https://novapwc.com/api/getAllCategories?type=exercise`)
                 .then(function (response) {
-
+                  // setLoading(false)
+                //  console.log(response?.data?.data,"-------eeeeeeeeee")
                   let existingCategories = response?.data?.data.map(e => e.category_name)
                   setData(response?.data?.data)
                   //  [{"category": "Pawan android", "diet_id": 709, "end_date": "08-23-2023", "interval": "2 month", "recommended_servings": 12, "servings_consumed": 0, "start_date": "05-25-2023", "total_servings": 1080, "type": "food", "user_id": 35}]} 
@@ -249,6 +258,7 @@ export default function Exercise(){
                   }
 
                 })
+                
                 .catch(function (error) {
                   // Alert.alert("something went wrong");
                   // console.log(error);
@@ -267,16 +277,19 @@ export default function Exercise(){
           // console.log(error);
           
         });
+        // setLoading(false)
     }
-    else {
+    else{
       setLoading(false)
+      console.log("---loader checking in else part")
     }
-  
+    
     // setLoading(false)
-    setTimeout(() => {
-      console.log("Delayed for 1 second.");
-      setLoading(false)
-    }, 500);
+    // setLoading(false)
+    // setTimeout(() => {
+    //   console.log("Delayed for 1 second.");
+    //   setLoading(false)
+    // }, 500);
 
   }
 
@@ -299,7 +312,7 @@ export default function Exercise(){
     let catid = data.filter(e => e.category_name == item.category)
     let id = null
     if (catid) { id = catid[0].category_id }
-    localStorage.setItem('params',JSON.stringify({ cat: id, diet_id: item?.diet_id, category: item.category, type: "exercise", servingsConsumed: item.servings_consumed, apiCall: apiCall }))
+    localStorage.setItem('params',JSON.stringify({ cat: id, diet_id: item?.diet_id, category: item.category, type: "exercise", servingsConsumed: item.servings_consumed,recommended_servings:item.recommended_servings, apiCall: apiCall }))
     navigate('/dashboard/itemofexercise')
     
 
@@ -318,28 +331,21 @@ export default function Exercise(){
       
     };
 
- const [ spinner, setSpinner ] = useState(true);
+//  const [ spinner, setSpinner ] = useState(true);
 
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoads(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
+  
   
  
 
     return (  
-      // !loading &&
+     <>
 
-      <>
-      { loading?(<div style={{ display: "flex", justifyContent: "center", flexDirection:"column", alignItems: "center" , height:"50vh" }}  >
-           
-           <img  src={TitleLogo} alt="loading" style={{height:"100px",width:"100px", }} />
-           
-       </div>):( <>
+     {loading?( <div className="loader-container" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "50vh" }}>
+          
+          {/* <ClipLoader height={100} width={100}  color="grey"  wrapperStyle={{}}  wrapperClass=""  visible={true}  ariaLabel='oval-loading'  secondaryColor="#4fa94d"  strokeWidth={2} strokeWidthSecondary={2}/> */}
+          <CircularProgress/>
+        </div>):( <>
         
         {/* <CardContent className='dietplan-companyname'>
               <img src={Logo} alt="loading" className='dietplan-companyname-image'/>
@@ -461,7 +467,7 @@ export default function Exercise(){
         // <Grid container flexDirection={"row"} item  >
         //   <Grid item sx={12} > 
           <Card  style={maincardStyle}  >
-                  <CardContent onClick={()=>{setDietId(item)}} sx={{textDecoration:'none'}}>
+                  <CardContent onClick={()=>{setDietId(item)}} sx={{textDecoration:'none',cursor:"pointer"}}>
                   <Grid container  flex flexDirection={"row"} spacing={1} margin="10px" alignItems="center">
                     
                    <Grid item container  xs={11} alignSelf={'center'}>
@@ -511,7 +517,7 @@ export default function Exercise(){
           
        ):(<Card sx={{backgroundColor:"#8D25C1", margin:"10px" ,maxHeight:"800px"}}>
             <CardContent>
-            <Typography  align="center"   style={calories}> You don`t have any ongoing  exercise plans. Please consult Dietician.</Typography>
+            <Typography  align="center" style={{calories,color:"white"}} > You don't have any ongoing  exercise plans. Please consult Dietician.</Typography>
             </CardContent>
             </Card>)}
 
@@ -519,7 +525,9 @@ export default function Exercise(){
 
  
        </>)}
-      </>
+      
+       </>
+     
        
 
          

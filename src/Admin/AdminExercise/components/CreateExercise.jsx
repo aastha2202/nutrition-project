@@ -255,7 +255,7 @@ const apiHit=async=>{
   let config = {
     method: 'POST',
     maxBodyLength: Infinity,
-    url: 'https://aipse.in/api/postOverAllDietPlan',
+    url: 'http://44.212.136.151:8081/api/postOverAllDietPlan',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -291,7 +291,7 @@ const apiHitEdit=async()=>{
   let config = {
     method: 'PUT',
     maxBodyLength: Infinity,
-    url: 'https://aipse.in/api/EditItemExerciseHandler',
+    url: 'http://44.212.136.151:8081/api/EditItemExerciseHandler',
     headers: { 
       'Content-Type': 'application/json'
     },

@@ -90,7 +90,7 @@ const onClose=()=>{
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'https://aipse.in/api/updateDailyIntake',
+      url: 'https://novapwc.com/api/updateDailyIntake',
       headers: { 
         'Content-Type': 'application/json'
       },

@@ -74,7 +74,7 @@ export default function ListAllDietPlan(props){
         let config = {
           method: 'POST',
           maxBodyLength: Infinity,
-          url: `https://aipse.in/api/listalldietplans?user_id=${userData.id}&type=food`,
+          url: `https://novapwc.com/api/listalldietplans?user_id=${userData.id}&type=food`,
           headers: { },
           data : data
         };

@@ -47,7 +47,7 @@ export default function AccountPopover(props) {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: `https://aipse.in/api/userDetails?user_id=${uid}`,
+        url: `https://novapwc.com/api/userDetails?user_id=${uid}`,
         headers: { }
       };
       
@@ -92,7 +92,7 @@ const handleOpen = (event) => {
   };
   
 
-  const imageurl= "https://aipse.in";
+  const imageurl= "https://novapwc.com/";
   console.log(userData?.profile_image,"---anil---")
   return (
     

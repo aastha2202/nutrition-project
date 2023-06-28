@@ -170,7 +170,7 @@ export default function Exercise(){
         let config = {
             method: 'GET',
             maxBodyLength: Infinity,
-            url: 'https://aipse.in/api/getAllCategories?type=exercise',
+            url: 'http://44.212.136.151:8081/api/getAllCategories?type=exercise',
             headers: { }
           };
           

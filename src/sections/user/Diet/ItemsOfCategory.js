@@ -25,13 +25,13 @@ const ItemsOfCategory = ({ route, navigation }) => {
 
     useEffect(() => {
         setCategoryName(route?.params.category)
-        axios.get(`https://aipse.in/api/getItemsOfCategory?category_id=${route?.params.cat}&type=food`)
+        axios.get(`http://44.212.136.151:8081/api/getItemsOfCategory?category_id=${route?.params.cat}&type=food`)
             .then(function (response) {
-                console.log(response?.data, "itemaassssssssssss", `https://aipse.in/api/getItemsOfCategory?category_id=${route?.params.cat}&type=food`)
+                console.log(response?.data, "itemaassssssssssss", `http://44.212.136.151:8081/api/getItemsOfCategory?category_id=${route?.params.cat}&type=food`)
                 setItems(response?.data?.data)
-                axios.get(`https://aipse.in/api/itemIntakeStatus?userid=1&type=food&category=proteins`)
+                axios.get(`http://44.212.136.151:8081/api/itemIntakeStatus?userid=1&type=food&category=proteins`)
                     .then(function (response) {
-                        console.log(`https://aipse.in/api/itemIntakeStatus?userid=1&type=food&category=${route?.params.category}`, response?.data, "..............")
+                        console.log(`http://44.212.136.151:8081/api/itemIntakeStatus?userid=1&type=food&category=${route?.params.category}`, response?.data, "..............")
                         setItemIntakeStatus(response?.data?.data)
                     })
                     .catch(function (error) {

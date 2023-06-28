@@ -38,7 +38,7 @@ Nav.propTypes = {
 
 export default function Nav({ openNav, onCloseNav,data }) {
   const { pathname } = useLocation();
-  const imageurl= "https://aipse.in";
+  const imageurl= "https://novapwc.com/";
 
   const isDesktop = useResponsive('up', 'lg');
 
@@ -62,7 +62,7 @@ export default function Nav({ openNav, onCloseNav,data }) {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: `https://aipse.in/api/userDetails?user_id=${uid}`,
+        url: `https://novapwc.com/api/userDetails?user_id=${uid}`,
         headers: { }
       };
       
