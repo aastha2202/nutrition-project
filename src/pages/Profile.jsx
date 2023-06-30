@@ -37,6 +37,13 @@ export default function Userprofile({props}){
     // const goingback= ()=>{
     //     navigate("/dashboard", { replace: true })
     // }
+    const handleClick = () => {
+      localStorage.removeItem('Username')
+      localStorage.removeItem('userId')
+     
+     navigate('/login', { replace: true });
+     handleClose()
+   };
   const [data,setData]= useState([]);
   useEffect(() => {
     
@@ -117,9 +124,9 @@ export default function Userprofile({props}){
                   <Grid style={{ textAlign: "center", fontSize: 20,color:"black", fontWeight:'normal',  fontFamily: 'Inter-Regular', lineHeight: "50px", marginLeft:"10px" }} item>
                       status: {item?.status} 
                   </Grid>
-                  {/* <Grid style={{ textAlign: "center", fontSize: 20,color:"black", fontWeight:'normal',  fontFamily: 'Inter-Regular', lineHeight: "50px", marginLeft:"10px" }} item>
-                      logout 
-                  </Grid> */}
+                  <Grid style={{ textAlign: "center", fontSize: 20,color:"black", fontWeight:'normal',  fontFamily: 'Inter-Regular', lineHeight: "50px", marginLeft:"10px" }} item>
+                      <Button onClick={handleClick} variant="contained" >logout</Button>
+                  </Grid>
                 </Grid>
               </CardContent>
             {/* </Card> */}

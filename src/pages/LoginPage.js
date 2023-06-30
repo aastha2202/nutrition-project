@@ -100,7 +100,7 @@ const [isLoading,setIsLoading]=useState(false)
 
   // const [item,setItem]=useState()
   const [response, setResponse] = useState()
-  const [formValue, setFormValue] = useState({ email_id: " ", password: " " ,fcm_token:"clxA5TEFTJy8NYn-JNJiLG:APA91bFi9xZ9WYiQ5wI4gS6rIjm0mRTaYvNuhKk2yQhz0ECeRXnYL31cwz7qxTGoPtu_rv-dhTAytiaj6bIIzDPQ1HfPS6ImErW94ptzf9Xc2q3CGV5LwrP_MfUFPpTc2pCq7kbBQzXi "})
+  const [formValue, setFormValue] = useState({ email_id: " ", password: " " ,fcm_token:"clxA5TEFTJy8NYn-JNJiLG:APA91bFi9xZ9WYiQ5wI4gS6rIjm0mRTaYvNuhKk2yQhz0ECeRXnYL31cwz7qxTGoPtu_rv-dhTAytiaj6bIIzDPQ1HfPS6ImErW94ptzf9Xc2q3CGV5LwrP_MfUFPpTc2pCq7kbBQzXi"})
   // let navigate = useNavigate();
   // localStorage.setItem('Username', 'response?.data?.Username')
   const loginUser = () => {
@@ -117,7 +117,7 @@ const [isLoading,setIsLoading]=useState(false)
       console.log(response?.data, "responseeeeeee------")
       console.log(formValue,"---form value checking--");
      
-      if (response?.data?.Status==200) {  
+      if (response?.data?.Code==200) {  
         // localStorage.setItem('tour', true )
         
        localStorage.setItem('Username', response?.data?.Username)
