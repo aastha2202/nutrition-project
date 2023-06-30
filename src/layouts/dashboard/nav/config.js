@@ -47,6 +47,15 @@ const navConfig = [{
         id: 1,
 
     },
+    {
+        title: 'Help Center',
+        path: '/dashboard/HelpCenter',
+        // icon: icon('ic_cart'),
+        //  icon:<ExerciseIcon/>,
+        icon:<FitnessCenterIcon/>,
+        id: 1,
+
+    },
 
     
     {
