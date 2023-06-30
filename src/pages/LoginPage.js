@@ -117,7 +117,7 @@ const [isLoading,setIsLoading]=useState(false)
       console.log(response?.data, "responseeeeeee------")
       console.log(formValue,"---form value checking--");
      
-      if (response?.data?.Status==200) {  
+      if (response?.data?.Code==200) {  
         // localStorage.setItem('tour', true )
         
        localStorage.setItem('Username', response?.data?.Username)
