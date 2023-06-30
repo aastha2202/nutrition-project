@@ -35,6 +35,7 @@ import Adminsearch from './Admin/AdminSearch/Adminsearch'
 import ListAllDietPlan from './Admin/AdminDiet/ListAllDietPlan';
  import DashboardAdminApp from "./Admin/AdminProfile/DashboardAdminApp";
 import ResetPassword from "./pages/ResetPassword";
+import Loader from "./pages/loader";
 // ----------------------------------------------------------------------
 //  import Login from './user/Login/Login';
 // import Home from './user/Home/Home';
@@ -58,6 +59,10 @@ export default function Router() {
         {
             path: 'resetpassword',
             element: < ResetPassword /> ,
+        },
+        {
+            path: 'loader',
+            element: < Loader /> ,
         },
         
         {
@@ -99,8 +104,7 @@ export default function Router() {
                     element: < Exercise /> ,
                 },
                 { path: 'itemofexercise', element: < ItemOfExercise /> },
-
-
+              
             ],
             
 

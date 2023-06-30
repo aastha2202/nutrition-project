@@ -146,16 +146,16 @@ const selectedProfileCalled=(e)=>{
       };
       const [pageNumber,setPageNumber]=useState(1);
       const [numberOfRecords,setNumberOfRecords]=useState(6);
-      //https://aipse.in/api/searchUser?name=&page=1&count=100
-      //`https://aipse.in/api/searchUser?name=${searchTitle}&page=${page}&count=6`,
+      //https://novapwc.com/api/searchUser?name=&page=1&count=100
+      //`https://novapwc.com/api/searchUser?name=${searchTitle}&page=${page}&count=6`,
 
     const apiHit=async()=>{
         
-        console.log(`https://aipse.in/api/searchUser?name=${searchTitle}&page=${currentPage}&count=10`,);
+        console.log(`https://novapwc.com/api/searchUser?name=${searchTitle}&page=${currentPage}&count=10`,);
        let config = {
             method: 'GET',
             maxBodyLength: Infinity,
-            url:`https://aipse.in/api/searchUser?name=${searchTitle}&page=${currentPage}&count=10&status=${status}`,
+            url:`https://novapwc.com/api/searchUser?name=${searchTitle}&page=${currentPage}&count=10&status=${status}`,
             headers: {'Content-Type': 'application/json' }
           };
           

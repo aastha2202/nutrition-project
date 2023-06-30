@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { useEffect ,useState} from 'react';
 import { useLocation } from 'react-router-dom';
 // @mui
 import { styled, alpha } from '@mui/material/styles';
@@ -14,7 +14,8 @@ import Scrollbar from '../../../components/scrollbar';
 import NavSection from '../../../components/nav-section';
 //
 import navConfig from './config';
-
+import axios from 'axios';
+// @mui
 import WaterWalking from "../../../assets/NPWCmainimage.png";
 // ----------------------------------------------------------------------
 
@@ -35,8 +36,9 @@ Nav.propTypes = {
   onCloseNav: PropTypes.func,
 };
 
-export default function Nav({ openNav, onCloseNav }) {
+export default function Nav({ openNav, onCloseNav,data }) {
   const { pathname } = useLocation();
+  const imageurl= "https://novapwc.com/";
 
   const isDesktop = useResponsive('up', 'lg');
 
@@ -46,7 +48,41 @@ export default function Nav({ openNav, onCloseNav }) {
     }
   
   }, [pathname]);
+  // const [item,setItem]= useState(data);
+  const [userData,setUserData]= useState([]);
+  useEffect(() => {
+    
+    apiCall()
+  
+}, [])
+  
+   const apiCall = async()=>{
+    let uid = localStorage.getItem('userId')
+    console.log(uid,"---popover in profile page---")
+    let config = {
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: `https://novapwc.com/api/userDetails?user_id=${uid}`,
+        headers: { }
+      };
+      
+     axios.request(config)
+      .then((response) => {
+        setUserData(response.data.data)
+        console.log(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+   }
 
+console.log(userData,"=====nav bar page user details==")
+ 
+
+
+//  const item=data;
+
+// console.log(item,"-------nav bar page---");
   const renderContent = (
     <Scrollbar
       sx={{
@@ -62,11 +98,12 @@ export default function Nav({ openNav, onCloseNav }) {
       <Box sx={{ mb: 5, mx: 2.5 }}>
         <Link underline="none">
           <StyledAccount>
-            <Avatar src={account.photoURL} alt="photoURL" />
+            <Avatar src={imageurl+userData[0]?.profile_image} alt="photoURL" />
 
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {account.displayName}
+                {/* {account.displayName} */}
+               {userData[0]?.user_name}
               </Typography>
 
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>

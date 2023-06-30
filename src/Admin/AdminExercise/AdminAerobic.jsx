@@ -138,7 +138,7 @@ const Aerobic = forwardRef((props, ref) => {
       let config = {
         method: 'GET',
         maxBodyLength: Infinity,
-        url: `https://aipse.in/api/getItemsOfCategory?category_id=${dataOfExercise.category_id}&type=exercise`,
+        url: `http://44.212.136.151:8081/api/getItemsOfCategory?category_id=${dataOfExercise.category_id}&type=exercise`,
         headers: { }
       };
       

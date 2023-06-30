@@ -21,7 +21,7 @@ const DetailItem = ({ item, closeBackdrop, route }) => {
         }
 
         console.log(data, "posr requestrrrrtt")
-        axios.post(`https://aipse.in/api/updateDailyIntake`, data)
+        axios.post(`http://44.212.136.151:8081/api/updateDailyIntake`, data)
             .then(function (response) {
                 console.log(response?.data, "response from apiii")
                 closeBackdrop()

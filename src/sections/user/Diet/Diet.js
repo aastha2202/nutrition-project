@@ -24,7 +24,7 @@ const Diet = ({ navigation }) => {
 
 
   useEffect(() => {
-    axios.get(`https://aipse.in/api/getAllDietPlan?userid=1&type=food&status=ongoing`)
+    axios.get(`http://44.212.136.151:8081/api/getAllDietPlan?userid=1&type=food&status=ongoing`)
       .then(function (response) {
         console.log(response.data.data, "dieettttttttttt")
         response.data.data.servingsLeft = parseInt
@@ -34,12 +34,12 @@ const Diet = ({ navigation }) => {
       .catch(function (error) {
         console.log(error);
       });
-    axios.get(`https://aipse.in/api/getAllCategories?type=food`)
+    axios.get(`http://44.212.136.151:8081/api/getAllCategories?type=food`)
       .then(function (response) {
         setData(response?.data?.data)
         console.log(response?.data?.data)
         for (let i = 0; i < response?.data?.data?.length; i++) {
-          axios.get(`https://aipse.in/api/getOneDietPlan?userid=1&dietid=${exerciseData?.DietID}`)
+          axios.get(`http://44.212.136.151:8081/api/getOneDietPlan?userid=1&dietid=${exerciseData?.DietID}`)
             .then(function (response) {
               // console.log(response?.data, "response..............responseeeeee")
             })

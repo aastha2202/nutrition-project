@@ -34,7 +34,7 @@ const count = async => {
     var config = {
         method: 'Get',
       maxBodyLength: Infinity,
-        url: 'https://aipse.in/api/count',
+        url: 'https://novapwc.com/api/count',
         headers: { }
       };
       
@@ -56,7 +56,7 @@ const count = async => {
     let config = {
         method: 'GET',
         maxBodyLength: Infinity,
-        url:'https://aipse.in/api/searchUser?name=&page=1&count=100',
+        url:'https://novapwc.com/api/searchUser?name=&page=1&count=100',
         headers: {'Content-Type': 'application/json' }
       };
       

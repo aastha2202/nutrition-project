@@ -205,7 +205,7 @@ const currencies = [
       var config = {
         method: 'PUT',
       maxBodyLength: Infinity,
-        url: 'https://aipse.in/api/deleteDiet',
+        url: 'http://44.212.136.151:8081/api/deleteDiet',
         headers: { 
           'Content-Type': 'application/json'
         },
@@ -278,7 +278,7 @@ const currencies = [
         method: 'POST',
         maxBodyLength: Infinity,
       //  url: baseUrl + '/assignDietPlanForPatient',
-       url: `https://aipse.in/api/assignDietPlanForPatient`,
+       url: `http://44.212.136.151:8081/api/assignDietPlanForPatient`,
   
         headers: {
           'Content-Type': 'application/json',
@@ -351,7 +351,7 @@ const currencies = [
         var config = {
           method: 'PUT',
           maxBodyLength: Infinity,
-          url: 'https://aipse.in/api/editDietPlanAssigned',
+          url: 'http://44.212.136.151:8081/api/editDietPlanAssigned',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -382,7 +382,7 @@ const currencies = [
         var config = {
           method: 'PUT',
         maxBodyLength: Infinity,
-          url: 'https://aipse.in/api/deleteDietOnPlanid',
+          url: 'http://44.212.136.151:8081/api/deleteDietOnPlanid',
           headers: { 
             'Content-Type': 'application/json'
           },
@@ -474,7 +474,7 @@ const currencies = [
       let config = {
           method: 'GET',
           maxBodyLength: Infinity,
-          url: 'https://aipse.in/api/getAllCategories?type=food',
+          url: 'http://44.212.136.151:8081/api/getAllCategories?type=food',
           headers: { 'Content-Type': 'application/json' },
       };
       axios(config)

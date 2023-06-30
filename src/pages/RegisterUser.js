@@ -55,50 +55,21 @@ export default function SignUp() {
 
   const [formValid, setFormValid] = useState(true);
 
-  
+  const [image, setImage] = useState('')
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
 
-    // const validationErrors = {};
-    // let hasErrors = false;
-
-    // if (formValue.user_name.trim() === '') {
-    //   validationErrors.user_name = true;
-    //   hasErrors = true;
-    // }
-
-    // if (formValue.password.trim() === '') {
-    //   validationErrors.password = true;
-    //   hasErrors = true;
-    // }
-
-    // if (formValue.email.trim() === '') {
-    //   validationErrors.email_id = true;
-    //   hasErrors = true;
-    // }
-
-    // if (!/^\d{10}$/.test(formValue.mobile-number)) {
-    //   validationErrors.mobile_number = true;
-    //   hasErrors = true;
-    // }
-
-    // setErrors(validationErrors);
-
-    // if (!hasErrors) {
-    //   // Perform form submission
-    //   // ...
-    // }
-    
-    console.log({
-      email: data.get('email_id'),
-      password: data.get('password'),
+   
+    // console.log({
+    //   email: data.get('email_id'),
+    //   password: data.get('password'),
       
-      patientid: data.get('patient-id')
+    //   patientid: data.get('patient-id')
       
-    });
+    // });
     
   };
 
@@ -167,13 +138,14 @@ const [errorPassword, setErrorPassword] = useState(false);
     const [formValue, setFormValue] = useState({
         "user_name": "",
         "password": "",
-        "role": "",
-        "gender": "",
+        "role": "user",
+        // "gender": "",
         "mobile_number": "",
         "email_id": "",
-        "address": "",
-        "profile_image": ""
-    })
+        // "address": "",
+        "fcm_token":"clxA5TEFTJy8NYn-JNJiLG:APA91bFi9xZ9WYiQ5wI4gS6rIjm0mRTaYvNuhKk2yQhz0ECeRXnYL31cwz7qxTGoPtu_rv-dhTAytiaj6bIIzDPQ1HfPS6ImErW94ptzf9Xc2q3CGV5LwrP_MfUFPpTc2pCq7kbBQzXi",
+        // "profile_image": ""
+    }) 
 
 
   //   const [errors, setErrors] = useState({
@@ -184,15 +156,34 @@ const [errorPassword, setErrorPassword] = useState(false);
   //   });
 
     const registerUser = () => {
-        
+       console.log("register user calling---") 
+      let validation = Object.values(formValue)
+      console.log(typeof Object?.mobile_number,"-----" ,Object?.mobile_number,Object)
+     // con
+      if (Object?.mobile_number?.length < 10){
+        alert("mobile number must be 10 characters ")
+       }
+      if(errorPassword){
+        alert("error password")
+     }
+     if(error || Object?.email_id==="" ) {
+      alert("valid mail is required")
+     }
 
-          // if(Object.values(formValue).includes("")){
-          //         // alert("Enter valid data")
-          //         handleEmpty()
-          //     }
-        
+     
 
-                axios.post(`https://aipse.in/api/registerUser`, formValue)
+    if( validation.includes("")){
+                  // alert("Enter valid data")
+                  handleEmpty()
+              }
+
+              
+      else{
+                let val=formValue
+                val.profile_image=images[0]?.toString().slice(images.toString()[22]===','?23:22,)
+                console.log(images,"---image--testing")
+                setFormValue(val)
+                axios.post(`https://novapwc.com/api/registerUser`, formValue)
                 .then(function (response) {
                 console.log(response?.data, "responseeeeeee")
                 if (response?.data?.Status) {  
@@ -217,6 +208,11 @@ const [errorPassword, setErrorPassword] = useState(false);
                   console.log(error);
                  
               });
+
+              }
+        
+
+               
                 
  
                 
@@ -250,6 +246,7 @@ const [errorPassword, setErrorPassword] = useState(false);
        getBase64(e.target.files[0], function (base64Data) {
         console.log('getBase64')
         setImages( [base64Data])
+        
         setViewImage(true);
         // console.log(images,'----images----');
         console.log(base64Data,'base64Data')
@@ -307,7 +304,7 @@ const handleImageSelection = (event) => {
                        sx={{ size:"200px" ,width:"100px",height:"100px"}}
                        alt="Remy Sharp"
                        src="/broken-image.jpg">
-                       <Iconify id="camera-icon" icon={'mdi:camera'} onChange={handleImageSelection} sx={{ width: 50, height: 150, ml: 1,  color: '#ff7424' }} />
+                       <Iconify id="camera-icon" icon={'mdi:camera'} onChange={handleImageSelection} sx={{ width: 50, height: 150, ml: 1,  color: 'purple' }} />
                       
                        {images && <img src={images} alt="Uploaded Image" />}
 
@@ -368,7 +365,7 @@ const handleImageSelection = (event) => {
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
-                        <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
+                        <IconButton onClick={() => setShowPassword(!showPassword)} edge="end"> 
                           <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
                         </IconButton>
                       </InputAdornment>

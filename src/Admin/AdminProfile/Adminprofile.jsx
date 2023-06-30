@@ -70,7 +70,7 @@ export default function Userprofile(props){
       let config = {
           method: 'GET',
           maxBodyLength: Infinity,
-          url: `https://aipse.in/api/userActivation?email=${email}&condition=${condition}`,
+          url: `https://novapwc.com/api/userActivation?email=${email}&condition=${condition}`,
           headers: { 'Content-Type': 'application/json' },
       };
       axios(config)

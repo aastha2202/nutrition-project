@@ -94,7 +94,7 @@ const handleExpandClick = () => {
 
   const listDietPlan = () => {
    
-    axios.get(`https://aipse.in/api/getlistsdietplans?userid=1`)
+    axios.get(`https://novapwc.com/api/getlistsdietplans?userid=1`)
       .then(function (response) {
         console.log(response?.data, "response in list diet plan")
         let prev = response?.data?.data?.filter(e => e.status == 'previous')
@@ -114,12 +114,12 @@ const handleExpandClick = () => {
   const getAllDietPlan = (diet, exercise, value) => {
      console.log(diet,'diet', exercise,'exercise',value)
     console.log('called');
-    let dieturl = `https://aipse.in/api/getAllDietPlan?userid=1&type=food&status=ongoing`,
-      exerciseurl = `https://aipse.in/api/getAllDietPlan?userid=1&type=exercise&status=ongoing`
+    let dieturl = `https://novapwc.com/api/getAllDietPlan?userid=1&type=food&status=ongoing`,
+      exerciseurl = `https://novapwc.com/api/getAllDietPlan?userid=1&type=exercise&status=ongoing`
     if (diet) {
-      dieturl = `https://aipse.in/api/getAllDietPlan?userid=2&startdate=${diet?.StartDate}&enddate=${diet?.EndDate}&type=food&status=${interval[value]}`
+      dieturl = `https://novapwc.com/api/getAllDietPlan?userid=2&startdate=${diet?.StartDate}&enddate=${diet?.EndDate}&type=food&status=${interval[value]}`
       if (exercise?.StartDate) {
-        exerciseurl = `https://aipse.in/api/getAllDietPlan?userid=2&startdate=${exercise?.StartDate}&enddate=${exercise?.EndDate}&type=exercise&status=${interval[value]}`
+        exerciseurl = `https://novapwc.com/api/getAllDietPlan?userid=2&startdate=${exercise?.StartDate}&enddate=${exercise?.EndDate}&type=exercise&status=${interval[value]}`
       }
     }
     console.log('diet and exwrcise url',dieturl, exerciseurl)
@@ -156,13 +156,13 @@ const handleExpandClick = () => {
 
   const getOneDiet = (item, index) => {
     console.log(item.status, "itemmmm statusss .....  ")
-    axios.get(`https://aipse.in/api/getAllDietPlan?userid=2&startdate=${item.startdate}&enddate=${item.enddate}&type=food&status=${item.status}`)
+    axios.get(`https://novapwc.com/api/getAllDietPlan?userid=2&startdate=${item.startdate}&enddate=${item.enddate}&type=food&status=${item.status}`)
       .then(function (response) {
         response.data.data.servingsLeft = parseInt
           (response?.data?.data.TotalServings - response?.data?.data.CosumedServings)
         setViewOneDietPlan({ ...viewOneDietPlan, previous: index })
         setoneDietplanData(response?.data?.data)
-        axios.get(`https://aipse.in/api/getAllDietPlan?userid=2&startdate=${item.startdate}&enddate=${item.enddate}&type=exercise&status=${item.status}`)
+        axios.get(`https://novapwc.com/api/getAllDietPlan?userid=2&startdate=${item.startdate}&enddate=${item.enddate}&type=exercise&status=${item.status}`)
           .then(function (response) {
             response.data.data.servingsLeft = parseInt
               (response?.data?.data.TotalServings - response?.data?.data.CosumedServings)

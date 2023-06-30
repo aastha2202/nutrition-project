@@ -16,7 +16,7 @@ import NotificationsPopover from './NotificationsPopover';
 
 const NAV_WIDTH = 280;
 
-const HEADER_MOBILE = 64;
+const HEADER_MOBILE = 84;
 
 const HEADER_DESKTOP = 92;
 
@@ -72,7 +72,9 @@ export default function Header({ onOpenNav }) {
           {/* <NotificationsPopover /> */}
           <AccountPopover />
         </Stack>
+        
       </StyledToolbar>
-    </StyledRoot>
+     </StyledRoot>
+    
   );
 }

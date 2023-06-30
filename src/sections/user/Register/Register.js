@@ -27,7 +27,7 @@ const Register = ({ navigation }) => {
     })
 
     const registerUser = () => {
-        axios.post(`https://aipse.in/api/registerUser`, formValue)
+        axios.post(`http://44.212.136.151:8081/api/registerUser`, formValue)
             .then(function (response) {
                 console.log(response?.data, "responseeeeeee")
                 navigation.navigate('Login')

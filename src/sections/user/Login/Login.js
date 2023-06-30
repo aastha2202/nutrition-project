@@ -19,7 +19,7 @@ const Login = ({ navigation }) => {
   const [formValue, setFormValue] = useState({ email_id: "", password: "" })
 
   const loginUser = () => {
-    axios.post(`https://aipse.in/api/login`, formValue)
+    axios.post(`http://44.212.136.151:8081/api/login`, formValue)
       .then(function (response) {
         console.log(response?.data, "responseeeeeee")
         if (response?.data?.status) {  

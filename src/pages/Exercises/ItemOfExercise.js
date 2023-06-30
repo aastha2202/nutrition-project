@@ -4,7 +4,7 @@ import * as React from 'react';
 // import '../../fonts/Poppins-BoldItalic.ttf'
 
 // import '../../fonts/Poppins-ExtraBold.ttf';
-
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import axios from 'axios';
 import Card from '@mui/material/Card';
 import Iconify from 'src/components/iconify/Iconify';
@@ -19,12 +19,13 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Logo from "../../assets/nova.svg";
 import Poultry from "../../assets/Poultry.svg";
-import Fish from "../../assets/Fish.svg";
+import TitleLogo from "../../assets/TitleLogo.svg";
 // import EditCalories from '../Exercises/Components/EditCalories';
 import  EditCalories from "./Components/EditCalories"
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 // import  "../styles.css";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const pageheading={
     fontFamily:"Inter-Bold",
@@ -92,7 +93,7 @@ const caloriesremained={
 export default function Aerobic({ route, navigation,props }) {
   const servlingsLeft= useRef();
 
-      const imageurl="https://aipse.in";
+  const imageurl= "https://novapwc.com/";
       const location = useLocation();
     //  console.log(location?.state?.data)
     // const [data,setData] = useState(location.state?.data);
@@ -199,7 +200,7 @@ export default function Aerobic({ route, navigation,props }) {
       }
 
       console.log(data, "posr requestrrrrtt")
-      axios.post(`https://aipse.in/api/updateDailyIntake`, data)
+      axios.post(`https://novapwc.com/api/updateDailyIntake`, data)
           .then(function (response) {
 
               console.log(response?.data, "response from apiii")
@@ -214,34 +215,7 @@ export default function Aerobic({ route, navigation,props }) {
 
   }
 
-    // const apiCall = async () => {
-    //   setViewModal(false)
-    //     let userIdAsync = await localStorage.getItem('userId')
-
-    //     setCategoryName(params.category)
-       
-
-    //     axios.get(`https://aipse.in/api/getItemsOfCategory?category_id=${params.cat}&type=exercise`)
-    //         .then(function (response) {
-
-    //             setItems(response?.data?.data)
-    //             axios.get(`https://aipse.in/api/itemIntakeStatus?userid=${userIdAsync}&type=exercise&category=${params.category}`)
-    //                 .then(function (response) {
-
-    //                     setItemIntakeStatus(response?.data?.data)
-    //                     // handleSuccess()
-    //                     setLoading(false)
-    //                 })
-    //                 .catch(function (error) {
-    //                     // Alert.alert("something went wrong");
-    //                     // console.log(error);
-    //                 });
-    //         })
-    //         .catch(function (error) {
-    //             // Alert.alert("something went wrong");
-    //             // console.log(error);
-    //         });
-    // }
+    
 
 
 
@@ -250,13 +224,13 @@ export default function Aerobic({ route, navigation,props }) {
 
       setCategoryName(params.category)
 
-      axios.get(`https://aipse.in/api/getItemsOfCategory?category_id=${params.cat}&type=exercise`)
+      axios.get(`https://novapwc.com/api/getItemsOfCategory?category_id=${params.cat}&type=exercise`)
           .then(function (response) {
               console.log(response?.data?.data,"checkingggggggggggggggggggg")
               if (response?.data?.data) {
                  let  items = response?.data?.data
                   setItems(items)
-                  axios.get(`https://aipse.in/api/itemIntakeStatus?userid=${userIdAsync}&type=exercise&category=${params.category}`)
+                  axios.get(`https://novapwc.com/api/itemIntakeStatus?userid=${userIdAsync}&type=exercise&category=${params.category}`)
                       .then(function (response) {
                           console.log(response?.data)
                           let itemServings = response?.data?.data ? response?.data?.data :[]
@@ -346,107 +320,139 @@ export default function Aerobic({ route, navigation,props }) {
   // }
   
     console.log(items,"--------------")
-    return ( 
-        <div>
+    const [ spinner, setSpinner ] = useState(true);
 
-
-      <Snackbar
-        open={showAlert}
-        onClose={() =>  setShowAlert(false)}
-        autoHideDuration={1000}
-    
-        >
-         <Alert severity="success"> servings created Successful!</Alert>
-        </Snackbar>
+    // It will be executed before rendering
   
-  {/* {
-    <img
-      src={Logo}
-      alt="nova logo"
-      style={{ height: "auto", width: "250px", marginLeft: "30px" }}
-    />
-  } */}
+    useEffect(() => {
+      console.log("loader is onnnnnnn");
+  
+  
+      setTimeout(() =>{ 
+        // <img src={Logo} alt="loader image" width="100" height="100"/>
+       
+        
+        // <HashLoader color="#36d7b7" />
+        setSpinner(false)
+      }, 1000)
+    }, []);
+
+
+    return (  
+
+      <>
+      {loading?( <div style={{ display: "flex", justifyContent: "center", flexDirection:"column", alignItems: "center" , height:"50vh" }}  >
+           
+           {/* <img  src={TitleLogo} alt="loading" style={{height:"100px",width:"100px"}} /> */}
+          < CircularProgress/>
+
+       </div>):(   <div>
+
+
+<Snackbar
+  open={showAlert}
+  onClose={() =>  setShowAlert(false)}
+  autoHideDuration={1000}
+
+  >
+   <Alert severity="success"> servings created Successful!</Alert>
+  </Snackbar>
+
+{/* {
+<img
+src={Logo}
+alt="nova logo"
+style={{ height: "auto", width: "250px", marginLeft: "30px" }}
+/>
+} */}
 {
-  viewModal && < EditCalories handleSuccess={handleSuccess} state={selectedData} apiCall={apiCall}  ref={childComp}/>
+viewModal && < EditCalories handleSuccess={handleSuccess} state={selectedData} apiCall={apiCall}  ref={childComp}/>
 }
-  <Grid container spacing={2}>
-    <Grid  item xs={6}>
-      <CardContent >
-       
-      <Grid  container flexDirection={"row"} >
-          {/* <img src={Backbutton} className='dinning-img' alt="dinning" /> */}
-          <Grid item>
-            <Link to="/dashboard/exercise" >
-              
-                  <IconButton>
-                    <Iconify icon="material-symbols:arrow-back-rounded" />
-                  </IconButton></Link>
-                  </Grid>
-                  <Grid item>
-                  <Typography variant="h3" style={pageheading} >{params?.category}  </Typography>
-                  {/* {value.category} */}
-                  </Grid>
+<Grid container spacing={2}>
+<Grid  item xs={7}>
+<CardContent >
+ 
+<Grid  container flexDirection={"row"} >
+    {/* <img src={Backbutton} className='dinning-img' alt="dinning" /> */}
+    <Grid item alignSelf={"center"}>
+      <Link to="/dashboard/exercise" >
+        
+            {/* <IconButton>
+              <Iconify icon="material-symbols:arrow-back-rounded" />
+            </IconButton> */}
+            <ArrowBackIcon style={{ color: 'black' }} />
+            </Link>
             </Grid>
-        {/* <Typography variant="h3" style={pageheading}> {value.category_name} </Typography> */}
-        <Typography style={calories}>45 Calories / Sets </Typography>
-        <Typography style={calories}>13 Sets / Day </Typography>
-      </CardContent>
-    </Grid>
-    <Grid item xs={6}>
-      <CardContent>
-        <Card
-          sx={{ Width: 200, height: 110 }}
-          style={{ backgroundColor: "#E1B725", textAlign:"center" }}
-        >
-          <Typography variant="h3"  style={caloriesremained}> {addServings}
-          {/* {params?.servingsConsumed + addServings}   */}
-       
-          </Typography>
-          <Typography variant="h5" style={caloriesremained} >
-            sets
-          </Typography>
-          <Typography variant="h5" style={caloriesremained} >
-            done
-          </Typography>
-        </Card>
-      </CardContent>
-    </Grid>
-  </Grid>
-  {/* <CardContent>
-    <Card>
-      <Typography variant="body1" style={textparaStyle}>
-        Weigh AFTER cooked / 1 serving = 1 cooked oz 
-      </Typography>
-    </Card>
-  </CardContent> */}
-  
-  {items?.length>0?
-  (items.map((item,index)=>{
-  return(
-    <Card style={cardStyle}>
-    <CardContent >
-    {/* onClick={()=>{handleCard(item)}} */}
-      <Grid container spacing={2} justifyContent="center" alignItems="center">
-        <Grid item xs={3} md={3} sx={{textAlign:"center"}}>
-          <ButtonBase>
-            <img   style={{borderRadius:100, maxHeight:"70px",minWidth:"70px",objectFit: 'cover'}} src={imageurl+item.item_image} alt="image" />
+            <Grid item>
+            <Typography variant="h3" style={pageheading} >{params?.category}  </Typography>
+            {/* {value.category} */}
+            </Grid>
+      </Grid>
+  {/* <Typography variant="h3" style={pageheading}> {value.category_name} </Typography> */}
+  <Typography style={calories}>{params?.recommended_servings} recommended / Sets </Typography>
+  {/* <Typography style={calories}>13 Sets / Day </Typography> */}
+</CardContent>
+</Grid>
+<Grid item xs={5}>
+<CardContent>
+  <Card
+    sx={{ Width: 200, height: 110 }}
+    style={{ backgroundColor: "#E1B725", textAlign:"center" }}
+  >
+    <Typography variant="h3"  style={caloriesremained}> {addServings}
+    {/* {params?.servingsConsumed + addServings}   */}
+ 
+    </Typography>
+    <Typography variant="h5" style={caloriesremained} >
+      sets
+    </Typography>
+    <Typography variant="h5" style={caloriesremained} >
+      done
+    </Typography>
+  </Card>
+</CardContent>
+</Grid>
+</Grid>
+{/* <CardContent>
+<Card>
+<Typography variant="body1" style={textparaStyle}>
+  Weigh AFTER cooked / 1 serving = 1 cooked oz 
+</Typography>
+</Card>
+</CardContent> */}
 
+{items?.length>0?
+(items.map((item,index)=>{
+return(
+<Card style={cardStyle}>
+<CardContent >
+
+<Grid container spacing={1} justifyContent="center" alignItems="center">
+        <Grid item xs={3}  sx={{textAlign:"center"}} >
+          <ButtonBase >
+            <img  style={{borderRadius:100,maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={imageurl+item.item_image}  alt="image" />
           </ButtonBase>
-        </Grid> 
-        <Grid item xs={9} spacing={2} md={9}>
-          <Grid item xs>
-            <div style={{ display: "flex" }}>
+        </Grid>
+        <Grid container item xs={9} spacing={1} >
+          {/* <Grid item xs> */}
+            {/* <div style={{ display: "flex" }}> */}
+            <Grid item xs={8} marginTop="9px">
               <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
+                // gutterBottom
+                // variant="h5"
+                // component="div"
                  style = {maintitle }
+                 sx={{alignSelf:"center",   display:"flex", flexDirection:"column" ,justifyContent: "center",}}
               >
-                 {item.item_name}  
+                 {item.item_name}
                 
               </Typography>
-              <Card sx={{position:'absolute', minWidth:"30px" , alignContent:"center" , right:10,borderRadius:1,boxShadow: '#c4c4c4'}}  >
+              </Grid>
+              <Grid item xs={4} >
+    
+              <Card sx={{position:'absolute', minWidth:"30px"  , right:5,borderRadius:1,boxShadow: '#c4c4c4'}}  >
               {/* <EditCalories state={{data:itemIntakeStatus}} /> */}
+
               <IconButton onClick={() => { item.servings_consumed >= 1 && decreaseCount(item, index) }} >
                                 <RemoveIcon  />
                                  </IconButton>
@@ -457,27 +463,37 @@ export default function Aerobic({ route, navigation,props }) {
                                  <IconButton  onClick={() => { increaseCount(item, index) }}>
                                  <AddIcon />
                                  </IconButton>
-                                
-                
+
+
+
+      
                 {/* <Typography sx={{textAlign:"center",alignContent:"center"}}>{getStatus(item.item_id)}</Typography> */}
               </Card>
-            </div>
+              </Grid>
+            {/* </div> */}
+
+           <Grid item xs={12}>
             <Typography variant="body2" gutterBottom mt={0.6} style={maintext}>
-              {item.description}
+              {item.description }
             </Typography>
+            </Grid>
+
+
           </Grid>
         </Grid>
-      </Grid>
-    </CardContent>
-  </Card>
 
-  )
+</CardContent>
+</Card>
+
+)
 
 })):(<Typography   align="center"  style={calories}>No Exercise Found</Typography> )}
 
 
 
 </div>
-
+)}
+      </>
+     
             );
    }
