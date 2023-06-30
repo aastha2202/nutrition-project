@@ -153,61 +153,124 @@
 
 
 // export default loader;
-import React, { useState, useRef } from 'react';
+// import React, { useState, useRef } from 'react';
 
+//   const loader = () => {
+//   const videoRef = useRef(null);
+//   const fileInputRef = useRef(null);
+//   const [capturedImage, setCapturedImage] = useState(null);
+
+//   const handleCapture = async () => {
+//     try {
+//       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+
+//       if (videoRef.current) {
+//         videoRef.current.srcObject = stream;
+//       }
+//     } catch (error) {
+//       console.log('Error accessing camera:', error);
+//     }
+//   };
+
+//   const handleCaptureImage = () => {
+//     const videoElement = videoRef.current;
+
+//     if (videoElement && videoElement.srcObject) {
+//       const canvas = document.createElement('canvas');
+//       const context = canvas.getContext('2d');
+//       const videoTrack = videoElement.srcObject.getVideoTracks()[0];
+
+//       canvas.width = videoTrack.getSettings().width;
+//       canvas.height = videoTrack.getSettings().height;
+
+//       context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+
+//       const capturedImageData = canvas.toDataURL('image/jpeg');
+//       setCapturedImage(capturedImageData);
+
+//       videoElement.srcObject.getVideoTracks().forEach((track) => track.stop());
+//     }
+//   };
+
+//   const handleUpload = (event) => {
+//     const file = event.target.files[0];
+
+//     if (file) {
+//       const reader = new FileReader();
+
+//       reader.onload = (e) => {
+//         setCapturedImage(e.target.result);
+//       };
+
+//       reader.readAsDataURL(file);
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <button onClick={handleCapture}>Capture Photo</button>
+
+//       {capturedImage && (
+//         <div>
+//           <p>Captured Photo:</p>
+//           <img src={capturedImage} alt="Captured" />
+//         </div>
+//       )}
+
+//       <video ref={videoRef} style={{ display: 'none' }} />
+
+//       <input type="file" accept="image/*" ref={fileInputRef} onChange={handleUpload} />
+
+//       <button onClick={() => fileInputRef.current.click()}>Upload Photo--</button>
+
+//       <button onClick={handleCaptureImage}>Capture Image--</button>
+//     </div>
+//   );
+// };
+
+// export default loader;
+
+import { Height } from '@mui/icons-material';
+import React, { useRef, useState } from 'react';
+import Webcam from 'react-webcam';
 const loader = () => {
-  const videoRef = useRef(null);
+  const webcamRef = useRef(null);
   const [capturedImage, setCapturedImage] = useState(null);
 
-  const handleCapture = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-      }
-    } catch (error) {
-      console.log('Error accessing camera:', error);
-    }
+  const captureImage = () => {
+    const imageSrc = webcamRef.current.getScreenshot();
+    setCapturedImage(imageSrc);
   };
 
-  const handleCaptureImage = () => {
-    const videoElement = videoRef.current;
-
-    if (videoElement && videoElement.srcObject) {
-      const canvas = document.createElement('canvas');
-      const context = canvas.getContext('2d');
-      const videoTrack = videoElement.srcObject.getVideoTracks()[0];
-
-      canvas.width = videoTrack.getSettings().width;
-      canvas.height = videoTrack.getSettings().height;
-
-      context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-
-      const capturedImageData = canvas.toDataURL('image/jpeg');
-      setCapturedImage(capturedImageData);
-
-      videoElement.srcObject.getVideoTracks().forEach((track) => track.stop());
+  const uploadImage = () => {
+    // Implement the logic to upload the image to your server
+    if (capturedImage) {
+      // Use the capturedImage variable to access the captured image data
+      console.log('Uploading image:', capturedImage);
+    } else {
+      console.log('No image captured');
     }
   };
 
   return (
     <div>
-      <button onClick={handleCapture}>Capture Photo</button>
+      <Webcam audio={false} ref={webcamRef} />
 
       {capturedImage && (
         <div>
-          <p>Captured Photo:</p>
-          <img src={capturedImage} alt="Captured" />
+          <p>Captured Image:</p>
+          <img src={capturedImage} alt="Captured"  style={{Height:"60px",width:"60px",borderRadius:"70px"}}/>
         </div>
       )}
 
-      <video ref={videoRef} style={{ display: 'none' }} />
-
-      <button onClick={handleCaptureImage}>Capture Image</button>
+      <button onClick={captureImage}>Capture Image</button>
+      <button onClick={uploadImage}>Upload Image</button>
     </div>
   );
 };
+
+
+
 
 export default loader;
 
