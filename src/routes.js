@@ -37,6 +37,7 @@ import ListAllDietPlan from './Admin/AdminDiet/ListAllDietPlan';
 import ResetPassword from "./pages/ResetPassword";
 import Loader from "./pages/loader";
  import HelpCenter from "./pages/HelpCenter/HelpCenter";
+ import RegisterHelp from "./pages/HelpCenter/RegisterHelp";
 // ----------------------------------------------------------------------
 //  import Login from './user/Login/Login';
 // import Home from './user/Home/Home';
@@ -104,8 +105,12 @@ export default function Router() {
                     path: 'exercise',
                     element: < Exercise /> ,
                 },
+               
                 { path: 'itemofexercise', element: < ItemOfExercise /> },
                 { path: 'helpcenter', element: <HelpCenter/> },
+                {
+                  path: 'registerhelp', element: <RegisterHelp />  
+                },
             ],
             
 
