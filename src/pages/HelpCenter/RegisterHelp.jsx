@@ -167,11 +167,11 @@ export default function VerticalLinearStepper() {
         {steps.map((step, index) => (
           <Step key={step.label}>
             <StepLabel
-              optional={
-                index === 8 ? (
-                  <Typography variant="caption">Last step</Typography>
-                ) : null
-              }
+            //   optional={
+            //     index === 8 ? (
+            //       <Typography variant="caption">Last step</Typography>
+            //     ) : null
+            //   }
             >
               {step.label}
             </StepLabel>
