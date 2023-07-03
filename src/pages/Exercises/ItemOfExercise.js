@@ -26,6 +26,7 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 // import  "../styles.css";
 import CircularProgress from '@mui/material/CircularProgress';
+import SearchBar from "../../layouts/dashboard/Searchbar";
 
 const pageheading={
     fontFamily:"Inter-Bold",
