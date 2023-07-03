@@ -11,8 +11,6 @@ NavSection.propTypes = {
   data: PropTypes.array,
 };
 
-
-
 export default function NavSection({ data = [],  ...other }) {
   const userId=1
  
@@ -37,7 +35,6 @@ export default function NavSection({ data = [],  ...other }) {
   );
 }
 
-// ----------------------------------------------------------------------
 
 NavItem.propTypes = {
   item: PropTypes.object,
@@ -66,12 +63,3 @@ function NavItem({ item }) {
     </StyledNavItem>
   );
 }
-
-
-
-
-
-
-
-
-

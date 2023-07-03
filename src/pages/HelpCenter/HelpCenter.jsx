@@ -5,16 +5,25 @@ import Snackbar from '@mui/material/Snackbar';
 // import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Diet from "../../assets/Diet.svg";
+import TermConditions from "../../assets/TermConditions.png";
+import AboutUs from "../../assets/AboutUs.jpg"
+import PivacyPolicy from "../../assets/PrivacyPolicy.png"
+import ReportProblem from "../../assets/ReportProblem.png"
+import GetStarted from "../../assets/GetStarted.png"
+import WhyLogo from "../../assets/WhyLogo.png"
 
 import { Link as RouterLink } from 'react-router-dom';
 
 
-
+const help={
+  fontFamily:"Inter-Bold",
+  fontSize:"20px" ,
+}
 
 const title={
     
   fontFamily:"Inter-Bold",
-  fontSize:"20px" ,
+  fontSize:"18px" ,
   color:"#112866",
 };
 const mainTitle={
@@ -35,7 +44,7 @@ export default function HelpCenter() {
     <>
     {/* <Card > */}
       <Grid margin="10px" >
-        <Typography variant='h4'>How can we help you?</Typography>
+        <Typography variant='h4' style={help}>How can we help you?</Typography>
       </Grid>
       {/* <Grid> 
         <Card sx={{margin:"10px" , height:"40px"}}> serach bar</Card>
@@ -53,9 +62,10 @@ export default function HelpCenter() {
     
    
     <Grid item container sx={{flexDirection:"column",margin:"10px"}} xs={5} sm={5.7} md={3.7} lg={3.7} xl={3.7} >
-    <Card >
+    <Card to="/dashboard/helpcenter/registerhelp" component={RouterLink} sx={{textDecoration:'none',height:"250px"}}>
+   <CardContent>
     <Grid item sx={{ display: "flex", margin:"20px", justifyContent: "center", alignItems: "center" }}>
-   <img  style={{borderRadius:100,maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={Diet}  alt="image" />
+   <img  style={{borderRadius:100,maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={GetStarted}  alt="image" />
    </Grid>
    <Grid item  sx={{ margin: '0px 10px 0px 10px' }}>
     <Typography variant="h5" style={title}  >
@@ -68,12 +78,15 @@ export default function HelpCenter() {
       lets get start  
     </Typography>
     </Grid>
+    </CardContent>
     </Card>
     </Grid>
     <Grid item container sx={{flexDirection:"column",margin:"10px"}} xs={5} sm={5.7} md={3.7} lg={3.7} xl={3.7} >
-    <Card to="/dashboard/helpcenter/aboutus" component={RouterLink} sx={{textDecoration:'none'}} >
+    
+    <Card to="/dashboard/helpcenter/aboutus" component={RouterLink} sx={{textDecoration:'none',height:"250px"}} >
+    <CardContent>
     <Grid item sx={{ display: "flex", margin:"20px", justifyContent: "center", alignItems: "center" }}>
-   <img  style={{borderRadius:100,maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={Diet}  alt="image" />
+   <img  style={{borderRadius:100,maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={AboutUs}  alt="image" />
    </Grid>
    <Grid item  sx={{ margin: '0px 10px 0px 10px' }}>
     <Typography variant="h5" style={title}  >
@@ -86,12 +99,14 @@ export default function HelpCenter() {
       About us....  
     </Typography>
     </Grid>
+    </CardContent>
     </Card>
     </Grid>
     <Grid item container sx={{flexDirection:"column",margin:"10px"}} xs={5} sm={5.7} md={3.7} lg={3.7} xl={3.7} >
-    <Card >
+    <Card sx={{height:"250px"}}>
+      <CardContent>
     <Grid item sx={{ display: "flex", margin:"20px", justifyContent: "center", alignItems: "center" }}>
-   <img  style={{borderRadius:100,maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={Diet}  alt="image" />
+   <img  style={{borderRadius:100,maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={WhyLogo}  alt="image" />
    </Grid>
    <Grid item  sx={{ margin: '0px 10px 0px 10px' }}>
     <Typography variant="h5" style={title}  >
@@ -104,12 +119,14 @@ export default function HelpCenter() {
       lets get why npwc  
     </Typography>
     </Grid>
+    </CardContent>
     </Card>
     </Grid>
     <Grid item container sx={{flexDirection:"column",margin:"10px"}} xs={5} sm={5.7} md={3.7} lg={3.7} xl={3.7} >
-    <Card  to="/dashboard/helpcenter/termconditions" component={RouterLink} sx={{textDecoration:'none'}}>
+    <Card  to="/dashboard/helpcenter/termconditions" component={RouterLink} sx={{textDecoration:'none',height:"250px"}}>
+    <CardContent>
     <Grid item sx={{ display: "flex", margin:"20px", justifyContent: "center", alignItems: "center" }}>
-   <img  style={{borderRadius:100,maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={Diet}  alt="image" />
+   <img  style={{borderRadius:100,maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={TermConditions}  alt="image" />
    </Grid>
    <Grid item  sx={{ margin: '0px 10px 0px 10px' }}>
     <Typography variant="h5" style={title}  >
@@ -119,16 +136,19 @@ export default function HelpCenter() {
     <Grid item sx={{ margin: '0px 10px 30px 10px' }}>
 
     <Typography variant="text" style={mainTitle} >
-      lets get starts with  terms & condtions
+      terms and conditions
     </Typography>
     </Grid>
+    </CardContent>
     </Card>
     </Grid>
 
     <Grid item container sx={{flexDirection:"column",margin:"10px"}} xs={5} sm={5.7} md={3.7} lg={3.7} xl={3.7} >
-    <Card   to="/dashboard/helpcenter/privacypolicy" component={RouterLink} sx={{textDecoration:'none'}}>
+    <Card   to="/dashboard/helpcenter/privacypolicy" component={RouterLink} sx={{textDecoration:'none',height:"250px"}}>
+    
+    <CardContent>
     <Grid item sx={{ display: "flex", margin:"20px", justifyContent: "center", alignItems: "center" }}>
-   <img  style={{borderRadius:100,maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={Diet}  alt="image" />
+   <img  style={{borderRadius:100,maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={PivacyPolicy}  alt="image" />
    </Grid>
    <Grid item  sx={{ margin: '0px 10px 0px 10px' }}>
     <Typography variant="h5" style={title}  >
@@ -141,13 +161,15 @@ export default function HelpCenter() {
       privacy policy of npwc  
     </Typography>
     </Grid>
+    </CardContent>
     </Card>
     </Grid>
 
     <Grid item container sx={{flexDirection:"column",margin:"10px"}} xs={5} sm={5.7} md={3.7} lg={3.7} xl={3.7} >
-    <Card >
+    <Card sx={{height:"250px"}} >
+    <CardContent>
     <Grid item sx={{ display: "flex", margin:"20px", justifyContent: "center", alignItems: "center" }}>
-   <img  style={{borderRadius:100,maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={Diet}  alt="image" />
+   <img  style={{borderRadius:100,maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={ReportProblem}  alt="image" />
    </Grid>
    <Grid item  sx={{ margin: '0px 10px 0px 10px' }}>
     <Typography variant="h5" style={title}  >
@@ -160,6 +182,7 @@ export default function HelpCenter() {
       raise your problem here
     </Typography>
     </Grid>
+    </CardContent>
     </Card>
     </Grid>
 

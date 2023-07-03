@@ -40,6 +40,7 @@ import Loader from "./pages/loader";
  import TermConditions from './pages/HelpCenter/TermConditions';
  import PrivacyPolicy from './pages/HelpCenter/PrivacyPolicy';
  import AboutUs from './pages/HelpCenter/AboutUs';
+ import RegisterHelp from "./pages/HelpCenter/RegisterHelp"
 // ----------------------------------------------------------------------
 //  import Login from './user/Login/Login';
 // import Home from './user/Home/Home';
@@ -115,6 +116,7 @@ export default function Router() {
                 { path: 'helpcenter/termconditions', element: <TermConditions/> },
                 { path: 'helpcenter/privacypolicy', element: <PrivacyPolicy/> },
                 { path: 'helpcenter/aboutus', element: <AboutUs/> },
+                { path: 'helpcenter/registerhelp', element: <RegisterHelp/> },
                 
 
             ],

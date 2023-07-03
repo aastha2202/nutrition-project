@@ -4,6 +4,7 @@ import { useState } from 'react';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import HomeIcon from '@mui/icons-material/Home';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
+import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 // ----------------------------------------------------------------------
 
 const icon = (name) => < SvgColor src = { `/assets/icons/navbar/${name}.svg` }
@@ -52,7 +53,7 @@ const navConfig = [{
         path: '/dashboard/HelpCenter',
         // icon: icon('ic_cart'),
         //  icon:<ExerciseIcon/>,
-        icon:<FitnessCenterIcon/>,
+        icon:<HelpCenterIcon/>,
         id: 1,
 
     },

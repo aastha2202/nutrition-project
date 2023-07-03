@@ -4,7 +4,7 @@ import { useState, useEffect,useRef } from 'react';
 import { Link as RouterLink,useLocation } from 'react-router-dom';
 import { Grid, Typography, Card, CardContent,ButtonBase,Button } from '@mui/material';
  import CreateCategory from "../AdminDiet/component/CreateCategory";
-import useLongPress from '../AdminDiet/components/UseLongPress';
+// import useLongPress from '../AdminDiet/components/UseLongPress';
 import Logo from "../../assets/nova.svg";
 import Peas from "../../assets/Peas.svg";
 import axios from 'axios';
@@ -52,7 +52,7 @@ const childcomref = useRef()
       shouldPreventDefault: true,
       delay: 200,
     };
-    const longPressEvent = useLongPress(onLongPress, onClick, defaultOptions);
+    // const longPressEvent = useLongPress(onLongPress, onClick, defaultOptions);
     
 
 
