@@ -37,6 +37,9 @@ import ListAllDietPlan from './Admin/AdminDiet/ListAllDietPlan';
 import ResetPassword from "./pages/ResetPassword";
 import Loader from "./pages/loader";
  import HelpCenter from "./pages/HelpCenter/HelpCenter";
+ import TermConditions from './pages/HelpCenter/TermConditions';
+ import PrivacyPolicy from './pages/HelpCenter/PrivacyPolicy';
+ import AboutUs from './pages/HelpCenter/AboutUs';
 // ----------------------------------------------------------------------
 //  import Login from './user/Login/Login';
 // import Home from './user/Home/Home';
@@ -52,6 +55,9 @@ export default function Router() {
         {
             path: '/login',
             element: < LoginPage /> ,
+
+            
+
         },  
         {
             path: '/registeruser',
@@ -106,6 +112,11 @@ export default function Router() {
                 },
                 { path: 'itemofexercise', element: < ItemOfExercise /> },
                 { path: 'helpcenter', element: <HelpCenter/> },
+                { path: 'helpcenter/termconditions', element: <TermConditions/> },
+                { path: 'helpcenter/privacypolicy', element: <PrivacyPolicy/> },
+                { path: 'helpcenter/aboutus', element: <AboutUs/> },
+                
+
             ],
             
 

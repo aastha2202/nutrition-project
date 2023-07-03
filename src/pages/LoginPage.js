@@ -18,7 +18,7 @@ import Iconify from '../components/iconify';
 import { LoginForm } from '../sections/auth/login';
 import Snackbar from '@mui/material/Snackbar';
 import { CircularProgress } from '@mui/material';
-
+import NetworkStatus from './Network/NetworkStatus';
 // ----------------------------------------------------------------------
 
 const StyledRoot = styled('div')(({ theme }) => ({
@@ -159,6 +159,8 @@ const [isLoading,setIsLoading]=useState(false)
         <title>  NPWC </title>
       </Helmet>
       <StyledRoot>
+        
+        <NetworkStatus/>
         
         <Container maxWidth="sm">
           <StyledContent>
