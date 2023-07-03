@@ -198,15 +198,23 @@ export default function VerticalLinearStepper() {
             </StepContent>
           </Step>
         ))}
-      </Stepper></CardContent></Card>
+      </Stepper>
       {activeStep === steps.length && (
+        <Paper square elevation={0} sx={{ p: 3, marginLeft: '15%' }}>
+          <Typography variant="h4"  gutterBottom>All steps completed - you&apos;re finished!!</Typography>
+          <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
+            Start Again!
+          </Button>
+        </Paper>
+      )}</CardContent></Card>
+      {/* {activeStep === steps.length && (
         <Paper square elevation={0} sx={{ p: 3 }}>
           <Typography variant="h6" gutterBottom>All steps completed - you&apos;re finished</Typography>
           <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-            Reset
+            Start Again!
           </Button>
         </Paper>
-      )}
+      )} */}
     </Box>
   );
 }
