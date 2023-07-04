@@ -31,6 +31,7 @@ import Joyride, { STATUS } from "react-joyride";
 import { useLocation } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
+import NetworkStatus from "../Network/NetworkStatus";
 // ----------------------------------------------------------------------
   
 const hello={
@@ -424,6 +425,7 @@ const handleExpandClick = () => {
       .catch(function (error) {
         // Alert.alert("something went wrong");
         console.log(error);
+
       });
       // axios.get(`https://novapwc.com/api/getAllDietPlan?userid=${userId}&startdate=${item.startdate}&enddate=${item.enddate}&type=exercise&status=${item.status}`)
       //     .then(function (response) {
@@ -598,6 +600,7 @@ console.log(oneDietPlanData.length,"----------length------");
     // !spinner &&
 
    <>
+   <NetworkStatus/>
    {loading?(<div style={{ display: "flex", justifyContent: "center", flexDirection:"column", alignItems: "center" , height:"50vh" }}  >
            
            {/* <img  src={Logo} alt="loading" style={{height:"100px",width:"100px"}} /> */}

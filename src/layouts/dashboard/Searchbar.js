@@ -12,8 +12,8 @@ import useResponsive from '../../hooks/useResponsive';
 
 
 
-export default function Searchbar({searchHandler}) {
-  // const searchHandler = props;
+export default function Searchbar({props}) {
+  const searchHandler = props;
   const [isOpen, setOpen] = useState(false);
   const[searchData,setSearchData]= useState("");
 

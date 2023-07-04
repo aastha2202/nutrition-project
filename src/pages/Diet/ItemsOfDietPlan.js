@@ -1,4 +1,4 @@
-import { Grid, Typography, Select, FormControl, InputLabel,Button } from '@mui/material';
+import { Grid, Typography, Select, FormControl, InputLabel,Button, TextField } from '@mui/material';
 import * as React from 'react';
 
 // import '../../fonts/Poppins-BoldItalic.ttf'
@@ -25,6 +25,7 @@ import EditCaloriesDiet from './Components/EditCaloriesDiet';
 // import EditCalories from '../Exercises/Components/EditCalories';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
+import SearchBar from "../../layouts/dashboard/header/Searchbar";
 
 // import  "../styles.css";
 
@@ -407,6 +408,11 @@ style={{ height: "auto", width: "250px", marginLeft: "30px" }}
 {
 viewModal &&  < EditCaloriesDiet handleSuccess={handleSuccess} state={selectedData} apiCall={apiCall}  ref={childComp}/>
 }
+{/* <Card sx={{margin:"20px"}}>
+<SearchBar/>
+</Card> */}
+
+
 <Grid container spacing={2}>
 <Grid  item xs={7}>
 <CardContent >
@@ -459,6 +465,10 @@ viewModal &&  < EditCaloriesDiet handleSuccess={handleSuccess} state={selectedDa
 </Card>
 </CardContent>
 
+{/* <Card sx={{margin:"20px"}}>
+<SearchBar/>
+</Card> */}
+
 {items?.length>0?(items.map((item,index)=>{
 return(
 <Card style={cardStyle}>
@@ -493,7 +503,7 @@ return(
                           <RemoveIcon  />
                            </IconButton>
                         
-                          
+                         
                            {item.servings_consumed}
                           { console.log(item?.servings_consumed,"in code --")}
                            <IconButton  onClick={() => { increaseCount(item, index) }}>
