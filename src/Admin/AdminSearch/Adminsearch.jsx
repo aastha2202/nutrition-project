@@ -11,7 +11,7 @@ import Page from 'src/components/Page';
 import Userfig from "../../assets/Userfig.svg";
 import Iconify from 'src/components/iconify/Iconify';
 import { Link } from 'react-router-dom';
-import Searchbar from 'src/layouts/dashboard/Searchbar';
+// import Searchbar from 'src/layouts/dashboard/Searchbar';
 import {Pagination} from '@mui/material';
 import axios from 'axios';
 

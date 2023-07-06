@@ -230,47 +230,123 @@
 
 // export default loader;
 
-import { Height } from '@mui/icons-material';
-import React, { useRef, useState } from 'react';
-import Webcam from 'react-webcam';
-const loader = () => {
-  const webcamRef = useRef(null);
-  const [capturedImage, setCapturedImage] = useState(null);
+// import { Height } from '@mui/icons-material';
+// import React, { useRef, useState } from 'react';
+// import Webcam from 'react-webcam';
+// const loader = () => {
+//   const webcamRef = useRef(null);
+//   const [capturedImage, setCapturedImage] = useState(null);
 
-  const captureImage = () => {
-    const imageSrc = webcamRef.current.getScreenshot();
-    setCapturedImage(imageSrc);
-  };
+//   const captureImage = () => {
+//     const imageSrc = webcamRef.current.getScreenshot();
+//     setCapturedImage(imageSrc);
+//   };
 
-  const uploadImage = () => {
-    // Implement the logic to upload the image to your server
-    if (capturedImage) {
-      // Use the capturedImage variable to access the captured image data
-      console.log('Uploading image:', capturedImage);
-    } else {
-      console.log('No image captured');
-    }
-  };
+//   const uploadImage = () => {
+//     // Implement the logic to upload the image to your server
+//     if (capturedImage) {
+//       // Use the capturedImage variable to access the captured image data
+//       console.log('Uploading image:', capturedImage);
+//     } else {
+//       console.log('No image captured');
+//     }
+//   };
 
+//   return (
+//     <div>
+//       <Webcam audio={false} ref={webcamRef} />
+
+//       {capturedImage && (
+//         <div>
+//           <p>Captured Image:</p>
+//           <img src={capturedImage} alt="Captured"  style={{Height:"60px",width:"60px",borderRadius:"70px"}}/>
+//         </div>
+//       )}
+
+//       <button onClick={captureImage}>Capture Image</button>
+//       <button onClick={uploadImage}>Upload Image</button>
+//     </div>
+//   );
+// };
+
+
+// import React, { useState } from 'react';
+
+// const loader = () => {
+//   const [searchQuery, setSearchQuery] = useState(null);
+
+//   const handleSearch = (event) => {
+//     setSearchQuery(event.target.value);
+//   };
+
+//   return (
+//     <div>
+//       <input
+//         type="text"
+//         value={searchQuery}
+//         onChange={handleSearch}
+//         placeholder="Search..."
+//       />
+//       <button onClick={() => console.log(searchQuery)}>Search</button>
+//     </div>
+//   );
+// };
+
+
+// export default loader;
+import * as React from 'react';
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+import Autocomplete from '@mui/material/Autocomplete';
+
+export default function loader() {
   return (
-    <div>
-      <Webcam audio={false} ref={webcamRef} />
-
-      {capturedImage && (
-        <div>
-          <p>Captured Image:</p>
-          <img src={capturedImage} alt="Captured"  style={{Height:"60px",width:"60px",borderRadius:"70px"}}/>
-        </div>
-      )}
-
-      <button onClick={captureImage}>Capture Image</button>
-      <button onClick={uploadImage}>Upload Image</button>
-    </div>
+    <Stack spacing={2} sx={{ width: 300 }}>
+      
+      <Autocomplete
+        freeSolo
+        id="free-solo-2-demo"
+        disableClearable
+        options={top100Films.map((option) => option.title)}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Search input"
+            InputProps={{
+              ...params.InputProps,
+              type: 'search',
+            }}
+          />
+        )}
+      />
+    </Stack>
   );
-};
+}
+
+// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
+const top100Films = [
+  { title: 'The Shawshank Redemption', year: 1994 },
+  { title: 'The Godfather', year: 1972 },
+  { title: 'The Godfather: Part II', year: 1974 },
+  { title: 'The Dark Knight', year: 2008 },
+  { title: '12 Angry Men', year: 1957 },
+  { title: "Schindler's List", year: 1993 },
+  { title: 'Pulp Fiction', year: 1994 },
+  {
+    title: 'The Lord of the Rings: The Return of the King',
+    year: 2003,
+  },
+  { title: 'The Prestige', year: 2006 },
+  { title: 'The Lion King', year: 1994 },
+  { title: 'Apocalypse Now', year: 1979 },
+  { title: 'Alien', year: 1979 },
+  { title: 'Sunset Boulevard', year: 1950 },
+  { title: 'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb',
+    year: 1964,},
+  { title: '3 Idiots', year: 2009 },
+  { title: 'Monty Python and the Holy Grail', year: 1975 },
+];
 
 
 
-
-export default loader;
 

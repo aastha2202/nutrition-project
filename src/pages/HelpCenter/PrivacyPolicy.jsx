@@ -5,6 +5,8 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Link } from 'react-router-dom';
 
 import React from "react";
 
@@ -19,22 +21,41 @@ function PrivacyPolicy() {
 
   return (
     <>
-      <Grid
-        container
-        direction="row"
+  <CardContent>
+    <Grid container flexDirection={"row"} margin="20px" >
+      
+    <Grid item xs={3}  direction="row"
         justifyContent="center"
         alignItems="center"
-        marginTop="5px"
+        alignSelf={"center"} >
+          
+          <Link to="/dashboard/HelpCenter" >
+        
+            
+        <ArrowBackIcon style={{ color: 'black' }} />
+        </Link>
+
+          
+  
+    </Grid>
+      <Grid item xs={9}
+        container
+        direction="row"
+        // justifyContent="center"
+        // alignItems="center"
+        // marginTop="5px"
       >
         <Typography
-          align="center"
+          // align="center"
          style={MainTitle}
         >
           Privacy Policy
         </Typography>
       </Grid>
+      </Grid>
+     
 
-      <CardContent>
+      
         <Container
           maxWidth="lg"
           sx={{

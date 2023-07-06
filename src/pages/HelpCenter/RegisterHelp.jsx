@@ -166,6 +166,7 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -174,6 +175,7 @@ import StepContent from '@mui/material/StepContent';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Logo from "../../assets/nova.svg";
+
 import { CardContent, Card } from '@mui/material';
 import registeraccount from "../../assets/registeraccount.png";
 import loginaccount from "../../assets/loginaccount.png"
@@ -184,6 +186,8 @@ import dietitem from "../../assets/dietitem.png";
 import incrementservings from "../../assets/incrementservings.png"
 import detailedexercise from "../../assets/detailedexercise.png";
 import exerciseitem from "../../assets/exerciseitem.png";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Link } from 'react-router-dom';
 
 const steps = [
   {
@@ -301,11 +305,46 @@ export default function BasicTabs() {
 
   return (
     <Box sx={{ width: '100%' }}>
-               <div><img
+    {/* <div><img
          src={Logo}
          alt="nova logo"
          style={{ height: "auto", width: "250px", marginLeft: "10px" }}
-      /></div>
+      />
+    </div> */}
+    <Grid container flexDirection={"row"} margin="20px" >
+      
+      <Grid item xs={1}  direction="row"
+          justifyContent="center"
+          alignItems="center"
+          alignSelf={"center"} >
+      
+        <Link to="/dashboard/HelpCenter" >
+        
+            
+        <ArrowBackIcon style={{ color: 'black' }} />
+        </Link>
+            
+            
+  
+            
+    
+      </Grid>
+        <Grid item xs={11}
+          container
+          direction="row"
+          // justifyContent="center"
+          // alignItems="center"
+          // marginTop="5px"
+        >
+          <img
+         src={Logo}
+         alt="nova logo"
+         style={{ height: "auto", width: "250px", marginLeft: "10px" }}
+      />
+         
+        </Grid>
+        </Grid>
+
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Web" {...a11yProps(0)} />

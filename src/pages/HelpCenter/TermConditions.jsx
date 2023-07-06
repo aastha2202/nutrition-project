@@ -1,6 +1,9 @@
 import {  CardContent, Container, Grid, Typography, useTheme } from "@mui/material";
 
 import React from "react";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Link } from 'react-router-dom';
+
 
 function TermConditions() {
   const theme = useTheme();
@@ -15,7 +18,7 @@ function TermConditions() {
   return (
     <>
     <CardContent>
-      <Grid
+      {/* <Grid
         container
         direction="row"
         justifyContent="center"
@@ -25,7 +28,40 @@ function TermConditions() {
         <Typography  align="center"style={MainTitle}>
           Terms & Conditions
         </Typography>
+      </Grid> */}
+      <Grid container flexDirection={"row"} margin="20px" >
+      
+      <Grid item xs={2}  direction="row"
+          justifyContent="center"
+          alignItems="center"
+          alignSelf={"center"} >
+      
+        <Link to="/dashboard/HelpCenter" >
+        
+            
+        <ArrowBackIcon style={{ color: 'black' }} />
+        </Link>
+            
+            
+  
+            
+    
       </Grid>
+        <Grid item xs={10}
+          container
+          direction="row"
+          // justifyContent="center"
+          // alignItems="center"
+          // marginTop="5px"
+        >
+          <Typography
+            // align="center"
+           style={MainTitle}
+          >
+            Terms & conditions
+          </Typography>
+        </Grid>
+        </Grid>
 
       <Container
         maxWidth="lg"
@@ -41,9 +77,7 @@ function TermConditions() {
           <Typography
             style={{
               fontFamily: "Inter-Bold",
-
               fontSize: "20px",
-
               color: "#112866",
             }}
           >

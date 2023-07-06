@@ -26,7 +26,7 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 // import  "../styles.css";
 import CircularProgress from '@mui/material/CircularProgress';
-import SearchBar from "../../layouts/dashboard/Searchbar";
+
 
 const pageheading={
     fontFamily:"Inter-Bold",
@@ -83,6 +83,28 @@ const maintext = {
 const calories ={
     fontFamily: 'Inter-Regular',
     color:"#112866",
+    // fontWeight:"500",
+
+
+    // fontFamily: 'Inter-Regular',
+    fontStyle: "normal",
+    fontWeight: "600",
+    fontSize: "12px",
+    // lineHeight: "15px",
+    color:"#112866",
+};
+const notFound ={
+  fontFamily: 'Inter-Regular',
+  color:"#112866",
+  // fontWeight:"500",
+
+
+  // fontFamily: 'Inter-Regular',
+  fontStyle: "normal",
+  fontWeight: "600",
+  fontSize: "18px",
+  // lineHeight: "15px",
+  color:"#112866",
 };
 const caloriesremained={
     fontFamily: 'Inter-Regular',
@@ -378,9 +400,7 @@ viewModal && < EditCalories handleSuccess={handleSuccess} state={selectedData} a
     <Grid item alignSelf={"center"}>
       <Link to="/dashboard/exercise" >
         
-            {/* <IconButton>
-              <Iconify icon="material-symbols:arrow-back-rounded" />
-            </IconButton> */}
+            
             <ArrowBackIcon style={{ color: 'black' }} />
             </Link>
             </Grid>
@@ -398,7 +418,7 @@ viewModal && < EditCalories handleSuccess={handleSuccess} state={selectedData} a
 <CardContent>
   <Card
     sx={{ Width: 200, height: 110 }}
-    style={{ backgroundColor: "#E1B725", textAlign:"center" }}
+    style={{ backgroundColor: "#E1B725", textAlign:"center",}}
   >
     <Typography variant="h3"  style={caloriesremained}> {addServings}
     {/* {params?.servingsConsumed + addServings}   */}
@@ -488,7 +508,7 @@ return(
 
 )
 
-})):(<Typography   align="center"  style={calories}>No Exercise Found</Typography> )}
+})):(<Typography   align="center"  style={notFound}>No Exercise Found</Typography> )}
 
 
 

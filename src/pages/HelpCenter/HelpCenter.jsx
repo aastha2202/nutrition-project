@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Grid,Card, Typography,CardContent, Select, FormControl,  InputLabel,Button,IconButton,Stack, Tooltip,  } from '@mui/material';
 // import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 // import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Diet from "../../assets/Diet.svg";
@@ -22,6 +23,7 @@ import aboutus from "../../assets/aboutus.svg";
 import reportproblem from "../../assets/reportproblem.svg";
 
 import { Link as RouterLink } from 'react-router-dom';
+import Searchbar from 'src/layouts/dashboard/nav/Searchbar';
 
 
 const help={
@@ -33,15 +35,15 @@ const help={
 const title={
     
   fontFamily:"Inter-Bold",
-  fontSize:"18px" ,
+  fontSize:"17px" ,
   color:"#112866",
 };
 const mainTitle={
   fontFamily:"Inter-Regular",
   fontStyle: "normal",
-  fontWeight: "600",
+  // fontWeight: "600",
   fontSize: "12px",
-  lineHeight: "15px",
+  // lineHeight: "5px",
   color:"#112866",
 };
 export default function HelpCenter() {
@@ -56,9 +58,9 @@ export default function HelpCenter() {
       <Grid margin="20px" >
         <Typography variant='h4' style={help}>How can we help you?</Typography>
       </Grid>
-      {/* <Grid> 
-        <Card sx={{margin:"10px" , height:"40px"}}> serach bar</Card>
-      </Grid> */}
+      <Grid margin={"20px"}> 
+     <Searchbar/>
+      </Grid>
 
 
     
@@ -132,11 +134,11 @@ export default function HelpCenter() {
     </CardContent>
     </Card>
     </Grid>
-    <Grid item container sx={{flexDirection:"column",}} xs={6} sm={6} md={4} lg={4} xl={4} >
+    {/* <Grid item container sx={{flexDirection:"column",}} xs={6} sm={6} md={4} lg={4} xl={4} >
     <Card  to="/dashboard/helpcenter/termconditions" component={RouterLink} sx={{textDecoration:'none',height:"250px"}}>
     <CardContent>
     <Grid item sx={{ display: "flex", margin:"20px", justifyContent: "center", alignItems: "center" }}>
-   <img  style={{maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={termconditions}  alt="image" />
+   <img  style={{borderRadius:"100px" ,maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={termconditions}  alt="image" />
    </Grid>
    <Grid item  sx={{ margin: '0px 10px 0px 10px' }}>
     <Typography variant="h5" style={title}  >
@@ -147,6 +149,27 @@ export default function HelpCenter() {
 
     <Typography variant="text" style={mainTitle} >
       terms and conditions
+    </Typography>
+    </Grid>
+    </CardContent>
+    </Card>
+    </Grid> */}
+      <Grid item container sx={{flexDirection:"column",}} xs={6} sm={6} md={4} lg={4} xl={4} >
+    <Card   to="/dashboard/helpcenter/termconditions" component={RouterLink} sx={{textDecoration:'none',height:"250px"}}>
+    
+    <CardContent>
+    <Grid item sx={{ display: "flex", margin:"20px", justifyContent: "center", alignItems: "center" }}>
+   <img  style={{maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={termconditions}  alt="image" />
+   </Grid>
+   <Grid item  sx={{ margin: '0px 10px 0px 10px' }}>
+    <Typography variant="h5" style={title}  >
+    terms & conditions 
+    </Typography>
+    </Grid>
+    <Grid item sx={{ margin: '0px 10px 30px 10px' }}>
+
+    <Typography variant="text" style={mainTitle} >
+      privacy policy of npwc  
     </Typography>
     </Grid>
     </CardContent>

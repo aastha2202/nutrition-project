@@ -1,8 +1,8 @@
 import { Card,  CardContent,  Container,  Grid,  Typography ,useTheme  } from "@mui/material";
 
 import React from "react";
-
-
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Link } from 'react-router-dom';
 
 
 function AboutUs() {
@@ -32,10 +32,11 @@ const MainTitle={
   return (
 
     <>
+     <CardContent>
 
-    {/* <Card  > */}
+    
 
-      <Grid container
+      {/* <Grid container
 
   direction="row"
 
@@ -57,11 +58,42 @@ const MainTitle={
 
       </Typography>
 
+      </Grid> */}
+      <Grid container flexDirection={"row"} margin="20px" >
+      
+      <Grid item xs={3}  direction="row"
+          justifyContent="center"
+          alignItems="center"
+          alignSelf={"center"} >
+            
+            <Link to="/dashboard/HelpCenter" >
+        
+            
+        <ArrowBackIcon style={{ color: 'black' }} />
+        </Link>
+  
+            
+    
       </Grid>
+        <Grid item xs={9}
+          container
+          direction="row"
+          // justifyContent="center"
+          // alignItems="center"
+          // marginTop="5px"
+        >
+          <Typography
+            // align="center"
+           style={MainTitle}
+          >
+            About Us
+          </Typography>
+        </Grid>
+        </Grid>
 
-    {/* </Card> */}
+    
 
-    <CardContent>
+   
 
    
 

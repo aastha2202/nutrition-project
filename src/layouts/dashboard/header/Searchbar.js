@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 // @mui
 import { styled } from '@mui/material/styles';
@@ -43,6 +44,12 @@ export default function Searchbar() {
     setOpen(false);
   };
 
+  const searchData = [
+   { name:"sute",},
+   {name1:"fdfsg"},
+    {name2:"ghjh"},
+  ]
+
   return (
     <ClickAwayListener onClickAway={handleClose}>
       <div>
@@ -57,6 +64,8 @@ export default function Searchbar() {
             <Input
               autoFocus
               fullWidth
+              // options={searchData}
+              
               disableUnderline
               placeholder="Search…"
               startAdornment={
@@ -65,8 +74,10 @@ export default function Searchbar() {
                 </InputAdornment>
               }
               sx={{ mr: 1, fontWeight: 'fontWeightBold' }}
+              
+              
             />
-            <Button variant="contained" sx={{backgroundColor:"purple"}} onClick={handleClose}>
+            <Button variant="contained" onClick={handleClose}>
               Search
             </Button>
           </StyledSearchbar>

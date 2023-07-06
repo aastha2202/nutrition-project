@@ -41,6 +41,9 @@ import CircularProgress from '@mui/material/CircularProgress';
 // import dinning from '../images/dinningicon.png';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import  "../styles.css";
+// import Searchbar from 'src/layouts/dashboard/header/Searchbar';
+import Searchbar from 'src/layouts/dashboard/nav/Searchbar';
+
 
 
 const title={
@@ -340,6 +343,7 @@ export default function Exercise(){
 
     return (  
      <>
+      {/* <Searchbar/>  */}
 
      {loading?( <div className="loader-container" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "50vh" }}>
           
