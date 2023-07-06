@@ -1,4 +1,4 @@
-import { Grid, Typography, Select, FormControl, InputLabel,Button } from '@mui/material';
+import { Grid, Typography, Select, FormControl, InputLabel,Button, TextField } from '@mui/material';
 import * as React from 'react';
 
 // import '../../fonts/Poppins-BoldItalic.ttf'
@@ -25,6 +25,8 @@ import EditCaloriesDiet from './Components/EditCaloriesDiet';
 // import EditCalories from '../Exercises/Components/EditCalories';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
+// import SearchBar from "../../layouts/dashboard/header/Searchbar";
+import Searchbar from 'src/layouts/dashboard/nav/Searchbar';
 
 // import  "../styles.css";
 
@@ -90,6 +92,31 @@ const caloriesremained={
 
 }
 
+
+const imageStyles = {
+  borderRadius: 100,
+  objectFit: 'cover',
+  maxHeight: '70px',
+  minWidth: '70px',
+  width: '100%', // Default width for smaller screens
+  height: 'auto', // Default height for smaller screens
+};
+
+// Media query for larger screens (min-width: 768px)
+const largeScreenStyles = {
+  '@media (min-width: 768px)': {
+    width: '150px',
+    height: '150px',
+  },
+};
+
+// Media query for extra large screens (min-width: 1024px)
+const extraLargeScreenStyles = {
+  '@media (min-width: 1024px)': {
+    width: '200px',
+    height: '200px',
+  },
+};
 
 export default function Protein({ route, navigation,props }) {
   const servlingsLeft= useRef();
@@ -238,34 +265,7 @@ export default function Protein({ route, navigation,props }) {
 
   }
 
-    // const apiCall = async () => {
-    //   setViewModal(false)
-    //     let userIdAsync = await localStorage.getItem('userId')
-
-    //     setCategoryName(params.category)
-       
-
-    //     axios.get(`https://novapwc.com/api/getItemsOfCategory?category_id=${params.cat}&type=food`)
-    //         .then(function (response) {
-
-    //             setItems(response?.data?.data)
-    //             axios.get(`https://novapwc.com/api/itemIntakeStatus?userid=${userIdAsync}&type=food&category=${params.category}`)
-    //                 .then(function (response) {
-
-    //                     setItemIntakeStatus(response?.data?.data)
-    //                     // handleSuccess()
-    //                     setLoading(false)
-    //                 })
-    //                 .catch(function (error) {
-    //                     // Alert.alert("something went wrong");
-    //                     // console.log(error);
-    //                 });
-    //         })
-    //         .catch(function (error) {
-    //             // Alert.alert("something went wrong");
-    //             // console.log(error);
-    //         });
-    // }
+    
     const apiCall = async () => {
       let userIdAsync = await localStorage.getItem('userId')
 
@@ -407,6 +407,11 @@ style={{ height: "auto", width: "250px", marginLeft: "30px" }}
 {
 viewModal &&  < EditCaloriesDiet handleSuccess={handleSuccess} state={selectedData} apiCall={apiCall}  ref={childComp}/>
 }
+{/* <CardContent >
+<Searchbar/>
+</CardContent> */}
+
+
 <Grid container spacing={2}>
 <Grid  item xs={7}>
 <CardContent >
@@ -459,6 +464,10 @@ viewModal &&  < EditCaloriesDiet handleSuccess={handleSuccess} state={selectedDa
 </Card>
 </CardContent>
 
+{/* <Card sx={{margin:"20px"}}>
+<SearchBar/>
+</Card> */}
+
 {items?.length>0?(items.map((item,index)=>{
 return(
 <Card style={cardStyle}>
@@ -466,6 +475,7 @@ return(
 <Grid container spacing={2} justifyContent="center" alignItems="center">
   <Grid item xs={3}  sx={{textAlign:"center"}} >
     <ButtonBase >
+    {/* style={{borderRadius:100,maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} */}
       <img  style={{borderRadius:100,maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={imageurl+item.item_image}  alt="image" />
     </ButtonBase>
   </Grid>
@@ -493,7 +503,7 @@ return(
                           <RemoveIcon  />
                            </IconButton>
                         
-                          
+                         
                            {item.servings_consumed}
                           { console.log(item?.servings_consumed,"in code --")}
                            <IconButton  onClick={() => { increaseCount(item, index) }}>
