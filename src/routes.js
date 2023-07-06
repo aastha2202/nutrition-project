@@ -40,7 +40,9 @@ import Loader from "./pages/loader";
  import TermConditions from './pages/HelpCenter/TermConditions';
  import PrivacyPolicy from './pages/HelpCenter/PrivacyPolicy';
  import AboutUs from './pages/HelpCenter/AboutUs';
- import RegisterHelp from "./pages/HelpCenter/RegisterHelp"
+ import RegisterHelp from "./pages/HelpCenter/RegisterHelp";
+
+ import Calender from "./pages/Calender/Calender";
 // ----------------------------------------------------------------------
 //  import Login from './user/Login/Login';
 // import Home from './user/Home/Home';
@@ -71,6 +73,10 @@ export default function Router() {
         {
             path: 'loader',
             element: < Loader /> ,
+        },
+        {
+            path: 'calender',
+            element: < Calender/> ,
         },
         
         {
