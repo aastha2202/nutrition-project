@@ -184,65 +184,114 @@ import dietitem from "../../assets/dietitem.png";
 import incrementservings from "../../assets/incrementservings.png"
 import detailedexercise from "../../assets/detailedexercise.png";
 import exerciseitem from "../../assets/exerciseitem.png";
+import MobileApp from './MobileApp';
+import WebApp from './WebApp';
 
-const steps = [
-  {
-    label:  <Typography variant="h6" gutterBottom>
-    Do Not Have an Account?
-  </Typography>,
-    description: <img src={registeraccount} width={'400px'}></img>,
-  },
-  {
-    label: <Typography variant="h6" gutterBottom>
-    Already have an account? Login Here!
-  </Typography>,
-    description: <img src={loginaccount} width={'500px'}
-    />
-  },
-  {
-    label: <Typography variant="h6" gutterBottom>
-    Succesfully LoggedIn? Check your diet and exercise plan!
-  </Typography>,
-    description: <img src={dashboarddietexerc} width={'300px'}/>,
-  },
+// const steps = [
+//   {
+//     label:  <Typography variant="h6" gutterBottom>
+//     Do Not Have an Account?
+//   </Typography>,
+//     description: <img src={registeraccount} width={'400px'}></img>,
+//   },
+//   {
+//     label: <Typography variant="h6" gutterBottom>
+//     Already have an account? Login Here!
+//   </Typography>,
+//     description: <img src={loginaccount} width={'500px'}
+//     />
+//   },
+//   {
+//     label: <Typography variant="h6" gutterBottom>
+//     Succesfully LoggedIn? Check your diet and exercise plan!
+//   </Typography>,
+//     description: <img src={dashboarddietexerc} width={'300px'}/>,
+//   },
 
-  {
-    label: <Typography variant="h6" gutterBottom>
-    How to check daily, weekly or monthly diet and exercise plans?
-  </Typography>,
-    description: <img src={overalltoday} width={'300px'}/>,
-  },
-  {
-    label: <Typography variant="h6" gutterBottom>
-    How to check detailed diet plan? Click Here!
-  </Typography>,
-    description: <img src={detaileddiet} width={'500px'}/>,
-  },
-  {
-    label: <Typography variant="h6" gutterBottom>
-    How to check diet items? Click Here!
-  </Typography> ,
-    description: <img src={dietitem} width={'300px'}/>,
-  },
-  {
-    label:  <Typography variant="h6" gutterBottom>
-    Consumed a Serving? Increment Here!
-  </Typography>,
-    description: <img src={incrementservings} width={'300px'}/>,
-  },
-  {
-    label:  <Typography variant="h6" gutterBottom>
-    Want to see detailed exercise plan for today? Click Here!
-  </Typography>,
-    description: <img src={detailedexercise} width={'300px'}/>,
-  },
-  {
-    label:  <Typography variant="h6" gutterBottom>
-    Click Here to check Recommended Exercise items!!
-  </Typography>,
-    description: <img src={exerciseitem} width={'300px'}/>,
-  },
-];
+//   {
+//     label: <Typography variant="h6" gutterBottom>
+//     How to check daily, weekly or monthly diet and exercise plans?
+//   </Typography>,
+//     description: <img src={overalltoday} width={'300px'}/>,
+//   },
+//   {
+//     label: <Typography variant="h6" gutterBottom>
+//     How to check detailed diet plan? Click Here!
+//   </Typography>,
+//     description: <img src={detaileddiet} width={'500px'}/>,
+//   },
+//   {
+//     label: <Typography variant="h6" gutterBottom>
+//     How to check diet items? Click Here!
+//   </Typography> ,
+//     description: <img src={dietitem} width={'300px'}/>,
+//   },
+//   {
+//     label:  <Typography variant="h6" gutterBottom>
+//     Consumed a Serving? Increment Here!
+//   </Typography>,
+//     description: <img src={incrementservings} width={'300px'}/>,
+//   },
+//   {
+//     label:  <Typography variant="h6" gutterBottom>
+//     Want to see detailed exercise plan for today? Click Here!
+//   </Typography>,
+//     description: <img src={detailedexercise} width={'300px'}/>,
+//   },
+//   {
+//     label:  <Typography variant="h6" gutterBottom>
+//     Click Here to check Recommended Exercise items!!
+//   </Typography>,
+//     description: <img src={exerciseitem} width={'300px'}/>,
+//   },
+// ];
+
+// const timelines = [
+//   {
+//     label:  <Typography variant="h6" gutterBottom>
+//      Account?
+//   </Typography>,
+//     description: <img src={registeraccount} width={'400px'}></img>,
+//   },
+//   {
+//     label: <Typography variant="h6" gutterBottom>
+//     Already !
+//   </Typography>,
+//     description: <img src={loginaccount} width={'500px'}
+//     />
+//   },
+//   {
+//     label: <Typography variant="h6" gutterBottom>
+//     Succesfully LoggedIn? Check your diet and exercise plan!
+//   </Typography>,
+//     description: <img src={dashboarddietexerc} width={'300px'}/>,
+//   },
+
+//   {
+//     label: <Typography variant="h6" gutterBottom>
+//     How to check daily, weekly or monthly diet and exercise plans?
+//   </Typography>,
+//     description: <img src={overalltoday} width={'300px'}/>,
+//   },
+//   {
+//     label: <Typography variant="h6" gutterBottom>
+//     How to check detailed diet plan? Click Here!
+//   </Typography>,
+//     description: <img src={detaileddiet} width={'500px'}/>,
+//   },
+//   {
+//     label: <Typography variant="h6" gutterBottom>
+//     How to check diet items? Click Here!
+//   </Typography> ,
+//     description: <img src={dietitem} width={'300px'}/>,
+//   },
+//   {
+//     label:  <Typography variant="h6" gutterBottom>
+//     Consumed a Serving? Increment Here!
+//   </Typography>,
+//     description: <img src={incrementservings} width={'300px'}/>,
+//   },
+// ]
 
 
 function TabPanel(props) {
@@ -280,24 +329,37 @@ function a11yProps(index) {
 }
 
 export default function BasicTabs() {
-  const [activeStep, setActiveStep] = React.useState(0);
+  // const [activeStep, setActiveStep] = React.useState(0);
+  // const [activeTimeline, setActiveTimeline] = React.useState(0);
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
+  // const handleNext = () => {
+  //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  // };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
+  // const handleBack = () => {
+  //   setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  // };
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
+  // const handleReset = () => {
+  //   setActiveStep(0);
+  // };
+
+  // const handleNclick = () => {
+  //   setActiveTimeline((prevActiveTimeline) => prevActiveTimeline + 1);
+  // }
+  // const handleBackclick = () => {
+  //   setActiveTimeline((prevActiveTimeline) => prevActiveTimeline - 1);
+  // }
+  // const handleResetclick = () => {
+  //   setActiveTimeline(0);
+  // };
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+ 
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -314,7 +376,8 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-      <Card><CardContent>
+        <MobileApp />
+      {/* <Card><CardContent>
       <Stepper  activeStep={activeStep} orientation="vertical">
         {steps.map((step, index) => (
           <Step key={step.label}>
@@ -358,13 +421,14 @@ export default function BasicTabs() {
             Start Again!
           </Button>
         </Paper>
-      )}</CardContent></Card>
+      )}</CardContent></Card> */}
       </TabPanel>
       <TabPanel value={value} index={1}>
-      <Card><CardContent>
-      <Stepper  activeStep={activeStep} orientation="vertical">
-        {steps.map((step, index) => (
-          <Step key={step.label}>
+        <WebApp />
+      {/* <Card><CardContent>
+      <Stepper  activeTimeline={activeTimeline} orientation="vertical">
+        {timelines.map((timeline, index) => (
+          <Step key={timeline.label}>
             <StepLabel
             //   optional={
             //     index === 8 ? (
@@ -372,22 +436,22 @@ export default function BasicTabs() {
             //     ) : null
             //   }
             >
-              {step.label}
+              {timeline.label}
             </StepLabel>
             <StepContent>
-              <Typography>{step.description}</Typography>
+              <Typography>{timeline.description}</Typography>
               <Box sx={{ mb: 2 }}>
                 <div>
                   <Button
                     variant="contained"
-                    onClick={handleNext}
+                    onClick={handleNclick}
                     sx={{ mt: 1, mr: 1 }}
                   >
-                    {index === steps.length - 1 ? 'Finish' : 'Continue'}
+                    {index === timelines.length - 1 ? 'Finish' : 'Continue'}
                   </Button>
                   <Button
                     disabled={index === 0}
-                    onClick={handleBack}
+                    onClick={handleBackclick}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     Back
@@ -398,14 +462,14 @@ export default function BasicTabs() {
           </Step>
         ))}
       </Stepper>
-      {activeStep === steps.length && (
+      {activeTimeline === timelines.length && (
         <Paper square elevation={0} sx={{ p: 3, marginLeft: '15%' }}>
           <Typography variant="h4"  gutterBottom>All steps completed - you&apos;re finished!!</Typography>
-          <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
+          <Button onClick={handleResetclick} sx={{ mt: 1, mr: 1 }}>
             Start Again!
           </Button>
         </Paper>
-      )}</CardContent></Card>
+      )}</CardContent></Card> */}
       </TabPanel>
       
     </Box>
