@@ -41,6 +41,7 @@ import ProteinChicken from "../../assets/ProteinChicken.svg"
 import CircularProgress from '@mui/material/CircularProgress';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { step3ClassName, step4ClassName } from '../Home/Home';
+import NetworkStatus from '../Network/NetworkStatus';
 const title={
     
     fontFamily:"Inter-Bold",
@@ -398,6 +399,7 @@ const [loading, setLoading] = useState(true)
       // !spinner &&
 
       <>
+      <NetworkStatus/>
       {loading?(<div className="loader-container" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "50vh" }}>
           
           {/* <ClipLoader height={100} width={100}  color="grey"  wrapperStyle={{}}  wrapperClass=""  visible={true}  ariaLabel='oval-loading'  secondaryColor="#4fa94d"  strokeWidth={2} strokeWidthSecondary={2}/> */}

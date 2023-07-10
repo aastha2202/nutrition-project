@@ -43,7 +43,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import  "../styles.css";
 // import Searchbar from 'src/layouts/dashboard/header/Searchbar';
 import Searchbar from 'src/layouts/dashboard/nav/Searchbar';
-
+import NetworkStatus from '../Network/NetworkStatus';
 
 
 const title={
@@ -344,6 +344,7 @@ export default function Exercise(){
     return (  
      <>
       {/* <Searchbar/>  */}
+      <NetworkStatus/>
 
      {loading?( <div className="loader-container" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "50vh" }}>
           
