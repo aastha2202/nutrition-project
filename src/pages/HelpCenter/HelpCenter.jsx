@@ -74,10 +74,10 @@ export default function HelpCenter() {
     
    
     <Grid item container sx={{flexDirection:"column",}} xs={6} sm={6} md={4} lg={4} xl={4} >
-    <Card to="/dashboard/helpcenter/registerhelp" component={RouterLink} sx={{textDecoration:'none',height:"250px"}}>
+    <Card to="/dashboard/helpcenter/registerhelp" component={RouterLink} sx={{textDecoration:'none',height:"250px",}}>
    <CardContent>
     <Grid item sx={{ display: "flex", margin:"20px", justifyContent: "center", alignItems: "center" }}>
-   <img  style={{maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={getstarted}  alt="image" />
+   <img  style={{maxHeight:"75px",minWidth:"70px",objectFit: 'cover',}} src={getstarted}  alt="image" />
    </Grid>
    <Grid item  sx={{ margin: '0px 10px 0px 10px' }}>
     <Typography variant="h5" style={title}  >
@@ -95,7 +95,7 @@ export default function HelpCenter() {
     </Grid>
     <Grid item container sx={{flexDirection:"column",}} xs={6} sm={6} md={4} lg={4} xl={4} >
     
-    <Card to="/dashboard/helpcenter/aboutus" component={RouterLink} sx={{textDecoration:'none',height:"250px"}} >
+    <Card to="/dashboard/helpcenter/aboutus" component={RouterLink} sx={{textDecoration:'none',height:"250px",}} >
     <CardContent>
     <Grid item sx={{ display: "flex", margin:"20px", justifyContent: "center", alignItems: "center" }}>
    <img  style={{maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={aboutus}  alt="image" />
@@ -115,7 +115,7 @@ export default function HelpCenter() {
     </Card>
     </Grid>
     <Grid item container sx={{flexDirection:"column",}} xs={6} sm={6} md={4} lg={4} xl={4} >
-    <Card sx={{height:"250px"}}>
+    <Card sx={{height:"250px",}}>
       <CardContent>
     <Grid item sx={{ display: "flex", margin:"20px", justifyContent: "center", alignItems: "center" }}>
    <img  style={{maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={whylogo1}  alt="image" />
@@ -199,14 +199,14 @@ export default function HelpCenter() {
     </Grid>
 
     <Grid item container sx={{flexDirection:"column",}} xs={6} sm={6} md={4} lg={4} xl={4} >
-    <Card sx={{height:"250px"}} >
+    <Card to="/dashboard/helpcenter/popularquestions" component={RouterLink} sx={{height:"250px",textDecoration:"none"}} >
     <CardContent>
     <Grid item sx={{ display: "flex", margin:"20px", justifyContent: "center", alignItems: "center" }}>
    <img  style={{ maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={reportproblem}  alt="image" />
    </Grid>
    <Grid item  sx={{ margin: '0px 10px 0px 10px' }}>
     <Typography variant="h5" style={title}  >
-      Report a problem
+      Popular Questions
     </Typography>
     </Grid>
     <Grid item sx={{ margin: '0px 10px 30px 10px' }}>

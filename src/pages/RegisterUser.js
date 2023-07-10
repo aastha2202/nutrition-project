@@ -24,9 +24,11 @@ import { Link as RouterLink, useNavigate} from 'react-router-dom';
 // import plusIcon from '@iconify-icons/mdi/plus';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import NetworkStatus from './Network/NetworkStatus';
 
 function Copyright(props) {
   return (
+    
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
@@ -285,6 +287,7 @@ const handleImageSelection = (event) => {
 
   return (
     <ThemeProvider theme={theme}>
+      <NetworkStatus/>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box

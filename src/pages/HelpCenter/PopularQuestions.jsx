@@ -16,20 +16,57 @@ import mobileexeritem from "../../assets/mobileexeritem.png"
 import { UserListHead, UserListToolbar } from '../../sections/@dashboard/user';
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
-import { InputAdornment } from '@mui/material';
+import { InputAdornment ,Grid} from '@mui/material';
 import SearchIcon from "@material-ui/icons/Search";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Link } from 'react-router-dom';
+
 
 export default function BasicAccordion() {
   
      
     
   return (
-    <div>
-        <div><img
+    <>
+        {/* <div><img
          src={Logo}
          alt="nova logo"
          style={{ height: "auto", width: "250px", marginLeft: "10px", marginBottom: "20px" }}
-      /></div>
+      /></div> */}
+       <Grid container flexDirection={"row"} marginLeft={2} >
+      
+      <Grid item xs={1}  direction="row"
+          justifyContent="center"
+          alignItems="center"
+          alignSelf={"center"} >
+      
+        <Link to="/dashboard/HelpCenter" >
+        
+            
+        <ArrowBackIcon style={{ color: 'black' }} />
+        </Link>
+            
+            
+  
+            
+    
+      </Grid>
+        <Grid item xs={11}
+          container
+          direction="row"
+          // justifyContent="center"
+          // alignItems="center"
+          // marginTop="5px"
+        >
+          <img
+         src={Logo}
+         alt="nova logo"
+         style={{ height: "auto", width: "250px", marginLeft: "10px" }}
+      />
+         
+        </Grid>
+        </Grid>
+      <CardContent>
       <TextField
 
 placeholder='Search..'
@@ -216,7 +253,7 @@ startAdornment: (
       </Accordion>
     
       </Stack>
-    
-    </div>
+      </CardContent>
+    </>
   );
 }

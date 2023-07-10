@@ -27,6 +27,12 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 // import SearchBar from "../../layouts/dashboard/header/Searchbar";
 import Searchbar from 'src/layouts/dashboard/nav/Searchbar';
+import SearchIcon from '@mui/icons-material/Search';
+// import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import ClearIcon from '@mui/icons-material/Clear';
+import NetworkStatus from '../Network/NetworkStatus';
+
 
 // import  "../styles.css";
 
@@ -121,6 +127,8 @@ const extraLargeScreenStyles = {
 export default function Protein({ route, navigation,props }) {
   const servlingsLeft= useRef();
   const imageurl= "https://novapwc.com/";
+  const [dataFromAPiGlobal, setDataFromAPiGlobal]= useState("");
+
       const location = useLocation();
     //  console.log(location?.state?.data)
     // const [data,setData] = useState(location.state?.data);
@@ -277,6 +285,7 @@ export default function Protein({ route, navigation,props }) {
               if (response?.data?.data) {
                  let  items = response?.data?.data
                   setItems(items)
+                  setDataFromAPiGlobal(items)
                   axios.get(`https://novapwc.com/api/itemIntakeStatus?userid=${userIdAsync}&type=food&category=${params.category}`)
                       .then(function (response) {
                           console.log(response?.data)
@@ -378,8 +387,17 @@ export default function Protein({ route, navigation,props }) {
       setSpinner(false)
     }, 1000)
   }, []);
+
+
+
+  const handleClearClick = () => {
+    setDataFromAPiGlobal("")
+    // setSearchQuery("");
+    // setItems(items);
+  };
     return (  
    <>
+   <NetworkStatus/>
    {loading?( <div style={{ display: "flex", justifyContent: "center", flexDirection:"column", alignItems: "center" , height:"50vh" }}  >
            
            {/* <img  src={TitleLogo} alt="loading" style={{height:"100px",width:"100px"}} /> */}
@@ -407,9 +425,7 @@ style={{ height: "auto", width: "250px", marginLeft: "30px" }}
 {
 viewModal &&  < EditCaloriesDiet handleSuccess={handleSuccess} state={selectedData} apiCall={apiCall}  ref={childComp}/>
 }
-{/* <CardContent >
-<Searchbar/>
-</CardContent> */}
+
 
 
 <Grid container spacing={2}>
@@ -467,6 +483,52 @@ viewModal &&  < EditCaloriesDiet handleSuccess={handleSuccess} state={selectedDa
 {/* <Card sx={{margin:"20px"}}>
 <SearchBar/>
 </Card> */}
+<CardContent >
+{/* <Searchbar data={items}/> */}
+
+<TextField
+  placeholder='Search..'
+ sx={{variant:"none"}}
+ onChange={(e)=>{
+  
+console.log(e?.target.value,'00000')
+
+let arr=[];
+
+let arr1=dataFromAPiGlobal
+
+arr1?.map(item=>{
+
+  if(item?.item_name.toLowerCase().includes(e?.target?.value.toLowerCase()))arr.push(item);
+
+})
+
+console.log(arr,'/////')
+
+setItems(arr);
+
+}}fullWidth
+
+InputProps={{
+  startAdornment: (
+    <InputAdornment position='start'>
+       <SearchIcon />
+    </InputAdornment>
+  ),
+}}
+
+// InputProps={{
+//     startAdornment: (
+//         <InputAdornment position="start">
+//            <SearchIcon />
+//         </InputAdornment>
+//          ),
+//     endAdornment:(<IconButton sx={{visibility: dataFromAPiGlobal? "visible": "hidden"}} onClick={handleClearClick}><ClearIcon/></IconButton>)
+//       }}
+
+
+> </TextField>
+</CardContent>
 
 {items?.length>0?(items.map((item,index)=>{
 return(

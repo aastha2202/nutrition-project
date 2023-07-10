@@ -1,4 +1,4 @@
-import { Grid, Typography, Select, FormControl, InputLabel,Button } from '@mui/material';
+import { Grid, Typography, Select, FormControl, InputLabel,Button, TextField } from '@mui/material';
 import * as React from 'react';
 
 // import '../../fonts/Poppins-BoldItalic.ttf'
@@ -26,6 +26,8 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 // import  "../styles.css";
 import CircularProgress from '@mui/material/CircularProgress';
+
+import NetworkStatus from '../Network/NetworkStatus';
 
 
 const pageheading={
@@ -176,6 +178,16 @@ export default function Aerobic({ route, navigation,props }) {
       saveDailyIntake(item)
   }
 
+
+  // search functionality
+  const [searchQuery, setSearchQuery] =  useState('');
+  const [searchResults, setSearchResult]= useState('');
+  const [searchData, setSearchData] = useState('');
+
+
+
+
+
     const [items, setItems] = useState([])
     const [itemIntakeStatus, setItemIntakeStatus] = useState([])
     const [refreshing, setRefreshing] = useState(false)
@@ -252,7 +264,10 @@ export default function Aerobic({ route, navigation,props }) {
               console.log(response?.data?.data,"checkingggggggggggggggggggg")
               if (response?.data?.data) {
                  let  items = response?.data?.data
+                  
                   setItems(items)
+                  
+                  setSearchData(items)
                   axios.get(`https://novapwc.com/api/itemIntakeStatus?userid=${userIdAsync}&type=exercise&category=${params.category}`)
                       .then(function (response) {
                           console.log(response?.data)
@@ -360,10 +375,35 @@ export default function Aerobic({ route, navigation,props }) {
       }, 1000)
     }, []);
 
+    // search functionality
+    // const [searchQuery, setSearchQuery] =  useState('');
+    // const [searchResults, setSearchResult]= useState('');
+    // const [searchData, setSearchData] = useState("");
+
+
+    const handleSearch=()=>{
+      const filteredResults = searchData.filter((item)=>item?.item_name.toLowerCase().includes(searchQuery.toLocaleLowerCase()))
+      setSearchResults(filteredResults);
+      
+    }
+
+  const handleChange =(e)=>{
+    setSearchQuery(e.target.value);
+    const filteredResults = searchData.filter((item)=>item?.item_name.toLowerCase().includes(searchQuery.toLocaleLowerCase()))
+    
+  //  setSearchResults(filteredResults);
+   setItems(filteredResults);
+  }
+  // const handleClearClick = () => {
+    
+  //   setSearchQuery("");
+  //   setItems(items);
+  // };
 
     return (  
 
       <>
+      <NetworkStatus/> 
       {loading?( <div style={{ display: "flex", justifyContent: "center", flexDirection:"column", alignItems: "center" , height:"50vh" }}  >
            
            {/* <img  src={TitleLogo} alt="loading" style={{height:"100px",width:"100px"}} /> */}
@@ -391,6 +431,7 @@ style={{ height: "auto", width: "250px", marginLeft: "30px" }}
 {
 viewModal && < EditCalories handleSuccess={handleSuccess} state={selectedData} apiCall={apiCall}  ref={childComp}/>
 }
+
 <Grid container spacing={2}>
 <Grid  item xs={7}>
 <CardContent >
@@ -442,6 +483,20 @@ viewModal && < EditCalories handleSuccess={handleSuccess} state={selectedData} a
 </Card>
 </CardContent> */}
 
+<CardContent>
+  <TextField  fullWidth   InputProps={{  variant:"none" }}  type="text" value={searchQuery} onChange={handleChange} placeholder='search..'  
+  // InputProps={{
+  //   // startAdornment: (
+  //   //     <InputAdornment position="start">
+  //   //        <SearchIcon />
+  //   //     </InputAdornment>
+  //   //      ),
+  //   endAdornment:(<IconButton sx={{visibility: searchQuery? "visible": "hidden"}} onClick={handleClearClick}><ClearIcon/></IconButton>)
+  //     }}
+  // endAdornment={<IconButton sx={{visibility: searchQuery? "visible": "hidden"}} onClick={handleClearClick}><ClearIcon/></IconButton>}
+  />
+</CardContent>
+
 {items?.length>0?
 (items.map((item,index)=>{
 return(
@@ -451,7 +506,7 @@ return(
 <Grid container spacing={1} justifyContent="center" alignItems="center">
         <Grid item xs={3}  sx={{textAlign:"center"}} >
           <ButtonBase >
-            <img  style={{borderRadius:100,maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={imageurl+item.item_image}  alt="image" />
+            <img  style={{display: 'inline-block',width: '90px',height: '90px',borderRadius: '50%'}} src={imageurl+item.item_image}  alt="image" />
           </ButtonBase>
         </Grid>
         <Grid container item xs={9} spacing={1} >
