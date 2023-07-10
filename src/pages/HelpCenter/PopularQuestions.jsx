@@ -137,7 +137,7 @@ startAdornment: (
           <Typography  >
            Click on Get Started and fill your details in the registraion form, as shown.
           </Typography>
-          <img src={registeraccount} width={'300px'}></img>
+          <img src={registeraccount} width={'400px'}></img>
         </AccordionDetails>
       </Accordion>
       <Accordion  sx={{ marginBottom: "20px"}}>
@@ -153,7 +153,7 @@ startAdornment: (
           <Typography>
             After registering, you can login after filling your login credentials, as shown below
           </Typography>
-          <img src={loginaccount} width={'300px'}></img>
+          <img src={loginaccount} width={'500px'}></img>
         </AccordionDetails>
       </Accordion>
       <Accordion  sx={{ marginBottom: "20px"}}>
@@ -168,7 +168,7 @@ startAdornment: (
           <Typography>
            For checking your dashboard, refer to this.
           </Typography>
-          <img src={dashboarddietexerc} width={'400px'}></img>
+          <img src={dashboarddietexerc} width={'300px'}></img>
          
          
         </AccordionDetails>
