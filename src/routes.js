@@ -41,6 +41,7 @@ import Loader from "./pages/loader";
  import PrivacyPolicy from './pages/HelpCenter/PrivacyPolicy';
  import AboutUs from './pages/HelpCenter/AboutUs';
  import RegisterHelp from "./pages/HelpCenter/RegisterHelp";
+ import PopularQuestions from "./pages/HelpCenter/PopularQuestions"
 
  import Calender from "./pages/Calender/Calender";
 // ----------------------------------------------------------------------
@@ -123,6 +124,7 @@ export default function Router() {
                 { path: 'helpcenter/privacypolicy', element: <PrivacyPolicy/> },
                 { path: 'helpcenter/aboutus', element: <AboutUs/> },
                 { path: 'helpcenter/registerhelp', element: <RegisterHelp/> },
+                { path: 'helpcenter/popularquestions', element: <PopularQuestions/> },
                 
 
             ],

@@ -22,6 +22,7 @@ import incrementservings from "../../assets/incrementservings.png"
 import detailedexercise from "../../assets/detailedexercise.png";
 import exerciseitem from "../../assets/exerciseitem.png";
 
+
 const steps = [
     {
       label:  <Typography variant="h6" gutterBottom>
