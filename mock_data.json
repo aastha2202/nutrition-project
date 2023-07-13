@@ -1,19 +1,7 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
-}
+  "emp":[{"id":1,"title":"How to register?", "image":"https://i.imgur.com/gwBMIWT.png"},
+{"id":2,"title":"How to login if already a member?", "image":"https://i.imgur.com/I21HYzZ.png"},
+{"id":3,"title":"How to check your dashboard?", "image": "https://i.imgur.com/eaGfDp6.png"},
+{"id":4,"title":"How to check detailed diet plan?", "image": "https://i.imgur.com/fpuOfn9.png"},
+{"id":5,"title":"How to check the detailed exercise plan?", "image": "https://i.imgur.com/3O4b8Pq.png"}
+]}
