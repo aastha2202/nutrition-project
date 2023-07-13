@@ -20,9 +20,68 @@ import { InputAdornment ,Grid} from '@mui/material';
 import SearchIcon from "@material-ui/icons/Search";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from 'react-router-dom';
+import Data from "./mock_data.json";
+
+
 
 
 export default function BasicAccordion() {
+  const [dataFromAPiGlobal, setDataFromAPiGlobal]= useState("");
+  const [items, setItems] = useState([])
+
+  const apiCall = async () => {
+    let userIdAsync = await localStorage.getItem('userId')
+
+    setCategoryName(params.category)
+
+    axios.get(`https://novapwc.com/api/getItemsOfCategory?category_id=${params.cat}&type=food`)
+        .then(function (response) {
+            console.log(response?.data?.data,"checkingggggggggggggggggggg")
+            if (response?.data?.data) {
+               let  items = response?.data?.data
+                setItems(items)
+                setDataFromAPiGlobal(items)
+                axios.get(`https://novapwc.com/api/itemIntakeStatus?userid=${userIdAsync}&type=food&category=${params.category}`)
+                    .then(function (response) {
+                        console.log(response?.data)
+                        let itemServings = response?.data?.data ? response?.data?.data :[]
+                       
+                        for (let i = 0; i < items.length; i++) {
+                            let servings = itemServings?.filter(oneitem => oneitem?.item_id == items[i].item_id)
+                            console.log(servings,"servings")
+                            if (servings.length > 0) {
+                                items[i] = { ...items[i], ...servings[0] }
+                                setAddServings(addServings => parseInt(addServings) + parseInt(servings[0].servings_consumed))
+                            }
+                            else {
+                                items[i] = { ...items[i], servings_consumed: 0 }
+                            }
+
+                            if (i == items.length - 1) {
+                                setItems(items)
+                                setLoading(false)
+                            }
+                        }
+                        setItemIntakeStatus(response?.data?.data)
+
+                    })
+                    .catch(function (error) {
+                        // Alert.alert("something went wrong");
+                        // console.log(error);
+                    });
+            }
+            else {
+                setLoading(false)
+            }
+        })
+        .catch(function (error) {
+            // Alert.alert("something went wrong");
+            // console.log(error);
+        });
+}
+
+  
+
   
      
     
@@ -72,47 +131,24 @@ export default function BasicAccordion() {
 placeholder='Search..'
 
 onChange={(e)=>{
-
-
-
-
-
-// let arr=[];
-
-
-
-
-// let arr1=dataFromAPiGlobal
-
-
-
-
-// arr1?.map(item=>{
-
-
-
-
-// if(item?.item_name.toLowerCase().includes(e?.target?.value.toLowerCase()))arr.push(item);
-
-
-
-
-// })
-
-
-
-
-// console.log(arr,'/////')
-
-
-
-
-// setItems(arr);
-
-
-
-
-}}fullWidth
+  
+  console.log(e?.target.value,'00000')
+  
+  let arr=[];
+  
+  let arr1=dataFromAPiGlobal
+  
+  arr1?.map(item=>{
+  
+    if(item?.item_name.toLowerCase().includes(e?.target?.value.toLowerCase()))arr.push(item);
+  
+  })
+  
+  console.log(arr,'/////')
+  
+  setItems(arr);
+  
+  }}
 
 
 
@@ -155,12 +191,12 @@ startAdornment: (
 
 
 > </TextField>
-      {/* <div class="col-sm-4 mb-4">
-     <input type="text" id="myFilter" class="form-control" onkeyup="myFunction()" placeholder="Search for card name...">
-    </div> */}
-     
-      {/* <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} /> */}
-<Stack  mt={3}>
+
+  
+              
+                
+                {/* <p>{post.title}</p> */}
+                <Stack  mt={3}>
       <Accordion  sx={{ marginBottom: "20px"}}>
         <AccordionSummary 
           expandIcon={<ExpandMoreIcon />}
@@ -168,7 +204,7 @@ startAdornment: (
           id="panel1a-header"
           
         >
-          <Typography variant="h5" gutterBottom>How to register?</Typography>
+          <Typography variant="h5" gutterBottom>{post.title}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography  >
@@ -184,7 +220,7 @@ startAdornment: (
           id="panel2a-header"
           
         >
-          <Typography variant="h5" gutterBottom>How to login if already a member?</Typography>
+          <Typography variant="h5" gutterBottom>{post.title}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
@@ -253,6 +289,15 @@ startAdornment: (
       </Accordion>
     
       </Stack>
+            
+          
+
+      {/* <div class="col-sm-4 mb-4">
+     <input type="text" id="myFilter" class="form-control" onkeyup="myFunction()" placeholder="Search for card name...">
+    </div> */}
+     
+      {/* <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} /> */}
+
       </CardContent>
     </>
   );

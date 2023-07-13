@@ -54,6 +54,8 @@
     "bootstrap": "^5.3.0",
     "change-case": "^4.1.2",
     "chartjs-adapter-dayjs-3": "^1.2.3",
+    "collect-js": "^0.0.4",
+    "collect.js": "^4.36.1",
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
     "firebase": "^9.22.2",
