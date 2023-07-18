@@ -26,6 +26,10 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import NetworkStatus from './Network/NetworkStatus';
 
+// fcm_token--
+import {messaging} from "./firebase";
+import {getToken} from "firebase/messaging"; 
+
 function Copyright(props) {
   return (
     
@@ -86,9 +90,21 @@ export default function SignUp() {
 // validation 
 
 
+const [token, setToken]= useState("");
 
-
-
+const [response, setResponse] = useState()
+  // const [email,setEmail]=useState({})
+    const [formValue, setFormValue] = useState({
+        "user_name": "",
+        "password": "",
+        "role": "user",
+        "gender": "",
+        "mobile_number": "",
+        "email_id": "",
+        // "address": "",
+        "fcm_token":"",
+        // "profile_image": ""
+    }) 
 const [error, setError] = useState(false);
 const [errorPassword, setErrorPassword] = useState(false);
 // To update the state of gender
@@ -134,30 +150,42 @@ const [errorPassword, setErrorPassword] = useState(false);
     navigate('/login', { replace: true });
   };
 
+
+    // 2nd time notification experiment
+    // const [token, setToken]= useState("");
+    useEffect(() => {
+      // Req user for notification permission
+      requestPermission();
+    }, []);
+  
+    async function requestPermission() {
+      const permission = await Notification.requestPermission();
+      if (permission === "granted") {
+        // Generate Token
+        const token_data = await getToken(messaging, {
+          vapidKey:
+            "BDBUPwY-0X0nyXaaaCpwZLfVLDACz9YEOoOM77im4oppBZ-RYJH2He5jbvDXCvAgosi7stPBkc5HE-q3mixjQ8k",
+        });  
+        // console.log("Token Gen", token_data);
+        setToken(token_data);
+        // setFormValue({ ...formValue, fcm_token:token_data});
+        // Send this token  to server ( db)
+      } else if (permission === "denied") {
+        console.log("You denied for the notification");
+      }
+    } 
+console.log(token,"---GENERATED TOKEN")
+console.log(formValue,"-----------formmm")
+
   //API integration
-  const [response, setResponse] = useState()
-  // const [email,setEmail]=useState({})
-    const [formValue, setFormValue] = useState({
-        "user_name": "",
-        "password": "",
-        "role": "user",
-        // "gender": "",
-        "mobile_number": "",
-        "email_id": "",
-        // "address": "",
-        "fcm_token":"clxA5TEFTJy8NYn-JNJiLG:APA91bFi9xZ9WYiQ5wI4gS6rIjm0mRTaYvNuhKk2yQhz0ECeRXnYL31cwz7qxTGoPtu_rv-dhTAytiaj6bIIzDPQ1HfPS6ImErW94ptzf9Xc2q3CGV5LwrP_MfUFPpTc2pCq7kbBQzXi",
-        // "profile_image": ""
-    }) 
+  
 
 
-  //   const [errors, setErrors] = useState({
-  //     user_name: false,
-  //     password: false,
-  //     email_id: false,
-  //     mobile_number: false,
-  //   });
+  
 
     const registerUser = () => {
+      setFormValue({ ...formValue, fcm_token:token});
+      setFormValue({ ...formValue, gender:gender});
        console.log("register user calling---") 
       let validation = Object.values(formValue)
       console.log(typeof Object?.mobile_number,"-----" ,Object?.mobile_number,Object)
@@ -202,6 +230,7 @@ const [errorPassword, setErrorPassword] = useState(false);
                 else {
                   setResponse(response?.data?.Message)
                   handleError()
+                  console.log(response?.data?.Message,"failed errorrr")
                 }
               })
               .catch(function (error) {

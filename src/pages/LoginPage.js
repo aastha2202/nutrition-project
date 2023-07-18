@@ -87,7 +87,7 @@ const [isLoading,setIsLoading]=useState(false)
   const handleError = () => {
     setErrorAlert(true);
   };
-
+  const [token, setToken]=useState("")
   const [errorBackend, setErrorBackend]=useState(false);
 
    const handleBackendError =()=>{
@@ -105,7 +105,8 @@ const [isLoading,setIsLoading]=useState(false)
 
   // const [item,setItem]=useState()
   const [response, setResponse] = useState()
-  const [formValue, setFormValue] = useState({ email_id: " ", password: " " ,fcm_token:"clxA5TEFTJy8NYn-JNJiLG:APA91bFi9xZ9WYiQ5wI4gS6rIjm0mRTaYvNuhKk2yQhz0ECeRXnYL31cwz7qxTGoPtu_rv-dhTAytiaj6bIIzDPQ1HfPS6ImErW94ptzf9Xc2q3CGV5LwrP_MfUFPpTc2pCq7kbBQzXi"})
+  const [formValue, setFormValue] = useState({ email_id: " ", password: " " ,
+  fcm_token:""})
   // let navigate = useNavigate();
   // localStorage.setItem('Username', 'response?.data?.Username')
 
@@ -177,19 +178,20 @@ axios.request(config)
 // }
 
   const loginUser = () => {
-    
+    setFormValue({ ...formValue, fcm_token:token })
     console.log(Object.values(formValue),"hellooo")
     if(Object.values(formValue).includes("")){
         // alert("Enter valid data")
         handleEmpty()
     }
    else{
+    
     axios.post(`https://novapwc.com/api/login`, formValue)
     .then(function (response) {
 
       console.log(response?.data, "responseeeeeee------")
       console.log(formValue,"---form value checking--");
-     
+      //  setFormValue({ ...formValue, fcm_token:token }) 
       if (response?.data?.Code==200) {  
         // localStorage.setItem('tour', true )
         
@@ -208,6 +210,7 @@ axios.request(config)
       else {
         setResponse(response?.data?.Message)
         handleError()
+        console.log("may be error in fcm_token")
       }
     })
     .catch(function (error) {
@@ -229,11 +232,12 @@ axios.request(config)
       const permission = await Notification.requestPermission();
       if (permission === "granted") {
         // Generate Token
-        const token = await getToken(messaging, {
+        const token_data = await getToken(messaging, {
           vapidKey:
             "BDBUPwY-0X0nyXaaaCpwZLfVLDACz9YEOoOM77im4oppBZ-RYJH2He5jbvDXCvAgosi7stPBkc5HE-q3mixjQ8k",
         });  
-        console.log("Token Gen", token);
+        console.log("Token Gen",  token_data);
+        setToken(token_data)
         // Send this token  to server ( db)
       } else if (permission === "denied") {
         alert("You denied for the notification");
