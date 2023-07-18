@@ -38,6 +38,7 @@ import ProteinChicken from "../../assets/ProteinChicken.svg"
 // import dinning from '../images/dinningicon.png';
 
 // import  "../styles.css";
+import BarGraph1 from '../Home/components/BarGraph1';
 import CircularProgress from '@mui/material/CircularProgress';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { step3ClassName, step4ClassName } from '../Home/Home';
@@ -405,6 +406,7 @@ const [loading, setLoading] = useState(true)
           {/* <ClipLoader height={100} width={100}  color="grey"  wrapperStyle={{}}  wrapperClass=""  visible={true}  ariaLabel='oval-loading'  secondaryColor="#4fa94d"  strokeWidth={2} strokeWidthSecondary={2}/> */}
           <CircularProgress/>
         </div>):(< >
+          
 
 {/* <div>
 {close &&(<div style={{

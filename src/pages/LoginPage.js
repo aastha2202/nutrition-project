@@ -20,6 +20,11 @@ import Snackbar from '@mui/material/Snackbar';
 import { CircularProgress } from '@mui/material';
 import NetworkStatus from './Network/NetworkStatus';
 // ----------------------------------------------------------------------
+import {messaging} from "./firebase";
+import {getToken} from "firebase/messaging"; 
+// import { askForPermissioToReceiveNotifications } from './push-notification'; 
+// import  "./firebase";
+
 
 const StyledRoot = styled('div')(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
@@ -103,6 +108,74 @@ const [isLoading,setIsLoading]=useState(false)
   const [formValue, setFormValue] = useState({ email_id: " ", password: " " ,fcm_token:"clxA5TEFTJy8NYn-JNJiLG:APA91bFi9xZ9WYiQ5wI4gS6rIjm0mRTaYvNuhKk2yQhz0ECeRXnYL31cwz7qxTGoPtu_rv-dhTAytiaj6bIIzDPQ1HfPS6ImErW94ptzf9Xc2q3CGV5LwrP_MfUFPpTc2pCq7kbBQzXi"})
   // let navigate = useNavigate();
   // localStorage.setItem('Username', 'response?.data?.Username')
+
+
+  const [notif, setNotif]= useState(
+    {
+      "message":{
+        "token":"eabLFpHVt_2yV3sorrjq6P:APA91bEhrXDJ0AfptnxXHISae80mjvlCnkfEkUWL4-WYCKRj1p7G9fVqMW4d5vmbHGic5Ah6ZALbwzpD6vmpOuO-0jGz20BBaGtCsKTpyYagBU6c_0vDTJVXcDQzPG3tsKXjrhbQFXHQ",
+        "data":{
+          "Nick" : "Mario",
+          "body" : "great match!",
+          "Room" : "PortugalVSDenmark"
+        }
+      }
+    }
+  );
+
+//   useEffect(() => {
+//     notification()
+//     console.log("useeffect-- notification")
+    
+  
+// }, [])
+
+useEffect(() => {
+  // Req user for notification permission
+  requestPermission();
+}, []);
+
+ 
+
+
+const notification = async()=>{
+
+
+let config = {
+  method: 'post',
+  maxBodyLength: Infinity,
+  url: 'https://fcm.googleapis.com/fcm/send',
+  headers: "BBgU1Y13q2Gg73TWW6SSXEgtqn8qGHPlISM-P-XoqYvimyrkmbeXrK2v8A-XeKHk8J-xvTPhowIK3rRDmBexUIg",
+  data:notif
+};
+
+axios.request(config)
+.then((response) => {
+  console.log(response,"notification---");
+})
+.catch((error) => {
+  console.log(error);
+});
+
+
+}
+
+
+  
+// const notification =()=>{
+//   axios.post(`https://fcm.googleapis.com/fcm/send`,notif)
+//   .then(function(response){
+//     console.log(response,"notifcation-----")
+
+//   })
+//   .catch(function (error) {
+//     // handleError()
+    
+//     console.log(error);
+    
+//   });
+// }
+
   const loginUser = () => {
     
     console.log(Object.values(formValue),"hellooo")
@@ -151,7 +224,30 @@ const [isLoading,setIsLoading]=useState(false)
       navigate('/resetpassword', { replace: true });
     }
 
+    // 2nd time notification exper
+    async function requestPermission() {
+      const permission = await Notification.requestPermission();
+      if (permission === "granted") {
+        // Generate Token
+        const token = await getToken(messaging, {
+          vapidKey:
+            "BDBUPwY-0X0nyXaaaCpwZLfVLDACz9YEOoOM77im4oppBZ-RYJH2He5jbvDXCvAgosi7stPBkc5HE-q3mixjQ8k",
+        });  
+        console.log("Token Gen", token);
+        // Send this token  to server ( db)
+      } else if (permission === "denied") {
+        alert("You denied for the notification");
+      }
+    } 
+    // 3rd thing
+    // const notify = () => {
+    //   askForPermissioToReceiveNotifications
+    //   console.log("12345678909876");
+     
+    // };
   
+   {console.log("login page")}
+
     return ( 
 
       <>
@@ -163,7 +259,15 @@ const [isLoading,setIsLoading]=useState(false)
         <NetworkStatus/>
         
         <Container maxWidth="sm">
+
+
           <StyledContent>
+            {/* <div style={{margin:"10px"}}>
+            <button onClick={notify} >
+      Click here to receive notifications
+    </button>
+
+            </div> */}
             <Grid
               container
               direction="column"
@@ -219,6 +323,7 @@ const [isLoading,setIsLoading]=useState(false)
               Forgot password?
             </Link>
           </Stack>
+       
           {/* <Card >
           
           <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={loginUser} > 

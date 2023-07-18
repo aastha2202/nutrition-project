@@ -44,6 +44,7 @@ import Loader from "./pages/loader";
  import PopularQuestions from "./pages/HelpCenter/PopularQuestions"
 
  import Calender from "./pages/Calender/Calender";
+ import SearchQues from "./pages/HelpCenter/SearchQues"
 // ----------------------------------------------------------------------
 //  import Login from './user/Login/Login';
 // import Home from './user/Home/Home';
@@ -125,6 +126,7 @@ export default function Router() {
                 { path: 'helpcenter/aboutus', element: <AboutUs/> },
                 { path: 'helpcenter/registerhelp', element: <RegisterHelp/> },
                 { path: 'helpcenter/popularquestions', element: <PopularQuestions/> },
+                { path: 'helpcenter/searchques', element: <SearchQues/> },
                 
 
             ],

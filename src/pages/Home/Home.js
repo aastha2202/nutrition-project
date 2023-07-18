@@ -4,7 +4,8 @@ import { Grid, Typography, Select, FormControl,  InputLabel,Button,IconButton,St
 import{useState,useEffect} from 'react'
 import axios from 'axios';
 import { styled } from '@mui/material/styles';
-import BarGraph1 from './components/BarGraph1'
+
+import BarGraph1 from "./components/BarGraph1";
 import { Link as RouterLink } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -176,6 +177,7 @@ const handleExpandClick = () => {
   const setValues = async () => {
     let uname =  localStorage.getItem('Username')
     let uid = localStorage.getItem('userId')
+    // let uid = 211;
     
     await setusername(uname)
     await setuserId(uid)
@@ -607,7 +609,7 @@ console.log(oneDietPlanData.length,"----------length------");
           < CircularProgress/>
 
        </div>):(<>
-
+        <BarGraph1/>
   
 {/* <Joyride
      continuous
@@ -1230,7 +1232,7 @@ console.log(oneDietPlanData.length,"----------length------");
            ))}
                </Card>  
                 ) }
- <BarGraph1/>
+ 
 </>)}
    </> 
   

@@ -23,7 +23,7 @@ import aboutus from "../../assets/aboutus.svg";
 import reportproblem from "../../assets/reportproblem.svg";
 
 import { Link as RouterLink } from 'react-router-dom';
-import Searchbar from 'src/layouts/dashboard/nav/Searchbar';
+// import Searchbar from 'src/layouts/dashboard/nav/Searchbar';
 
 
 const help={
@@ -59,7 +59,7 @@ export default function HelpCenter() {
         <Typography variant='h4' style={help}>How can we help you?</Typography>
       </Grid>
       <Grid margin={"20px"}> 
-     <Searchbar/>
+     {/* <Searchbar/> */}
       </Grid>
 
 
