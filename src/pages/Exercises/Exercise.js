@@ -44,7 +44,9 @@ import  "../styles.css";
 // import Searchbar from 'src/layouts/dashboard/header/Searchbar';
 import Searchbar from 'src/layouts/dashboard/nav/Searchbar';
 import NetworkStatus from '../Network/NetworkStatus';
-
+import Skeleton from '@mui/material/Skeleton';
+import CardExercise from './Components/CardExercise';
+import ExerciseSkeleton from './Components/ExerciseSkeleton';
 
 const title={
     
@@ -346,11 +348,24 @@ export default function Exercise(){
       {/* <Searchbar/>  */}
       <NetworkStatus/>
 
-     {loading?( <div className="loader-container" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "50vh" }}>
+      {/* <div className="loader-container" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "50vh" }}>
           
-          {/* <ClipLoader height={100} width={100}  color="grey"  wrapperStyle={{}}  wrapperClass=""  visible={true}  ariaLabel='oval-loading'  secondaryColor="#4fa94d"  strokeWidth={2} strokeWidthSecondary={2}/> */}
+         
           <CircularProgress/>
-        </div>):( <>
+        </div> */}
+
+     {loading?( 
+     <>
+      <ExerciseSkeleton/>
+ 
+             <div className="loader-container" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "10vh" }}>
+          
+         
+          <CircularProgress/>
+        </div>
+     </>):( <>
+
+      
         
         {/* <CardContent className='dietplan-companyname'>
               <img src={Logo} alt="loading" className='dietplan-companyname-image'/>
@@ -469,8 +484,7 @@ export default function Exercise(){
              {/* oneDietPlan?.length>0         */}
    {(oneDietPlan.length>0)?(oneDietPlan?.map(item=>{
       return(
-        // <Grid container flexDirection={"row"} item  >
-        //   <Grid item sx={12} > 
+        
           <Card  style={maincardStyle}  >
                   <CardContent onClick={()=>{setDietId(item)}} sx={{textDecoration:'none',cursor:"pointer"}}>
                   <Grid container  flex flexDirection={"row"} spacing={1} margin="10px" alignItems="center">
@@ -503,9 +517,7 @@ export default function Exercise(){
   
              </Card>  
 
-              // {/* </Grid>  
-              // </Grid> */}
-
+            
       );
    })):(
    <Card sx={{ margin:"10px" ,maxHeight:"800px"}}>

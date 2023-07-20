@@ -33,6 +33,8 @@ import { useLocation } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
 import NetworkStatus from "../Network/NetworkStatus";
+
+import HomeSkeleton from "./components/HomeSkeleton";
 // ----------------------------------------------------------------------
   
 const hello={
@@ -603,12 +605,19 @@ console.log(oneDietPlanData.length,"----------length------");
 
    <>
    <NetworkStatus/>
-   {loading?(<div style={{ display: "flex", justifyContent: "center", flexDirection:"column", alignItems: "center" , height:"50vh" }}  >
+   {/* <div style={{ display: "flex", justifyContent: "center", flexDirection:"column", alignItems: "center" , height:"50vh" }}  >
            
-           {/* <img  src={Logo} alt="loading" style={{height:"100px",width:"100px"}} /> */}
+          
           < CircularProgress/>
 
-       </div>):(<>
+       </div> */}
+   {loading?(<>
+    <HomeSkeleton/>
+    <div className="loader-container" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "10vh" }}>   
+          <CircularProgress/>
+        </div> 
+
+   </>):(<>
         <BarGraph1/>
   
 {/* <Joyride

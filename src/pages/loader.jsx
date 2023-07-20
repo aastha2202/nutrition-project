@@ -353,30 +353,103 @@
 
 
 
-import React, { useEffect } from "react";
+// import React, { useEffect } from "react";
 
-const loader = () => {
-  useEffect(() => {
-    if (!("Notification" in window)) {
-      console.log("Browser does not support desktop notification");
-    } else {
-      Notification.requestPermission();
-    }
-  }, []);
+// const loader = () => {
+//   useEffect(() => {
+//     if (!("Notification" in window)) {
+//       console.log("Browser does not support desktop notification");
+//     } else {
+//       Notification.requestPermission();
+//     }
+//   }, []);
 
-  const showNotification = () => {
-    console.log("helllooooooooo")
-    new Notification("Hello World");
-  };
+//   const showNotification = () => {
+//     console.log("helllooooooooo")
+//     new Notification("Hello World");
+//   };
+
+//   return (
+//     <div style={{margin:"20px"}}>
+//       <button onClick={showNotification}>Show notification</button>
+//     </div>
+//   );
+// };
+
+// export default loader;
+
+
+
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
+import Grid from '@mui/material/Grid';
+import Skeleton from '@mui/material/Skeleton';
+
+const Image = styled('img')({
+  width: '100%',
+});
+
+function loaderDemo(props) {
+  const { loading = true } = props;
 
   return (
-    <div style={{margin:"20px"}}>
-      <button onClick={showNotification}>Show notification</button>
+    <div>
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ margin: 1 }}>
+          {loading ? (
+            <Skeleton variant="circular">
+              <Avatar />
+            </Skeleton>
+          ) : (
+            <Avatar src="https://pbs.twimg.com/profile_images/877631054525472768/Xp5FAPD5_reasonably_small.jpg" />
+          )}
+        </Box>
+        <Box sx={{ width: '100%' }}>
+          {loading ? (
+            <Skeleton width="100%">
+              <Typography>.</Typography>
+            </Skeleton>
+          ) : (
+            <Typography>Ted</Typography>
+          )}
+        </Box>
+      </Box>
+      {loading ? (
+        <Skeleton variant="rectangular" width="100%">
+          <div style={{ paddingTop: '57%' }} />
+        </Skeleton>
+      ) : (
+        <Image
+          src="https://pi.tedcdn.com/r/talkstar-photos.s3.amazonaws.com/uploads/72bda89f-9bbf-4685-910a-2f151c4f3a8a/NicolaSturgeon_2019T-embed.jpg?w=512"
+          alt=""
+        />
+      )}
     </div>
   );
+}
+
+loaderDemo.propTypes = {
+  loading: PropTypes.bool,
 };
 
-export default loader;
+export default function loader() {
+  return (
+    <Grid container spacing={8}>
+      <Grid item xs>
+        <loaderDemo loading />
+      </Grid>
+      <Grid item xs>
+        <loaderDemo />
+      </Grid>
+    </Grid>
+  );
+}
+
+
 
 
 

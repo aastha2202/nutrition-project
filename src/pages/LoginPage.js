@@ -178,7 +178,7 @@ axios.request(config)
 // }
 
   const loginUser = () => {
-    setFormValue({ ...formValue, fcm_token:token })
+    // setFormValue({ ...formValue, fcm_token:token })
     console.log(Object.values(formValue),"hellooo")
     if(Object.values(formValue).includes("")){
         // alert("Enter valid data")
@@ -238,6 +238,7 @@ axios.request(config)
         });  
         console.log("Token Gen",  token_data);
         setToken(token_data)
+        setFormValue({ ...formValue, fcm_token:token_data})
         // Send this token  to server ( db)
       } else if (permission === "denied") {
         alert("You denied for the notification");

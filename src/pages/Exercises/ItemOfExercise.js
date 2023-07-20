@@ -10,7 +10,7 @@ import Card from '@mui/material/Card';
 import Iconify from 'src/components/iconify/Iconify';
 import CardContent from '@mui/material/CardContent';
 import { Link } from 'react-router-dom';
-import ButtonBase from '@mui/material/ButtonBase'
+import ButtonBase from '@mui/material/ButtonBase';
 import { useLocation  } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import { useRef } from 'react';
@@ -28,6 +28,9 @@ import Snackbar from '@mui/material/Snackbar';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import NetworkStatus from '../Network/NetworkStatus';
+import Skeleton from '@mui/material/Skeleton';
+import CardItem from './Components/CardItem';
+import ItemsSkeleton from './Components/ItemsSkeleton';
 
 
 const pageheading={
@@ -400,16 +403,26 @@ export default function Aerobic({ route, navigation,props }) {
   //   setItems(items);
   // };
 
+  
+
     return (  
 
       <>
       <NetworkStatus/> 
-      {loading?( <div style={{ display: "flex", justifyContent: "center", flexDirection:"column", alignItems: "center" , height:"50vh" }}  >
-           
-           {/* <img  src={TitleLogo} alt="loading" style={{height:"100px",width:"100px"}} /> */}
-          < CircularProgress/>
+      {loading?( 
+      <>
 
-       </div>):(   <div>
+<ItemsSkeleton/>
+
+<div className="loader-container" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "10vh" }}>   
+          <CircularProgress/>
+        </div>
+        
+
+                           
+
+
+      </>):(   <div>
 
 
 <Snackbar
@@ -458,7 +471,7 @@ viewModal && < EditCalories handleSuccess={handleSuccess} state={selectedData} a
 <Grid item xs={5}>
 <CardContent>
   <Card
-    sx={{ Width: 200, height: 110 }}
+    sx={{ Width:150, height: 110 }}
     style={{ backgroundColor: "#E1B725", textAlign:"center",}}
   >
     <Typography variant="h3"  style={caloriesremained}> {addServings}
