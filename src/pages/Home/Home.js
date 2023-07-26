@@ -36,6 +36,14 @@ import NetworkStatus from "../Network/NetworkStatus";
 
 import HomeSkeleton from "./components/HomeSkeleton";
 // ----------------------------------------------------------------------
+// accordin in mui
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+
   
 const hello={
   color:"#112866",
@@ -66,6 +74,16 @@ export function step4ClassName() {
 // export const step4ClassName = "step-4";
 export default function Home() {
  const charts= useLocation.state;
+ // mui accordin data
+//  const [expandIcon, setExpandIcon] = React.useState(false);
+
+//   const handleChange = (panel) => (event, isExpand) => {
+//     setExpandIcon(isExpand ? panel : false);
+//   };
+ 
+
+// close mui accordino data
+
 
 console.log(charts,"=---charts importing----")
 const handleExpandClick = () => {
@@ -245,84 +263,7 @@ const handleExpandClick = () => {
       });
   }
 
-  // const getAllDietPlan = (diet, exercise, value, uid) => {
-  //   // console.log("getAlldeiteplan")
-  //   let dieturl = `https://novapwc.com/api/getAllDietPlan?userid=${uid}&type=food&status=ongoing`,
-  //     exerciseurl = `https://novapwc.com/api/getAllDietPlan?userid=${uid}&type=exercise&status=ongoing`
-  //   if (diet) {
-  //     dieturl = `https://novapwc.com/api/getAllDietPlan?userid=${uid}&startdate=${diet?.StartDate}&enddate=${diet?.EndDate}&type=food&status=${interval[value]}`
-  //     if (exercise?.StartDate) {
-  //       exerciseurl = `https://novapwc.com/api/getAllDietPlan?userid=${uid}&startdate=${exercise?.StartDate}&enddate=${exercise?.EndDate}&type=exercise&status=${interval[value]}`
-  //     }
-  //   }
-  //   // console.log(dieturl, exerciseurl)
-  //   let days;
-  //   value == '0' ? days = 1 : value == '1' ? days = 7 : value == '2' ? days = 30 : days = 90
-
-  //   axios.get(dieturl)
-  //     .then(function (response) {
-  //       // 
-  //       // console.log(response.data, "foodddd")
-  //       // setOngoingDietPlan({ servingsLeft: 0, TotalServings: 0 })
-  //       // setOngoingExercisePlan({ servingsLeft: 0, TotalServings: 0 })
-  //       if (diet) {
-
-
-  //         if (response?.data?.data?.RecommendedServings * days < response?.data?.data?.TotalServings) {
-  //           response.data.data.TotalServings = parseInt
-  //             (response?.data?.data?.RecommendedServings * days)
-  //         }
-
-
-
-  //       }
-
-
-  //       // console.log(response.data.data,"responseee")
-
-  //       response.data.data.servingsLeft = parseInt
-  //         (response?.data?.data.TotalServings - response?.data?.data.CosumedServings)
-
-  //       localStorage.setItem('dietstartDate', response?.data?.data?.StartDate)
-  //       localStorage.setItem('dietendDate', response?.data?.data?.EndDate)
-  //       setOngoingDietPlan(response?.data?.data)
-  //       axios.get(exerciseurl)
-  //         .then(function (response) {
-
-  //           console.log(response?.data,"checking----exercise ---------")
-
-  //           if (response?.data?.data) {
-  //             if (exercise) {
-  //               if (response?.data?.data?.RecommendedServings * days < response?.data?.data?.TotalServings) {
-  //                 response.data.data.TotalServings = parseInt
-  //                   (response?.data?.data?.RecommendedServings * days)
-  //               }
-
-  //             }
-
-  //             response.data.data.servingsLeft = parseInt
-  //               (response?.data?.data.TotalServings - response?.data?.data.CosumedServings)
-  //             localStorage.setItem('exercisestartDate', response?.data?.data?.StartDate)
-  //             localStorage.setItem('exerciseendDate', response?.data?.data?.EndDate)
-
-  //             setOngoingExercisePlan(response?.data?.data)
-  //           }
-  //           else {
-  //             setOngoingExercisePlan({ servingsLeft: 0, TotalServings: 0 })
-  //           }
-
-  //           setLoading(false)
-  //         })
-  //         .catch(function (error) {
-  //           // Alert.alert("something went wrong");
-  //           console.log(error);
-  //         });
-  //     })
-  //     .catch(function (error) {
-  //       // Alert.alert("something went wrong");
-  //       console.log(error);
-  //     });
-  // }
+  
 
   const getAllDietPlan = (diet, exercise, value, uid) => {
 
@@ -957,51 +898,15 @@ console.log(oneDietPlanData.length,"----------length------");
        <Typography variant='h5' style={hello} >Previous Plans</Typography>
  
         </Grid>
-           {prevDietPlan.map((item, index) => (
-             <CardContent key={index} > 
-     
-             
-                 <Card  onClick={() => { setArrowDirection(arrowDirection === 'down' ? 'up' : 'down');  index == viewOneDietPlan.previous ? setViewOneDietPlan(-1) : getOneDiet(item, index) }} style={{backgroundColor:"white", boxShadow:10, borderRadius: 10 ,cursor:"pointer"}} >
-{/* <Tooltip title={toolTipmsg} placement="top">*/}
-{/* setToolTipMsg(toolTipmsg==='click to view'?'click to close':'click to view'); */}
-
-<Grid container item alignContent={"center"} minHeight="80px" >
-<Grid item xs={5} >
-<Typography variant='h4' style={{color:"black" ,textAlign:"center" }}>
-
-{formatDate(item.startdate)}
-</Typography > 
-</Grid>
-<Grid item xs={1}>
-<Typography variant='h4' sx={{color:"black",fontFamily:"Inter-regular",textAlign:"center"}}>to</Typography>
-
-</Grid>
-<Grid item  container xs={5} justifyContent="center"   >
-
-<Typography variant='h4'  style={{color:"black", textAlign:"center"}}>
-
-{formatDate(item.enddate)}
-</Typography>
+           
 
 
-</Grid>
-<Grid item xs={1} sx={{textAlign:"center",alignSelf:"center"}}>
-
-   {arrowDirection === 'down' ? (
-     <KeyboardArrowDown />
-   ) : (
-     <KeyboardArrowUp />
-   )}
- 
- </Grid>
-
-
-
-</Grid>
-{/* </Tooltip> */}
-
-{viewOneDietPlan.previous === index && (
-                 <Grid sx={{marginTop:"10px"}}>
+         {/* <h1>testing..</h1> */}
+         {prevDietPlan.map((item, index) => (
+             <Stack key={index} sx={{margin:"20px"}} >
+               
+                 
+                  
                    {item?.type === 'food' ? (
                      // item?.type === 'food'
                      <Grid >
@@ -1010,46 +915,92 @@ console.log(oneDietPlanData.length,"----------length------");
                            <Typography  style={{calories,color: "black"}}> No data found in diet plan</Typography>
                          </CardContent>
                        ) : (
-                         <Card  style={{backgroundColor:"#2c2b2b", margin:"10px"}}  >
-                         
-                      
-                             <CardContent >
-                         <Grid container flexDirection="row" spacing="1" alignItems="center" justifyContent="center" >
-                             
-                             <Grid item xs={4} alignItems="center"  sx={{textAlign:'center'}} alignSelf={"center"} justifyContent="center">
+                        <Card  >
+                        <Accordion  >
+          <AccordionSummary 
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+            
+          >
+            <Grid container item alignContent={"center"} minHeight="80px" >
+  <Grid item xs={5} >
+  <Typography variant='h4' style={{color:"black" ,textAlign:"center" }}>
+  
+  {formatDate(item.startdate)}
+  </Typography > 
+  </Grid>
+  <Grid item xs={2}>
+  <Typography variant='h4' sx={{color:"black",fontFamily:"Inter-regular",textAlign:"center"}}>to</Typography>
+  
+  </Grid>
+  <Grid item  container xs={5} justifyContent="center"   >
+  
+  <Typography variant='h4'  style={{color:"black", textAlign:"center"}}>
+  
+  {formatDate(item.enddate)}
+  </Typography>
+  
+  
+  </Grid>
+  
+  
+  
+  
+  </Grid>
+           
+          </AccordionSummary>
+          <AccordionDetails>
+           
+          <Card  style={{backgroundColor:"#2c2b2b", margin:"10px"}}  >
+                           
+                        
+                           <CardContent >
+                       <Grid container flexDirection="row" spacing="1" alignItems="center" justifyContent="center" >
+                           
+                           <Grid item xs={4} alignItems="center"  sx={{textAlign:'center'}} alignSelf={"center"} justifyContent="center">
+                                 
                                    
-                                     
-                                     <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
-                                     {oneDietPlanData.TotalServings}
-                                    
-                                     </Typography>
-                                     <Typography style={subtext}>servings recommended</Typography>
-                                    
-             
-                             </Grid>
-                             <Grid item xs={4}  sx={{justifyContent:'center',alignItems:"center",textAlign:'center',alignSelf:'center',alignContent:'center'}}>
+                                   <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
+                                   {oneDietPlanData.TotalServings}
+                                  
+                                   </Typography>
+                                   <Typography style={subtext}>servings recommended</Typography>
+                                  
+           
+                           </Grid>
+                           <Grid item xs={4}  sx={{justifyContent:'center',alignItems:"center",textAlign:'center',alignSelf:'center',alignContent:'center'}}>
+                           
+                           <img src={Diet}  alt="dinning" style={{display: 'block', margin: 'auto'}}/>
+                           
+                          
+                           </Grid>
+                           <Grid item xs={4} sx={{textAlign:'center'}}  >
                              
-                             <img src={Diet}  alt="dinning" style={{display: 'block', margin: 'auto'}}/>
                              
-                            
-                             </Grid>
-                             <Grid item xs={4} sx={{textAlign:'center'}}  >
-                               
-                               
-                                     <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
-                                     {oneDietPlanData.servingsLeft}
-                                    
-                                     
-                                     </Typography>
-                                     <Typography style={subtext}>servings left</Typography>
-                                                         
-                                    
-                             </Grid>
-                                            
-                             </Grid>
-                         </CardContent>
-                         
-                 </Card>
+                                   <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
+                                   {oneDietPlanData.servingsLeft}
+                                  
+                                   
+                                   </Typography>
+                                   <Typography style={subtext}>servings left</Typography>
+                                                       
+                                  
+                           </Grid>
+                                          
+                           </Grid>
+                       </CardContent>
+                       
+               </Card>
+           
+          </AccordionDetails>
+        </Accordion>
+                           
+                          
+  
+                       
+                   
+           </Card>
                        )}
                      </Grid>
                    ) : item?.type === 'exercise' ? (
@@ -1059,45 +1010,93 @@ console.log(oneDietPlanData.length,"----------length------");
                            <Typography style={{ color: "white" }}> No data found in exercise plan</Typography>
                          </CardContent>
                        ) : (
-                         <Card   style={{backgroundColor:"#2c2b2b",margin:"10px"}}>
-                         <CardContent  >
-                         <Grid container flexDirection="row" spacing="1" alignItems="center" justifyContent="center" >
-                             
-                             <Grid item xs={4} alignItems="center"  sx={{textAlign:'center'}} alignSelf={"center"} justifyContent="center">
+                        <Card  >
+                        <Accordion  sx={{ margin: "20px"}}>
+          <AccordionSummary 
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+            
+          >
+            <Grid container item alignContent={"center"} minHeight="80px" >
+  <Grid item xs={5} >
+  <Typography variant='h4' style={{color:"black" ,textAlign:"center" }}>
+  
+  {formatDate(item.startdate)}
+  </Typography > 
+  </Grid>
+  <Grid item xs={2}>
+  <Typography variant='h4' sx={{color:"black",fontFamily:"Inter-regular",textAlign:"center"}}>to</Typography>
+  
+  </Grid>
+  <Grid item  container xs={5} justifyContent="center"   >
+  
+  <Typography variant='h4'  style={{color:"black", textAlign:"center"}}>
+  
+  {formatDate(item.enddate)}
+  </Typography>
+  
+  
+  </Grid>
+  
+  
+  
+  
+  </Grid>
+           
+          </AccordionSummary>
+          <AccordionDetails>
+           
+          <Card  style={{backgroundColor:"#2c2b2b", margin:"10px"}}  >
+                           
+                        
+                           <CardContent >
+                       <Grid container flexDirection="row" spacing="1" alignItems="center" justifyContent="center" >
+                           
+                           <Grid item xs={4} alignItems="center"  sx={{textAlign:'center'}} alignSelf={"center"} justifyContent="center">
+                                 
                                    
-                                     
-                                     <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
+                           <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
      
-                                     {oneExerciseData.TotalServings}
-                                     </Typography>
-                                     <Typography style={subtext}>exercise recommended</Typography>
-                                    
-     
-                                   
-                                    
-                             </Grid>
-                             <Grid item xs={4}  sx={{justifyContent:'center',alignItems:"center",textAlign:'center',alignSelf:'center',alignContent:'center'}}>
+     {oneExerciseData.TotalServings}
+     </Typography>
+     <Typography style={subtext}>exercise recommended</Typography>
+                                  
+           
+                           </Grid>
+                           <Grid item xs={4}  sx={{justifyContent:'center',alignItems:"center",textAlign:'center',alignSelf:'center',alignContent:'center'}}>
+                           
+                           <img src={Diet}  alt="dinning" style={{display: 'block', margin: 'auto'}}/>
+                           
+                          
+                           </Grid>
+                           <Grid item xs={4} sx={{textAlign:'center'}}  >
                              
-                             <img src={Exerciselogo}  alt="dinning" style={{display: 'block', margin: 'auto'}}/>
                              
-                            
-                             </Grid>
-                             <Grid item xs={4} sx={{textAlign:'center'}}  >
-                               
-                               
-                                     <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
+                           <Typography style={{  fontSize:"25px" ,color:"#E1B725"}}>
                                     
                                     
-                                     {oneExerciseData.servingsLeft}
-                                     </Typography>
-                                     <Typography style={subtext}>exercise left</Typography>
-                                                         
-                                    
-                             </Grid>
-                                            
-                             </Grid>
-                         </CardContent>
-                          </Card>
+                                    {oneExerciseData.servingsLeft}
+                                    </Typography>
+                                    <Typography style={subtext}>exercise left</Typography>
+                                                       
+                                  
+                           </Grid>
+                                          
+                           </Grid>
+                       </CardContent>
+                       
+               </Card>
+           
+          </AccordionDetails>
+        </Accordion>
+                           
+                          
+  
+               
+                      
+                   
+           </Card>
                        )}
                      </Grid>
                    ) : (
@@ -1105,16 +1104,22 @@ console.log(oneDietPlanData.length,"----------length------");
                        <Typography>No activity</Typography>
                      </CardContent>
                    )}
-                 </Grid>
-               )
-               }
+                    
+                   
 
-             </Card>
-
+                  
+      
+                      
+                
+                  
+                
               
-             </CardContent>
+             </Stack>
            ))}
+
+
          
+
        
      </Card>
      
@@ -1137,34 +1142,7 @@ console.log(oneDietPlanData.length,"----------length------");
                    {item?.type === 'food' ? (
                      <Card  style={{backgroundColor:"#2c2b2b",}} >
                          
-                         {/* < Grid container item alignContent={"center"} minHeight="80px" sx={{backgroundColor:"#2c2b2b" }} >
-           <Grid xs={12} >
-         <img src={Diet}  alt="dinning" style={{display: 'block', margin: 'auto'}}/>
-         </Grid>
-        
-         <Grid  container item xs={5} flexDirection={"row"}  >
-          
-        <Grid item>
-         <Typography variant='h4' style={{color:"white" ,textAlign:"center", }}>
-         {formatDate(item.startdate)}
-        
-         </Typography > 
-         </Grid>
-         </Grid>
-         <Grid item xs={2}>
-         <Typography variant='h4' sx={{color:"white",fontFamily:"Inter-regular",textAlign:"center"}}>to</Typography>
-        
-         </Grid>
-         <Grid item  xs={5} justify="center" >
-         <Typography variant='h4'  style={{color:"white", textAlign:"center"}}>
-        
-         {formatDate(item.enddate)}
-         </Typography>
-         </Grid>
-         
-         
-                  </Grid>
-                        */}
+                        
 
 <Grid container item alignContent={"center"} minHeight="100px" >
 <Grid xs={12} >

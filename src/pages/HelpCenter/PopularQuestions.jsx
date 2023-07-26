@@ -42,7 +42,7 @@ export default function BasicAccordion() {
   const apiCall = async () => {
    
 
-    axios.get(`http://localhost:3002/emp`)
+    axios.get(`http://localhost:3004/emp`)
         .then(function (response) {
             console.log(response,"checkingggggggggggggggggggg")
             if (response) {
@@ -88,48 +88,7 @@ export default function BasicAccordion() {
             </Grid>
            
      </CardContent>
-   {/* <TextField
-  placeholder='Search..'
- sx={{variant:"none"}}
- onChange={(e)=>{
   
- console.log(e?.target.value,'00000')
-
-let arr=[];
-
-let arr1=dataFromAPiGlobal
-
- arr1?.map(item=>{
-
-  if(item?.item_title.toLowerCase().includes(e?.target?.value.toLowerCase()))arr.push(item);
-
-}) 
-
-console.log(arr,'/////')
-
-setItems(arr);
-
-}}fullWidth
-
-InputProps={{
-  startAdornment: (
-    <InputAdornment position='start'>
-       <SearchIcon />
-    </InputAdornment>
-  ),
-}}
-
-// InputProps={{
-//     startAdornment: (
-//         <InputAdornment position="start">
-//            <SearchIcon />
-//         </InputAdornment>
-//          ),
-//     endAdornment:(<IconButton sx={{visibility: dataFromAPiGlobal? "visible": "hidden"}} onClick={handleClearClick}><ClearIcon/></IconButton>)
-//       }}
-
-
-> </TextField> */}
 <TextField
   placeholder='Search..'
  sx={{variant:"none"}}
@@ -176,8 +135,8 @@ InputProps={{
           
           <>
           
-        
-      <Accordion  sx={{ marginBottom: "20px"}}>
+        <Card sx={{marginBottom:"20px"}} >
+      <Accordion  sx={{ margin: "20px"}}>
         <AccordionSummary 
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -190,11 +149,11 @@ InputProps={{
           <Typography  >
            {item?.answer}
           </Typography>
-          {/* {console.log(item?.img, 'dff')} */}
+         
           <img src={item.image} alt="fff" key={item.id} width={'500px'} />
         </AccordionDetails>
       </Accordion>
-      
+      </Card>
     
     
       </>

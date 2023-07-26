@@ -535,16 +535,16 @@ return(
 <Card style={cardStyle}>
 <CardContent >
 <Grid container spacing={2} justifyContent="center" alignItems="center">
-  <Grid item xs={3}  sx={{textAlign:"center"}} >
+  <Grid item xs={4} md={2} sx={{textAlign:"center"}} >
     <ButtonBase >
     {/* style={{borderRadius:100,maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} */}
-      <img  style={{borderRadius:100,maxHeight:"70px",minWidth:"70px",objectFit: 'cover',}} src={imageurl+item.item_image}  alt="image" />
+      <img  style={{display: 'inline-block',width: '90px',height: '90px',borderRadius: '50%'}} src={imageurl+item.item_image}  alt="image" />
     </ButtonBase>
   </Grid>
-  <Grid container item xs={9} spacing={1} >
+  <Grid container item xs={8} md={10} spacing={1} >
     {/* <Grid item xs> */}
       {/* <div style={{ display: "flex" }}> */}
-      <Grid item xs={8} marginTop="9px">
+      <Grid item xs={8}  marginTop="9px">
         <Typography
           // gutterBottom
           // variant="h5"
@@ -558,7 +558,7 @@ return(
         </Grid>
         <Grid item xs={4} >
 
-        <Card sx={{position:'absolute', minWidth:"30px"  , right:5,borderRadius:1,boxShadow: '#c4c4c4'}}  >
+        <Card sx={{position:'absolute', minWidth:"30px"  , right:10,borderRadius:1,boxShadow: '#c4c4c4'}}  >
         {/* <EditCalories state={{data:itemIntakeStatus}} /> */}
 
         <IconButton onClick={() => { item.servings_consumed >= 1 && decreaseCount(item, index) }} >
@@ -585,6 +585,7 @@ return(
 
 
     </Grid>
+    
   </Grid>
 {/* </Grid> */}
 </CardContent>

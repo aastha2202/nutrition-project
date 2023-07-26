@@ -450,7 +450,7 @@ viewModal && < EditCalories handleSuccess={handleSuccess} state={selectedData} a
 <CardContent >
  
 <Grid  container flexDirection={"row"} >
-    {/* <img src={Backbutton} className='dinning-img' alt="dinning" /> */}
+  
     <Grid item alignSelf={"center"}>
       <Link to="/dashboard/exercise" >
         
@@ -460,12 +460,12 @@ viewModal && < EditCalories handleSuccess={handleSuccess} state={selectedData} a
             </Grid>
             <Grid item>
             <Typography variant="h3" style={pageheading} >{params?.category}  </Typography>
-            {/* {value.category} */}
+            
             </Grid>
       </Grid>
-  {/* <Typography variant="h3" style={pageheading}> {value.category_name} </Typography> */}
+ 
   <Typography style={calories}>{params?.recommended_servings} recommended / Sets </Typography>
-  {/* <Typography style={calories}>13 Sets / Day </Typography> */}
+  
 </CardContent>
 </Grid>
 <Grid item xs={5}>
@@ -475,7 +475,7 @@ viewModal && < EditCalories handleSuccess={handleSuccess} state={selectedData} a
     style={{ backgroundColor: "#E1B725", textAlign:"center",}}
   >
     <Typography variant="h3"  style={caloriesremained}> {addServings}
-    {/* {params?.servingsConsumed + addServings}   */}
+ 
  
     </Typography>
     <Typography variant="h5" style={caloriesremained} >
@@ -561,7 +561,7 @@ return(
               </Grid>
             {/* </div> */}
 
-           <Grid item xs={12}>
+           <Grid item xs={12} display={{ xs: 'none', md: 'block', }}>
             <Typography variant="body2" gutterBottom mt={0.6} style={maintext}>
               {item.description }
             </Typography>
@@ -569,6 +569,11 @@ return(
 
 
           </Grid>
+          <Grid item xs={12} display={{ xs: 'block', md: 'none' }}>
+            <Typography variant="body2" gutterBottom mt={0.6} style={maintext}>
+              {item.description }
+            </Typography>
+            </Grid>
         </Grid>
 
 </CardContent>
